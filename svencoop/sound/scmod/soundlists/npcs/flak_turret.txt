@@ -1,1 +1,0 @@
-"turret/tu_fire1.wav" "ambience/biggun1.wav"
