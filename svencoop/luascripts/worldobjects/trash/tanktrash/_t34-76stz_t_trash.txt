@@ -1,0 +1,27 @@
+Class_name = "CSolidTrash"
+
+
+VisualImage=0,"graphics\Vehicles\_T34-76STZ\_T34-76STZ-C1-low.mgm",true
+CollisionBody="graphics\Vehicles\_T34-76STZ\_T34-76STZ-C1.col"
+
+
+Friction=0.8
+Mass=2700
+//MaxDeep=0.1
+TLimit=0
+Ik=3.0
+DynamicCOG=true
+
+
+
+
+
+
+
+
+//Spin=false
+ImageArg=5000
+ImagePhase=1
+
+NetworkClone=true
+

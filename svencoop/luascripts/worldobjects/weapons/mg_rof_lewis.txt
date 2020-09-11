@@ -1,0 +1,57 @@
+
+Name = "Lewis"
+
+Gage = 7.69 // [мм]
+
+Mass = 0.01 // [кг] 7.257кг, но масса перемещена в лафет до поры
+MassPosition_inGunAxis = -0.573, -0.005, 0.000
+MOI_inGunAxis = 0.006, 0.253, 0.256, 0.003, 0.002, 0.000 // [кг*кв.м]
+
+SnappingTime = 0.02
+AutoCockingTime = 0.089
+
+ShotAnimationPeriod = 0.109 // SnappingTime + AutoCockingTime
+
+// Паспортная скорострельность: RapidityOfFire = 60 / (SnappingTime + AutoCockingTime) = 550 выстрелов в минуту
+
+MainManuallyCockingTime = 0.38
+//ReserveManuallyCockingTime = 0.7
+
+ShotRate = 0 // Количество выстрелов в одной очереди не ограничено
+
+FireUnLockedSafetyLockPosition = 0.0
+FireLockedSafetyLockPosition = 1.0
+
+FireLockedMaxTriggerPosition = 0.0
+FireTriggerPosition = 0.5
+
+FiringPinPositionKeysDuringManuallyCocking = 0.0, 1.0
+FiringPinPositionKeysDuringAutoCocking = 0.0, 1.0
+
+AmmunitionMovingKeysDuringManuallyCocking = 0.0, 1.0
+AmmunitionMovingKeysDuringAutoCocking = 0.0, 1.0
+
+AmmunitionMovingIfCocked = false
+
+CartridgeCaseReleaseDuringMainManuallyCocking = 0.5
+cartridgeCaseReleaseDuringAutoCocking = 0.5
+
+BarrelTemperatureIncreasePerShot = 5.0
+BarrelTemperatureDecreaseCoefficient = 0.045
+
+BulletDispertionAngleData = 0.0, 0.6, 700.0, 3.5 //разброс зафиксированной пушки при 0К нулевой, разброс перегретой 0.6°
+BulletSpeedReducingData = 0.01, 700.0, 0.25, 0.05, 3.5
+BulletMisfireData= 0.005, 0.04, 700.0, 6.0
+
+CartridgeCasesEjectionPosition = -0.765, -0.05, 0.025
+CartridgeCasesEjectionSpeed = 0, -0.5, 1
+
+[DrawAnimation=0] // Движение ручки взведения
+
+	[GunMode=MainManuallyCocking]
+		Point = 0.00, 0.0
+		Point = 0.70, 1.0
+		Point = 0.85, 1.0
+		Point = 0.90, 0.0
+	[end]
+[end]

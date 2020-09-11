@@ -1,0 +1,7 @@
+class_name = "CBatchFreeEffect"
+
+VisualImage=0,"graphics\effects\Surf\planeTowedDust.mgm",false
+visualradius=20
+SoundScript=""
+
+InitDestroyDelay=0	//Задержка на удаление после пропадания родительского объекта

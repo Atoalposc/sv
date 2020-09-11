@@ -1,0 +1,65 @@
+Class_name = "CBatchBallistics"
+object_name = "NPC_SHELL_GER_20_HE"
+
+//20мм патрон к пушке Flak 38 осколочно-фугасный
+
+//////	PhysicsBody properties
+VisualImage=0,"graphics/ammo/ammoYac.mgm",false
+visualradius=4
+SoundScript=""
+ImageAttr=21	//IA_NOMINPIXELS | IA_NOINTERPOLATION
+
+//CollisionBody="graphics/ammo/ammo.col"
+
+NoDirecion=true
+NoCollision=true
+
+// дальность, скорость на этой дальности (на 0м - указать на 5км/ч меньше расчетной), пары броня-урон за броней. Броню больше, чем в первой паре, не пробьет
+// за базовый взят урон на дальности 100м при нулевой броне, на макс. броне урон равне 0.25 от базового, на 0.8 макс. брони урон равен 0.5 от базового
+// урон при нулевой броне уменьшается с дальностью по соотношению квадрата скоростей
+// скорости по дальностям взяты из лога утилиты расчета .bin файлов пули (расчет таблиц наведения), на 10км/ч меньше ресчетной
+// т.к. если скорость окажется больше расчетной на данной дальности, то дамага не будет
+// базовый урон расчитан по соотношению кинетических энергий на дальности 100м между данной пулей и референсной пулей SHELL_GER_20x82_AP (=1000)
+
+Armor=1,900,	14,504,	11,1260,	0,2016
+Armor=100,804,	12,403,	9,1006,		0,1610
+Armor=500,510,	6,162,	5,404,		0,647 // опорная бронепробиваемость пересчитана по формуле де Марра из референсной бронепробиваемости SHELL_RUS_20x99_HE на близкой скорости
+Armor=2000,172,	2,0,	1,18,		0,74
+
+// аэродинамические коэфициенты подобраны исходя из совпадения графика скорости по дальности для эталонной пули (20мм немецкий снаряд, немецкое описание боеприпасов 1936-1945)
+
+Gage=20					//калибр
+DefaultStartSpeed=900	//дефолтная начальная скорость при стрельбе из простых пушек (наземка)
+MaxDistance=2500		//предельная дальность, дальше которой объект удалится
+Mass=0.12				//масса пули
+Mkr=0.75				//значение числа Маха, после которого начинается повышение Cx до момента M=1, зависит от формы тела но не от размера
+Mmax=2.0				//значение числа Маха, до которого завершается понижение Cx, начавшееся при M=1, зависит от формы тела но не от размера
+Cx_0=0.3				//значение к-та сопротивления при (M <= Mkr), зависит от формы тела но не от размера
+Cx_max=0.78				//значение к-та сопротивления при (M = 1), зависит от формы тела но не от размера
+Cx_1=0.68				//значение к-та сопротивления при (M >= Mmax), зависит от формы тела но не от размера
+R=0.01					//радиус пули
+LiveTime=10				//время жизни объекта (ExplodeTime + TimeToDestroy)
+ExplodeTime=6.8			//время самоподрыва
+TimeToDestroy=0			//время жизни объекта после попадания в скрытом состоянии, что бы трейл трассера не пропадал пока не расствориться
+TracertShowtime = 6.8	//время горения трассера
+MaxRedirections = 0		//максимальное кол-во рикошетов
+
+debug=false
+
+HitDummy="LuaScripts/WorldObjects/Explosions/HEprojectiles/HE_020mm_92g_20g_object.txt"
+HitMisc="LuaScripts/WorldObjects/Explosions/HEprojectiles/HE_020mm_92g_20g_object.txt"
+HitWater="LuaScripts/WorldObjects/Explosions/HEprojectiles/HE_020mm_92g_20g_water.txt"
+HitGround="LuaScripts/WorldObjects/Explosions/HEprojectiles/HE_020mm_92g_20g_ground.txt"
+HitArmor="LuaScripts/WorldObjects/Explosions/HEprojectiles/HE_020mm_92g_20g_object.txt"
+HitBuilding="LuaScripts/WorldObjects/Explosions/HEprojectiles/HE_020mm_92g_20g_building.txt"
+HitMetal="LuaScripts/WorldObjects/Explosions/HEprojectiles/HE_020mm_92g_20g_object.txt"
+HitForest="LuaScripts/WorldObjects/Explosions/HEprojectiles/HE_020mm_92g_20g_object.txt"
+
+shellType = 6
+//        SHELL_TYPE_CV = 1,// Бронебойный - CV - Armour Piercing with Cavity Bursting Charge
+//        SHELL_TYPE_AP = 2,// Бронебойный сплошной - AP - Armour Piercing Solid
+//        SHELL_TYPE_HV = 3,// Подкалиберный - HV - Armour Piercing Composite Rigid (High Velocity)
+//        SHELL_TYPE_HT = 4,// Кумулятивный - HT - Hight Explosive Anti Tank (HEAT)
+//        SHELL_TYPE_SH = 5,// Шрапнельный - SH - Shrapnel
+//        SHELL_TYPE_HE = 6,// Осколочный - HE - High Explosive and Fragmental
+//        SHELL_TYPE_SpHV = 7,// Подкалиберный катушечный - SpHV - Armour Piercing Spool-Shaped (Spool High Velocity)

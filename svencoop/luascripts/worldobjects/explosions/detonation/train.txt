@@ -1,0 +1,37 @@
+Class_name = "CBatchExplosion"
+object_name = "Explosion"
+
+// Расчитнано из ТНТ=4кг, массы пули 22кг, калибра 122мм
+
+//////	PhysicsBody properties
+VisualImage=0,"graphics\effects\Surf\explTrain.epl",false
+VisualRadius=24
+ImageAttr=17		//IA_NOCLIP | IA_NOMINPIXELS
+
+SoundScript="LuaScripts\Sound\explosions\Bomb\Ground_Med.cfg"
+
+ExplosionPower=0.4
+Animation=1
+LiveTime=9.16
+AnimationTime=9.16
+Ranges=1, 0.01, 1.0, 0.0
+
+// Параметры Sphere Hit, внешний взрыв
+
+Radius=51.9	// Радиус сферы воздействия взрыва, определяющий выборку объектов
+TNT_equ=4	// Тротилловый эквивалент для моделирования атмосферной ударной волны
+
+// Фугасное воздействие: дальность, (-1 не использ.), пары (броня, дамаг за броней)
+ArmorFoug=0.0,-1,	37,18283,	0,36565
+ArmorFoug=1.6,-1,	3,1283,		0,2566
+ArmorFoug=5.9,-1,				0,184
+ArmorFoug=11.4,-1,				0,50
+
+// Осколочное воздействие
+ShrapnelQuantity=4381
+FragmentMass=0.0016
+// Единичный осколок: дальность, скорость, пары (броня, дамаг за броней)
+ArmorShr=0.0,1001,	45,82,	36,206,	0,329
+ArmorShr=5.2,862,	26,61,	21,153,	0,244
+ArmorShr=25.9,468,			3,18,	0,72
+ArmorShr=51.9,249,					0,20

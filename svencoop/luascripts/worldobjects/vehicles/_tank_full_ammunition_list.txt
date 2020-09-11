@@ -1,0 +1,1169 @@
+// 1/5 - 22+22+22+22+22
+// 1/5 - 53+15+15+15+15
+// 1/5 - 15+15+15+15+15
+
+// 1/4 - 28+28+28+28
+// 1/4 - 53+20+20+20
+// 1/4 - 15+15+15+15
+
+// 1/3 - 37+37+37
+// 1/3 - 73+20+20
+// 1/3 - 20+20+20
+
+// 1/2 - 56+56
+// 1/2 - 93+20
+// 1/2 - 28+28
+
+// 1/1 - 113
+// 1/1 - 56
+
+// 0 - 113 - 
+// 1 - 93 - 
+// 2 - 73 - 
+// 3 - 56 - 
+// 4 - 53 - 
+// 5 - 37 - 
+// 6 - 28 - 
+// 7 - 22 - 
+// 8 - 20 - 
+// 9 - 15 - 
+
+// Weapon Modes (unlocks). Tanks uses them just as filter.
+
+[WeaponMode0]
+	WMname="default"
+	WMgroup="default"
+[end]
+[WeaponMode1]
+	WMname="CAVITY"
+	WMgroup="1"
+[end]
+[WeaponMode2]
+	WMname="AP"
+	WMgroup="2"
+[end]
+[WeaponMode3]
+	WMname="HVAP"
+	WMgroup="3"
+[end]
+[WeaponMode4]
+	WMname="HEAT"
+	WMgroup="4"
+[end]
+[WeaponMode5]
+	WMname="HE"
+	WMgroup="5"
+[end]
+
+
+////////// AMMUNITIONS (PAYLOADS)
+
+
+[Ammunition0]
+	name="0-ZIS5-CV-56 + 0-ZIS5-HE-56 + 1-DT-AP-1386"
+	WeaponModes=0,15,-2,-3,-4
+	GunAmmunition0=3,43
+	GunAmmunition1=50
+[end]
+
+////////// 5 TYPES
+
+[Ammunition1]
+	name="0-ZIS5-CV-22 + 0-ZIS5-AP-22 + 0-ZIS5-HV-22 + 0-ZIS5-HT-22 + 0-ZIS5-HE-22 + 1-DT-AP-1386"
+	WeaponModes=12345
+	GunAmmunition0=7,17,27,37,47
+	GunAmmunition1=50
+[end]
+
+// 5 types prevail
+
+[Ammunition2]
+	name="0-ZIS5-CV-53 + 0-ZIS5-AP-15 + 0-ZIS5-HV-15 + 0-ZIS5-HT-15 + 0-ZIS5-HE-15 + 1-DT-AP-1386"
+	WeaponModes=12345
+	GunAmmunition0=4,19,29,39,49
+	GunAmmunition1=50
+[end]
+[Ammunition3]
+	name="0-ZIS5-CV-15 + 0-ZIS5-AP-53 + 0-ZIS5-HV-15 + 0-ZIS5-HT-15 + 0-ZIS5-HE-15 + 1-DT-AP-1386"
+	WeaponModes=12345
+	GunAmmunition0=9,14,29,39,49
+	GunAmmunition1=50
+[end]
+[Ammunition4]
+	name="0-ZIS5-CV-15 + 0-ZIS5-AP-15 + 0-ZIS5-HV-53 + 0-ZIS5-HT-15 + 0-ZIS5-HE-15 + 1-DT-AP-1386"
+	WeaponModes=12345
+	GunAmmunition0=9,19,24,39,49
+	GunAmmunition1=50
+[end]
+[Ammunition5]
+	name="0-ZIS5-CV-15 + 0-ZIS5-AP-15 + 0-ZIS5-HV-15 + 0-ZIS5-HT-53 + 0-ZIS5-HE-15 + 1-DT-AP-1386"
+	WeaponModes=12345
+	GunAmmunition0=9,19,29,34,49
+	GunAmmunition1=50
+[end]
+[Ammunition6]
+	name="0-ZIS5-CV-15 + 0-ZIS5-AP-15 + 0-ZIS5-HV-15 + 0-ZIS5-HT-15 + 0-ZIS5-HE-53 + 1-DT-AP-1386"
+	WeaponModes=12345
+	GunAmmunition0=9,19,29,39,44
+	GunAmmunition1=50
+[end]
+
+// 5 types reduced
+
+[Ammunition7]
+	name="0-ZIS5-CV-15 + 0-ZIS5-AP-15 + 0-ZIS5-HV-15 + 0-ZIS5-HT-15 + 0-ZIS5-HE-15 + 1-DT-AP-1386"
+	WeaponModes=12345
+	GunAmmunition0=9,19,29,39,49
+	GunAmmunition1=50
+[end]
+
+////////// 4 TYPES
+
+[Ammunition8]
+	name="0-ZIS5-CV-28 + 0-ZIS5-AP-28 + 0-ZIS5-HV-28 + 0-ZIS5-HT-28 + 1-DT-AP-1386"
+	WeaponModes=1234,-5
+	GunAmmunition0=6,16,26,36
+	GunAmmunition1=50
+[end]
+[Ammunition9]
+	name="0-ZIS5-CV-28 + 0-ZIS5-AP-28 + 0-ZIS5-HV-28 + 0-ZIS5-HE-28 + 1-DT-AP-1386"
+	WeaponModes=1235,-4
+	GunAmmunition0=6,16,26,46
+	GunAmmunition1=50
+[end]
+[Ammunition10]
+	name="0-ZIS5-CV-28 + 0-ZIS5-AP-28 + 0-ZIS5-HT-28 + 0-ZIS5-HE-28 + 1-DT-AP-1386"
+	WeaponModes=1245,-3
+	GunAmmunition0=6,16,36,46
+	GunAmmunition1=50
+[end]
+[Ammunition11]
+	name="0-ZIS5-CV-28 + 0-ZIS5-HV-28 + 0-ZIS5-HT-28 + 0-ZIS5-HE-28 + 1-DT-AP-1386"
+	WeaponModes=1345,-2
+	GunAmmunition0=6,26,36,46
+	GunAmmunition1=50
+[end]
+[Ammunition12]
+	name="0-ZIS5-AP-28 + 0-ZIS5-HV-28 + 0-ZIS5-HT-28 + 0-ZIS5-HE-28 + 1-DT-AP-1386"
+	WeaponModes=2345,-1
+	GunAmmunition0=16,26,36,46
+	GunAmmunition1=50
+[end]
+
+// 4 types prevail
+
+[Ammunition13]
+	name="0-ZIS5-CV-53 + 0-ZIS5-AP-20 + 0-ZIS5-HV-20 + 0-ZIS5-HT-20 + 1-DT-AP-1386"
+	WeaponModes=1234,-5
+	GunAmmunition0=4,18,28,38
+	GunAmmunition1=50
+[end]
+[Ammunition14]
+	name="0-ZIS5-CV-20 + 0-ZIS5-AP-53 + 0-ZIS5-HV-20 + 0-ZIS5-HT-20 + 1-DT-AP-1386"
+	WeaponModes=1234,-5
+	GunAmmunition0=8,14,28,38
+	GunAmmunition1=50
+[end]
+[Ammunition15]
+	name="0-ZIS5-CV-20 + 0-ZIS5-AP-20 + 0-ZIS5-HV-53 + 0-ZIS5-HT-20 + 1-DT-AP-1386"
+	WeaponModes=1234,-5
+	GunAmmunition0=8,18,24,38
+	GunAmmunition1=50
+[end]
+[Ammunition16]
+	name="0-ZIS5-CV-20 + 0-ZIS5-AP-20 + 0-ZIS5-HV-20 + 0-ZIS5-HT-53 + 1-DT-AP-1386"
+	WeaponModes=1234,-5
+	GunAmmunition0=8,18,28,34
+	GunAmmunition1=50
+[end]
+
+[Ammunition17]
+	name="0-ZIS5-CV-53 + 0-ZIS5-AP-20 + 0-ZIS5-HV-20 + 0-ZIS5-HE-20 + 1-DT-AP-1386"
+	WeaponModes=1235,-4
+	GunAmmunition0=4,18,28,48
+	GunAmmunition1=50
+[end]
+[Ammunition18]
+	name="0-ZIS5-CV-20 + 0-ZIS5-AP-53 + 0-ZIS5-HV-20 + 0-ZIS5-HE-20 + 1-DT-AP-1386"
+	WeaponModes=1235,-4
+	GunAmmunition0=8,14,28,48
+	GunAmmunition1=50
+[end]
+[Ammunition19]
+	name="0-ZIS5-CV-20 + 0-ZIS5-AP-20 + 0-ZIS5-HV-53 + 0-ZIS5-HE-20 + 1-DT-AP-1386"
+	WeaponModes=1235,-4
+	GunAmmunition0=8,18,24,48
+	GunAmmunition1=50
+[end]
+[Ammunition20]
+	name="0-ZIS5-CV-20 + 0-ZIS5-AP-20 + 0-ZIS5-HV-20 + 0-ZIS5-HE-53 + 1-DT-AP-1386"
+	WeaponModes=1235,-4
+	GunAmmunition0=8,18,28,44
+	GunAmmunition1=50
+[end]
+
+[Ammunition21]
+	name="0-ZIS5-CV-53 + 0-ZIS5-AP-20 + 0-ZIS5-HT-20 + 0-ZIS5-HE-20 + 1-DT-AP-1386"
+	WeaponModes=1245,-3
+	GunAmmunition0=4,18,38,48
+	GunAmmunition1=50
+[end]
+[Ammunition22]
+	name="0-ZIS5-CV-20 + 0-ZIS5-AP-53 + 0-ZIS5-HT-20 + 0-ZIS5-HE-20 + 1-DT-AP-1386"
+	WeaponModes=1245,-3
+	GunAmmunition0=8,14,38,48
+	GunAmmunition1=50
+[end]
+[Ammunition23]
+	name="0-ZIS5-CV-20 + 0-ZIS5-AP-20 + 0-ZIS5-HT-53 + 0-ZIS5-HE-20 + 1-DT-AP-1386"
+	WeaponModes=1245,-3
+	GunAmmunition0=8,18,34,48
+	GunAmmunition1=50
+[end]
+[Ammunition24]
+	name="0-ZIS5-CV-20 + 0-ZIS5-AP-20 + 0-ZIS5-HT-20 + 0-ZIS5-HE-53 + 1-DT-AP-1386"
+	WeaponModes=1245,-3
+	GunAmmunition0=8,18,38,44
+	GunAmmunition1=50
+[end]
+
+[Ammunition25]
+	name="0-ZIS5-CV-53 + 0-ZIS5-HV-20 + 0-ZIS5-HT-20 + 0-ZIS5-HE-20 + 1-DT-AP-1386"
+	WeaponModes=1345,-2
+	GunAmmunition0=4,28,38,48
+	GunAmmunition1=50
+[end]
+[Ammunition26]
+	name="0-ZIS5-CV-20 + 0-ZIS5-HV-53 + 0-ZIS5-HT-20 + 0-ZIS5-HE-20 + 1-DT-AP-1386"
+	WeaponModes=1345,-2
+	GunAmmunition0=8,24,38,48
+	GunAmmunition1=50
+[end]
+[Ammunition27]
+	name="0-ZIS5-CV-20 + 0-ZIS5-HV-20 + 0-ZIS5-HT-53 + 0-ZIS5-HE-20 + 1-DT-AP-1386"
+	WeaponModes=1345,-2
+	GunAmmunition0=8,28,34,48
+	GunAmmunition1=50
+[end]
+[Ammunition28]
+	name="0-ZIS5-CV-20 + 0-ZIS5-HV-20 + 0-ZIS5-HT-20 + 0-ZIS5-HE-53 + 1-DT-AP-1386"
+	WeaponModes=1345,-2
+	GunAmmunition0=8,28,38,44
+	GunAmmunition1=50
+[end]
+
+[Ammunition29]
+	name="0-ZIS5-AP-53 + 0-ZIS5-HV-20 + 0-ZIS5-HT-20 + 0-ZIS5-HE-20 + 1-DT-AP-1386"
+	WeaponModes=2345,-1
+	GunAmmunition0=14,28,38,48
+	GunAmmunition1=50
+[end]
+[Ammunition30]
+	name="0-ZIS5-AP-20 + 0-ZIS5-HV-53 + 0-ZIS5-HT-20 + 0-ZIS5-HE-20 + 1-DT-AP-1386"
+	WeaponModes=2345,-1
+	GunAmmunition0=18,24,38,48
+	GunAmmunition1=50
+[end]
+[Ammunition31]
+	name="0-ZIS5-AP-20 + 0-ZIS5-HV-20 + 0-ZIS5-HT-53 + 0-ZIS5-HE-20 + 1-DT-AP-1386"
+	WeaponModes=2345,-1
+	GunAmmunition0=18,28,34,48
+	GunAmmunition1=50
+[end]
+[Ammunition32]
+	name="0-ZIS5-AP-20 + 0-ZIS5-HV-20 + 0-ZIS5-HT-20 + 0-ZIS5-HE-53 + 1-DT-AP-1386"
+	WeaponModes=2345,-1
+	GunAmmunition0=18,28,38,44
+	GunAmmunition1=50
+[end]
+
+// 4 types reduced
+
+[Ammunition33]
+	name="0-ZIS5-CV-15 + 0-ZIS5-AP-15 + 0-ZIS5-HV-15 + 0-ZIS5-HT-15 + 1-DT-AP-1386"
+	WeaponModes=1234,-5
+	GunAmmunition0=9,19,29,39
+	GunAmmunition1=50
+[end]
+[Ammunition34]
+	name="0-ZIS5-CV-15 + 0-ZIS5-AP-15 + 0-ZIS5-HV-15 + 0-ZIS5-HE-15 + 1-DT-AP-1386"
+	WeaponModes=1235,-4
+	GunAmmunition0=9,19,29,49
+	GunAmmunition1=50
+[end]
+[Ammunition35]
+	name="0-ZIS5-CV-15 + 0-ZIS5-AP-15 + 0-ZIS5-HT-15 + 0-ZIS5-HE-15 + 1-DT-AP-1386"
+	WeaponModes=1245,-3
+	GunAmmunition0=9,19,39,49
+	GunAmmunition1=50
+[end]
+[Ammunition36]
+	name="0-ZIS5-CV-15 + 0-ZIS5-HV-15 + 0-ZIS5-HT-15 + 0-ZIS5-HE-15 + 1-DT-AP-1386"
+	WeaponModes=1345,-2
+	GunAmmunition0=9,29,39,49
+	GunAmmunition1=50
+[end]
+[Ammunition37]
+	name="0-ZIS5-AP-15 + 0-ZIS5-HV-15 + 0-ZIS5-HT-15 + 0-ZIS5-HE-15 + 1-DT-AP-1386"
+	WeaponModes=2345,-1
+	GunAmmunition0=19,29,39,49
+	GunAmmunition1=50
+[end]
+
+////////// 3 TYPES
+
+[Ammunition38]
+	name="0-ZIS5-CV-37 + 0-ZIS5-AP-37 + 0-ZIS5-HV-37 + 1-DT-AP-1386"
+	WeaponModes=123,-4,-5
+	GunAmmunition0=5,15,25
+	GunAmmunition1=50
+[end]
+[Ammunition39]
+	name="0-ZIS5-CV-37 + 0-ZIS5-AP-37 + 0-ZIS5-HT-37 + 1-DT-AP-1386"
+	WeaponModes=124,-3,-5
+	GunAmmunition0=5,15,35
+	GunAmmunition1=50
+[end]
+[Ammunition40]
+	name="0-ZIS5-CV-37 + 0-ZIS5-HV-37 + 0-ZIS5-HT-37 + 1-DT-AP-1386"
+	WeaponModes=134,-2,-5
+	GunAmmunition0=5,25,35
+	GunAmmunition1=50
+[end]
+[Ammunition41]
+	name="0-ZIS5-AP-37 + 0-ZIS5-HV-37 + 0-ZIS5-HT-37 + 1-DT-AP-1386"
+	WeaponModes=234,-1,-5
+	GunAmmunition0=15,25,35
+	GunAmmunition1=50
+[end]
+[Ammunition42]
+	name="0-ZIS5-CV-37 + 0-ZIS5-AP-37 + 0-ZIS5-HE-37 + 1-DT-AP-1386"
+	WeaponModes=125,-3,-4
+	GunAmmunition0=5,15,45
+	GunAmmunition1=50
+[end]
+[Ammunition43]
+	name="0-ZIS5-CV-37 + 0-ZIS5-HV-37 + 0-ZIS5-HE-37 + 1-DT-AP-1386"
+	WeaponModes=135,-2,-4
+	GunAmmunition0=5,25,45
+	GunAmmunition1=50
+[end]
+[Ammunition44]
+	name="0-ZIS5-AP-37 + 0-ZIS5-HV-37 + 0-ZIS5-HE-37 + 1-DT-AP-1386"
+	WeaponModes=235,-1,-4
+	GunAmmunition0=15,25,45
+	GunAmmunition1=50
+[end]
+[Ammunition45]
+	name="0-ZIS5-CV-37 + 0-ZIS5-HT-37 + 0-ZIS5-HE-37 + 1-DT-AP-1386"
+	WeaponModes=145,-2,-3
+	GunAmmunition0=5,35,45
+	GunAmmunition1=50
+[end]
+[Ammunition46]
+	name="0-ZIS5-AP-37 + 0-ZIS5-HT-37 + 0-ZIS5-HE-37 + 1-DT-AP-1386"
+	WeaponModes=245,-1,-3
+	GunAmmunition0=15,35,45
+	GunAmmunition1=50
+[end]
+[Ammunition47]
+	name="0-ZIS5-HV-37 + 0-ZIS5-HT-37 + 0-ZIS5-HE-37 + 1-DT-AP-1386"
+	WeaponModes=345,-1,-2
+	GunAmmunition0=25,35,45
+	GunAmmunition1=50
+[end]
+
+// 3 types prevail
+
+[Ammunition48]
+	name="0-ZIS5-CV-73 + 0-ZIS5-AP-20 + 0-ZIS5-HV-20 + 1-DT-AP-1386"
+	WeaponModes=123,-4,-5
+	GunAmmunition0=2,18,28
+	GunAmmunition1=50
+[end]
+[Ammunition49]
+	name="0-ZIS5-CV-20 + 0-ZIS5-AP-73 + 0-ZIS5-HV-20 + 1-DT-AP-1386"
+	WeaponModes=123,-4,-5
+	GunAmmunition0=8,12,28
+	GunAmmunition1=50
+[end]
+[Ammunition50]
+	name="0-ZIS5-CV-20 + 0-ZIS5-AP-20 + 0-ZIS5-HV-73 + 1-DT-AP-1386"
+	WeaponModes=123,-4,-5
+	GunAmmunition0=8,18,22
+	GunAmmunition1=50
+[end]
+
+[Ammunition51]
+	name="0-ZIS5-CV-73 + 0-ZIS5-AP-20 + 0-ZIS5-HT-20 + 1-DT-AP-1386"
+	WeaponModes=124,-3,-5
+	GunAmmunition0=2,18,38
+	GunAmmunition1=50
+[end]
+[Ammunition52]
+	name="0-ZIS5-CV-20 + 0-ZIS5-AP-73 + 0-ZIS5-HT-20 + 1-DT-AP-1386"
+	WeaponModes=124,-3,-5
+	GunAmmunition0=8,12,38
+	GunAmmunition1=50
+[end]
+[Ammunition53]
+	name="0-ZIS5-CV-20 + 0-ZIS5-AP-20 + 0-ZIS5-HT-73 + 1-DT-AP-1386"
+	WeaponModes=124,-3,-5
+	GunAmmunition0=8,18,32
+	GunAmmunition1=50
+[end]
+
+[Ammunition54]
+	name="0-ZIS5-CV-73 + 0-ZIS5-HV-20 + 0-ZIS5-HT-20 + 1-DT-AP-1386"
+	WeaponModes=134,-2,-5
+	GunAmmunition0=2,28,38
+	GunAmmunition1=50
+[end]
+[Ammunition55]
+	name="0-ZIS5-CV-20 + 0-ZIS5-HV-73 + 0-ZIS5-HT-20 + 1-DT-AP-1386"
+	WeaponModes=134,-2,-5
+	GunAmmunition0=8,22,38
+	GunAmmunition1=50
+[end]
+[Ammunition56]
+	name="0-ZIS5-CV-20 + 0-ZIS5-HV-20 + 0-ZIS5-HT-73 + 1-DT-AP-1386"
+	WeaponModes=134,-2,-5
+	GunAmmunition0=8,28,32
+	GunAmmunition1=50
+[end]
+
+[Ammunition57]
+	name="0-ZIS5-AP-73 + 0-ZIS5-HV-20 + 0-ZIS5-HT-20 + 1-DT-AP-1386"
+	WeaponModes=234,-1,-5
+	GunAmmunition0=12,28,38
+	GunAmmunition1=50
+[end]
+[Ammunition58]
+	name="0-ZIS5-AP-20 + 0-ZIS5-HV-73 + 0-ZIS5-HT-20 + 1-DT-AP-1386"
+	WeaponModes=234,-1,-5
+	GunAmmunition0=18,22,38
+	GunAmmunition1=50
+[end]
+[Ammunition59]
+	name="0-ZIS5-AP-20 + 0-ZIS5-HV-20 + 0-ZIS5-HT-73 + 1-DT-AP-1386"
+	WeaponModes=234,-1,-5
+	GunAmmunition0=18,28,32
+	GunAmmunition1=50
+[end]
+
+[Ammunition60]
+	name="0-ZIS5-CV-73 + 0-ZIS5-AP-20 + 0-ZIS5-HE-20 + 1-DT-AP-1386"
+	WeaponModes=125,-3,-4
+	GunAmmunition0=2,18,48
+	GunAmmunition1=50
+[end]
+[Ammunition61]
+	name="0-ZIS5-CV-20 + 0-ZIS5-AP-73 + 0-ZIS5-HE-20 + 1-DT-AP-1386"
+	WeaponModes=125,-3,-4
+	GunAmmunition0=8,12,48
+	GunAmmunition1=50
+[end]
+[Ammunition62]
+	name="0-ZIS5-CV-20 + 0-ZIS5-AP-20 + 0-ZIS5-HE-73 + 1-DT-AP-1386"
+	WeaponModes=125,-3,-4
+	GunAmmunition0=8,18,42
+	GunAmmunition1=50
+[end]
+
+[Ammunition63]
+	name="0-ZIS5-CV-73 + 0-ZIS5-HV-20 + 0-ZIS5-HE-20 + 1-DT-AP-1386"
+	WeaponModes=135,-2,-4
+	GunAmmunition0=2,28,48
+	GunAmmunition1=50
+[end]
+[Ammunition64]
+	name="0-ZIS5-CV-20 + 0-ZIS5-HV-73 + 0-ZIS5-HE-20 + 1-DT-AP-1386"
+	WeaponModes=135,-2,-4
+	GunAmmunition0=8,22,48
+	GunAmmunition1=50
+[end]
+[Ammunition65]
+	name="0-ZIS5-CV-20 + 0-ZIS5-HV-20 + 0-ZIS5-HE-73 + 1-DT-AP-1386"
+	WeaponModes=135,-2,-4
+	GunAmmunition0=8,28,42
+	GunAmmunition1=50
+[end]
+
+[Ammunition66]
+	name="0-ZIS5-AP-73 + 0-ZIS5-HV-20 + 0-ZIS5-HE-20 + 1-DT-AP-1386"
+	WeaponModes=235,-1,-4
+	GunAmmunition0=12,28,48
+	GunAmmunition1=50
+[end]
+[Ammunition67]
+	name="0-ZIS5-AP-20 + 0-ZIS5-HV-73 + 0-ZIS5-HE-20 + 1-DT-AP-1386"
+	WeaponModes=235,-1,-4
+	GunAmmunition0=18,22,48
+	GunAmmunition1=50
+[end]
+[Ammunition68]
+	name="0-ZIS5-AP-20 + 0-ZIS5-HV-20 + 0-ZIS5-HE-73 + 1-DT-AP-1386"
+	WeaponModes=235,-1,-4
+	GunAmmunition0=18,28,42
+	GunAmmunition1=50
+[end]
+
+[Ammunition69]
+	name="0-ZIS5-CV-73 + 0-ZIS5-HT-20 + 0-ZIS5-HE-20 + 1-DT-AP-1386"
+	WeaponModes=145,-2,-3
+	GunAmmunition0=2,38,48
+	GunAmmunition1=50
+[end]
+[Ammunition70]
+	name="0-ZIS5-CV-20 + 0-ZIS5-HT-73 + 0-ZIS5-HE-20 + 1-DT-AP-1386"
+	WeaponModes=145,-2,-3
+	GunAmmunition0=8,32,48
+	GunAmmunition1=50
+[end]
+[Ammunition71]
+	name="0-ZIS5-CV-20 + 0-ZIS5-HT-20 + 0-ZIS5-HE-73 + 1-DT-AP-1386"
+	WeaponModes=145,-2,-3
+	GunAmmunition0=8,38,42
+	GunAmmunition1=50
+[end]
+
+[Ammunition72]
+	name="0-ZIS5-AP-73 + 0-ZIS5-HT-20 + 0-ZIS5-HE-20 + 1-DT-AP-1386"
+	WeaponModes=245,-1,-3
+	GunAmmunition0=12,38,48
+	GunAmmunition1=50
+[end]
+[Ammunition73]
+	name="0-ZIS5-AP-20 + 0-ZIS5-HT-73 + 0-ZIS5-HE-20 + 1-DT-AP-1386"
+	WeaponModes=245,-1,-3
+	GunAmmunition0=18,32,48
+	GunAmmunition1=50
+[end]
+[Ammunition74]
+	name="0-ZIS5-AP-20 + 0-ZIS5-HT-20 + 0-ZIS5-HE-73 + 1-DT-AP-1386"
+	WeaponModes=245,-1,-3
+	GunAmmunition0=18,38,42
+	GunAmmunition1=50
+[end]
+
+[Ammunition75]
+	name="0-ZIS5-HV-73 + 0-ZIS5-HT-20 + 0-ZIS5-HE-20 + 1-DT-AP-1386"
+	WeaponModes=345,-1,-2
+	GunAmmunition0=22,38,48
+	GunAmmunition1=50
+[end]
+[Ammunition76]
+	name="0-ZIS5-HV-20 + 0-ZIS5-HT-73 + 0-ZIS5-HE-20 + 1-DT-AP-1386"
+	WeaponModes=345,-1,-2
+	GunAmmunition0=28,32,48
+	GunAmmunition1=50
+[end]
+[Ammunition77]
+	name="0-ZIS5-HV-20 + 0-ZIS5-HT-20 + 0-ZIS5-HE-73 + 1-DT-AP-1386"
+	WeaponModes=345,-1,-2
+	GunAmmunition0=28,38,42
+	GunAmmunition1=50
+[end]
+
+// 3 types reduced
+
+[Ammunition78]
+	name="0-ZIS5-CV-20 + 0-ZIS5-AP-20 + 0-ZIS5-HV-20 + 1-DT-AP-1386"
+	WeaponModes=123,-4,-5
+	GunAmmunition0=8,18,28
+	GunAmmunition1=50
+[end]
+[Ammunition79]
+	name="0-ZIS5-CV-20 + 0-ZIS5-AP-20 + 0-ZIS5-HT-20 + 1-DT-AP-1386"
+	WeaponModes=124,-3,-5
+	GunAmmunition0=8,18,38
+	GunAmmunition1=50
+[end]
+[Ammunition80]
+	name="0-ZIS5-CV-20 + 0-ZIS5-HV-20 + 0-ZIS5-HT-20 + 1-DT-AP-1386"
+	WeaponModes=134,-2,-5
+	GunAmmunition0=8,28,38
+	GunAmmunition1=50
+[end]
+[Ammunition81]
+	name="0-ZIS5-AP-20 + 0-ZIS5-HV-20 + 0-ZIS5-HT-20 + 1-DT-AP-1386"
+	WeaponModes=234,-1,-5
+	GunAmmunition0=18,28,38
+	GunAmmunition1=50
+[end]
+[Ammunition82]
+	name="0-ZIS5-CV-20 + 0-ZIS5-AP-20 + 0-ZIS5-HE-20 + 1-DT-AP-1386"
+	WeaponModes=125,-3,-4
+	GunAmmunition0=8,18,48
+	GunAmmunition1=50
+[end]
+[Ammunition83]
+	name="0-ZIS5-CV-20 + 0-ZIS5-HV-20 + 0-ZIS5-HE-20 + 1-DT-AP-1386"
+	WeaponModes=135,-2,-4
+	GunAmmunition0=8,28,48
+	GunAmmunition1=50
+[end]
+[Ammunition84]
+	name="0-ZIS5-AP-20 + 0-ZIS5-HV-20 + 0-ZIS5-HE-20 + 1-DT-AP-1386"
+	WeaponModes=235,-1,-4
+	GunAmmunition0=18,28,48
+	GunAmmunition1=50
+[end]
+[Ammunition85]
+	name="0-ZIS5-CV-20 + 0-ZIS5-HT-20 + 0-ZIS5-HE-20 + 1-DT-AP-1386"
+	WeaponModes=145,-2,-3
+	GunAmmunition0=8,38,48
+	GunAmmunition1=50
+[end]
+[Ammunition86]
+	name="0-ZIS5-AP-20 + 0-ZIS5-HT-20 + 0-ZIS5-HE-20 + 1-DT-AP-1386"
+	WeaponModes=245,-1,-3
+	GunAmmunition0=18,38,48
+	GunAmmunition1=50
+[end]
+[Ammunition87]
+	name="0-ZIS5-HV-20 + 0-ZIS5-HT-20 + 0-ZIS5-HE-20 + 1-DT-AP-1386"
+	WeaponModes=345,-1,-2
+	GunAmmunition0=28,38,48
+	GunAmmunition1=50
+[end]
+
+////////// 2 TYPES (1st variation is in the beginning as default)
+
+[Ammunition88]
+	name="0-ZIS5-CV-56 + 0-ZIS5-AP-56 + 1-DT-AP-1386"
+	WeaponModes=12,-3,-4,-5
+	GunAmmunition0=3,13
+	GunAmmunition1=50
+[end]
+[Ammunition89]
+	name="0-ZIS5-CV-56 + 0-ZIS5-HV-56 + 1-DT-AP-1386"
+	WeaponModes=13,-2,-4,-5
+	GunAmmunition0=3,23
+	GunAmmunition1=50
+[end]
+[Ammunition90]
+	name="0-ZIS5-CV-56 + 0-ZIS5-HT-56 + 1-DT-AP-1386"
+	WeaponModes=14,-2,-3,-5
+	GunAmmunition0=3,33
+	GunAmmunition1=50
+[end]
+[Ammunition91]
+	name="0-ZIS5-AP-56 + 0-ZIS5-HV-56 + 1-DT-AP-1386"
+	WeaponModes=23,-1,-4,-5
+	GunAmmunition0=13,23
+	GunAmmunition1=50
+[end]
+[Ammunition92]
+	name="0-ZIS5-AP-56 + 0-ZIS5-HT-56 + 1-DT-AP-1386"
+	WeaponModes=24,-1,-3,-5
+	GunAmmunition0=13,33
+	GunAmmunition1=50
+[end]
+[Ammunition93]
+	name="0-ZIS5-AP-56 + 0-ZIS5-HE-56 + 1-DT-AP-1386"
+	WeaponModes=25,-1,-3,-4
+	GunAmmunition0=13,43
+	GunAmmunition1=50
+[end]
+[Ammunition94]
+	name="0-ZIS5-HV-56 + 0-ZIS5-HT-56 + 1-DT-AP-1386"
+	WeaponModes=34,-1,-2,-5
+	GunAmmunition0=23,33
+	GunAmmunition1=50
+[end]
+[Ammunition95]
+	name="0-ZIS5-HV-56 + 0-ZIS5-HE-56 + 1-DT-AP-1386"
+	WeaponModes=35,-1,-2,-4
+	GunAmmunition0=23,43
+	GunAmmunition1=50
+[end]
+[Ammunition96]
+	name="0-ZIS5-HT-56 + 0-ZIS5-HE-56 + 1-DT-AP-1386"
+	WeaponModes=45,-1,-2,-3
+	GunAmmunition0=33,43
+	GunAmmunition1=50
+[end]
+
+// 2 types prevail
+
+[Ammunition97]
+	name="0-ZIS5-CV-93 + 0-ZIS5-AP-20 + 1-DT-AP-1386"
+	WeaponModes=12,-3,-4,-5
+	GunAmmunition0=1,18
+	GunAmmunition1=50
+[end]
+[Ammunition98]
+	name="0-ZIS5-CV-20 + 0-ZIS5-AP-93 + 1-DT-AP-1386"
+	WeaponModes=12,-3,-4,-5
+	GunAmmunition0=8,11
+	GunAmmunition1=50
+[end]
+
+[Ammunition99]
+	name="0-ZIS5-CV-93 + 0-ZIS5-HV-20 + 1-DT-AP-1386"
+	WeaponModes=13,-2,-4,-5
+	GunAmmunition0=1,28
+	GunAmmunition1=50
+[end]
+[Ammunition100]
+	name="0-ZIS5-CV-20 + 0-ZIS5-HV-93 + 1-DT-AP-1386"
+	WeaponModes=13,-2,-4,-5
+	GunAmmunition0=8,21
+	GunAmmunition1=50
+[end]
+
+[Ammunition101]
+	name="0-ZIS5-CV-93 + 0-ZIS5-HT-20 + 1-DT-AP-1386"
+	WeaponModes=14,-2,-3,-5
+	GunAmmunition0=1,38
+	GunAmmunition1=50
+[end]
+[Ammunition102]
+	name="0-ZIS5-CV-20 + 0-ZIS5-HT-93 + 1-DT-AP-1386"
+	WeaponModes=14,-2,-3,-5
+	GunAmmunition0=8,31
+	GunAmmunition1=50
+[end]
+
+[Ammunition103]
+	name="0-ZIS5-CV-93 + 0-ZIS5-HE-20 + 1-DT-AP-1386"
+	WeaponModes=15,-2,-3,-4
+	GunAmmunition0=1,48
+	GunAmmunition1=50
+[end]
+[Ammunition104]
+	name="0-ZIS5-CV-20 + 0-ZIS5-HE-93 + 1-DT-AP-1386"
+	WeaponModes=15,-2,-3,-4
+	GunAmmunition0=8,41
+	GunAmmunition1=50
+[end]
+
+[Ammunition105]
+	name="0-ZIS5-AP-93 + 0-ZIS5-HV-20 + 1-DT-AP-1386"
+	WeaponModes=23,-1,-4,-5
+	GunAmmunition0=11,28
+	GunAmmunition1=50
+[end]
+[Ammunition106]
+	name="0-ZIS5-AP-20 + 0-ZIS5-HV-93 + 1-DT-AP-1386"
+	WeaponModes=23,-1,-4,-5
+	GunAmmunition0=18,21
+	GunAmmunition1=50
+[end]
+
+[Ammunition107]
+	name="0-ZIS5-AP-93 + 0-ZIS5-HT-20 + 1-DT-AP-1386"
+	WeaponModes=24,-1,-3,-5
+	GunAmmunition0=11,38
+	GunAmmunition1=50
+[end]
+[Ammunition108]
+	name="0-ZIS5-AP-20 + 0-ZIS5-HT-93 + 1-DT-AP-1386"
+	WeaponModes=24,-1,-3,-5
+	GunAmmunition0=18,31
+	GunAmmunition1=50
+[end]
+
+[Ammunition109]
+	name="0-ZIS5-AP-93 + 0-ZIS5-HE-20 + 1-DT-AP-1386"
+	WeaponModes=25,-1,-3,-4
+	GunAmmunition0=11,48
+	GunAmmunition1=50
+[end]
+[Ammunition110]
+	name="0-ZIS5-AP-20 + 0-ZIS5-HE-93 + 1-DT-AP-1386"
+	WeaponModes=25,-1,-3,-4
+	GunAmmunition0=18,41
+	GunAmmunition1=50
+[end]
+
+[Ammunition111]
+	name="0-ZIS5-HV-93 + 0-ZIS5-HT-20 + 1-DT-AP-1386"
+	WeaponModes=34,-1,-2,-5
+	GunAmmunition0=21,38
+	GunAmmunition1=50
+[end]
+[Ammunition112]
+	name="0-ZIS5-HV-20 + 0-ZIS5-HT-93 + 1-DT-AP-1386"
+	WeaponModes=34,-1,-2,-5
+	GunAmmunition0=28,31
+	GunAmmunition1=50
+[end]
+
+[Ammunition113]
+	name="0-ZIS5-HV-93 + 0-ZIS5-HE-20 + 1-DT-AP-1386"
+	WeaponModes=35,-1,-2,-4
+	GunAmmunition0=21,48
+	GunAmmunition1=50
+[end]
+[Ammunition114]
+	name="0-ZIS5-HV-20 + 0-ZIS5-HE-93 + 1-DT-AP-1386"
+	WeaponModes=35,-1,-2,-4
+	GunAmmunition0=28,41
+	GunAmmunition1=50
+[end]
+
+[Ammunition115]
+	name="0-ZIS5-HT-93 + 0-ZIS5-HE-20 + 1-DT-AP-1386"
+	WeaponModes=45,-1,-2,-3
+	GunAmmunition0=31,48
+	GunAmmunition1=50
+[end]
+[Ammunition116]
+	name="0-ZIS5-HT-20 + 0-ZIS5-HE-93 + 1-DT-AP-1386"
+	WeaponModes=45,-1,-2,-3
+	GunAmmunition0=38,41
+	GunAmmunition1=50
+[end]
+
+// 2 types reduced
+
+[Ammunition117]
+	name="0-ZIS5-CV-28 + 0-ZIS5-AP-28 + 1-DT-AP-1386"
+	WeaponModes=12,-3,-4,-5
+	GunAmmunition0=6,16
+	GunAmmunition1=50
+[end]
+[Ammunition118]
+	name="0-ZIS5-CV-28 + 0-ZIS5-HV-28 + 1-DT-AP-1386"
+	WeaponModes=13,-2,-4,-5
+	GunAmmunition0=6,26
+	GunAmmunition1=50
+[end]
+[Ammunition119]
+	name="0-ZIS5-CV-28 + 0-ZIS5-HT-28 + 1-DT-AP-1386"
+	WeaponModes=14,-2,-3,-5
+	GunAmmunition0=6,36
+	GunAmmunition1=50
+[end]
+[Ammunition120]
+	name="0-ZIS5-CV-28 + 0-ZIS5-HE-28 + 1-DT-AP-1386"
+	WeaponModes=15,-2,-3,-4
+	GunAmmunition0=6,46
+	GunAmmunition1=50
+[end]
+[Ammunition121]
+	name="0-ZIS5-AP-28 + 0-ZIS5-HV-28 + 1-DT-AP-1386"
+	WeaponModes=23,-1,-4,-5
+	GunAmmunition0=16,26
+	GunAmmunition1=50
+[end]
+[Ammunition122]
+	name="0-ZIS5-AP-28 + 0-ZIS5-HT-28 + 1-DT-AP-1386"
+	WeaponModes=24,-1,-3,-5
+	GunAmmunition0=16,36
+	GunAmmunition1=50
+[end]
+[Ammunition123]
+	name="0-ZIS5-AP-28 + 0-ZIS5-HE-28 + 1-DT-AP-1386"
+	WeaponModes=25,-1,-3,-4
+	GunAmmunition0=16,46
+	GunAmmunition1=50
+[end]
+[Ammunition124]
+	name="0-ZIS5-HV-28 + 0-ZIS5-HT-28 + 1-DT-AP-1386"
+	WeaponModes=34,-1,-2,-5
+	GunAmmunition0=26,36
+	GunAmmunition1=50
+[end]
+[Ammunition125]
+	name="0-ZIS5-HV-28 + 0-ZIS5-HE-28 + 1-DT-AP-1386"
+	WeaponModes=35,-1,-2,-4
+	GunAmmunition0=26,46
+	GunAmmunition1=50
+[end]
+[Ammunition126]
+	name="0-ZIS5-HT-28 + 0-ZIS5-HE-28 + 1-DT-AP-1386"
+	WeaponModes=45,-1,-2,-3
+	GunAmmunition0=36,46
+	GunAmmunition1=50
+[end]
+
+////////// 1 TYPE
+
+[Ammunition127]
+	name="0-ZIS5-CV-113 + 1-DT-AP-1386"
+	WeaponModes=1,-2,-3,-4,-5
+	GunAmmunition0=0
+	GunAmmunition1=50
+[end]
+[Ammunition128]
+	name="0-ZIS5-AP-113 + 1-DT-AP-1386"
+	WeaponModes=2,-1,-3,-4,-5
+	GunAmmunition0=10
+	GunAmmunition1=50
+[end]
+[Ammunition129]
+	name="0-ZIS5-HV-113 + 1-DT-AP-1386"
+	WeaponModes=3,-1,-2,-4,-5
+	GunAmmunition0=20
+	GunAmmunition1=50
+[end]
+[Ammunition130]
+	name="0-ZIS5-HT-113 + 1-DT-AP-1386"
+	WeaponModes=4,-1,-2,-3,-5
+	GunAmmunition0=30
+	GunAmmunition1=50
+[end]
+[Ammunition131]
+	name="0-ZIS5-HE-113 + 1-DT-AP-1386"
+	WeaponModes=5,-1,-2,-3,-4
+	GunAmmunition0=40
+	GunAmmunition1=50
+[end]
+
+// 3 types reduced
+
+[Ammunition132]
+	name="0-ZIS5-CV-56 + 1-DT-AP-1386"
+	WeaponModes=1,-2,-3,-4,-5
+	GunAmmunition0=3
+	GunAmmunition1=50
+[end]
+[Ammunition133]
+	name="0-ZIS5-AP-56 + 1-DT-AP-1386"
+	WeaponModes=2,-1,-3,-4,-5
+	GunAmmunition0=13
+	GunAmmunition1=50
+[end]
+[Ammunition134]
+	name="0-ZIS5-HV-56 + 1-DT-AP-1386"
+	WeaponModes=3,-1,-2,-4,-5
+	GunAmmunition0=23
+	GunAmmunition1=50
+[end]
+[Ammunition135]
+	name="0-ZIS5-HT-56 + 1-DT-AP-1386"
+	WeaponModes=4,-1,-2,-3,-5
+	GunAmmunition0=33
+	GunAmmunition1=50
+[end]
+[Ammunition136]
+	name="0-ZIS5-HE-56 + 1-DT-AP-1386"
+	WeaponModes=5,-1,-2,-3,-4
+	GunAmmunition0=43
+	GunAmmunition1=50
+[end]
+
+
+
+////////// GUN BELT AMMUNITIONS
+
+
+
+[GunAmmunition0]
+	RoundsInMagazine = 113
+	BulletConfig = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_76_CV.txt"
+[end]
+[GunAmmunition1]
+	RoundsInMagazine = 93
+	BulletConfig = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_76_CV.txt"
+[end]
+[GunAmmunition2]
+	RoundsInMagazine = 73
+	BulletConfig = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_76_CV.txt"
+[end]
+[GunAmmunition3]
+	RoundsInMagazine = 56
+	BulletConfig = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_76_CV.txt"
+[end]
+[GunAmmunition4]
+	RoundsInMagazine = 53
+	BulletConfig = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_76_CV.txt"
+[end]
+[GunAmmunition5]
+	RoundsInMagazine = 37
+	BulletConfig = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_76_CV.txt"
+[end]
+[GunAmmunition6]
+	RoundsInMagazine = 28
+	BulletConfig = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_76_CV.txt"
+[end]
+[GunAmmunition7]
+	RoundsInMagazine = 22
+	BulletConfig = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_76_CV.txt"
+[end]
+[GunAmmunition8]
+	RoundsInMagazine = 20
+	BulletConfig = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_76_CV.txt"
+[end]
+[GunAmmunition9]
+	RoundsInMagazine = 15
+	BulletConfig = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_76_CV.txt"
+[end]
+
+[GunAmmunition10]
+	RoundsInMagazine = 113
+	BulletConfig = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_76_AP.txt"
+[end]
+[GunAmmunition11]
+	RoundsInMagazine = 93
+	BulletConfig = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_76_AP.txt"
+[end]
+[GunAmmunition12]
+	RoundsInMagazine = 73
+	BulletConfig = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_76_AP.txt"
+[end]
+[GunAmmunition13]
+	RoundsInMagazine = 56
+	BulletConfig = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_76_AP.txt"
+[end]
+[GunAmmunition14]
+	RoundsInMagazine = 53
+	BulletConfig = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_76_AP.txt"
+[end]
+[GunAmmunition15]
+	RoundsInMagazine = 37
+	BulletConfig = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_76_AP.txt"
+[end]
+[GunAmmunition16]
+	RoundsInMagazine = 28
+	BulletConfig = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_76_AP.txt"
+[end]
+[GunAmmunition17]
+	RoundsInMagazine = 22
+	BulletConfig = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_76_AP.txt"
+[end]
+[GunAmmunition18]
+	RoundsInMagazine = 20
+	BulletConfig = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_76_AP.txt"
+[end]
+[GunAmmunition19]
+	RoundsInMagazine = 15
+	BulletConfig = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_76_AP.txt"
+[end]
+
+[GunAmmunition20]
+	RoundsInMagazine = 113
+	BulletConfig = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_76_HV.txt"
+[end]
+[GunAmmunition21]
+	RoundsInMagazine = 93
+	BulletConfig = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_76_HV.txt"
+[end]
+[GunAmmunition22]
+	RoundsInMagazine = 73
+	BulletConfig = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_76_HV.txt"
+[end]
+[GunAmmunition23]
+	RoundsInMagazine = 56
+	BulletConfig = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_76_HV.txt"
+[end]
+[GunAmmunition24]
+	RoundsInMagazine = 53
+	BulletConfig = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_76_HV.txt"
+[end]
+[GunAmmunition25]
+	RoundsInMagazine = 37
+	BulletConfig = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_76_HV.txt"
+[end]
+[GunAmmunition26]
+	RoundsInMagazine = 28
+	BulletConfig = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_76_HV.txt"
+[end]
+[GunAmmunition27]
+	RoundsInMagazine = 22
+	BulletConfig = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_76_HV.txt"
+[end]
+[GunAmmunition28]
+	RoundsInMagazine = 20
+	BulletConfig = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_76_HV.txt"
+[end]
+[GunAmmunition29]
+	RoundsInMagazine = 15
+	BulletConfig = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_76_HV.txt"
+[end]
+
+[GunAmmunition30]
+	RoundsInMagazine = 113
+	BulletConfig = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_76_HT.txt"
+[end]
+[GunAmmunition31]
+	RoundsInMagazine = 93
+	BulletConfig = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_76_HT.txt"
+[end]
+[GunAmmunition32]
+	RoundsInMagazine = 73
+	BulletConfig = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_76_HT.txt"
+[end]
+[GunAmmunition33]
+	RoundsInMagazine = 56
+	BulletConfig = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_76_HT.txt"
+[end]
+[GunAmmunition34]
+	RoundsInMagazine = 53
+	BulletConfig = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_76_HT.txt"
+[end]
+[GunAmmunition35]
+	RoundsInMagazine = 37
+	BulletConfig = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_76_HT.txt"
+[end]
+[GunAmmunition36]
+	RoundsInMagazine = 28
+	BulletConfig = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_76_HT.txt"
+[end]
+[GunAmmunition37]
+	RoundsInMagazine = 22
+	BulletConfig = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_76_HT.txt"
+[end]
+[GunAmmunition38]
+	RoundsInMagazine = 20
+	BulletConfig = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_76_HT.txt"
+[end]
+[GunAmmunition39]
+	RoundsInMagazine = 15
+	BulletConfig = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_76_HT.txt"
+[end]
+
+[GunAmmunition40]
+	RoundsInMagazine = 113
+	BulletConfig = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_76_HE.txt"
+[end]
+[GunAmmunition41]
+	RoundsInMagazine = 93
+	BulletConfig = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_76_HE.txt"
+[end]
+[GunAmmunition42]
+	RoundsInMagazine = 73
+	BulletConfig = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_76_HE.txt"
+[end]
+[GunAmmunition43]
+	RoundsInMagazine = 56
+	BulletConfig = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_76_HE.txt"
+[end]
+[GunAmmunition44]
+	RoundsInMagazine = 53
+	BulletConfig = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_76_HE.txt"
+[end]
+[GunAmmunition45]
+	RoundsInMagazine = 37
+	BulletConfig = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_76_HE.txt"
+[end]
+[GunAmmunition46]
+	RoundsInMagazine = 28
+	BulletConfig = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_76_HE.txt"
+[end]
+[GunAmmunition47]
+	RoundsInMagazine = 22
+	BulletConfig = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_76_HE.txt"
+[end]
+[GunAmmunition48]
+	RoundsInMagazine = 20
+	BulletConfig = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_76_HE.txt"
+[end]
+[GunAmmunition49]
+	RoundsInMagazine = 15
+	BulletConfig = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_76_HE.txt"
+[end]
+
+[GunAmmunition50]
+	MaxRoundsInMagazine = 63
+	RoundsInMagazine = 63
+	MaxReservedMagazines = 21
+	ReservedMagazines = 21
+	MaxMisFiresInMagazine = 0
+	AmountRoundsWithOneTracer = 2
+	ParallaxConfig=""
+	BulletConfig = "LuaScripts/WorldObjects/Ballistics/Projectiles/BULLET_RUS_7-62x54_AP.txt"
+[end]

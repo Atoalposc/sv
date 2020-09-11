@@ -1,0 +1,69 @@
+Class_name = "CVehicleTurret"
+object_name = "VehicleTurret"
+// Пулемет Максим счетверенный
+//SoundScript="LuaScripts\Sound\Vehicles\Maksim4_AA_Turret.cfg"
+
+[attach=0]
+	position= 0.0, 0.0, 0
+	object = "LuaScripts/WorldObjects/Bots/BotGunnerMachineGun.txt"
+[end]
+
+PitchPoint = -0.127, 1.226, 0.0
+
+AngleYawMin      = -180.0
+AngleYawMax      = 180.0
+AnglePitchMin    = -7.0
+AnglePitchMax    = 77.0
+AnglePitchDef    = 0.1
+YawArgNum        = 221
+PitchArgNum      = 241
+YawArgMin        = 0.0
+YawArgMax        = 1.0
+PitchArgMin      = 0.0
+PitchArgMax      = 1.0
+
+YawAngularSpeed    = 35.0
+PitchAngularSpeed  = 30.0
+
+SiegeArgNum = 101
+SiegeTime = 5
+MaxVehicleSpeedToAttack = 0.3
+StopVehicleWhenPointing = true
+
+FireArgumentNum  = 64200
+AttackAnimationArgNum = 61
+NumOfAnimations = 1
+
+FireAnimationTime    = 0.3692
+AttackAnimationTime  = 0.0923
+
+MuzzleDisplacement = 1.667, 0.079, 0.087	//Смещено вперед на 1.0м
+MuzzleDisplacement = 1.667, 0.08, -0.26
+MuzzleDisplacement = 1.667, 0.08, 0.26
+MuzzleDisplacement = 1.667, 0.08, -0.087
+
+AttackDistance = 1500.0		//AI max aim distance versus ground point
+AttackDistanceTrgGnd = 700.0		//AI max aim distance versus ground target
+AttackDistanceTrgAir = 1500.0		//AI max aim distance versus air target
+
+[bullet=1]
+	BulletScript    = "LuaScripts/WorldObjects/Ballistics/AmmunitionForNPC/NPC_BULLET_RUS_7-62_AP.txt"
+	TargetingScript = "LuaScripts/WorldObjects/Ballistics/AmmunitionForNPC/NPC_BULLET_RUS_7-62_AP.bin"
+	ExplosionScript = ""
+	BulletsCount = 4000
+	StartBulletSpeed = 840.0
+	RealPhysicBullet = true
+[end]
+
+VisibleTraceNum = 5
+
+NumBulletsInQueue = 320
+QueueRechargeTime   = 1.0
+BulletRechargeTime  = 0.023075
+FireDispAngle = 0.2 //градусы
+FireDispSpeed = 16.5 // м/с
+
+NeedFuse = false
+
+IsSoundLooped = true
+SoundNumber = 5

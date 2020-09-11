@@ -1,0 +1,5 @@
+class_name = "CComplexTrigger"
+object_name = "ComplexTrigger"
+
+//////	PhysicsBody properties
+network=true

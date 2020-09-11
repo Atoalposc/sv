@@ -1,0 +1,19 @@
+// attach ID shold be in range from 100 to 110
+
+[attach=100] // Side camera looking forward
+	position = -5.1, 1.6, 2.3
+	rotation = 0, -15, 0
+	object = "LuaScripts/WorldObjects/GoProCamera90.txt"
+[end]
+
+[attach=101] // Side camera looking backward
+	position = 10.0, 2.0, -2.9
+	rotation = 0, 160, 10
+	object = "LuaScripts/WorldObjects/GoProCamera90.txt"
+[end]
+
+[attach=102] // Roof camera looking backward
+	position = -5.3, 5.0, 2.5
+	rotation = 0, -30, -15
+	object = "LuaScripts/WorldObjects/GoProCamera90.txt"
+[end]

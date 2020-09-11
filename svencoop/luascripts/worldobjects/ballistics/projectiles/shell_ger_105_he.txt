@@ -1,0 +1,65 @@
+Class_name = "CBatchBallistics"
+object_name = "SHELL_GER_105_HE"
+
+//105мм патрон F.H.Gr. к пушке leFH 18 осколочно-фугасный
+
+//////	PhysicsBody properties
+VisualImage=0,"graphics/ammo/ammoShellTypeA.mgm",false
+VisualRadius=5
+SizeArg=10
+SizeArgVal=0.105
+
+//CollisionBody="graphics/ammo/ammo.col"
+
+NoDirecion=true
+NoCollision=true
+
+// дальность, скорость на этой дальности (на 0м - указать на 5км/ч меньше расчетной), пары броня-урон за броней. Броню больше, чем в первой паре, не пробьет
+// за базовый взят урон на дальности 100м при нулевой броне, на макс. броне урон равне 0.25 от базового, на 0.8 макс. брони урон равен 0.5 от базового
+// урон при нулевой броне уменьшается с дальностью по соотношению квадрата скоростей
+// скорости по дальностям взяты из лога утилиты расчета .bin файлов пули (расчет таблиц наведения), на 10км/ч меньше ресчетной
+// т.к. если скорость окажется больше расчетной на данной дальности, то дамага не будет
+// базовый урон расчитан по соотношению кинетических энергий на дальности 100м между данной пулей и референсной пулей SHELL_GER_20x82_AP (=1000)
+
+Armor=0,470,	19,16961,	15,42402,	0,67843
+Armor=500,435,	17,14541,	13,36353,	0,58165
+Armor=1000,403,	15,12465,	12,31163,	0,49860 // опорная бронепробиваемость пересчитана по формуле де Марра из референсной бронепробиваемости SHELL_RUS_37X195_HE на близкой скорости
+Armor=2000,346,	12,9173,	10,22933,	0,36692
+Armor=4000,288,	9,6358,		7,15895,	0,25432
+
+// аэродинамические коэфициенты подобраны исходя из совпадения графика скорости по дальности для эталонной пули (расчет на балл. калькуляторе снаряда ОР-167)
+
+Gage=105				//калибр
+DefaultStartSpeed=470	//дефолтная начальная скорость при стрельбе из простых пушек (наземка)
+MaxDistance=11000		//предельная дальность, дальше которой объект удалится
+Mass=14.81				//масса пули
+Mkr=0.75				//значение числа Маха, после которого начинается повышение Cx до момента M=1, зависит от формы тела но не от размера
+Mmax=1.3				//значение числа Маха, до которого завершается понижение Cx, начавшееся при M=1, зависит от формы тела но не от размера
+Cx_0=0.067				//значение к-та сопротивления при (M <= Mkr), зависит от формы тела но не от размера
+Cx_max=0.45				//значение к-та сопротивления при (M = 1), зависит от формы тела но не от размера
+Cx_1=0.43				//значение к-та сопротивления при (M >= Mmax), зависит от формы тела но не от размера
+R=0.0525				//радиус пули
+LiveTime=50				//время жизни объекта (большее из двух: время полета на MaxDistance или время горения трассера + 3.5с)
+TimeToDestroy=0			//время жизни объекта после попадания в скрытом состоянии, что бы трейл трассера не пропадал пока не расствориться
+TracertShowtime = 0.1	//время горения трассера
+MaxRedirections = 0		//максимальное кол-во рикошетов
+
+debug=false
+
+HitDummy="LuaScripts/WorldObjects/Explosions/Shells/HE_105mm_15kg_1kg_object.txt"
+HitMisc="LuaScripts/WorldObjects/Explosions/Shells/HE_105mm_15kg_1kg_object.txt"
+HitWater="LuaScripts/WorldObjects/Explosions/Shells/HE_105mm_15kg_1kg_water.txt"
+HitGround="LuaScripts/WorldObjects/Explosions/Shells/HE_105mm_15kg_1kg_ground.txt"
+HitArmor="LuaScripts/WorldObjects/Explosions/Shells/HE_105mm_15kg_1kg_object.txt"
+HitBuilding="LuaScripts/WorldObjects/Explosions/Shells/HE_105mm_15kg_1kg_building.txt"
+HitMetal="LuaScripts/WorldObjects/Explosions/Shells/HE_105mm_15kg_1kg_object.txt"
+HitForest="LuaScripts/WorldObjects/Explosions/Shells/HE_105mm_15kg_1kg_object.txt"
+
+shellType = 6
+//        SHELL_TYPE_CV = 1,// Бронебойный - CV - Armour Piercing with Cavity Bursting Charge
+//        SHELL_TYPE_AP = 2,// Бронебойный сплошной - AP - Armour Piercing Solid
+//        SHELL_TYPE_HV = 3,// Подкалиберный - HV - Armour Piercing Composite Rigid (High Velocity)
+//        SHELL_TYPE_HT = 4,// Кумулятивный - HT - Hight Explosive Anti Tank (HEAT)
+//        SHELL_TYPE_SH = 5,// Шрапнельный - SH - Shrapnel
+//        SHELL_TYPE_HE = 6,// Осколочный - HE - High Explosive and Fragmental
+//        SHELL_TYPE_SpHV = 7,// Подкалиберный катушечный - SpHV - Armour Piercing Spool-Shaped (Spool High Velocity)

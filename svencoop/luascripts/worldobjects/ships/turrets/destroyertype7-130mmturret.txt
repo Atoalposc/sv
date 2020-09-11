@@ -1,0 +1,67 @@
+Class_name = "CVehicleTurret"
+object_name = "HowitzerTurret"
+// Пушка Б-13
+
+[attach=0]
+	position= 0.0, 0.0, 0
+	object = "LuaScripts\WorldObjects\Bots\BotGunnerHowitzPhys.txt"
+[end]
+
+PitchPoint = -0.033, 1.732, 0.0
+
+AngleYawMin      = -150.0
+AngleYawMax      = 150.0
+AnglePitchMin    = -5.0
+AnglePitchMax    = 45.0
+AnglePitchDef    = 10
+YawArgNum        = 221
+PitchArgNum      = 241
+YawArgMin        = 0.083333
+YawArgMax        = 0.916667
+PitchArgMin      = 0.0
+PitchArgMax      = 1.0
+
+YawAngularSpeed    = 6.0
+PitchAngularSpeed  = 1.8
+
+FireArgumentNum  = 64100
+AttackAnimationArgNum = 61
+
+FireAnimationTime    = 0.4
+AttackAnimationTime  = 0.4
+
+MuzzleDisplacement = 5.5, 0, 0
+AttackDistance   = 26000.0
+AttackDistanceTrgGnd = 5000.0
+AttackDistanceTrgAir = 1.0
+
+[bullet=1]
+	BulletScript    = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_130_HE.txt"
+	TargetingScript = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_130_HE.bin"
+	ExplosionScript = ""
+	BulletsCount = 100
+	StartBulletSpeed = 870.0
+	RealPhysicBullet = true
+	PriorityArmorMin = 0.0
+	PriorityArmorMax = 35.0
+[end]
+
+[bullet=2]
+	BulletScript    = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_130_CV.txt"
+	TargetingScript = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_130_CV.bin"
+	ExplosionScript = ""
+	BulletsCount = 85
+	StartBulletSpeed = 870.0
+	RealPhysicBullet = true
+	PriorityArmorMin = 35.0
+	PriorityArmorMax = 1000.0
+[end]
+
+NumBulletsInQueue = 1
+QueueRechargeTime   = 7.5
+BulletRechargeTime  = 0.1
+
+NeedFuse = false
+
+IsSoundLooped = false
+SoundNumber = 1

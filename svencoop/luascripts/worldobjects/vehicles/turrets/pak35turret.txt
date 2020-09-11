@@ -1,0 +1,70 @@
+Class_name = "CVehicleTurret"
+object_name = "HowitzerTurret"
+// Полевая пушка Pak 35/36
+//SoundScript="LuaScripts\Sound\Vehicles\CannonAA_Shot_Large.cfg"
+
+[attach=0]
+	position= 0.0, 0.0, 0
+	object = "LuaScripts/WorldObjects/Bots/BotGunnerFieldCannon.txt"
+[end]
+
+PitchPoint = 0.09765, 0.30103, 0
+
+AngleYawMin      = -180.0
+AngleYawMax	     = 180.0
+AnglePitchMin    = -10.0
+AnglePitchMax    = 25.0
+AnglePitchDef    = 3.0
+YawArgNum        = 221
+PitchArgNum      = 241
+YawArgMin        = 0.0
+YawArgMax        = 1.0
+PitchArgMin      = 0.0
+PitchArgMax      = 1.0
+
+YawAngularSpeed    = 6.0
+PitchAngularSpeed  = 3.0
+
+FireArgumentNum  = 64100
+AttackAnimationArgNum = 61
+
+FireAnimationTime    = 0.4
+AttackAnimationTime  = 0.4
+
+MuzzleDisplacement = 1.3, 0, 0
+
+AttackDistance   = 5500.0		//AI max aim distance versus ground point
+AttackDistanceTrgGnd = 1500.0		//AI max aim distance versus ground target
+AttackDistanceTrgAir = 1.0		//AI max aim distance versus air target
+
+[bullet=1]
+	BulletScript = "LuaScripts/WorldObjects/Ballistics/AmmunitionForNPC/NPC_SHELL_GER_37_HE.txt" // 3,7 cm Pzgr
+	TargetingScript = "LuaScripts/WorldObjects/Ballistics/AmmunitionForNPC/NPC_SHELL_GER_37_HE_745ms.bin"
+	ExplosionScript = "LuaScripts/WorldObjects/Explosions/Small/Ground.txt"
+	BulletsCount = 100
+	StartBulletSpeed = 745
+	RealPhysicBullet = true
+	PriorityArmorMin = 0.0
+	PriorityArmorMax = 5.0
+[end]
+
+[bullet=2]
+	BulletScript = "LuaScripts/WorldObjects/Ballistics/AmmunitionForNPC/NPC_SHELL_GER_37_CV.txt" // 3,7 cm Sprg.39
+	TargetingScript = "LuaScripts/WorldObjects/Ballistics/AmmunitionForNPC/NPC_SHELL_GER_37_CV_762ms.bin"
+	ExplosionScript = ""
+	BulletsCount = 100
+	StartBulletSpeed = 762
+	RealPhysicBullet = true
+	PriorityArmorMin = 5.0
+	PriorityArmorMax = 1000.0
+[end]
+
+VisibleTraceNum = 1
+NumBulletsInQueue = 1
+QueueRechargeTime = 3.0
+BulletRechargeTime  = 1.0
+
+NeedFuse = false
+
+IsSoundLooped = false
+SoundNumber = 1

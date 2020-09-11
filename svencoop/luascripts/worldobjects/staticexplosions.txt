@@ -1,0 +1,31 @@
+Class_name = "CStaticExplosions"
+
+RenderID=0			//-1 to explode everywhere
+
+[Emitter]
+	P=0.1
+	Object="LuaScripts\WorldObjects\Emitters\DummyGroundExpl_0.txt"
+	WaterObject="LuaScripts\WorldObjects\Emitters\DummyWaterExpl_0.txt"
+	Alt=0
+	Range=200,3000
+[end]
+[Emitter]
+	P=0.15
+	Object="LuaScripts\WorldObjects\Emitters\DummyGroundExpl_1.txt"
+	WaterObject="LuaScripts\WorldObjects\Emitters\DummyWaterExpl_1.txt"
+	Alt=0
+	Range=200,5000
+[end]
+[Emitter]
+	P=0.05
+	Object="LuaScripts\WorldObjects\Emitters\DummyGroundExpl_2.txt"
+	WaterObject="LuaScripts\WorldObjects\Emitters\DummyWaterExpl_2.txt"
+	Alt=0
+	Range=200,7000
+[end]
+//[Emitter]
+//	P=0.1
+//	Object="LuaScripts\WorldObjects\Emitters\DummyAirExpl_0.txt"
+//	Alt=500
+//	Range=200,10000
+//[end]

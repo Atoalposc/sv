@@ -1,0 +1,8 @@
+Class_name = "CTurretRadioAIInputController"
+object_name = "CTurretRadioAIInputController"
+
+//////	Controller specific
+Artificial=false;
+
+ControlledType="GOT_VEHICLE_TURRET";
+

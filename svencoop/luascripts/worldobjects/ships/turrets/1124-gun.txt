@@ -1,0 +1,78 @@
+class_name = "CAttachedVehicle"
+object_name = "F-34 turret"
+
+
+//////	PhysicsBody properties
+//VisualImage = <int TYPE>,<string File_PathName>,<bool cast_shadows>
+
+VisualImage=0,"graphics/Ships/1124/1124-T1.mgm",true
+
+CollisionBody="graphics/Ships/1124/1124-T1.col"
+
+SoundScript="LuaScripts/Sound/Vehicles/T34.cfg"
+
+[attach=0]
+	position= 0.0, 0.0, 0.0
+	object = "LuaScripts/WorldObjects/Ships/Turrets/1124-GunTurret.txt"
+[end]
+
+TargetHeight = 0.5			// Дельта по высоте к центру модели используемая при прицеливании и оценке видимости
+
+//////	Controled body specific
+
+Mass=4000.0					// Полная масса танка
+
+energyloss="",true,45.0,1000		// Потеря энергии пули при попадании, true - проверка на входе и выходе в колижн-бокс, первое эквивалентная броня на входе и выходе, второе джоулей на каждый метр пути внутри колижена
+
+RegenerationMax = 1.0		// До какого Life само-чиниться танк
+RegenerationMin = 0.5		// Минимальное значение Life, ниже которого починки не будет
+RegenerationPercent = 0.0	// Скорость восстановления, долей Life в секунду, похоже что не работает
+
+Firing=0.0008				// Скорость сгорания от большого пожара, долей Life в секунду
+SmokeStartHealth = 0.25		// Лайф, при котором начнется малый пожар
+MinFiringHealth = 0.15		// Лайф, при котором начнется большой пожар
+MinMovementHealth = 0.25	// Лайф, при котором перестанет ездить
+MinAttackHealth = 0.1		// Лайф, при котором перестанет стрелять
+
+FireEffectTime = 100.0		// Сколько будет гореть по времени
+DestructArg = 281			// Аргумент дамага
+SmokeArgBase    = 60001		// Аргумент малого пожара
+SmokeArgTotalNum = 1		// Кол-во вариантов пожара, 1-й вариант будет по хуку 60000, второй по 60001, третий по 60002 и т.д.
+FiringArg = 60000			// Аргумент большого пожара
+
+ExplosionScript = "LuaScripts/WorldObjects/explosions/Detonation/VehicleNoDmg.txt"
+OnDropLandScript = "LuaScripts/WorldObjects/Emitters/DustBlow5_3.txt"			// Эффект при падении на землю
+OnDropWaterScript = "LuaScripts/WorldObjects/Emitters/WaterSpray5_3.txt"		// Эффект при падении на воду
+
+CriticalWaterLevel = 1.5		// Гулбже начнет умирать
+CriticalHeigthLevel = 3.0		// При падении с большей высоты умрет
+DivingSpeed = 0.8				// Скорость погружения в воду
+ImpulseToDestroy = 45000		// Определяет силу удара обеъкта об танк, нужную для его уничтожения
+ImpulseMinimumLevel = 9000		// Определяет минимальную силу удара об танк, нужную для его повреждения (видимо)
+
+//логирование повреждений
+logtreshold=0.0001
+
+Armor=45					// Толщина брони, общий параметр, нужен для других ИИ для определения типа снаряда
+
+// Модель повреждения. Исходный убалансированный лайф объекта до введения простой модели 20000.
+
+[DmgElement = ammo]
+	damageablePart="collision_t34"
+	LifeRate=20000
+	LifeRateFrag=20000
+	[ArmorBox]			// Если данный блок есть, то броня задана по сторонам, если блока нет, то используется общий параметр Armor=
+		FovH=90			// Полный угол горизонтального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+		FovV=90			// Полный угол вертикального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+						// Остальные 5 раструбов определяются автоматически по центральной симметрии относительно переднего
+		ArmorFront=45
+		ArmorBack=45
+		ArmorTop=15
+		ArmorBottom=15
+		ArmorRight=45
+		ArmorLeft=45
+	[end]
+	CollisioDamageSens=1
+[End]
+
+DebugInfo = false

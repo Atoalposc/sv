@@ -1,0 +1,4 @@
+Class_name = "CTurretRiffle"
+object_name = "TurretRiffle"
+
+//SendRate=10,10000	//normal, attached state

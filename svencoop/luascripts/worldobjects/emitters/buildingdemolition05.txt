@@ -1,0 +1,17 @@
+Class_name = "CStaticEmitter"
+
+//////	PhysicsBody properties
+VisualImage=0,"graphics\effects\surf\AntiairCrash.epl",false
+
+SoundScript="LuaScripts/Sound/explosions/Splash/Fire.cfg"
+SoundStrength=0.2
+SoundTime=2
+
+duration=1
+range=0,1
+loop=false
+
+destroy_pause=3.5
+
+
+VisualRadius=1.5

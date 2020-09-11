@@ -1,0 +1,3747 @@
+class_name = "CPlane"
+object_name = "Il-2 mod.1941"
+detail_type = "DET_PLANE" //list of types is in \inc\SimulationSystem\DetailTypes.inc
+
+[COCKPIT_LIMITS]
+x= -0.13, 0.25
+y= -0.15, 0.05
+z= -0.21, 0.21
+[END]
+
+[OPEN_COCKPIT_LIMITS]
+x= -0.13, 0.23
+y= -0.2, 0.2
+z= -0.5, 0.5
+[END]
+
+//////	PhysicsBody properties
+//VisualImage = <int TYPE>,<string File_PathName>,<bool cast_shadows>
+
+VisualImage=0,"graphics/planes/Il2m41/Il2m41.mgm",true,true
+VisualImage=1,"graphics/planes/Il2m41/Il2m41-C.mgm",false
+DistantLOD="LuaScripts/WorldObjects/Planes/DistantLODs/Il2m41_Distant.txt"
+DLODArgs=50380,57200
+Fragment="LuaScripts/WorldObjects/Planes/Fragments/Il2m41_Fragment.txt"
+
+//VisualImage=ID,model_or_effect,cast_shadows[,debris_effects]
+//ID:					INT:	0 - visible everywhere, 1 - visible inside, 2 - visible outside
+//model_or_effect:		STRING:	path to model file (mgm) of effect file (epl)
+//cast_shadows: 		BOOL:	cast shadows from object or not
+//[,debris_effects]:	BOOL:	optional parameter, show effects on object debris or not
+
+ImageAttr=345	//IA_NOCLIP | IA_CLOSEVIEWARG | IA_NOMINPIXELS | IA_NOMINZ | IA_SCALEARG
+//	IA_DEFAULT=0,
+//	IA_NOCLIP=1,
+//	IA_NOCLIP_ANIM=2,
+//	IA_NOROTINTERPOLATION=4,
+//	IA_NOMINZ=8,
+//	IA_NOMINPIXELS=16,
+//	IA_NOPOSINTERPOLATION=32,
+//	IA_CLOSEVIEWARG=64,
+//	IA_ALWAYSVISIBLE=128,
+//	IA_SCALEARG=256,
+//	ImageAttr=Attr1+Attr2+...+AttrN
+
+CollisionBody="graphics/planes/Il2m41/Il2m41_Phys.col"
+HitBody="graphics/planes/Il2m41/Il2m41.col"
+
+SoundScript="LuaScripts/Sound/Planes/Il2m41.cfg"
+HidePeriodAfterExplosion = 3.0
+
+DropsArg=100
+HumidityArg=101
+
+SetCockpitArgs=false	// true - автоматическое выставление значений анимаций в систему сетевых команд с указанным флагом сетевой передачи, false - в самолётах это делается в коде или в случае работы объекта только на приём
+
+//CockpitArg= FetchType, CmdID, SubcmdID, ArgNum, ArgValDefault, SmoothingType, SmoothingPower, NetworkFlag
+//FetchType=-1: аргумент в объекте не забирается для анимирования
+//FetchType=-2: аргумент в объекте забирается для анимирования из самого объекта
+//FetchType=-3: аргумент в объекте забирается для анимирования по сетевым командам parent-объекта
+//FetchType>=0: аргумент в объекте забирается для анимирования по сетевым командам child-объекта с укзанным Attach ID
+//CmdID=[0..999]: ID сетевой команды низкого качества, используемой для передачи значения.
+//CmdID=[1000..1999]: ID сетевой команды среднего качества, используемой для передачи значения.
+//SubcmdID=[0..3]: ID сетевой подкоманды команды низкого качества.
+//SubcmdID=[0..1]: ID сетевой подкоманды команды среднего качества.
+//ArgNum: номер аргумента анимации устанавливаемого в/из команды.
+//ArgValDefault: дефолтное значение аргумента анимации в случае, если команда не приходила.
+//SmoothingType: smooth_clamp - сглаживаение не-круговых анимаций
+//SmoothingType: smooth_wrap - сглаживаение круговых анимаций
+//SmoothingPower: постоянная времени сглаживания
+//NetworkFlag="": отправки команды в сеть нет и нет выставления команды в случае, если SetCockpitArgs=false
+//NetworkFlag="low_freq": отправка в сеть целиком команды, содержащей указанный аргумент в случае его изменения, не чаще низкой частоты
+//NetworkFlag="med_freq": отправка в сеть целиком команды, содержащей указанный аргумент в случае его изменения, не чаще средней частоты
+//NetworkFlag="high_freq": отправка в сеть целиком команды, содержащей указанный аргумент в случае его изменения, не чаще высокой частоты
+//NetworkFlag="granted_single": отправка в сеть целиком команды, содержащей указанный аргумент в случае его изменения, с применением гарантированного пакета состояния
+
+CockpitArg = -2, 0000, 0, 00402, 0.5, "smooth_clamp", 0.0, "" // Педали (тяги) - управление по рысканию
+CockpitArg = -2, 1000, 0, 00406, 0.5, "smooth_clamp", 0.0, "med_freq" // РУС / штурвал (тяги) - управление по тангажу
+CockpitArg = -2, 1000, 1, 00407, 0.5, "smooth_clamp", 0.0, "" // РУС / штурвал (тяги) - управление по крену
+CockpitArg = -2, 0000, 1, 00436, 0.5, "smooth_wrap", 0.2, "" // Рукоятка триммера РВ
+CockpitArg = -2, 0010, 0, 00423, 0.0, "smooth_clamp", 0.1, "" // Кран шасси
+CockpitArg = -2, 0010, 2, 00411, 0.0, "smooth_clamp", 0.1, "" // Рычаг стопорения костыля (хвостового колеса)
+CockpitArg = -2, 0011, 1, 00430, 0.0, "smooth_clamp", 0.1, "" // Кран (штурвал) посадочных щитков / закрылков
+CockpitArg = -2, 0012, 0, 00420, 0.0, "smooth_clamp", 0.1, "" // Рычаг тормоза колёс шасси
+CockpitArg = -2, 0020, 0, 00701, 0.0, "smooth_clamp", 0.0, "" // Левая красная лампа шасси
+CockpitArg = -2, 0020, 1, 00702, 0.0, "smooth_clamp", 0.0, "" // Левая зелёная лампа шасси
+CockpitArg = -2, 0020, 2, 00703, 0.0, "smooth_clamp", 0.0, "" // Правая красная лампа шасси
+CockpitArg = -2, 0020, 3, 00704, 0.0, "smooth_clamp", 0.0, "" // Правая зелёная лампа шасси
+CockpitArg = -2, 0100, 0, 01100, 0.0, "smooth_clamp", 0.2, "" // РУД (нормальный газ) 1-го двигателя
+CockpitArg = -2, 0100, 1, 01111, 0.0, "smooth_clamp", 0.2, "" // Рычаг управления составом топливовоздушной смеси (высотный корректор) 1-го двигателя
+CockpitArg = -2, 0101, 0, 01106, 0.0, "smooth_clamp", 0.2, "" // Рычаг шага винта 1-го двигателя
+CockpitArg = -2, 0102, 2, 01130, 0.0, "smooth_clamp", 0.2, "" // Рычаг управления жалюзи маслорадиатора 1-го двигателя
+CockpitArg = -2, 0102, 3, 01182, 0.0, "smooth_clamp", 0.2, "" // Рычаг управления жалюзи водорадиатора 1-го двигателя
+CockpitArg = -2, 0103, 0, 01152, 0.0, "smooth_clamp", 0.1, "" // Переключатель 1-го магнето 1-го двигателя
+CockpitArg = -2, 0103, 2, 01160, 0.0, "smooth_clamp", 0.1, "" // Кнопка "Пуск" (выключатель "запуск", тяга / рукоятка стартера) 1-го двигателя
+CockpitArg = -2, 0103, 3, 01161, 0.0, "smooth_clamp", 0.1, "" // Выключатели пусковых катушек 1-го двигателя
+CockpitArg = -2, 0104, 1, 01113, 0.0, "smooth_clamp", 0.1, "" // Пожарный кран 1-го двигателя
+CockpitArg = -2, 0104, 2, 01116, 0.0, "smooth_clamp", 0.2, "" // Плунжер впрыска пускового топлива / заливной топливный насос 1-го двигателя
+CockpitArg = -2, 0104, 3, 01117, 0.0, "smooth_clamp", 0.1, "" // Впрыск пускового топлива в 1-ый двигатель
+CockpitArg = -2, 1200, 0, 03102, 0.0, "smooth_wrap",  0.1, "" // RPM 1-го двигателя (стрелка сотен RPM)
+CockpitArg = -2, 1200, 1, 03103, 0.0, "smooth_wrap",  0.1, "" // RPM 1-го двигателя (стрелка тысяч RPM)
+CockpitArg = -2, 1201, 0, 03109, 0.0, "smooth_clamp", 0.1, "" // Указатель наддува (мановакуумметр) 1-го двигателя
+CockpitArg = -2, 0200, 0, 03122, 0.0, "smooth_clamp", 0.2, "" // Давление топлива в топливной магистрали 1-го двигателя
+CockpitArg = -2, 0200, 1, 03142, 0.0, "smooth_clamp", 0.2, "" // Давление масла 1-го двигателя
+CockpitArg = -2, 0201, 2, 03154, 0.0, "smooth_clamp", 0.5, "" // Температура входящего масла 1-го двигателя
+CockpitArg = -2, 0201, 3, 03152, 0.0, "smooth_clamp", 0.5, "" // Температура выходящего масла 1-го двигателя
+CockpitArg = -2, 0202, 1, 03172, 0.0, "smooth_clamp", 0.5, "" // Температура выходящей воды 1-го двигателя
+
+CockpitArg = -2, 0350, 0, 02501, 0.0, "smooth_clamp", 0.5, "" // Топливомер (левый)
+CockpitArg = -2, 0353, 0, 02410, 0.0, "smooth_clamp", 0.2, "" // Переключатель топливомера
+
+CockpitArg = -2, 0400, 0, 08511, 0.0, "smooth_wrap",  0.2, "" // Часы - часовая стрелка
+CockpitArg = -2, 0400, 1, 08512, 0.0, "smooth_wrap",  0.2, "" // Часы - минутная стрелка
+CockpitArg = -2, 1400, 0, 08513, 0.0, "smooth_wrap",  0.1, "" // Часы - секундная стрелка
+CockpitArg = -2, 1400, 1, 08551, 0.0, "smooth_wrap",  0.1, "" // Компасный курс ("Бычий глаз" и повторитель)
+CockpitArg = -2, 1401, 0, 08011, 0.5, "smooth_clamp", 0.1, "" // Индикация угла тангажа (авиагоризонт)
+CockpitArg = -2, 1401, 1, 08012, 0.5, "smooth_wrap",  0.1, "" // Индикация угла крена (авиагоризонт)
+CockpitArg = -2, 0401, 0, 08002, 0.5, "smooth_clamp", 0.2, "" // Указатель поворота
+CockpitArg = -2, 0401, 1, 08171, 0.5, "smooth_clamp", 0.2, "" // Указатель скольжения 
+CockpitArg = -2, 0401, 2, 00206, 0.5, "smooth_clamp", 0.2, "" // Тангаж картушки компаса
+CockpitArg = -2, 0401, 3, 00205, 0.5, "smooth_clamp", 0.2, "" // Крен картушки компаса
+CockpitArg = -2, 0402, 0, 08253, 0.5, "smooth_clamp", 0.1, "" // Указатель барометрической высоты - задатчик давления
+CockpitArg = -2, 0402, 1, 08251, 0.0, "smooth_wrap",  0.5, "" // Указатель барометрической высоты - километры (малая стрелка / окошко)
+CockpitArg = -2, 1402, 0, 08252, 0.0, "smooth_wrap",  0.1, "" // Указатель барометрической высоты - метры (большая стрелка)
+CockpitArg = -2, 1402, 1, 08232, 0.5, "smooth_clamp", 0.1, "" // Вариометр
+CockpitArg = -2, 1403, 0, 08201, 0.0, "smooth_clamp", 0.1, "" // Указатель приборной (индикаторной) скорости
+CockpitArg = -2, 0430, 0, 02509, 0.0, "smooth_clamp", 0.0, "" // Подсветка приборов
+CockpitArg = -2, 0430, 1, 60210, 0.0, "smooth_clamp", 0.0, "granted_single" // Заливка кабины светом
+CockpitArg = -2, 0431, 0, 04324, 0.0, "smooth_clamp", 0.1, "" // Положение переключателя (регулятора яркости) подсветки приборов
+CockpitArg = -2, 0431, 1, 04323, 0.0, "smooth_clamp", 0.1, "" // Положение переключателя (регулятора яркости) заливки кабины светом
+CockpitArg = -2, 0431, 2, 04320, 0.0, "smooth_clamp", 0.1, "" // Положение переключателя бортовых аэронавигационных огней (БАНО)
+CockpitArg = -2, 0431, 3, 04321, 0.0, "smooth_clamp", 0.1, "" // Положение переключателя посадочных фар
+CockpitArg = -2, 0601, 2, 09142, 0.0, "smooth_clamp", 0.5, "" // Положение прицела
+CockpitArg = -2, 0601, 1, 04313, 0.0, "smooth_clamp", 0.1, "" // Сетка коллиматорного прицела
+CockpitArg = -2, 0104, 1, 01113, 0.0, "smooth_clamp", 0.2, "" // Пожарный кран
+
+CockpitArg = -2, 0450, 2, 04310, 0.0, "smooth_clamp", 0.1, "" // Аккумулятор - АЗС
+CockpitArg = -2, 0450, 3, 04312, 0.0, "smooth_clamp", 0.1, "" // Различные АЗС и прочая арматура кабины
+CockpitArg = -2, 0451, 1, 05700, 0.0, "smooth_clamp", 0.1, "" // Вентили и краны пневмосистемы
+CockpitArg = -2, 0451, 2, 05701, 0.0, "smooth_clamp", 0.1, "" // Кран воздушного самопуска
+CockpitArg = -2, 0452, 0, 04314, 0.0, "smooth_clamp", 0.1, "" // Вольтамперметр
+
+CockpitArg = -2, 0850, 2, 07002, 0.0, "smooth_clamp", 0.2, "" // Настройка частоты ресивера радиостанции
+
+CockpitArg = -2, 0434, 3, 06012, 0.0, "smooth_wrap", 0.1, "" // Кран подачи кислорода
+CockpitArg = -2, 0434, 1, 06010, 0.0, "smooth_clamp", 0.2, "" // Манометр кислородного прибора
+CockpitArg = -2, 0434, 2, 06011, 0.0, "smooth_clamp", 0.2, "" // Индикатор кислородного потока ("высота в кабине")
+
+CockpitArg = -2, 0454, 1, 09144, 0.0, "smooth_wrap",  0.2, "" // ЭСБР Б
+CockpitArg = -2, 0454, 2, 09002, 0.0, "smooth_wrap",  0.2, "" // Кнопка сброса бомб
+CockpitArg = -2, 0641, 1, 04319, 0.0, "smooth_clamp", 0.1, "" // АЗС подвесного оружия
+
+CockpitArg = -2, 0459, 0, 09051, 0.0, "smooth_clamp", 0.2, "" // Лампа подвешенной бомбы
+CockpitArg = -2, 0459, 1, 09052, 0.0, "smooth_clamp", 0.2, "" // Лампа подвешенной бомбы
+CockpitArg = -2, 0459, 2, 09053, 0.0, "smooth_clamp", 0.2, "" // Лампа подвешенной бомбы
+CockpitArg = -2, 0459, 3, 09054, 0.0, "smooth_clamp", 0.2, "" // Лампа подвешенной бомбы
+
+CockpitArg = -2, 0460, 0, 09055, 0.0, "smooth_clamp", 0.2, "" // Лампа подвешенной бомбы
+CockpitArg = -2, 0460, 1, 09056, 0.0, "smooth_clamp", 0.2, "" // Лампа подвешенной бомбы
+
+CockpitArg = -2, 0462, 2, 05711, 0.0, "smooth_clamp", 0.2, "" // Манометр левого тормоза
+CockpitArg = -2, 0462, 3, 05712, 0.0, "smooth_clamp", 0.2, "" // Манометр правого тормоза
+
+// Скрипт замены пилота и параметры для него
+Script="LuaScripts\ObjectScripts\AlternateBot.sc"
+[AlterBot]			//CountryID, fromYYYYMMDD, tillYYYYMMDD, SeasonsList"sp su au wi", BotConfig. Fist match will be choosen.
+	AlterBotConfig = -1, -1, -1, "wi", "LuaScripts/WorldObjects/Bots/BotPilot_Il2_RUSwi.txt"
+	AlterBotConfig = -1, -1, 19420331, "", "LuaScripts/WorldObjects/Bots/BotPilot_Il2_RUS41.txt"
+	AlterBotConfig = -1, 19420401, 19430228, "", "LuaScripts/WorldObjects/Bots/BotPilot_Il2_RUS42.txt"
+[end]
+
+[attach=0]
+	position= -0.75, 0.33, 0
+	object = "LuaScripts/WorldObjects/Bots/BotPilot_Il2_RUS43.txt"
+[end]
+
+[attach=1]
+	position= -0.45, 1.19, -0.87
+	rotation= 85, 20, 0
+	object = "LuaScripts/WorldObjects/FlareGun.txt"
+[end]
+
+[attach=2]
+	position= 0.0, 0.0, 0.0
+	object = "LuaScripts/WorldObjects/Spotter.txt"
+[end]
+
+AttachedCameras = "LuaScripts\WorldObjects\fixcameras\Planes\Il2m41.txt"
+
+ToggleUserAI=true	//при пересадке в турель включится автопилот
+
+BannerAttachID=-1
+CustomPhotoArg=55
+
+EnterPoint= -1.38, -0.05, 1
+
+SendRate=5,50	//normal, attached state
+
+CommandMonitor="LuaScripts/WorldObjects/FokkerMonitor.txt"
+
+
+//////	Controled body specific
+CockpitFocus=0.6,-1.0,0,65,0.7
+
+RSE_Data_File="LuaScripts/RSE/RSE_FokkerDr7.txt"
+Plane_Class="CAeroplane_Il_2_m_41"
+
+InitialSpeedInAir = 320.0   //Скорость, с которой самолёт рождается в воздухе, 200...700 км/ч
+
+Gun_Coord0= 1.5, -0.08, -2.8
+Gun_Coord1= 1.5, -0.08, 2.8
+Deviation0= 3, 2, 0.9, 0.02, 0.1
+Deviation1= 3, 2, 0.9, 0.02, 0.1
+ParallaxDistance = 600.0
+
+MinCartridgeCaseTime = 0.05 // минимальный период между выбросами гильз с самолета
+
+BombDoorPeriod0=0.04,0.1,0.7,false,true  // bools: manual control,spring-door type
+BombDoorPeriod1=0.04,0.1,0.7,false,true  // bools: manual control,spring-door type
+BombDoorPeriod2=0.04,0.1,0.7,false,true  // bools: manual control,spring-door type
+BombDoorPeriod3=0.04,0.1,0.7,false,true  // bools: manual control,spring-door type
+
+FTCoord=0.17,0.055,0
+PPCoord=-0.112,0.083,0
+
+FlarePos= -0.45, 1.19, -0.87
+FlareDir= 0.082, 0.34, -0.936
+FlarePath="LuaScripts/WorldObjects/Ballistics/Flare.txt"
+FlareDisabled=true	// ИИ самолёты выдущих не отстреливают ракетницы дублируя команды
+
+GunsightPosition = -0.303, 1.059, 0.0
+
+// Варианты модификации вооружения
+
+[WeaponMode=0]
+	WMname="default"
+	WMgroup="default"
+	PlaneModArg=-1
+	TurretID=-1
+	TurretDefault=""
+	TurretMod=""
+
+	[AdditionalElement] // Пилот
+		AttachToPart = "EngCowl_Ctl_0"
+		Position = -0.614, 0.712, 0.0
+		Mass = 90.0
+		CxaS = 0.0
+	[end]
+
+	[AdditionalElement] // Масло в МБ
+		AttachToPart = "EngCowl_Ctl_0"
+		Position = 1.726, -0.025, -0.298
+		Mass = 30.362
+		CxaS = 0.0
+	[end]
+
+	[AdditionalElement] // Масло в двигателе
+		AttachToPart = "EngCowl_Ctl_0"
+		Position = 1.682, 0.074, -0.002
+		Mass = 7.144
+		CxaS = 0.0
+	[end]
+
+	[AdditionalElement] // Масло в маслорадиаторе
+		AttachToPart = "EngCowl_Ctl_0"
+		Position = 0.069, -0.624, 0.0
+		Mass = 8.93
+		CxaS = 0.0
+	[end]
+
+	[AdditionalElement] // Вода в водорадиаторе
+		AttachToPart = "EngCowl_Ctl_0"
+		Position = 0.491, 0.013, 0.0
+		Mass = 15.0
+		CxaS = 0.0
+	[end]
+
+	[AdditionalElement] // Вода в рубашке охлаждения
+		AttachToPart = "EngCowl_Ctl_0"
+		Position = 0.069, -0.624, 0.0
+		Mass = 22.0
+		CxaS = 0.0
+	[end]
+
+	[AdditionalElement] // Вода в расширительном баке
+		AttachToPart = "EngCowl_Ctl_0"
+		Position = 2.610, 0.368, 0.0
+		Mass = 43.0
+		CxaS = 0.0
+	[end]
+
+	[Gun=0]
+		GunType = "LuaScripts/WorldObjects/Weapons/MG_RUS_ShKAS.txt"
+		MaxReservedMagazines = 0
+		WeaponGroup1 = true // Пулемётное вооружение
+		AttachToPart = "WingL_Mid_0"
+		DamageConvex = "~gun01"
+		ProbabilityOfHit = 0.05
+		CarriagePosition = 0.310, -0.002, -3.076	// Масса и момент инерции пушки с установкой прописаны в лафет
+		CarriageYawPitchRoll = 0.0, 0.0, 0.0
+		CarriageMass = 10.6	// Масса пушки с установкой на данном самолете
+		CarriageMassPosition_inCarriageAxis = 0.0, 0.0, 0.0
+		CarriageMOI_inCarriageAxis = 0.005, 0.556, 0.558, -0.003, 0.000, 0.000	// Момент инерции пушки с установкой
+		CarriageCxaS = 0.0	// Внутренняя установка
+		CarriageDragPosition = 0.0, 0.0, 0.0	// Внутренняя установка
+		DefaultGunPosition = 0.848, 0.041, -3.086	// По срезу ствола
+		DefaultGunYawPitchRoll = 0.0, 0.0, 0.0
+		DefaultGunCxaS = 0.0	// Внутренняя установка
+		DefaultGunDragPosition = 0.0,  0.0,  0.0	// Внутренняя установка
+		BarrelTemperatureDecreaseCorrectionData = 1.0, 4.0, 300.0
+		CarriageAdditionalBulletDispertionAngle = 0.0315723, 0.061884	// Разброс при нулевом разогреве в градусах, реф от ШКАСа на ЛаГГ-3 раннем 102.4мм..118мм на 200м. Реф от ШКАСа "отстрел на автомат" на Ил-2 54мм на 50м.
+		AmmunitionAttachToPart = "WingL_Mid_0"  // Наименование CollisionBox той части ЛА, к которой присоединяется боекомплект стрелкового оружия
+		AmmunitionPosition = -0.278, -0.061, -3.172 // Координаты ц.м. боекомплекта стрелкового оружия в ССК ЛА, [м]
+		CartridgeCasesEjection = false
+		AfterServiceOperationDelay = 0.3
+		ReArmTime = 60 // Внутренняя установка
+		FireButtonArgIdx = 9000
+		FlashAnimationArgIdx = 9013
+		FlashAnimationGroup = 4 //Light Arg 60260
+		DrawAnimationArgIdx = 0, 9125	// Поворот дополнительного рычага ручного взведения
+		GunSoundsIdx = 1
+		ShotSoundType = 0
+	[end]
+
+	[Gun=1]
+		GunType = "LuaScripts/WorldObjects/Weapons/MG_RUS_ShKAS.txt"
+		MaxReservedMagazines = 0
+		WeaponGroup1 = true // Пулемётное вооружение
+		AttachToPart = "WingR_Mid_0"
+		DamageConvex = "~gun04"
+		ProbabilityOfHit = 0.05
+		CarriagePosition = 0.310, -0.002, 3.076	// Масса и момент инерции пушки с установкой прописаны в лафет
+		CarriageYawPitchRoll = 0.0, 0.0, 0.0
+		CarriageMass = 10.6	// Масса пушки с установкой на данном самолете
+		CarriageMassPosition_inCarriageAxis = 0.0, 0.0, 0.0
+		CarriageMOI_inCarriageAxis = 0.005, 0.556, 0.558, -0.003, 0.000, 0.000	// Момент инерции пушки с установкой
+		CarriageCxaS = 0.0	// Внутренняя установка
+		CarriageDragPosition = 0.0, 0.0, 0.0	// Внутренняя установка
+		DefaultGunPosition = 0.848, 0.041, 3.086	// По срезу ствола
+		DefaultGunYawPitchRoll = 0.0, 0.0, 0.0
+		DefaultGunCxaS = 0.0	// Внутренняя установка
+		DefaultGunDragPosition = 0.0,  0.0,  0.0	// Внутренняя установка
+		BarrelTemperatureDecreaseCorrectionData = 1.0, 4.0, 300.0
+		CarriageAdditionalBulletDispertionAngle = 0.0315723, 0.061884	// Разброс при нулевом разогреве в градусах, реф от ШКАСа на ЛаГГ-3 раннем 102.4мм..118мм на 200м. Реф от ШКАСа "отстрел на автомат" на Ил-2 54мм на 50м.
+		AmmunitionAttachToPart = "WingR_Mid_0"  // Наименование CollisionBox той части ЛА, к которой присоединяется боекомплект стрелкового оружия
+		AmmunitionPosition = -0.278, -0.061, 3.172 // Координаты ц.м. боекомплекта стрелкового оружия в ССК ЛА, [м]
+		CartridgeCasesEjection = false
+		AfterServiceOperationDelay = 0.3
+		ReArmTime = 60 // Внутренняя установка
+		FireButtonArgIdx = 9000
+		FlashAnimationArgIdx = 9113
+		FlashAnimationGroup = 5 //Light Arg 60270
+		DrawAnimationArgIdx = 0, 9225	// Поворот дополнительного рычага ручного взведения
+		GunSoundsIdx = 2
+		ShotSoundType = 0
+        isElectroTrigger = false
+        IsOnlyMechanicalManualCocking = false
+        IsTwoManualCockingMethods = false
+	[end]
+
+	[Gun=2]
+		GunType = "LuaScripts/WorldObjects/Weapons/AC_RUS_ShVAK.txt"
+		MaxReservedMagazines = 0
+		WeaponGroup2 = true // Пушечное вооружение
+		AttachToPart = "WingL_Mid_0"
+		DamageConvex = "~gun02"
+		ProbabilityOfHit = 0.05
+		CarriagePosition = 0.169, -0.123, -2.357	// Масса и момент инерции пушки с установкой прописаны в лафет
+		CarriageYawPitchRoll = 0.0, 0.0, 0.0
+		CarriageMass = 44.5	// Масса мотор-пушки с установкой на данном самолете
+		CarriageMassPosition_inCarriageAxis = 0.0, 0.0, 0.0
+		CarriageMOI_inCarriageAxis = 0.021, 11.243, 11.253, -0.030, 0.000, 0.000	// Момент инерции пушки с установкой
+		CarriageCxaS = 0.0	// Внутренняя установка
+		CarriageDragPosition = 0.0, 0.0, 0.0	// Внутренняя установка
+		DefaultGunPosition = 1.321, -0.110, -2.353	// По срезу ствола
+		DefaultGunYawPitchRoll = 0.0, 0.0, 0.0
+		DefaultGunCxaS = 0.0	// Внутренняя установка
+		DefaultGunDragPosition = 0.0,  0.0,  0.0	// Внутренняя установка
+		BarrelTemperatureDecreaseCorrectionData = 1.0, 4.0, 300.0
+		CarriageAdditionalBulletDispertionAngle = 0.029796, 0.0820536	// Разброс при нулевом разогреве в градусах,  Референс для менее разболтаного ШВАКа на Як-7: 25.98мм на 50м. Реф от ШВАКа "отстрел на автомат" на Ил-2 64.6мм..78.6мм на 50м.
+		AmmunitionAttachToPart = "WingL_Mid_0"  // Наименование CollisionBox той части ЛА, к которой присоединяется боекомплект стрелкового оружия
+		AmmunitionPosition = 0.114, -0.041, -2.919 // Координаты ц.м. боекомплекта стрелкового оружия в ССК ЛА, [м]
+		CartridgeCasesEjection = true
+		CartridgeCasesEjectionPosition = 0.096, -0.251, -2.262
+		CartridgeCasesEjectionSpeed = 0, -2, 0
+		AfterServiceOperationDelay = 0.3
+		ReArmTime = 60 // Внутренняя установка
+		FireButtonArgIdx = 9001
+		FlashAnimationArgIdx = 9213
+		FlashAnimationGroup = 0 //Light Arg 60220
+		DrawAnimationArgIdx = 0, 9025	// Поворот дополнительного рычага ручного взведения
+		GunSoundsIdx = 3
+		ShotSoundType = 1
+        isElectroTrigger = false
+        IsOnlyMechanicalManualCocking = false
+        IsTwoManualCockingMethods = false
+	[end]
+
+	[Gun=3]
+		GunType = "LuaScripts/WorldObjects/Weapons/AC_RUS_ShVAK.txt"
+		MaxReservedMagazines = 0
+		WeaponGroup2 = true // Пушечное вооружение
+		AttachToPart = "WingR_Mid_0"
+		DamageConvex = "~gun03"
+		ProbabilityOfHit = 0.05
+		CarriagePosition = 0.169, -0.123, 2.357	// Масса и момент инерции пушки с установкой прописаны в лафет
+		CarriageYawPitchRoll = 0.0, 0.0, 0.0
+		CarriageMass = 44.5	// Масса мотор-пушки с установкой на данном самолете
+		CarriageMassPosition_inCarriageAxis = 0.0, 0.0, 0.0
+		CarriageMOI_inCarriageAxis = 0.021, 11.243, 11.253, -0.030, 0.000, 0.000	// Момент инерции пушки с установкой
+		CarriageCxaS = 0.0	// Внутренняя установка
+		CarriageDragPosition = 0.0, 0.0, 0.0	// Внутренняя установка
+		DefaultGunPosition = 1.321, -0.110, 2.353	// По срезу ствола
+		DefaultGunYawPitchRoll = 0.0, 0.0, 0.0
+		DefaultGunCxaS = 0.0	// Внутренняя установка
+		DefaultGunDragPosition = 0.0,  0.0,  0.0	// Внутренняя установка
+		BarrelTemperatureDecreaseCorrectionData = 1.0, 4.0, 300.0
+		CarriageAdditionalBulletDispertionAngle = 0.029796, 0.0820536	// Разброс при нулевом разогреве в градусах,  Референс для менее разболтаного ШВАКа на Як-7: 25.98мм на 50м. Реф от ШВАКа "отстрел на автомат" на Ил-2 64.6мм..78.6мм на 50м.
+		AmmunitionAttachToPart = "WingR_Mid_0"  // Наименование CollisionBox той части ЛА, к которой присоединяется боекомплект стрелкового оружия
+		AmmunitionPosition = 0.114, -0.041, 2.919 // Координаты ц.м. боекомплекта стрелкового оружия в ССК ЛА, [м]
+		CartridgeCasesEjection = true
+		CartridgeCasesEjectionPosition = 0.096, -0.251, 2.262
+		CartridgeCasesEjectionSpeed = 0, -2, 0
+		AfterServiceOperationDelay = 0.3
+		ReArmTime = 60 // Внутренняя установка
+		FireButtonArgIdx = 9001
+		FlashAnimationArgIdx = 9313
+		FlashAnimationGroup = 1 //Light Arg 60230
+		DrawAnimationArgIdx = 0, 9325	// Поворот дополнительного рычага ручного взведения
+		GunSoundsIdx = 4
+		ShotSoundType = 1
+        isElectroTrigger = false
+        IsOnlyMechanicalManualCocking = false
+        IsTwoManualCockingMethods = false
+	[end]
+[end]
+
+[WeaponMode=1]	// Замена ШВАК на ВЯ-23
+	WMname="Il2m41_VYa23x2"
+	WMgroup="1"
+	PlaneModArg=19001
+	TurretID=-1
+	TurretDefault=""
+	TurretMod=""
+
+	[Gun=0]
+		GunType = "LuaScripts/WorldObjects/Weapons/MG_RUS_ShKAS.txt"
+		MaxReservedMagazines = 0
+		WeaponGroup1 = true // Пулемётное вооружение
+		AttachToPart = "WingL_Mid_0"
+		DamageConvex = "~gun06"
+		ProbabilityOfHit = 0.05
+		CarriagePosition = 0.405, -0.031, -2.342	// Масса и момент инерции пушки с установкой прописаны в лафет
+		CarriageYawPitchRoll = 0.0, 0.0, 0.0
+		CarriageMass = 10.6	// Масса пушки с установкой на данном самолете
+		CarriageMassPosition_inCarriageAxis = 0.0, 0.0, 0.0
+		CarriageMOI_inCarriageAxis = 0.005, 0.556, 0.558, -0.003, 0.000, 0.000	// Момент инерции пушки с установкой
+		CarriageCxaS = 0.0	// Внутренняя установка
+		CarriageDragPosition = 0.0, 0.0, 0.0	// Внутренняя установка
+		DefaultGunPosition = 0.943, 0.0125, -2.3525	// По срезу ствола
+		DefaultGunYawPitchRoll = 0.0, 0.0, 0.0
+		DefaultGunCxaS = 0.0	// Внутренняя установка
+		DefaultGunDragPosition = 0.0,  0.0,  0.0	// Внутренняя установка
+		BarrelTemperatureDecreaseCorrectionData = 1.0, 4.0, 300.0
+		CarriageAdditionalBulletDispertionAngle = 0.0315723, 0.061884	// Разброс при нулевом разогреве в градусах, реф от ШКАСа на ЛаГГ-3 раннем 102.4мм..118мм на 200м. Реф от ШКАСа "отстрел на автомат" на Ил-2 54мм на 50м.
+		AmmunitionAttachToPart = "WingL_Mid_0"  // Наименование CollisionBox той части ЛА, к которой присоединяется боекомплект стрелкового оружия
+		AmmunitionPosition = -0.183, -0.089, -2.438 // Координаты ц.м. боекомплекта стрелкового оружия в ССК ЛА, [м]
+		CartridgeCasesEjection = false
+		AfterServiceOperationDelay = 0.3
+		ReArmTime = 60 // Внутренняя установка
+		FireButtonArgIdx = 9000
+		FlashAnimationArgIdx = 9613
+		FlashAnimationGroup = 0 //Light Arg 60220
+		DrawAnimationArgIdx = 0, 9125	// Поворот дополнительного рычага ручного взведения
+		GunSoundsIdx = 1
+		ShotSoundType = 0
+        isElectroTrigger = false
+        IsOnlyMechanicalManualCocking = false
+        IsTwoManualCockingMethods = false
+	[end]
+
+	[Gun=1]
+		GunType = "LuaScripts/WorldObjects/Weapons/MG_RUS_ShKAS.txt"
+		MaxReservedMagazines = 0
+		WeaponGroup1 = true // Пулемётное вооружение
+		AttachToPart = "WingR_Mid_0"
+		DamageConvex = "~gun07"
+		ProbabilityOfHit = 0.05
+		CarriagePosition = 0.405, -0.031, 2.342	// Масса и момент инерции пушки с установкой прописаны в лафет
+		CarriageYawPitchRoll = 0.0, 0.0, 0.0
+		CarriageMass = 10.6	// Масса пушки с установкой на данном самолете
+		CarriageMassPosition_inCarriageAxis = 0.0, 0.0, 0.0
+		CarriageMOI_inCarriageAxis = 0.005, 0.556, 0.558, -0.003, 0.000, 0.000	// Момент инерции пушки с установкой
+		CarriageCxaS = 0.0	// Внутренняя установка
+		CarriageDragPosition = 0.0, 0.0, 0.0	// Внутренняя установка
+		DefaultGunPosition = 0.943, 0.0125, 2.3525	// По срезу ствола
+		DefaultGunYawPitchRoll = 0.0, 0.0, 0.0
+		DefaultGunCxaS = 0.0	// Внутренняя установка
+		DefaultGunDragPosition = 0.0,  0.0,  0.0	// Внутренняя установка
+		BarrelTemperatureDecreaseCorrectionData = 1.0, 4.0, 300.0
+		CarriageAdditionalBulletDispertionAngle = 0.0315723, 0.061884	// Разброс при нулевом разогреве в градусах, реф от ШКАСа на ЛаГГ-3 раннем 102.4мм..118мм на 200м. Реф от ШКАСа "отстрел на автомат" на Ил-2 54мм на 50м.
+		AmmunitionAttachToPart = "WingR_Mid_0"  // Наименование CollisionBox той части ЛА, к которой присоединяется боекомплект стрелкового оружия
+		AmmunitionPosition = -0.183, -0.089,  2.438 // Координаты ц.м. боекомплекта стрелкового оружия в ССК ЛА, [м]
+		CartridgeCasesEjection = false
+		AfterServiceOperationDelay = 0.3
+		ReArmTime = 60 // Внутренняя установка
+		FireButtonArgIdx = 9000
+		FlashAnimationArgIdx = 9713
+		FlashAnimationGroup = 1 //Light Arg 60230
+		DrawAnimationArgIdx = 0, 9225	// Поворот дополнительного рычага ручного взведения
+		GunSoundsIdx = 2
+		ShotSoundType = 0
+        isElectroTrigger = false
+        IsOnlyMechanicalManualCocking = false
+        IsTwoManualCockingMethods = false
+	[end]
+
+	[Gun=2]
+		GunType = "LuaScripts/WorldObjects/Weapons/AC_RUS_VYa23.txt"
+		MaxReservedMagazines = 0
+		WeaponGroup2 = true // Пушечное вооружение
+		AttachToPart = "WingL_Mid_0"
+		DamageConvex = "~gun05"
+		ProbabilityOfHit = 0.05
+		CarriagePosition = 0.25, -0.078, -2.805	// Масса и момент инерции пушки с установкой прописаны в лафет
+		CarriageYawPitchRoll = 0.0, 0.0, 0.0
+		CarriageMass = 66.0	// Масса мотор-пушки с установкой на данном самолете
+		CarriageMassPosition_inCarriageAxis = 0.0, 0.0, 0.0
+		CarriageMOI_inCarriageAxis = 0.203, 16.270, 16.304, -0.014, 0.000, 0.000
+		CarriageCxaS = 0.0	// Внутренняя установка
+		CarriageDragPosition = 0.0, 0.0, 0.0	// Внутренняя установка
+		DefaultGunPosition = 1.500, -0.078, -2.805	// По срезу ствола
+		DefaultGunYawPitchRoll = 0.0, 0.0, 0.0
+		DefaultGunCxaS = 0.0	// Внутренняя установка
+		DefaultGunDragPosition = 0.0,  0.0,  0.0	// Внутренняя установка
+		BarrelTemperatureDecreaseCorrectionData = 1.0, 4.0, 300.0
+		CarriageAdditionalBulletDispertionAngle = 0.029796, 0.0820536	// Разброс при нулевом разогреве в градусах,  Референс для менее разболтаного ШВАКа на Як-7: 25.98мм на 50м. Реф от ШВАКа "отстрел на автомат" на Ил-2 64.6мм..78.6мм на 50м.
+		AmmunitionAttachToPart = "WingL_Mid_0"  // Наименование CollisionBox той части ЛА, к которой присоединяется боекомплект стрелкового оружия
+		AmmunitionPosition = 0.096, -0.009, -3.371 // Координаты ц.м. боекомплекта стрелкового оружия в ССК ЛА, [м]
+		CartridgeCasesEjection = true
+		CartridgeCasesEjectionPosition = -0.367, -0.208, -2.834
+		CartridgeCasesEjectionSpeed = 0, -2, 0
+		AfterServiceOperationDelay = 0.3
+		ReArmTime = 60 // Внутренняя установка
+		FireButtonArgIdx = 9001
+		FlashAnimationArgIdx = 9413
+		FlashAnimationGroup = 2 //Light Arg 60240
+		DrawAnimationArgIdx = 0, 9025	// Поворот дополнительного рычага ручного взведения
+		GunSoundsIdx = 5
+		ShotSoundType = 2
+        isElectroTrigger = false
+        IsOnlyMechanicalManualCocking = false
+        IsTwoManualCockingMethods = false
+	[end]
+
+	[Gun=3]
+		GunType = "LuaScripts/WorldObjects/Weapons/AC_RUS_VYa23.txt"
+		MaxReservedMagazines = 0
+		WeaponGroup2 = true // Пушечное вооружение
+		AttachToPart = "WingR_Mid_0"
+		DamageConvex = "~gun08"
+		ProbabilityOfHit = 0.05
+		CarriagePosition = 0.25, -0.078, 2.8055	// Масса и момент инерции пушки с установкой прописаны в лафет
+		CarriageYawPitchRoll = 0.0, 0.0, 0.0
+		CarriageMass = 66.0	// Масса мотор с установкой на данном самолете
+		CarriageMassPosition_inCarriageAxis = 0.0, 0.0, 0.0
+		CarriageMOI_inCarriageAxis = 0.203, 16.270, 16.304, -0.014, 0.000, 0.000
+		CarriageCxaS = 0.0	// Внутренняя установка
+		CarriageDragPosition = 0.0, 0.0, 0.0	// Внутренняя установка
+		DefaultGunPosition = 1.500, -0.078, 2.8055	// По срезу ствола
+		DefaultGunYawPitchRoll = 0.0, 0.0, 0.0
+		DefaultGunCxaS = 0.0	// Внутренняя установка
+		DefaultGunDragPosition = 0.0,  0.0,  0.0	// Внутренняя установка
+		BarrelTemperatureDecreaseCorrectionData = 1.0, 4.0, 300.0
+		CarriageAdditionalBulletDispertionAngle = 0.029796, 0.0820536	// Разброс при нулевом разогреве в градусах,  Референс для менее разболтаного ШВАКа на Як-7: 25.98мм на 50м. Реф от ШВАКа "отстрел на автомат" на Ил-2 64.6мм..78.6мм на 50м.
+		AmmunitionAttachToPart = "WingR_Mid_0"  // Наименование CollisionBox той части ЛА, к которой присоединяется боекомплект стрелкового оружия
+		AmmunitionPosition = 0.096, -0.009,  3.371 // Координаты ц.м. боекомплекта стрелкового оружия в ССК ЛА, [м]
+		CartridgeCasesEjection = true
+		CartridgeCasesEjectionPosition = -0.367, -0.208, 2.834
+		CartridgeCasesEjectionSpeed = 0, -2, 0
+		AfterServiceOperationDelay = 0.3
+		ReArmTime = 60 // Внутренняя установка
+		FireButtonArgIdx = 9001
+		FlashAnimationArgIdx = 9513
+		FlashAnimationGroup = 3 //Light Arg 60250
+		DrawAnimationArgIdx = 0, 9325	// Поворот дополнительного рычага ручного взведения
+		GunSoundsIdx = 6
+		ShotSoundType = 2
+        isElectroTrigger = false
+        IsOnlyMechanicalManualCocking = false
+        IsTwoManualCockingMethods = false
+	[end]
+[end]
+
+[WeaponMode=2]	// Внешние точки подвески бомб 50кг и 100кг
+	WMname="il2m41_FAB50_FAB100x6"
+	WMgroup="2"
+	PlaneModArg=19003
+	TurretID=-1
+	TurretDefault=""
+	TurretMod=""
+[end]
+
+[WeaponMode=3]	// Бомбодержатели под 250кг бомбы
+	WMname="Il2m41_FAB250x2"
+	WMgroup="3"
+	PlaneModArg=19003
+	TurretID=-1
+	TurretDefault=""
+	TurretMod=""
+[end]
+
+[WeaponMode=4]	// Пусковые бронебойных РС
+	WMname="il2m41_RBS82x8"
+	WMgroup="3"
+	PlaneModArg=-1	//Отображение через 12900
+	TurretID=-1
+	TurretDefault=""
+	TurretMod=""
+[end]
+
+[WeaponMode=5]	// Пусковые крупных РС
+	WMname="il2m41_ROFS132x8"
+	WMgroup="3"
+	PlaneModArg=-1	//Отображение через 12900
+	TurretID=-1
+	TurretDefault=""
+	TurretMod=""
+[end]
+
+// Варианты подвески вооружения
+
+AmmunitionArg=12900
+
+[Ammunition=0]
+	WeaponModes=-1,-2,-3,-4,-5
+	AnimationVal=1.0
+	name="0,1-SHKAS-AP-1500 + 2,3-SHVAK-APHE-420"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=1
+	GunAmmunition3=1
+	Bomb0=-1
+	PrimaryAimingGun=2
+[end]
+
+[Ammunition=1]
+	WeaponModes=1,-2,-3,-4,-5
+	AnimationVal=1.0
+	name="0,1-SHKAS-AP-1500 + 2,3-VYA23-APHE-300-add"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=2
+	GunAmmunition3=2
+	Bomb0=-1
+	PrimaryAimingGun=2
+[end]
+
+[Ammunition=2]
+	WeaponModes=1,-2,-3,-4,-5
+	AnimationVal=1.0
+	name="0,1-SHKAS-AP-1500 + 2,3-VYA23-AP-300-add"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=3
+	GunAmmunition3=3
+	Bomb0=-1
+	PrimaryAimingGun=2
+[end]
+
+[Ammunition=3]
+	WeaponModes=1,-2,-3,-4,-5
+	AnimationVal=1.0
+	name="0,1-SHKAS-AP-1500 + 2,3-VYA23-HE-300-add"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=4
+	GunAmmunition3=4
+	Bomb0=-1
+	PrimaryAimingGun=2
+[end]
+
+// + FAB50SV-4
+
+[Ammunition=4]
+	WeaponModes=-1,-2,-3,-4,-5
+	AnimationVal=1.0
+	name="0,1-SHKAS-AP-1500 + 2,3-SHVAK-APHE-420 + FAB50SV-4"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=1
+	GunAmmunition3=1
+	Bomb0=2, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb1=3, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb2=4, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb3=5, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	PrimaryAimingGun=2
+[end]
+
+[Ammunition=5]
+	WeaponModes=1,-2,-3,-4,-5
+	AnimationVal=1.0
+	name="0,1-SHKAS-AP-1500 + 2,3-VYA23-APHE-300-add + FAB50SV-4"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=2
+	GunAmmunition3=2
+	Bomb0=2, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb1=3, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb2=4, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb3=5, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	PrimaryAimingGun=2
+[end]
+
+[Ammunition=6]
+	WeaponModes=1,-2,-3,-4,-5
+	AnimationVal=1.0
+	name="0,1-SHKAS-AP-1500 + 2,3-VYA23-AP-300-add + FAB50SV-4"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=3
+	GunAmmunition3=3
+	Bomb0=2, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb1=3, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb2=4, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb3=5, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	PrimaryAimingGun=2
+[end]
+
+[Ammunition=7]
+	WeaponModes=1,-2,-3,-4,-5
+	AnimationVal=1.0
+	name="0,1-SHKAS-AP-1500 + 2,3-VYA23-HE-300-add + FAB50SV-4"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=4
+	GunAmmunition3=4
+	Bomb0=2, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb1=3, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb2=4, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb3=5, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	PrimaryAimingGun=2
+[end]
+
+
+// + FAB50SV-6
+
+[Ammunition=8]
+	WeaponModes=2,-1,-3,-4,-5
+	AnimationVal=1.0
+	name="0,1-SHKAS-AP-1500 + 2,3-SHVAK-APHE-420 + FAB50SV-6"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=1
+	GunAmmunition3=1
+	Bomb0=0, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb1=1, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb2=2, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb3=3, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb4=4, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb5=5, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	PrimaryAimingGun=2
+[end]
+
+[Ammunition=9]
+	WeaponModes=12,-3,-4,-5
+	AnimationVal=1.0
+	name="0,1-SHKAS-AP-1500 + 2,3-VYA23-APHE-300-add + FAB50SV-6"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=2
+	GunAmmunition3=2
+	Bomb0=0, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb1=1, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb2=2, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb3=3, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb4=4, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb5=5, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	PrimaryAimingGun=2
+[end]
+
+[Ammunition=10]
+	WeaponModes=12,-3,-4,-5
+	AnimationVal=1.0
+	name="0,1-SHKAS-AP-1500 + 2,3-VYA23-AP-300-add + FAB50SV-6"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=3
+	GunAmmunition3=3
+	Bomb0=0, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb1=1, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb2=2, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb3=3, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb4=4, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb5=5, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	PrimaryAimingGun=2
+[end]
+
+[Ammunition=11]
+	WeaponModes=12,-3,-4,-5
+	AnimationVal=1.0
+	name="0,1-SHKAS-AP-1500 + 2,3-VYA23-HE-300-add + FAB50SV-6"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=4
+	GunAmmunition3=4
+	Bomb0=0, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb1=1, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb2=2, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb3=3, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb4=4, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb5=5, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	PrimaryAimingGun=2
+[end]
+
+// + FAB100M-4
+
+[Ammunition=12]
+	WeaponModes=-1,-2,-3,-4,-5
+	AnimationVal=1.0
+	name="0,1-SHKAS-AP-1500 + 2,3-SHVAK-APHE-420 + FAB100M-4"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=1
+	GunAmmunition3=1
+	Bomb0=8, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb1=9, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb2=10, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb3=11, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	PrimaryAimingGun=2
+[end]
+
+[Ammunition=13]
+	WeaponModes=1,-2,-3,-4,-5
+	AnimationVal=1.0
+	name="0,1-SHKAS-AP-1500 + 2,3-VYA23-APHE-300-add + FAB100M-4"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=2
+	GunAmmunition3=2
+	Bomb0=8, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb1=9, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb2=10, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb3=11, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	PrimaryAimingGun=2
+[end]
+
+[Ammunition=14]
+	WeaponModes=1,-2,-3,-4,-5
+	AnimationVal=1.0
+	name="0,1-SHKAS-AP-1500 + 2,3-VYA23-AP-300-add + FAB100M-4"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=3
+	GunAmmunition3=3
+	Bomb0=8, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb1=9, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb2=10, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb3=11, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	PrimaryAimingGun=2
+[end]
+
+[Ammunition=15]
+	WeaponModes=1,-2,-3,-4,-5
+	AnimationVal=1.0
+	name="0,1-SHKAS-AP-1500 + 2,3-VYA23-HE-300-add + FAB100M-4"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=4
+	GunAmmunition3=4
+	Bomb0=8, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb1=9, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb2=10, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb3=11, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	PrimaryAimingGun=2
+[end]
+
+// + FAB100M-6
+
+[Ammunition=16]
+	WeaponModes=2,-1,-3,-4,-5
+	AnimationVal=1.0
+	name="0,1-SHKAS-AP-1500 + 2,3-SHVAK-APHE-420 + FAB100M-6"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=1
+	GunAmmunition3=1
+	Bomb0=6, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb1=7, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb2=8, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb3=9, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb4=10, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb5=11, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	PrimaryAimingGun=2
+[end]
+
+[Ammunition=17]
+	WeaponModes=12,-3,-4,-5
+	AnimationVal=1.0
+	name="0,1-SHKAS-AP-1500 + 2,3-VYA23-APHE-300-add + FAB100M-6"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=2
+	GunAmmunition3=2
+	Bomb0=6, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb1=7, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb2=8, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb3=9, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb4=10, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb5=11, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	PrimaryAimingGun=2
+[end]
+
+[Ammunition=18]
+	WeaponModes=12,-3,-4,-5
+	AnimationVal=1.0
+	name="0,1-SHKAS-AP-1500 + 2,3-VYA23-AP-300-add + FAB100M-6"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=3
+	GunAmmunition3=3
+	Bomb0=6, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb1=7, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb2=8, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb3=9, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb4=10, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb5=11, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	PrimaryAimingGun=2
+[end]
+
+[Ammunition=19]
+	WeaponModes=12,-3,-4,-5
+	AnimationVal=1.0
+	name="0,1-SHKAS-AP-1500 + 2,3-VYA23-HE-300-add + FAB100M-6"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=4
+	GunAmmunition3=4
+	Bomb0=6, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb1=7, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb2=8, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb3=9, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb4=10, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb5=11, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	PrimaryAimingGun=2
+[end]
+
+// + 8 x ROS82
+
+[Ammunition=20]
+	WeaponModes=-1,-2,-3,-4,-5
+	AnimationVal=0.0
+	name="0,1-SHKAS-AP-1500 + 2,3-SHVAK-APHE-420 + ROS82-8"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=1
+	GunAmmunition3=1
+	Bomb0=14, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb1=15, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb2=16, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb3=17, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb4=18, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb5=19, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb6=20, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb7=21, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	PrimaryAimingGun=2
+[end]
+
+[Ammunition=21]
+	WeaponModes=1,-2,-3,-4,-5
+	AnimationVal=0.0
+	name="0,1-SHKAS-AP-1500 + 2,3-VYA23-APHE-300-add + ROS82-8"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=2
+	GunAmmunition3=2
+	Bomb0=14, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb1=15, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb2=16, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb3=17, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb4=18, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb5=19, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb6=20, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb7=21, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	PrimaryAimingGun=2
+[end]
+
+[Ammunition=22]
+	WeaponModes=1,-2,-3,-4,-5
+	AnimationVal=0.0
+	name="0,1-SHKAS-AP-1500 + 2,3-VYA23-AP-300-add + ROS82-8"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=3
+	GunAmmunition3=3
+	Bomb0=14, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb1=15, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb2=16, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb3=17, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb4=18, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb5=19, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb6=20, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb7=21, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	PrimaryAimingGun=2
+[end]
+
+[Ammunition=23]
+	WeaponModes=1,-2,-3,-4,-5
+	AnimationVal=0.0
+	name="0,1-SHKAS-AP-1500 + 2,3-VYA23-HE-300-add + ROS82-8"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=4
+	GunAmmunition3=4
+	Bomb0=14, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb1=15, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb2=16, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb3=17, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb4=18, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb5=19, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb6=20, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb7=21, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	PrimaryAimingGun=2
+[end]
+
+// + FAB50SV-4 + ROS82-8
+
+[Ammunition=24]
+	WeaponModes=-1,-2,-3,-4,-5
+	AnimationVal=0.0
+	name="0,1-SHKAS-AP-1500 + 2,3-SHVAK-APHE-420 + FAB50SV-4 + ROS82-8"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=1
+	GunAmmunition3=1
+	Bomb0=2, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb1=3, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb2=4, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb3=5, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb4=14, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb5=15, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb6=16, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb7=17, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb8=18, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb9=19, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb10=20, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb11=21, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	PrimaryAimingGun=2
+[end]
+
+[Ammunition=25]
+	WeaponModes=1,-2,-3,-4,-5
+	AnimationVal=0.0
+	name="0,1-SHKAS-AP-1500 + 2,3-VYA23-APHE-300-add + FAB50SV-4 + ROS82-8"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=2
+	GunAmmunition3=2
+	Bomb0=2, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb1=3, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb2=4, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb3=5, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb4=14, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb5=15, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb6=16, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb7=17, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb8=18, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb9=19, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb10=20, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb11=21, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	PrimaryAimingGun=2
+[end]
+
+[Ammunition=26]
+	WeaponModes=1,-2,-3,-4,-5
+	AnimationVal=0.0
+	name="0,1-SHKAS-AP-1500 + 2,3-VYA23-AP-300-add + FAB50SV-4 + ROS82-8"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=3
+	GunAmmunition3=3
+	Bomb0=2, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb1=3, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb2=4, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb3=5, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb4=14, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb5=15, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb6=16, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb7=17, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb8=18, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb9=19, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb10=20, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb11=21, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	PrimaryAimingGun=2
+[end]
+
+[Ammunition=27]
+	WeaponModes=1,-2,-3,-4,-5
+	AnimationVal=0.0
+	name="0,1-SHKAS-AP-1500 + 2,3-VYA23-HE-300-add + FAB50SV-4 + ROS82-8"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=4
+	GunAmmunition3=4
+	Bomb0=2, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb1=3, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb2=4, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb3=5, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb4=14, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb5=15, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb6=16, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb7=17, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb8=18, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb9=19, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb10=20, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb11=21, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	PrimaryAimingGun=2
+[end]
+
+// + FAB50SV-6 + ROS82-8
+
+[Ammunition=28]
+	WeaponModes=2,-1,-3,-4,-5
+	AnimationVal=0.0
+	name="0,1-SHKAS-AP-1500 + 2,3-SHVAK-APHE-420 + FAB50SV-6 + ROS82-8"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=1
+	GunAmmunition3=1
+	Bomb0=0, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb1=1, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb2=2, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb3=3, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb4=4, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb5=5, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb6=14, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb7=15, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb8=16, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb9=17, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb10=18, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb11=19, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb12=20, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb13=21, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	PrimaryAimingGun=2
+[end]
+
+[Ammunition=29]
+	WeaponModes=12,-3,-4,-5
+	AnimationVal=0.0
+	name="0,1-SHKAS-AP-1500 + 2,3-VYA23-APHE-300-add + FAB50SV-6 + ROS82-8"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=2
+	GunAmmunition3=2
+	Bomb0=0, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb1=1, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb2=2, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb3=3, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb4=4, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb5=5, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb6=14, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb7=15, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb8=16, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb9=17, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb10=18, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb11=19, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb12=20, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb13=21, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	PrimaryAimingGun=2
+[end]
+
+[Ammunition=30]
+	WeaponModes=12,-3,-4,-5
+	AnimationVal=0.0
+	name="0,1-SHKAS-AP-1500 + 2,3-VYA23-AP-300-add + FAB50SV-6 + ROS82-8"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=3
+	GunAmmunition3=3
+	Bomb0=0, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb1=1, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb2=2, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb3=3, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb4=4, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb5=5, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb6=14, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb7=15, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb8=16, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb9=17, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb10=18, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb11=19, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb12=20, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb13=21, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	PrimaryAimingGun=2
+[end]
+
+[Ammunition=31]
+	WeaponModes=12,-3,-4,-5
+	AnimationVal=0.0
+	name="0,1-SHKAS-AP-1500 + 2,3-VYA23-HE-300-add + FAB50SV-6 + ROS82-8"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=4
+	GunAmmunition3=4
+	Bomb0=0, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb1=1, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb2=2, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb3=3, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb4=4, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb5=5, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb6=14, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb7=15, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb8=16, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb9=17, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb10=18, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb11=19, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb12=20, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb13=21, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	PrimaryAimingGun=2
+[end]
+
+// + FAB100M-4 + ROS82-8
+
+[Ammunition=32]
+	WeaponModes=-1,-2,-3,-4,-5
+	AnimationVal=0.0
+	name="0,1-SHKAS-AP-1500 + 2,3-SHVAK-APHE-420 + FAB100M-4 + ROS82-8"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=1
+	GunAmmunition3=1
+	Bomb0=8, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb1=9, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb2=10, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb3=11, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb4=14, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb5=15, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb6=16, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb7=17, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb8=18, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb9=19, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb10=20, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb11=21, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	PrimaryAimingGun=2
+[end]
+
+[Ammunition=33]
+	WeaponModes=1,-2,-3,-4,-5
+	AnimationVal=0.0
+	name="0,1-SHKAS-AP-1500 + 2,3-VYA23-APHE-300-add + FAB100M-4 + ROS82-8"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=2
+	GunAmmunition3=2
+	Bomb0=8, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb1=9, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb2=10, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb3=11, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb4=14, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb5=15, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb6=16, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb7=17, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb8=18, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb9=19, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb10=20, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb11=21, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	PrimaryAimingGun=2
+[end]
+
+[Ammunition=34]
+	WeaponModes=1,-2,-3,-4,-5
+	AnimationVal=0.0
+	name="0,1-SHKAS-AP-1500 + 2,3-VYA23-AP-300-add + FAB100M-4 + ROS82-8"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=3
+	GunAmmunition3=3
+	Bomb0=8, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb1=9, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb2=10, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb3=11, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb4=14, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb5=15, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb6=16, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb7=17, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb8=18, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb9=19, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb10=20, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb11=21, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	PrimaryAimingGun=2
+[end]
+
+[Ammunition=35]
+	WeaponModes=1,-2,-3,-4,-5
+	AnimationVal=0.0
+	name="0,1-SHKAS-AP-1500 + 2,3-VYA23-HE-300-add + FAB100M-4 + ROS82-8"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=4
+	GunAmmunition3=4
+	Bomb0=8, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb1=9, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb2=10, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb3=11, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb4=14, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb5=15, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb6=16, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb7=17, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb8=18, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb9=19, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb10=20, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Bomb11=21, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	PrimaryAimingGun=2
+[end]
+
+// + FAB250SV-2
+
+[Ammunition=36]
+	WeaponModes=3,-1,-2,-4,-5
+	AnimationVal=1.0
+	name="0,1-SHKAS-AP-1500 + 2,3-SHVAK-APHE-420 + FAB250SV-2"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=1
+	GunAmmunition3=1
+	Bomb0=12, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB250sv.txt"
+	Bomb1=13, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB250sv.txt"
+	PrimaryAimingGun=2
+[end]
+
+[Ammunition=37]
+	WeaponModes=13,-2,-4,-5
+	AnimationVal=1.0
+	name="0,1-SHKAS-AP-1500 + 2,3-VYA23-APHE-300-add + FAB250SV-2"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=2
+	GunAmmunition3=2
+	Bomb0=12, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB250sv.txt"
+	Bomb1=13, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB250sv.txt"
+	PrimaryAimingGun=2
+[end]
+
+[Ammunition=38]
+	WeaponModes=13,-2,-4,-5
+	AnimationVal=1.0
+	name="0,1-SHKAS-AP-1500 + 2,3-VYA23-AP-300-add + FAB250SV-2"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=3
+	GunAmmunition3=3
+	Bomb0=12, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB250sv.txt"
+	Bomb1=13, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB250sv.txt"
+	PrimaryAimingGun=2
+[end]
+
+[Ammunition=39]
+	WeaponModes=13,-2,-4,-5
+	AnimationVal=1.0
+	name="0,1-SHKAS-AP-1500 + 2,3-VYA23-HE-300-add + FAB250SV-2"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=4
+	GunAmmunition3=4
+	Bomb0=12, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB250sv.txt"
+	Bomb1=13, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB250sv.txt"
+	PrimaryAimingGun=2
+[end]
+
+// + RBS82-8
+
+[Ammunition=40]
+	WeaponModes=4,-1,-2,-3,-5
+	AnimationVal=0.5
+	name="0,1-SHKAS-AP-1500 + 2,3-SHVAK-APHE-420 + RBS82-8"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=1
+	GunAmmunition3=1
+	Bomb0=22, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb1=23, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb2=24, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb3=25, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb4=26, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb5=27, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb6=28, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb7=29, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	PrimaryAimingGun=2
+[end]
+
+[Ammunition=41]
+	WeaponModes=14,-2,-3,-5
+	AnimationVal=0.5
+	name="0,1-SHKAS-AP-1500 + 2,3-VYA23-APHE-300-add + RBS82-8"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=2
+	GunAmmunition3=2
+	Bomb0=22, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb1=23, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb2=24, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb3=25, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb4=26, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb5=27, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb6=28, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb7=29, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	PrimaryAimingGun=2
+[end]
+
+[Ammunition=42]
+	WeaponModes=14,-2,-3,-5
+	AnimationVal=0.5
+	name="0,1-SHKAS-AP-1500 + 2,3-VYA23-AP-300-add + RBS82-8"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=3
+	GunAmmunition3=3
+	Bomb0=22, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb1=23, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb2=24, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb3=25, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb4=26, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb5=27, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb6=28, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb7=29, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	PrimaryAimingGun=2
+[end]
+
+[Ammunition=43]
+	WeaponModes=14,-2,-3,-5
+	AnimationVal=0.5
+	name="0,1-SHKAS-AP-1500 + 2,3-VYA23-HE-300-add + RBS82-8"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=4
+	GunAmmunition3=4
+	Bomb0=22, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb1=23, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb2=24, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb3=25, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb4=26, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb5=27, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb6=28, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb7=29, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	PrimaryAimingGun=2
+[end]
+
+// + FAB50SV-4 + RBS82-8
+
+[Ammunition=44]
+	WeaponModes=4,-1,-2,-3,-5
+	AnimationVal=0.5
+	name="0,1-SHKAS-AP-1500 + 2,3-SHVAK-APHE-420 + FAB50SV-4 + RBS82-8"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=1
+	GunAmmunition3=1
+	Bomb0=2, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb1=3, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb2=4, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb3=5, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb4=22, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb5=23, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb6=24, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb7=25, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb8=26, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb9=27, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb10=28, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb11=29, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	PrimaryAimingGun=2
+[end]
+
+[Ammunition=45]
+	WeaponModes=14,-2,-3,-5
+	AnimationVal=0.5
+	name="0,1-SHKAS-AP-1500 + 2,3-VYA23-APHE-300-add + FAB50SV-4 + RBS82-8"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=2
+	GunAmmunition3=2
+	Bomb0=2, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb1=3, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb2=4, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb3=5, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb4=22, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb5=23, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb6=24, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb7=25, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb8=26, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb9=27, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb10=28, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb11=29, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	PrimaryAimingGun=2
+[end]
+
+[Ammunition=46]
+	WeaponModes=14,-2,-3,-5
+	AnimationVal=0.5
+	name="0,1-SHKAS-AP-1500 + 2,3-VYA23-AP-300-add + FAB50SV-4 + RBS82-8"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=3
+	GunAmmunition3=3
+	Bomb0=2, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb1=3, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb2=4, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb3=5, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb4=22, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb5=23, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb6=24, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb7=25, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb8=26, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb9=27, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb10=28, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb11=29, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	PrimaryAimingGun=2
+[end]
+
+[Ammunition=47]
+	WeaponModes=14,-2,-3,-5
+	AnimationVal=0.5
+	name="0,1-SHKAS-AP-1500 + 2,3-VYA23-HE-300-add + FAB50SV-4 + RBS82-8"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=4
+	GunAmmunition3=4
+	Bomb0=2, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb1=3, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb2=4, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb3=5, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb4=22, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb5=23, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb6=24, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb7=25, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb8=26, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb9=27, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb10=28, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb11=29, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	PrimaryAimingGun=2
+[end]
+
+// + FAB50SV-6 + RBS82-8
+
+[Ammunition=48]
+	WeaponModes=24,-1,-3,-5
+	AnimationVal=0.5
+	name="0,1-SHKAS-AP-1500 + 2,3-SHVAK-APHE-420 + FAB50SV-6 + RBS82-8"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=1
+	GunAmmunition3=1
+	Bomb0=0, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb1=1, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb2=2, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb3=3, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb4=4, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb5=5, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb6=22, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb7=23, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb8=24, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb9=25, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb10=26, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb11=27, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb12=28, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb13=29, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	PrimaryAimingGun=2
+[end]
+
+[Ammunition=49]
+	WeaponModes=124,-3,-5
+	AnimationVal=0.5
+	name="0,1-SHKAS-AP-1500 + 2,3-VYA23-APHE-300-add + FAB50SV-6 + RBS82-8"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=2
+	GunAmmunition3=2
+	Bomb0=0, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb1=1, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb2=2, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb3=3, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb4=4, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb5=5, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb6=22, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb7=23, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb8=24, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb9=25, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb10=26, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb11=27, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb12=28, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb13=29, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	PrimaryAimingGun=2
+[end]
+
+[Ammunition=50]
+	WeaponModes=124,-3,-5
+	AnimationVal=0.5
+	name="0,1-SHKAS-AP-1500 + 2,3-VYA23-AP-300-add + FAB50SV-6 + RBS82-8"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=3
+	GunAmmunition3=3
+	Bomb0=0, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb1=1, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb2=2, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb3=3, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb4=4, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb5=5, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb6=22, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb7=23, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb8=24, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb9=25, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb10=26, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb11=27, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb12=28, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb13=29, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	PrimaryAimingGun=2
+[end]
+
+[Ammunition=51]
+	WeaponModes=124,-3,-5
+	AnimationVal=0.5
+	name="0,1-SHKAS-AP-1500 + 2,3-VYA23-HE-300-add + FAB50SV-6 + RBS82-8"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=4
+	GunAmmunition3=4
+	Bomb0=0, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb1=1, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb2=2, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb3=3, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb4=4, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb5=5, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb6=22, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb7=23, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb8=24, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb9=25, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb10=26, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb11=27, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb12=28, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb13=29, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	PrimaryAimingGun=2
+[end]
+
+// + FAB100M-4 + RBS82-8
+
+[Ammunition=52]
+	WeaponModes=-1,4,-2,-3,-5
+	AnimationVal=0.5
+	name="0,1-SHKAS-AP-1500 + 2,3-SHVAK-APHE-420 + FAB100M-4 + RBS82-8"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=1
+	GunAmmunition3=1
+	Bomb0=8, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb1=9, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb2=10, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb3=11, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb4=22, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb5=23, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb6=24, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb7=25, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb8=26, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb9=27, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb10=28, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb11=29, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	PrimaryAimingGun=2
+[end]
+
+[Ammunition=53]
+	WeaponModes=14,-2,-3,-5
+	AnimationVal=0.5
+	name="0,1-SHKAS-AP-1500 + 2,3-VYA23-APHE-300-add + FAB100M-4 + RBS82-8"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=2
+	GunAmmunition3=2
+	Bomb0=8, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb1=9, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb2=10, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb3=11, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb4=22, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb5=23, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb6=24, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb7=25, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb8=26, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb9=27, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb10=28, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb11=29, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	PrimaryAimingGun=2
+[end]
+
+[Ammunition=54]
+	WeaponModes=14,-2,-3,-5
+	AnimationVal=0.5
+	name="0,1-SHKAS-AP-1500 + 2,3-VYA23-AP-300-add + FAB100M-4 + RBS82-8"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=3
+	GunAmmunition3=3
+	Bomb0=8, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb1=9, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb2=10, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb3=11, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb4=22, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb5=23, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb6=24, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb7=25, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb8=26, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb9=27, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb10=28, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb11=29, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	PrimaryAimingGun=2
+[end]
+
+[Ammunition=55]
+	WeaponModes=14,-2,-3,-5
+	AnimationVal=0.5
+	name="0,1-SHKAS-AP-1500 + 2,3-VYA23-HE-300-add + FAB100M-4 + RBS82-8"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=4
+	GunAmmunition3=4
+	Bomb0=8, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb1=9, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb2=10, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb3=11, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb4=22, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb5=23, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb6=24, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb7=25, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb8=26, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb9=27, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb10=28, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Bomb11=29, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	PrimaryAimingGun=2
+[end]
+
+// + ROFS132-8
+
+[Ammunition=56]
+	WeaponModes=5,-1,-2,-3,-4
+	AnimationVal=0.5
+	name="0,1-SHKAS-AP-1500 + 2,3-SHVAK-APHE-420 + ROFS132-8"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=1
+	GunAmmunition3=1
+	Bomb0=30, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb1=31, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb2=32, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb3=33, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb4=34, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb5=35, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb6=36, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb7=37, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	PrimaryAimingGun=2
+[end]
+
+[Ammunition=57]
+	WeaponModes=15,-2,-3,-4
+	AnimationVal=0.5
+	name="0,1-SHKAS-AP-1500 + 2,3-VYA23-APHE-300-add + ROFS132-8"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=2
+	GunAmmunition3=2
+	Bomb0=30, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb1=31, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb2=32, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb3=33, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb4=34, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb5=35, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb6=36, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb7=37, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	PrimaryAimingGun=2
+[end]
+
+[Ammunition=58]
+	WeaponModes=15,-2,-3,-4
+	AnimationVal=0.5
+	name="0,1-SHKAS-AP-1500 + 2,3-VYA23-AP-300-add + ROFS132-8"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=3
+	GunAmmunition3=3
+	Bomb0=30, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb1=31, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb2=32, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb3=33, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb4=34, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb5=35, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb6=36, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb7=37, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	PrimaryAimingGun=2
+[end]
+
+[Ammunition=59]
+	WeaponModes=15,-2,-3,-4
+	AnimationVal=0.5
+	name="0,1-SHKAS-AP-1500 + 2,3-VYA23-HE-300-add + ROFS132-8"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=4
+	GunAmmunition3=4
+	Bomb0=30, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb1=31, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb2=32, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb3=33, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb4=34, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb5=35, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb6=36, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb7=37, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	PrimaryAimingGun=2
+[end]
+
+// + FAB50SV-4 + ROFS132-8
+
+[Ammunition=60]
+	WeaponModes=5,-1,-2,-3,-4
+	AnimationVal=0.5
+	name="0,1-SHKAS-AP-1500 + 2,3-SHVAK-APHE-420 + FAB50SV-4 + ROFS132-8"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=1
+	GunAmmunition3=1
+	Bomb0=2, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb1=3, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb2=4, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb3=5, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb4=30, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb5=31, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb6=32, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb7=33, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb8=34, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb9=35, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb10=36, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb11=37, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	PrimaryAimingGun=2
+[end]
+
+[Ammunition=61]
+	WeaponModes=15,-2,-3,-4
+	AnimationVal=0.5
+	name="0,1-SHKAS-AP-1500 + 2,3-VYA23-APHE-300-add + FAB50SV-4 + ROFS132-8"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=2
+	GunAmmunition3=2
+	Bomb0=2, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb1=3, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb2=4, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb3=5, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb4=30, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb5=31, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb6=32, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb7=33, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb8=34, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb9=35, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb10=36, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb11=37, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	PrimaryAimingGun=2
+[end]
+
+[Ammunition=62]
+	WeaponModes=15,-2,-3,-4
+	AnimationVal=0.5
+	name="0,1-SHKAS-AP-1500 + 2,3-VYA23-AP-300-add + FAB50SV-4 + ROFS132-8"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=3
+	GunAmmunition3=3
+	Bomb0=2, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb1=3, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb2=4, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb3=5, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb4=30, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb5=31, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb6=32, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb7=33, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb8=34, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb9=35, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb10=36, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb11=37, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	PrimaryAimingGun=2
+[end]
+
+[Ammunition=63]
+	WeaponModes=15,-2,-3,-4
+	AnimationVal=0.5
+	name="0,1-SHKAS-AP-1500 + 2,3-VYA23-HE-300-add + FAB50SV-4 + ROFS132-8"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=4
+	GunAmmunition3=4
+	Bomb0=2, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb1=3, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb2=4, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb3=5, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb4=30, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb5=31, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb6=32, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb7=33, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb8=34, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb9=35, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb10=36, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb11=37, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	PrimaryAimingGun=2
+[end]
+
+// + FAB50SV-6 + ROFS132-8
+
+[Ammunition=64]
+	WeaponModes=25,-1,-3,-4
+	AnimationVal=0.5
+	name="0,1-SHKAS-AP-1500 + 2,3-SHVAK-APHE-420 + FAB50SV-6 + ROFS132-8"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=1
+	GunAmmunition3=1
+	Bomb0=0, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb1=1, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb2=2, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb3=3, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb4=4, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb5=5, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb6=30, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb7=31, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb8=32, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb9=33, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb10=34, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb11=35, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb12=36, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb13=37, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	PrimaryAimingGun=2
+[end]
+
+[Ammunition=65]
+	WeaponModes=125,-3,-4
+	AnimationVal=0.5
+	name="0,1-SHKAS-AP-1500 + 2,3-VYA23-APHE-300-add + FAB50SV-6 + ROFS132-8"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=2
+	GunAmmunition3=2
+	Bomb0=0, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb1=1, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb2=2, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb3=3, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb4=4, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb5=5, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb6=30, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb7=31, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb8=32, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb9=33, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb10=34, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb11=35, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb12=36, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb13=37, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	PrimaryAimingGun=2
+[end]
+
+[Ammunition=66]
+	WeaponModes=125,-3,-4
+	AnimationVal=0.5
+	name="0,1-SHKAS-AP-1500 + 2,3-VYA23-AP-300-add + FAB50SV-6 + ROFS132-8"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=3
+	GunAmmunition3=3
+	Bomb0=0, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb1=1, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb2=2, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb3=3, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb4=4, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb5=5, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb6=30, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb7=31, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb8=32, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb9=33, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb10=34, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb11=35, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb12=36, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb13=37, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	PrimaryAimingGun=2
+[end]
+
+[Ammunition=67]
+	WeaponModes=125,-3,-4
+	AnimationVal=0.5
+	name="0,1-SHKAS-AP-1500 + 2,3-VYA23-HE-300-add + FAB50SV-6 + ROFS132-8"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=4
+	GunAmmunition3=4
+	Bomb0=0, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb1=1, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb2=2, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb3=3, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb4=4, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb5=5, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Bomb6=30, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb7=31, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb8=32, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb9=33, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb10=34, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb11=35, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb12=36, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb13=37, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	PrimaryAimingGun=2
+[end]
+
+// + FAB100M-2 + ROFS132-8
+
+[Ammunition=68]
+	WeaponModes=5,-1,-2,-3,-4
+	AnimationVal=0.5
+	name="0,1-SHKAS-AP-1500 + 2,3-SHVAK-APHE-420 + FAB100M-2 + ROFS132-8"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=1
+	GunAmmunition3=1
+	Bomb0=10, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb1=11, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb2=30, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb3=31, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb4=32, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb5=33, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb6=34, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb7=35, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb8=36, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb9=37, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	PrimaryAimingGun=2
+[end]
+
+[Ammunition=69]
+	WeaponModes=15,-2,-3,-4
+	AnimationVal=0.5
+	name="0,1-SHKAS-AP-1500 + 2,3-VYA23-APHE-300-add + FAB100M-2 + ROFS132-8"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=2
+	GunAmmunition3=2
+	Bomb0=10, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb1=11, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb2=30, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb3=31, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb4=32, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb5=33, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb6=34, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb7=35, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb8=36, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb9=37, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	PrimaryAimingGun=2
+[end]
+
+[Ammunition=70]
+	WeaponModes=15,-2,-3,-4
+	AnimationVal=0.5
+	name="0,1-SHKAS-AP-1500 + 2,3-VYA23-AP-300-add + FAB100M-2 + ROFS132-8"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=3
+	GunAmmunition3=3
+	Bomb0=10, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb1=11, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb2=30, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb3=31, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb4=32, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb5=33, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb6=34, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb7=35, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb8=36, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb9=37, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	PrimaryAimingGun=2
+[end]
+
+[Ammunition=71]
+	WeaponModes=15,-2,-3,-4
+	AnimationVal=0.5
+	name="0,1-SHKAS-AP-1500 + 2,3-VYA23-HE-300-add + FAB100M-2 + ROFS132-8"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=4
+	GunAmmunition3=4
+	Bomb0=10, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb1=11, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Bomb2=30, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb3=31, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb4=32, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb5=33, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb6=34, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb7=35, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb8=36, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Bomb9=37, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	PrimaryAimingGun=2
+[end]
+
+[Ammunition=72]
+	WeaponModes=-1,-2,-3,-4,-5
+	AnimationVal=1.0
+	name="Empty"
+	GunAmmunition0=-1
+	GunAmmunition1=-1
+	GunAmmunition2=-1
+	GunAmmunition3=-1
+	Bomb0=-1
+	PrimaryAimingGun=2
+[end]
+
+[Ammunition=73]
+	WeaponModes=-1,-2,-3,-4,-5
+	AnimationVal=1.0
+	name="SmokeGenWhiteOne-1"
+	GunAmmunition0=-1
+	GunAmmunition1=-1
+	GunAmmunition2=-1
+	GunAmmunition3=-1
+	Bomb0=38, "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	PrimaryAimingGun=2
+[end]
+[Ammunition=74]
+	WeaponModes=-1,-2,-3,-4,-5
+	AnimationVal=1.0
+	name="SmokeGenWhiteTwo-2"
+	GunAmmunition0=-1
+	GunAmmunition1=-1
+	GunAmmunition2=-1
+	GunAmmunition3=-1
+	Bomb0=39, "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	Bomb1=40, "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	PrimaryAimingGun=2
+[end]
+[Ammunition=75]
+	WeaponModes=-1,-2,-3,-4,-5
+	AnimationVal=1.0
+	name="SmokeGenBlueOne-1"
+	GunAmmunition0=-1
+	GunAmmunition1=-1
+	GunAmmunition2=-1
+	GunAmmunition3=-1
+	Bomb0=41, "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	PrimaryAimingGun=2
+[end]
+[Ammunition=76]
+	WeaponModes=-1,-2,-3,-4,-5
+	AnimationVal=1.0
+	name="SmokeGenBlueTwo-2"
+	GunAmmunition0=-1
+	GunAmmunition1=-1
+	GunAmmunition2=-1
+	GunAmmunition3=-1
+	Bomb0=42, "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	Bomb1=43, "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	PrimaryAimingGun=2
+[end]
+[Ammunition=77]
+	WeaponModes=-1,-2,-3,-4,-5
+	AnimationVal=1.0
+	name="SmokeGenRedOne-1"
+	GunAmmunition0=-1
+	GunAmmunition1=-1
+	GunAmmunition2=-1
+	GunAmmunition3=-1
+	Bomb0=44, "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	PrimaryAimingGun=2
+[end]
+[Ammunition=78]
+	WeaponModes=-1,-2,-3,-4,-5
+	AnimationVal=1.0
+	name="SmokeGenRedTwo-2"
+	GunAmmunition0=-1
+	GunAmmunition1=-1
+	GunAmmunition2=-1
+	GunAmmunition3=-1
+	Bomb0=45, "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	Bomb1=46, "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	PrimaryAimingGun=2
+[end]
+[Ammunition=79]
+	WeaponModes=-1,-2,-3,-4,-5
+	AnimationVal=1.0
+	name="SmokeGenGreenOne-1"
+	GunAmmunition0=-1
+	GunAmmunition1=-1
+	GunAmmunition2=-1
+	GunAmmunition3=-1
+	Bomb0=47, "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	PrimaryAimingGun=2
+[end]
+[Ammunition=80]
+	WeaponModes=-1,-2,-3,-4,-5
+	AnimationVal=1.0
+	name="SmokeGenGreenTwo-2"
+	GunAmmunition0=-1
+	GunAmmunition1=-1
+	GunAmmunition2=-1
+	GunAmmunition3=-1
+	Bomb0=48, "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	Bomb1=49, "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	PrimaryAimingGun=2
+[end]
+[Ammunition=81]
+	WeaponModes=-1,-2,-3,-4,-5
+	AnimationVal=1.0
+	name="SmokeGenYellowOne-1"
+	GunAmmunition0=-1
+	GunAmmunition1=-1
+	GunAmmunition2=-1
+	GunAmmunition3=-1
+	Bomb0=50, "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	PrimaryAimingGun=2
+[end]
+[Ammunition=82]
+	WeaponModes=-1,-2,-3,-4,-5
+	AnimationVal=1.0
+	name="SmokeGenYellowTwo-2"
+	GunAmmunition0=-1
+	GunAmmunition1=-1
+	GunAmmunition2=-1
+	GunAmmunition3=-1
+	Bomb0=51, "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	Bomb1=52, "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	PrimaryAimingGun=2
+[end]
+[Ammunition=83]
+	WeaponModes=-1,-2,-3,-4,-5
+	AnimationVal=1.0
+	name="SmokeGenBlackOne-1"
+	GunAmmunition0=-1
+	GunAmmunition1=-1
+	GunAmmunition2=-1
+	GunAmmunition3=-1
+	Bomb0=53, "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	PrimaryAimingGun=2
+[end]
+[Ammunition=84]
+	WeaponModes=-1,-2,-3,-4,-5
+	AnimationVal=1.0
+	name="SmokeGenBlackTwo-2"
+	GunAmmunition0=-1
+	GunAmmunition1=-1
+	GunAmmunition2=-1
+	GunAmmunition3=-1
+	Bomb0=54, "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	Bomb1=55, "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	PrimaryAimingGun=2
+[end]
+
+DefaultAmmunition=0
+
+// Зарядка пулеметов
+
+[GunAmmunition=0]	// 750 бронебойных пуль 7.62х54 (к пулемету ШКАС)
+	ExpendableMass = 7.719
+	ResidualMass = 11.677	//взят б/к Ил-2-42, и по пропорции с Як1 пересчитан в остающиеся гильзы и звенья
+	MaxMisFiresInMagazine=0
+	MaxRoundsInMagazine=750
+	RoundsInMagazine=750
+	ReservedMagazines=0
+	AmountRoundsWithOneTracer=8	// каждая 8-я пуля с трассером
+	TracerIdx=0
+	object0="LuaScripts/WorldObjects/Ballistics/Projectiles/BULLET_RUS_7-62x54_APsmk.txt"
+	target0="LuaScripts/WorldObjects/Ballistics/Projectiles/BULLET_RUS_7-62x54_APsmk.bin"
+	BushConfig = "LuaScripts/WorldObjects/Trash/Batch_case07-08mm.txt"
+[end]
+
+[GunAmmunition=1]	// 140 бронебойных и 70 осколочно-фугасных снарядов 20х99 (к пушке ШВАК)
+	ExpendableMass = 45.72
+	ResidualMass = 5.414	// Лишняя масса в рефе-отчете по сравнению с расчетом
+	MaxMisFiresInMagazine=0
+	MaxRoundsInMagazine=210
+	RoundsInMagazine=210
+	ReservedMagazines=0
+	AmountRoundsWithOneTracer=0	// без трассеров
+	object0="LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_20x99_AP.txt"
+	object1="LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_20x99_HE.txt"
+	object2="LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_20x99_AP.txt"
+	target0="LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_20x99_AP.bin"
+	target1="LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_20x99_HE.bin"
+	target2="LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_20x99_AP.bin"
+	BushConfig = "LuaScripts/WorldObjects/Trash/Batch_case12-20mm.txt"
+[end]
+
+[GunAmmunition=2]	// 100 бронебойных и 50 осколочно-фугасных снарядов 23x152 (к пушке ВЯ-23)
+	ExpendableMass = 75.675
+	ResidualMass = 9.075	// Лишняя масса в рефе-отчете по сравнению с расчетом
+	MaxMisFiresInMagazine=0
+	MaxRoundsInMagazine=150
+	RoundsInMagazine=150
+	ReservedMagazines=0
+	AmountRoundsWithOneTracer=4	// каждая 4-я пуля с трассером
+	object0="LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_23x152_AP.txt"
+	object1="LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_23x152_HE.txt"
+	object2="LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_23x152_AP.txt"
+	target0="LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_23x152_AP.bin"
+	target1="LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_23x152_HE.bin"
+	target2="LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_23x152_AP.bin"
+	BushConfig = "LuaScripts/WorldObjects/Trash/Batch_case23-25mm.txt"
+[end]
+
+[GunAmmunition=3]	// 150 бронебойных снарядов 23x152 (к пушке ВЯ-23)
+	ExpendableMass = 75.825
+	ResidualMass = 8.925	// Лишняя масса в рефе-отчете по сравнению с расчетом
+	MaxMisFiresInMagazine=0
+	MaxRoundsInMagazine=150
+	RoundsInMagazine=150
+	ReservedMagazines=0
+	AmountRoundsWithOneTracer=4	// каждая 4-я пуля с трассером
+	object0="LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_23x152_AP.txt"
+	target0="LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_23x152_AP.bin"
+	BushConfig = "LuaScripts/WorldObjects/Trash/Batch_case23-25mm.txt"
+[end]
+
+[GunAmmunition=4]	// 150 осколочно-фугасных снарядов 23x152 (к пушке ВЯ-23)
+	ExpendableMass = 75.375
+	ResidualMass = 9.375	// Лишняя масса в рефе-отчете по сравнению с расчетом
+	MaxMisFiresInMagazine=0
+	MaxRoundsInMagazine=150
+	RoundsInMagazine=150
+	ReservedMagazines=0
+	AmountRoundsWithOneTracer=4	// каждая 4-я пуля с трассером
+	object0="LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_23x152_HE.txt"
+	target0="LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_23x152_HE.bin"
+	BushConfig = "LuaScripts/WorldObjects/Trash/Batch_case23-25mm.txt"
+[end]
+
+
+// Точки подвески 6 ФАБ-50
+
+[attach=20]
+	position= 0.124, -0.504, -0.915
+	convex = "WingL_In_0"
+[end]
+[attach=21]
+	position= 0.124, -0.504, 0.915
+	convex = "WingR_In_0"
+[end]
+[attach=22]
+	position= 0.124, -0.124, -1.138
+	convex = "WingL_In_0"
+[end]
+[attach=23]
+	position= 0.124, -0.124, 1.138
+	convex = "WingR_In_0"
+[end]
+[attach=24]
+	position= 0.124, -0.149, -0.688
+	convex = "WingL_In_0"
+[end]
+[attach=25]
+	position= 0.124, -0.149, 0.688
+	convex = "WingR_In_0"
+[end]
+
+// Точки подвески 6 ФАБ-100
+
+[attach=26]
+	position= 0.124, -0.533, -0.915
+	convex = "WingL_In_0"
+[end]
+[attach=27]
+	position= 0.124, -0.533, 0.915
+	convex = "WingR_In_0"
+[end]
+[attach=28]
+	position= 0.124, -0.151, -1.138
+	convex = "WingL_In_0"
+[end]
+[attach=29]
+	position= 0.124, -0.151, 1.138
+	convex = "WingR_In_0"
+[end]
+[attach=30]
+	position= 0.124, -0.173, -0.688
+	convex = "WingL_In_0"
+[end]
+[attach=31]
+	position= 0.124, -0.173, 0.688
+	convex = "WingR_In_0"
+[end]
+
+// Точки подвески 2 ФАБ-250
+
+[attach=32]
+	position= 0.14, -0.608, -0.688
+	convex = "WingL_In_0"
+[end]
+[attach=33]
+	position= 0.14, -0.608, 0.688
+	convex = "WingR_In_0"
+[end]
+
+// Точки подвески 8 РОС-82
+
+[attach=34]
+	position= -0.347, -0.245, -4.127
+	convex = "WingL_Mid_0"
+	rotation= 0, 0, 2
+[end]
+[attach=35]
+	position= -0.347, -0.245, 4.127
+	convex = "WingR_Mid_0"
+	rotation= 0, 0, 2
+[end]
+[attach=36]
+	position= -0.316, -0.27, -3.819
+	convex = "WingL_Mid_0"
+	rotation= 0, 0, 2
+[end]
+[attach=37]
+	position= -0.316, -0.27, 3.819
+	convex = "WingR_Mid_0"
+	rotation= 0, 0, 2
+[end]
+[attach=38]
+	position= -0.281, -0.289, -3.529
+	convex = "WingL_Mid_0"
+	rotation= 0, 0, 2
+[end]
+[attach=39]
+	position= -0.281, -0.289, 3.529
+	convex = "WingR_Mid_0"
+	rotation= 0, 0, 2
+[end]
+[attach=40]
+	position= -0.252, -0.315, -3.227
+	convex = "WingL_Mid_0"
+	rotation= 0, 0, 2
+[end]
+[attach=41]
+	position= -0.252, -0.315, 3.227
+	convex = "WingR_Mid_0"
+	rotation= 0, 0, 2
+[end]
+
+// Точки подвески 8 БРС-82
+
+[attach=42]
+	position= 0.169, -0.227, -4.127
+	convex = "WingL_Mid_0"
+	rotation= 0, 0, 2
+[end]
+[attach=43]
+	position= 0.169, -0.227, 4.127
+	convex = "WingR_Mid_0"
+	rotation= 0, 0, 2
+[end]
+[attach=44]
+	position= 0.201, -0.252, -3.819
+	convex = "WingL_Mid_0"
+	rotation= 0, 0, 2
+[end]
+[attach=45]
+	position= 0.201, -0.252, 3.819
+	convex = "WingR_Mid_0"
+	rotation= 0, 0, 2
+[end]
+[attach=46]
+	position= 0.236, -0.271, -3.529
+	convex = "WingL_Mid_0"
+	rotation= 0, 0, 2
+[end]
+[attach=47]
+	position= 0.236, -0.271, 3.529
+	convex = "WingR_Mid_0"
+	rotation= 0, 0, 2
+[end]
+[attach=48]
+	position= 0.265, -0.296, -3.227
+	convex = "WingL_Mid_0"
+	rotation= 0, 0, 2
+[end]
+[attach=49]
+	position= 0.265, -0.296, 3.227
+	convex = "WingR_Mid_0"
+	rotation= 0, 0, 2
+[end]
+
+// Точки подвески 8 РОФС-132
+
+[attach=50]
+	position= 0.112, -0.254, -4.126
+	convex = "WingL_Mid_0"
+	rotation= 0, 0, 2
+[end]
+[attach=51]
+	position= 0.112, -0.254, 4.126
+	convex = "WingR_Mid_0"
+	rotation= 0, 0, 2
+[end]
+[attach=52]
+	position= 0.142, -0.278, -3.818
+	convex = "WingL_Mid_0"
+	rotation= 0, 0, 2
+[end]
+[attach=53]
+	position= 0.142, -0.278, 3.818
+	convex = "WingR_Mid_0"
+	rotation= 0, 0, 2
+[end]
+[attach=54]
+	position= 0.174, -0.299, -3.529
+	convex = "WingL_Mid_0"
+	rotation= 0, 0, 2
+[end]
+[attach=55]
+	position= 0.174, -0.299, 3.529
+	convex = "WingR_Mid_0"
+	rotation= 0, 0, 2
+[end]
+[attach=56]
+	position= 0.201, -0.325, -3.227
+	convex = "WingL_Mid_0"
+	rotation= 0, 0, 2
+[end]
+[attach=57]
+	position= 0.201, -0.325, 3.227
+	convex = "WingR_Mid_0"
+	rotation= 0, 0, 2
+[end]
+
+// Точки подвески дымогенераторов
+
+[attach=58]
+	position= -6.378, -0.014, 0.201
+	convex = "Fuse_Ctl_7"
+	rotation= 40, 3, -11
+[end]
+[attach=59]
+	position= -0.402, 0.145, -7.073
+	convex = "WingL_Out_0"
+	rotation= -6.5, 0, -0.8
+[end]
+[attach=60]
+	position= -0.402, 0.145, 7.073
+	convex = "WingR_Out_0"
+	rotation= 6.5, 0, -0.8
+[end]
+
+
+// Описания 24 ракет 280mm
+
+// Описания 6 ФАБ-50
+
+[BombHolder=0]
+	AttachIdx = 20
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 0.0, -0.02, 0.0
+	Rotation = 0
+	AttachPos= 0.124, -0.504, -0.915
+	Convex = "WingL_In_0"
+	BombHolderMass = 0.0 // Бомбодержатель несъёмный
+	BombHolderCxaS = 0.0 // Бомбодержатель несъёмный
+	AttachedBombCxaS = 0.012
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	ThrowSoundType = 2
+[end]
+[BombHolder=1]
+	AttachIdx = 21
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 0.0, -0.02, 0.0
+	Rotation = 0
+	AttachPos= 0.124, -0.504, 0.915
+	Convex = "WingR_In_0"
+	BombHolderMass = 0.0 // Бомбодержатель несъёмный
+	BombHolderCxaS = 0.0 // Бомбодержатель несъёмный
+	AttachedBombCxaS = 0.012
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	ThrowSoundType = 2
+[end]
+[BombHolder=2]
+	AttachIdx = 22
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 0.0, -0.3, 0.0
+	Rotation = 0
+	AttachPos= 0.124, -0.124, -1.138
+	Convex = "WingL_In_0"
+	BombDoor=0
+	DamagedPushProp = 0 // Вероятность отцепа при попадании в Convex
+	ThrowSoundType = 1
+[end]
+[BombHolder=3]
+	AttachIdx = 23
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 0.0, -0.3, 0.0
+	Rotation = 0
+	AttachPos= 0.124, -0.124, 1.138
+	Convex = "WingR_In_0"
+	BombDoor=3
+	DamagedPushProp = 0 // Вероятность отцепа при попадании в Convex
+	ThrowSoundType = 1
+[end]
+[BombHolder=4]
+	AttachIdx = 24
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 0.0, -0.3, 0.0
+	Rotation = 0
+	AttachPos= 0.124, -0.149, -0.688
+	Convex = "WingL_In_0"
+	BombDoor=1
+	DamagedPushProp = 0 // Вероятность отцепа при попадании в Convex
+	ThrowSoundType = 1
+[end]
+[BombHolder=5]
+	AttachIdx = 25
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB50sv.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 0.0, -0.3, 0.0
+	Rotation = 0
+	AttachPos= 0.124, -0.149, 0.688
+	Convex = "WingR_In_0"
+	BombDoor=2
+	DamagedPushProp = 0 // Вероятность отцепа при попадании в Convex
+	ThrowSoundType = 1
+[end]
+
+// Описания 6 ФАБ-100
+
+[BombHolder=6]
+	AttachIdx = 26
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 0.0, -0.02, 0.0
+	Rotation = 0
+	AttachPos= 0.124, -0.533, -0.915
+	Convex = "WingL_In_0"
+	BombHolderMass = 0.0 // Бомбодержатель несъёмный
+	BombHolderCxaS = 0.0 // Бомбодержатель несъёмный
+	AttachedBombCxaS = 0.021
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	ThrowSoundType = 2
+[end]
+[BombHolder=7]
+	AttachIdx = 27
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 0.0, -0.02, 0.0
+	Rotation = 0
+	AttachPos= 0.124, -0.533, 0.915
+	Convex = "WingR_In_0"
+	BombHolderMass = 0.0 // Бомбодержатель несъёмный
+	BombHolderCxaS = 0.0 // Бомбодержатель несъёмный
+	AttachedBombCxaS = 0.021
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	ThrowSoundType = 2
+[end]
+[BombHolder=8]
+	AttachIdx = 28
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 0.0, -0.2, 0.0
+	Rotation = 0
+	AttachPos= 0.124, -0.151, -1.138
+	Convex = "WingL_In_0"
+	BombDoor=0
+	DamagedPushProp = 0 // Вероятность отцепа при попадании в Convex
+	ThrowSoundType = 1
+[end]
+[BombHolder=9]
+	AttachIdx = 29
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 0.0, -0.2, 0.0
+	Rotation = 0
+	AttachPos= 0.124, -0.151, 1.138
+	Convex = "WingR_In_0"
+	BombDoor=3
+	DamagedPushProp = 0 // Вероятность отцепа при попадании в Convex
+	ThrowSoundType = 1
+[end]
+[BombHolder=10]
+	AttachIdx = 30
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 0.0, -0.2, 0.0
+	Rotation = 0
+	AttachPos= 0.124, -0.173, -0.688
+	Convex = "WingL_In_0"
+	BombDoor=1
+	DamagedPushProp = 0 // Вероятность отцепа при попадании в Convex
+	ThrowSoundType = 1
+[end]
+[BombHolder=11]
+	AttachIdx = 31
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB100M.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 0.0, -0.2, 0.0
+	Rotation = 0
+	AttachPos= 0.124, -0.173, 0.688
+	Convex = "WingR_In_0"
+	BombDoor=2
+	DamagedPushProp = 0 // Вероятность отцепа при попадании в Convex
+	ThrowSoundType = 1
+[end]
+
+// Описания 2 ФАБ-250
+
+[BombHolder=12]
+	AttachIdx = 32
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB250sv.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 0.0, -0.02, 0.0
+	Rotation = 0
+	AttachPos= 0.14, -0.608, -0.688
+	Convex = "WingL_In_0"
+	BombHolderMass = 14.7 
+	BombHolderCxaS = 0.025 
+	AttachedBombCxaS = 0.030
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	ThrowSoundType = 2
+[end]
+[BombHolder=13]
+	AttachIdx = 33
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_RUS_FAB250sv.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 0.0, -0.02, 0.0
+	Rotation = 0
+	AttachPos= 0.14, -0.608, 0.688
+	Convex = "WingR_In_0"
+	BombHolderMass = 14.7 
+	BombHolderCxaS = 0.025 
+	AttachedBombCxaS = 0.030
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	ThrowSoundType = 2
+[end]
+
+// Описания 8 РОС-82
+
+[BombHolder=14]
+	AttachIdx = 34
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 1.038, 0.0, 0.0
+	Rotation = 0
+	AttachPos= -0.347, -0.245, -4.127
+	Convex = "WingL_Mid_0"
+	BombHolderMass = 3.0
+	BombHolderCxaS = 0.007
+	AttachedBombCxaS = 0.003
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	ThrowSoundType = 4
+[end]
+[BombHolder=15]
+	AttachIdx = 35
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 1.038, 0.0, 0.0
+	Rotation = 0
+	AttachPos= -0.347, -0.245, 4.127
+	Convex = "WingR_Mid_0"
+	BombHolderMass = 3.0
+	BombHolderCxaS = 0.007
+	AttachedBombCxaS = 0.003
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	ThrowSoundType = 5
+[end]
+[BombHolder=16]
+	AttachIdx = 36
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 1.038, 0.0, 0.0
+	Rotation = 0
+	AttachPos= -0.316, -0.27, -3.819
+	Convex = "WingL_Mid_0"
+	BombHolderMass = 3.0
+	BombHolderCxaS = 0.007
+	AttachedBombCxaS = 0.003
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	ThrowSoundType = 4
+[end]
+[BombHolder=17]
+	AttachIdx = 37
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 1.038, 0.0, 0.0
+	Rotation = 0
+	AttachPos= -0.316, -0.27, 3.819
+	Convex = "WingR_Mid_0"
+	BombHolderMass = 3.0
+	BombHolderCxaS = 0.007
+	AttachedBombCxaS = 0.003
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	ThrowSoundType = 5
+[end]
+[BombHolder=18]
+	AttachIdx = 38
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 1.038, 0.0, 0.0
+	Rotation = 0
+	AttachPos= -0.281, -0.289, -3.529
+	Convex = "WingL_Mid_0"
+	BombHolderMass = 3.0
+	BombHolderCxaS = 0.007
+	AttachedBombCxaS = 0.003
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	ThrowSoundType = 4
+[end]
+[BombHolder=19]
+	AttachIdx = 39
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 1.038, 0.0, 0.0
+	Rotation = 0
+	AttachPos= -0.281, -0.289, 3.529
+	Convex = "WingR_Mid_0"
+	BombHolderMass = 3.0
+	BombHolderCxaS = 0.007
+	AttachedBombCxaS = 0.003
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	ThrowSoundType = 5
+[end]
+[BombHolder=20]
+	AttachIdx = 40
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 1.038, 0.0, 0.0
+	Rotation = 0
+	AttachPos= -0.252, -0.315, -3.227
+	Convex = "WingL_Mid_0"
+	BombHolderMass = 3.0
+	BombHolderCxaS = 0.007
+	AttachedBombCxaS = 0.003
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	ThrowSoundType = 4
+[end]
+[BombHolder=21]
+	AttachIdx = 41
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROS82.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 1.038, 0.0, 0.0
+	Rotation = 0
+	AttachPos= -0.252, -0.315, 3.227
+	Convex = "WingR_Mid_0"
+	BombHolderMass = 3.0
+	BombHolderCxaS = 0.007
+	AttachedBombCxaS = 0.003
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	ThrowSoundType = 5
+[end]
+
+// Описания 8 БРС-82
+
+[BombHolder=22]
+	AttachIdx = 42
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 1.033, 0.0, 0.0
+	Rotation = 0
+	AttachPos= 0.169, -0.227, -4.127
+	Convex = "WingL_Mid_0"
+	BombHolderMass = 3.0
+	BombHolderCxaS = 0.007
+	AttachedBombCxaS = 0.003
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	ThrowSoundType = 4
+[end]
+[BombHolder=23]
+	AttachIdx = 43
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 1.033, 0.0, 0.0
+	Rotation = 0
+	AttachPos= 0.169, -0.227, 4.127
+	Convex = "WingR_Mid_0"
+	BombHolderMass = 3.0
+	BombHolderCxaS = 0.007
+	AttachedBombCxaS = 0.003
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	ThrowSoundType = 5
+[end]
+[BombHolder=24]
+	AttachIdx = 44
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 1.033, 0.0, 0.0
+	Rotation = 0
+	AttachPos= 0.201, -0.252, -3.819
+	Convex = "WingL_Mid_0"
+	BombHolderMass = 3.0
+	BombHolderCxaS = 0.007
+	AttachedBombCxaS = 0.003
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	ThrowSoundType = 4
+[end]
+[BombHolder=25]
+	AttachIdx = 45
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 1.033, 0.0, 0.0
+	Rotation = 0
+	AttachPos= 0.201, -0.252, 3.819
+	Convex = "WingR_Mid_0"
+	BombHolderMass = 3.0
+	BombHolderCxaS = 0.007
+	AttachedBombCxaS = 0.003
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	ThrowSoundType = 5
+[end]
+[BombHolder=26]
+	AttachIdx = 46
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 1.033, 0.0, 0.0
+	Rotation = 0
+	AttachPos= 0.236, -0.271, -3.529
+	Convex = "WingL_Mid_0"
+	BombHolderMass = 3.0
+	BombHolderCxaS = 0.007
+	AttachedBombCxaS = 0.003
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	ThrowSoundType = 4
+[end]
+[BombHolder=27]
+	AttachIdx = 47
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 1.033, 0.0, 0.0
+	Rotation = 0
+	AttachPos= 0.236, -0.271, 3.529
+	Convex = "WingR_Mid_0"
+	BombHolderMass = 3.0
+	BombHolderCxaS = 0.007
+	AttachedBombCxaS = 0.003
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	ThrowSoundType = 5
+[end]
+[BombHolder=28]
+	AttachIdx = 48
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 1.033, 0.0, 0.0
+	Rotation = 0
+	AttachPos= 0.265, -0.296, -3.227
+	Convex = "WingL_Mid_0"
+	BombHolderMass = 3.0
+	BombHolderCxaS = 0.007
+	AttachedBombCxaS = 0.003
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	ThrowSoundType = 4
+[end]
+[BombHolder=29]
+	AttachIdx = 49
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_RBS82.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 1.033, 0.0, 0.0
+	Rotation = 0
+	AttachPos= 0.265, -0.296, 3.227
+	Convex = "WingR_Mid_0"
+	BombHolderMass = 3.0
+	BombHolderCxaS = 0.007
+	AttachedBombCxaS = 0.003
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	ThrowSoundType = 5
+[end]
+
+// Описания 8 РОФС-132
+
+[BombHolder=30]
+	AttachIdx = 50
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 1.011, 0.0, 0.0
+	Rotation = 0
+	AttachPos= 0.112, -0.254, -4.126
+	Convex = "WingL_Mid_0"
+	BombHolderMass = 5.0
+	BombHolderCxaS = 0.009
+	AttachedBombCxaS = 0.007
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	ThrowSoundType = 4
+[end]
+[BombHolder=31]
+	AttachIdx = 51
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 1.011, 0.0, 0.0
+	Rotation = 0
+	AttachPos= 0.112, -0.254, 4.126
+	Convex = "WingR_Mid_0"
+	BombHolderMass = 5.0
+	BombHolderCxaS = 0.009
+	AttachedBombCxaS = 0.007
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	ThrowSoundType = 5
+[end]
+[BombHolder=32]
+	AttachIdx = 52
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 1.011, 0.0, 0.0
+	Rotation = 0
+	AttachPos= 0.142, -0.278, -3.818
+	Convex = "WingL_Mid_0"
+	BombHolderMass = 5.0
+	BombHolderCxaS = 0.009
+	AttachedBombCxaS = 0.007
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	ThrowSoundType = 4
+[end]
+[BombHolder=33]
+	AttachIdx = 53
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 1.011, 0.0, 0.0
+	Rotation = 0
+	AttachPos= 0.142, -0.278, 3.818
+	Convex = "WingR_Mid_0"
+	BombHolderMass = 5.0
+	BombHolderCxaS = 0.009
+	AttachedBombCxaS = 0.007
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	ThrowSoundType = 5
+[end]
+[BombHolder=34]
+	AttachIdx = 54
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 1.011, 0.0, 0.0
+	Rotation = 0
+	AttachPos= 0.174, -0.299, -3.529
+	Convex = "WingL_Mid_0"
+	BombHolderMass = 5.0
+	BombHolderCxaS = 0.009
+	AttachedBombCxaS = 0.007
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	ThrowSoundType = 4
+[end]
+[BombHolder=35]
+	AttachIdx = 55
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 1.011, 0.0, 0.0
+	Rotation = 0
+	AttachPos= 0.174, -0.299, 3.529
+	Convex = "WingR_Mid_0"
+	BombHolderMass = 5.0
+	BombHolderCxaS = 0.009
+	AttachedBombCxaS = 0.007
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	ThrowSoundType = 5
+[end]
+[BombHolder=36]
+	AttachIdx = 56
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 1.011, 0.0, 0.0
+	Rotation = 0
+	AttachPos= 0.201, -0.325, -3.227
+	Convex = "WingL_Mid_0"
+	BombHolderMass = 5.0
+	BombHolderCxaS = 0.009
+	AttachedBombCxaS = 0.007
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	ThrowSoundType = 4
+[end]
+[BombHolder=37]
+	AttachIdx = 57
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_RUS_ROFS132.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 1.011, 0.0, 0.0
+	Rotation = 0
+	AttachPos= 0.201, -0.325, 3.227
+	Convex = "WingR_Mid_0"
+	BombHolderMass = 5.0
+	BombHolderCxaS = 0.009
+	AttachedBombCxaS = 0.007
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	ThrowSoundType = 5
+[end]
+
+// Дымогенераторы белые
+[BombHolder=38]
+	AttachIdx = 58
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 0.0, -0.02, 0.0
+	Rotation = 0
+	AttachPos = -6.378, -0.014, 0.201
+	Convex = "Fuse_Ctl_7"
+	BombHolderMass = 0.0
+	BombHolderCxaS = 0.0
+	AttachedBombCxaS = 0.009
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	IsSmokeGenerator = 1 // 1 белый, 2 синий, 3 красный
+	smokePositionShiftX = 0.0
+	smokePositionShiftY = 0.0
+[end]
+[BombHolder=39]
+	AttachIdx = 59
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 0.0, -0.02, 0.0
+	Rotation = 0
+	AttachPos = -0.402, 0.145, -7.073
+	Convex = "WingL_Out_0"
+	BombHolderMass = 0.0
+	BombHolderCxaS = 0.0
+	AttachedBombCxaS = 0.009
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	IsSmokeGenerator = 1 // 1 белый, 2 синий, 3 красный
+	smokePositionShiftX = 0.0
+	smokePositionShiftY = 0.0
+[end]
+[BombHolder=40]
+	AttachIdx = 60
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 0.0, -0.02, 0.0
+	Rotation = 0
+	AttachPos = -0.402, 0.145, 7.073
+	Convex = "WingR_Out_0"
+	BombHolderMass = 0.0
+	BombHolderCxaS = 0.0
+	AttachedBombCxaS = 0.009
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	IsSmokeGenerator = 1 // 1 белый, 2 синий, 3 красный
+	smokePositionShiftX = 0.0
+	smokePositionShiftY = 0.0
+[end]
+
+// Дымогенераторы синие
+[BombHolder=41]
+	AttachIdx = 58
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 0.0, -0.02, 0.0
+	Rotation = 0
+	AttachPos = -6.378, -0.014, 0.201
+	Convex = "Fuse_Ctl_7"
+	BombHolderMass = 0.0
+	BombHolderCxaS = 0.0
+	AttachedBombCxaS = 0.009
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	IsSmokeGenerator = 2 // 1 белый, 2 синий, 3 красный
+	smokePositionShiftX = 0.0
+	smokePositionShiftY = 0.0
+[end]
+[BombHolder=42]
+	AttachIdx = 59
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 0.0, -0.02, 0.0
+	Rotation = 0
+	AttachPos = -0.402, 0.145, -7.073
+	Convex = "WingL_Out_0"
+	BombHolderMass = 0.0
+	BombHolderCxaS = 0.0
+	AttachedBombCxaS = 0.009
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	IsSmokeGenerator = 2 // 1 белый, 2 синий, 3 красный
+	smokePositionShiftX = 0.0
+	smokePositionShiftY = 0.0
+[end]
+[BombHolder=43]
+	AttachIdx = 60
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 0.0, -0.02, 0.0
+	Rotation = 0
+	AttachPos = -0.402, 0.145, 7.073
+	Convex = "WingR_Out_0"
+	BombHolderMass = 0.0
+	BombHolderCxaS = 0.0
+	AttachedBombCxaS = 0.009
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	IsSmokeGenerator = 2 // 1 белый, 2 синий, 3 красный
+	smokePositionShiftX = 0.0
+	smokePositionShiftY = 0.0
+[end]
+
+// Дымогенераторы красные
+[BombHolder=44]
+	AttachIdx = 58
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 0.0, -0.02, 0.0
+	Rotation = 0
+	AttachPos = -6.378, -0.014, 0.201
+	Convex = "Fuse_Ctl_7"
+	BombHolderMass = 0.0
+	BombHolderCxaS = 0.0
+	AttachedBombCxaS = 0.009
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	IsSmokeGenerator = 3 // 1 белый, 2 синий, 3 красный
+	smokePositionShiftX = 0.0
+	smokePositionShiftY = 0.0
+[end]
+[BombHolder=45]
+	AttachIdx = 59
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 0.0, -0.02, 0.0
+	Rotation = 0
+	AttachPos = -0.402, 0.145, -7.073
+	Convex = "WingL_Out_0"
+	BombHolderMass = 0.0
+	BombHolderCxaS = 0.0
+	AttachedBombCxaS = 0.009
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	IsSmokeGenerator = 3 // 1 белый, 2 синий, 3 красный
+	smokePositionShiftX = 0.0
+	smokePositionShiftY = 0.0
+[end]
+[BombHolder=46]
+	AttachIdx = 60
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 0.0, -0.02, 0.0
+	Rotation = 0
+	AttachPos = -0.402, 0.145, 7.073
+	Convex = "WingR_Out_0"
+	BombHolderMass = 0.0
+	BombHolderCxaS = 0.0
+	AttachedBombCxaS = 0.009
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	IsSmokeGenerator = 3 // 1 белый, 2 синий, 3 красный
+	smokePositionShiftX = 0.0
+	smokePositionShiftY = 0.0
+[end]
+
+// Дымогенераторы зеленые
+[BombHolder=47]
+	AttachIdx = 58
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 0.0, -0.02, 0.0
+	Rotation = 0
+	AttachPos = -6.378, -0.014, 0.201
+	Convex = "Fuse_Ctl_7"
+	BombHolderMass = 0.0
+	BombHolderCxaS = 0.0
+	AttachedBombCxaS = 0.009
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	IsSmokeGenerator = 4 // 1 белый, 2 синий, 3 красный
+	smokePositionShiftX = 0.0
+	smokePositionShiftY = 0.0
+[end]
+[BombHolder=48]
+	AttachIdx = 59
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 0.0, -0.02, 0.0
+	Rotation = 0
+	AttachPos = -0.402, 0.145, -7.073
+	Convex = "WingL_Out_0"
+	BombHolderMass = 0.0
+	BombHolderCxaS = 0.0
+	AttachedBombCxaS = 0.009
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	IsSmokeGenerator = 4 // 1 белый, 2 синий, 3 красный
+	smokePositionShiftX = 0.0
+	smokePositionShiftY = 0.0
+[end]
+[BombHolder=49]
+	AttachIdx = 60
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 0.0, -0.02, 0.0
+	Rotation = 0
+	AttachPos = -0.402, 0.145, 7.073
+	Convex = "WingR_Out_0"
+	BombHolderMass = 0.0
+	BombHolderCxaS = 0.0
+	AttachedBombCxaS = 0.009
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	IsSmokeGenerator = 4 // 1 белый, 2 синий, 3 красный
+	smokePositionShiftX = 0.0
+	smokePositionShiftY = 0.0
+[end]
+
+// Дымогенераторы желтые
+[BombHolder=50]
+	AttachIdx = 58
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 0.0, -0.02, 0.0
+	Rotation = 0
+	AttachPos = -6.378, -0.014, 0.201
+	Convex = "Fuse_Ctl_7"
+	BombHolderMass = 0.0
+	BombHolderCxaS = 0.0
+	AttachedBombCxaS = 0.009
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	IsSmokeGenerator = 5 // 1 белый, 2 синий, 3 красный
+	smokePositionShiftX = 0.0
+	smokePositionShiftY = 0.0
+[end]
+[BombHolder=51]
+	AttachIdx = 59
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 0.0, -0.02, 0.0
+	Rotation = 0
+	AttachPos = -0.402, 0.145, -7.073
+	Convex = "WingL_Out_0"
+	BombHolderMass = 0.0
+	BombHolderCxaS = 0.0
+	AttachedBombCxaS = 0.009
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	IsSmokeGenerator = 5 // 1 белый, 2 синий, 3 красный
+	smokePositionShiftX = 0.0
+	smokePositionShiftY = 0.0
+[end]
+[BombHolder=52]
+	AttachIdx = 60
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 0.0, -0.02, 0.0
+	Rotation = 0
+	AttachPos = -0.402, 0.145, 7.073
+	Convex = "WingR_Out_0"
+	BombHolderMass = 0.0
+	BombHolderCxaS = 0.0
+	AttachedBombCxaS = 0.009
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	IsSmokeGenerator = 5 // 1 белый, 2 синий, 3 красный
+	smokePositionShiftX = 0.0
+	smokePositionShiftY = 0.0
+[end]
+
+// Дымогенераторы черные
+[BombHolder=53]
+	AttachIdx = 58
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 0.0, -0.02, 0.0
+	Rotation = 0
+	AttachPos = -6.378, -0.014, 0.201
+	Convex = "Fuse_Ctl_7"
+	BombHolderMass = 0.0
+	BombHolderCxaS = 0.0
+	AttachedBombCxaS = 0.009
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	IsSmokeGenerator = 6 // 1 белый, 2 синий, 3 красный
+	smokePositionShiftX = 0.0
+	smokePositionShiftY = 0.0
+[end]
+[BombHolder=54]
+	AttachIdx = 59
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 0.0, -0.02, 0.0
+	Rotation = 0
+	AttachPos = -0.402, 0.145, -7.073
+	Convex = "WingL_Out_0"
+	BombHolderMass = 0.0
+	BombHolderCxaS = 0.0
+	AttachedBombCxaS = 0.009
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	IsSmokeGenerator = 6 // 1 белый, 2 синий, 3 красный
+	smokePositionShiftX = 0.0
+	smokePositionShiftY = 0.0
+[end]
+[BombHolder=55]
+	AttachIdx = 60
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 0.0, -0.02, 0.0
+	Rotation = 0
+	AttachPos = -0.402, 0.145, 7.073
+	Convex = "WingR_Out_0"
+	BombHolderMass = 0.0
+	BombHolderCxaS = 0.0
+	AttachedBombCxaS = 0.009
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	IsSmokeGenerator = 6 // 1 белый, 2 синий, 3 красный
+	smokePositionShiftX = 0.0
+	smokePositionShiftY = 0.0
+[end]
+
+TrashWood="LuaScripts/WorldObjects/Trash/Trash.txt"
+TrashArmor="LuaScripts/WorldObjects/Trash/Trash.txt"
+logtreshold=0.0001
+
+rec_cockpit_arg=1
+
+SmoothControlFactor=0
+
+//Значение, обозначающее минимальный радиус сферы, в которую может быть вписана модель объекта, относительно центра модели
+ObjectRadius=8.1
+
+[Entrance]
+	EntrancePos= -0.75, 0.33, 0
+	EntranceRot= 0,0,0
+	JumpDir=0,1,-4
+[end]
+[Entrance]
+	EntrancePos= -0.75, 0.33, 0
+	EntranceRot= 0,0,0
+	JumpDir=2,6,0
+	SelectorDir=0,2,0	// Альтернативный метод покидания при отрицательной перегрузке более 2м/с
+[end]
+
+// ограничения сектора обзора
+SectorLimits  = -180.0, -175.0, +55.0, +90.0
+SectorLimits  = -175.0, -170.0, -10.0, +90.0
+SectorLimits  = -170.0, -160.0, -20.0, +90.0
+SectorLimits  = -160.0, -105.0, -23.0, +90.0
+SectorLimits  = -105.0,  -95.0, -10.0, +90.0
+SectorLimits  =  -95.0,  -77.0,  -7.0, +90.0
+SectorLimits  =  -77.0,  -55.0, -17.0, +90.0
+SectorLimits  =  -55.0,  -16.0, -27.0, +90.0
+SectorLimits  =  -16.0,   -6.0, -20.0, +90.0
+SectorLimits  =   -6.0,   +6.0,  -8.0, +90.0
+SectorLimits =   +6.0,  +16.0, -20.0, +90.0
+SectorLimits =  +16.0,  +55.0, -27.0, +90.0
+SectorLimits =  +55.0,  +77.0, -17.0, +90.0
+SectorLimits =  +77.0,  +95.0,  -7.0, +90.0
+SectorLimits =  +95.0, +105.0, -10.0, +90.0
+SectorLimits = +105.0, +160.0, -23.0, +90.0
+SectorLimits = +160.0, +170.0, -20.0, +90.0
+SectorLimits = +170.0, +175.0, -10.0, +90.0
+SectorLimits = +175.0, +180.0, +55.0, +90.0
+
+//AIRPLANE DAMAGE
+
+[PlanePartProtection]
+	PartName = "~eng01"
+	DirectHitArmor = 1.0
+	SphereHitProtection = 6.5
+
+	[SphereHitProtectionBox]	// +1mm for all sides since the engine-box is metallic
+		AngleBackFrontAxis = 65.0
+
+		BackArmor = 6.5
+		FrontArmor = 9.25
+		BottomArmor = 6.5
+		TopArmor = 6.5
+		LeftArmor = 6.5
+		RightArmor = 6.5
+	[end]
+[end]
+
+[PlanePartProtection]
+	PartName = "~ftank01"
+	SphereHitProtection = 5.5
+[end]
+
+[PlanePartProtection]
+	PartName = "~ftank02"
+	SphereHitProtection = 6.9
+    
+  	[SphereHitProtectionBox]
+		AngleBackFrontAxis = 45.0
+		AngleBottomTopAxis = 45.0
+		AngleSideAxis = 45.0
+
+		BackArmor = 16.5
+		FrontArmor = 6.9
+		BottomArmor = 6.9
+		TopArmor = 6.9
+		LeftArmor = 6.9
+		RightArmor = 6.9
+	[end]   
+[end]
+
+[PlanePartProtection]
+	PartName = "~ftank03"
+	SphereHitProtection = 6.9
+
+	[SphereHitProtectionBox]
+		AngleBackFrontAxis = 65.0
+		AngleBottomTopAxis = 65.0
+		AngleSideAxis = 45.0
+
+		BackArmor = 16.5
+		FrontArmor = 8.25
+		BottomArmor = 6.9
+		TopArmor = 8.25
+		LeftArmor = 8.25
+		RightArmor = 8.25
+	[end]
+[end]
+
+[PlanePartProtection]
+	PartName = "~otank01"
+	SphereHitProtection = 5.5
+[end]
+
+[PlanePartProtection]
+	PartName = "~wcooler01"
+	SphereHitProtection = 6.9
+[end]
+
+[PlanePartProtection]
+	PartName = "~ocooler01"
+	SphereHitProtection = 8.25
+
+	[SphereHitProtectionBox]
+		AngleBackFrontAxis = 65.0
+		AngleBottomTopAxis = 65.0
+		AngleSideAxis = 45.0
+
+		BackArmor = 6.9
+		FrontArmor = 8.25
+		BottomArmor = 8.25
+		TopArmor = 8.25
+		LeftArmor = 8.25
+		RightArmor = 8.25
+	[end]
+[end]
+
+[PlanePartProtection]
+	PartName = "Instr_L"
+	SphereHitProtection = 11.0
+	
+	[SphereHitProtectionBox]
+		AngleBackFrontAxis = 65.0
+		AngleBottomTopAxis = 65.0
+		AngleSideAxis = 45.0
+
+		BackArmor = 18.0
+		FrontArmor = 8.0
+		BottomArmor = 6.9
+		TopArmor = 6.9
+		LeftArmor = 11.0
+		RightArmor = 11.0
+	[end]
+[end]
+
+[PlanePartProtection]
+	PartName = "Instr_C"
+	SphereHitProtection = 11.0
+	
+	[SphereHitProtectionBox]
+		AngleBackFrontAxis = 65.0
+		AngleBottomTopAxis = 65.0
+		AngleSideAxis = 45.0
+
+		BackArmor = 18.0
+		FrontArmor = 8.0
+		BottomArmor = 6.9
+		TopArmor = 6.9
+		LeftArmor = 11.0
+		RightArmor = 11.0
+	[end]
+[end]
+
+[PlanePartProtection]
+	PartName = "Instr_R"
+	SphereHitProtection = 11.0
+	
+	[SphereHitProtectionBox]
+		AngleBackFrontAxis = 65.0
+		AngleBottomTopAxis = 65.0
+		AngleSideAxis = 45.0
+
+		BackArmor = 18.0
+		FrontArmor = 8.0
+		BottomArmor = 6.9
+		TopArmor = 6.9
+		LeftArmor = 11.0
+		RightArmor = 11.0
+	[end]
+[end]
+
+SphereHitProtection=5	//Броневая защита стрелка/пилота от осколков при закрытой кабине
+
+[SphereProtectionBoxOpen]	// Если данный блок есть, то броня пилота от осколков задана по сторонам, если блока нет, то используется общий параметр SphereHitProtection=
+	FovH=120				// Полный угол горизонтального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+	FovV=60					// Полный угол вертикального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+							// Остальные 5 раструбов определяются автоматически по центральной симметрии относительно переднего
+	ArmorFront=8
+	ArmorBack=30
+	ArmorTop=0
+	ArmorBottom=8
+	ArmorRight=0
+	ArmorLeft=0
+[end]
+
+[SphereProtectionBoxClose]	// Если данный блок есть, то броня пилота от осколков задана по сторонам, если блока нет, то используется общий параметр SphereHitProtection=
+	FovH=120				// Полный угол горизонтального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+	FovV=60					// Полный угол вертикального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+							// Остальные 5 раструбов определяются автоматически по центральной симметрии относительно переднего
+	ArmorFront=8
+	ArmorBack=30
+	ArmorTop=8
+	ArmorBottom=8
+	ArmorRight=8
+	ArmorLeft=8
+[end]
+
+energyloss="",true,0.7,1000 // Потеря энергии пули при попадании, true - проверка на входе и выходе в колижн-бокс, первое эквивалентная броня на входе и выходе, второе джоулей на каждый метр пути внутри колижена
+
+//Engine Goup
+
+energyloss="~eng01",true,5.0,20000  //двигатель 
+
+energyloss="eng01_scr0",true,2.5,1000 //лопасть 0
+energyloss="eng01_scr1",true,2.5,1000 //лопасть 1
+energyloss="eng01_scr2",true,2.5,1000 //лопасть 2
+
+
+energyloss="~ftank01",true,0.7,10000 //передний бак
+energyloss="~ftank02",true,0.7,10000 //нижний бак
+energyloss="~ftank03",true,0.7,10000 //задний бак 
+
+energyloss="~otank01",true,0.7,20000 //масолобак
+
+energyloss="~wcooler01",true,0.7,10000 //вод., радиатор
+energyloss="~ocooler01",true,0.7,10000 //масл., радиатор
+
+//Armor
+
+energyloss="Blister0",false,8.0,1 //бронекозырек 64мм - аналог 8 мм
+energyloss="Blister-armor",false,8.25,1 //броня сдвижной части фонаря - 6мм, учтена повышенная прочность брони АБ-1
+
+energyloss="EngCowl_Ctl_0",false,5.5,1 //бронекапот низ - 4мм, учтена повышенная прочность брони АБ-1
+energyloss="EngCowl_Ctl_1",false,5.5,1 //бронекапот левый - 4мм, учтена повышенная прочность брони АБ-1
+energyloss="EngCowl_Ctl_2",false,5.5,1 //бронекапот верх - 4мм, учтена повышенная прочность брони АБ-1
+energyloss="EngCowl_Ctl_3",false,5.5,1 //бронекапот правый - 4мм, учтена повышенная прочность брони АБ-1
+energyloss="EngCowl_Ctl_4",false,8.25,1 //бронеперегородка за коком - 6мм, учтена повышенная прочность брони АБ-1
+
+energyloss="armor-box",true,8.25,1 //бронекорпус - 6мм (т.к. это не плита, а объем корпуса с броней, то броня полная), учтена повышенная прочность брони АБ-1
+
+energyloss="armor-wall1",false,16.5,1 //бронеплита за пилотом - 12мм, учтена повышенная прочность брони АБ-1
+energyloss="armor-wall2",false,14.5,1 //бронеплита за баком - 12мм (стоит остаток для пробития 12мм после списывания 6мм бронекорпусом, плюс учет нелинейности), учтена повышенная прочность брони АБ-1
+energyloss="armor_oil_r",false,8.25,1 //бронекорпус маслорадиатора правая стенка - 6мм, учтена повышенная прочность брони АБ-1
+energyloss="armor_oil_b",false,8.25,1 //бронекорпус маслорадиатора нижняя стенка - 6мм, учтена повышенная прочность брони АБ-1
+energyloss="armor_oil_l",false,8.25,1 //бронекорпус маслорадиатора левая стенка - 6мм, учтена повышенная прочность брони АБ-1
+
+energyloss="armor_oil_front",false,6.9,1 //передняя створка маслорадиатора - 5мм, учтена повышенная прочность брони АБ-1
+energyloss="armor_oil_rear",false,6.9,1 //задняя створка маслорадиатора - 5мм, учтена повышенная прочность брони АБ-1
+energyloss="armor_water_rear",false,6.9,1 //створка водорадиатора - 5мм, учтена повышенная прочность брони АБ-1
+
+//Undercarriage Group
+
+energyloss="Wheel_Lft_0",true,4.0,1 //левое колесо
+energyloss="StruGear_Lft_0",true,4.0,1 //левая стойка
+energyloss="StruGear_Lft_1",true,4.0,1 //левая стойка
+
+energyloss="Wheel_Rgt_0",true,4.0,1 //колесо правое
+energyloss="StruGear_Rgt_0",true,4.0,1 //правая стойка
+energyloss="StruGear_Rgt_1",true,4.0,1 //правая стойка
+
+energyloss="Wheel_Ctl_0",true,4.0,1 //колесо хвостовое
+energyloss="StruGear_Ctl_0",true,4.0,1 //стойка хвостового колеса 
+
+//Armament Group
+
+energyloss="~gun01_ammo",true,0.7,20000 //Боекомплект ШКАС
+energyloss="~gun02_ammo",true,0.7,20000 //Боекомплект ШВАК
+energyloss="~gun03_ammo",true,0.7,20000 //Боекомплект ШВАК
+energyloss="~gun04_ammo",true,0.7,20000 //Боекомплект ШКАС
+
+energyloss="~gun05_ammo",true,0.7,20000 //Боекомплект ВЯ
+energyloss="~gun06_ammo",true,0.7,20000 //Боекомплект ШКАС
+energyloss="~gun07_ammo",true,0.7,20000 //Боекомплект ШКАС
+energyloss="~gun08_ammo",true,0.7,20000 //Боекомплект ВЯ
+energyloss="~gun01",true,4.0,1 //орудие
+energyloss="~gun02",true,4.0,1 //орудие
+energyloss="~gun03",true,4.0,1 //орудие
+energyloss="~gun04",true,4.0,1 //орудие
+energyloss="~gun05",true,4.0,1 //орудие
+energyloss="~gun06",true,4.0,1 //орудие
+energyloss="~gun07",true,4.0,1 //орудие
+energyloss="~gun08",true,4.0,1 //орудие
+
+
+SeekMaintenance = true
+ReFuelFlow = 6 // liters per second
+BombHolderReArmTime = 30 // seconds
+RepairTime = 300 // seconds
+
+
+///// Подсказки в техночате
+
+min_CAS=156
+max_CAS=570
+
+DangerAoA = 17.0                            // Максимально-допустимый безопасный угол атаки
+CriticalAoA = 19.5							// Критический угол атаки
+Maxny = 9.5									// Предельно-допустимая перегрузка
+DangerV = 510.0								// Максимальная безопасная приборная скорость
+MaxGearV = 320.0							// Максимально-допустимая приборная скорость с выпущенными шасси
+MaxFlapV = 250.0							// Максимально-допустимая приборная скорость с выпущенными закрылками
+TakeOffV = 185.0							// Рекомендованная взлётная скорость
+ClimbV = 260.0								// Рекомендованная приборная скорость набора высоты
+DescendV = 190.0							// Рекомендованная скорость на глиссаде
+minV = 160.0								// Минимально-безопасная приборная скорость
+minVDeltaFlaps = 20.0						// Уменьшение безопасной приборной скорости, обусловленное выпуском закрылок
+IsTakeOffFlaps = false						// Флаг наличия взлётного положения механизации
+IsLeftPedal = true							// Необходимая на разбеге педаль (true - левая, false - правая)
+OilMaxTemperature = 115.0					// Максимально-допустимая по РЛЭ температура масла
+WaterMaxTemperature = 110.0					// Максимально-допустимая по РЛЭ температура воды
+//CylinderHeadMaxTemperature = 230.0		// Максимально-допустимая по РЛЭ температура головок цилиндров

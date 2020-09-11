@@ -1,0 +1,17 @@
+Class_name = "CBatchTrashAnimated"
+object_name = "Explosion"
+
+//////	PhysicsBody properties
+VisualImage=0,"graphics\effects\Surf\vehiclenofire.epl",false
+VisualRadius=12
+ImageAttr=17		//IA_NOCLIP | IA_NOMINPIXELS
+
+SoundScript="LuaScripts\Sound\explosions\Bomb\Ground_Med.cfg"
+ExplosionPower=0.4
+Animation=60101
+LiveTime=3.12
+AnimationTime=3.12
+Ranges=1, 0.01, 1.0, 0.0
+Drag = 0.2
+
+//NoExplosionDamageOccured

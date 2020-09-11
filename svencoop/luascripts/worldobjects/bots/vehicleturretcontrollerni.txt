@@ -1,0 +1,8 @@
+Class_name = "CVehicleTurretInputController"
+object_name = "VehicleTurretInputController0"
+
+//////	Controller specific
+Artificial=false;
+
+ControlledType="GOT_VEHICLE_TURRET";
+

@@ -1,0 +1,51 @@
+
+Name = "75mm M3"
+
+Gage = 75 // [мм]
+
+Mass = 50 // [кг]
+MassPosition_inGunAxis = -1.580, 0.0, 0.0
+MOI_inGunAxis = 0.04, 6.0, 6.0, 0.075, 0.05, 0.0 // [кг*кв.м]
+
+SnappingTime = 0.02
+
+AutoCockingTime = 7.55
+
+ShotAnimationPeriod = 0.5
+
+LoadersRequired = true
+CockingPauseIfNoLoader = 30.0
+CockingArgPausePhase = 0.120
+
+ShotRate = 1 // Стрельба одиночными снарядами, т.е. оружие не автоматическое
+
+FireUnLockedSafetyLockPosition = 0.0
+FireLockedSafetyLockPosition = 1.0
+
+FireLockedMaxTriggerPosition = 0.0
+FireTriggerPosition = 0.5
+
+FiringPinPositionKeysDuringRevolverCocking = 0.1, 0.4
+AmmunitionMovingKeysDuringRevolverCocking = 0.1, 0.4
+
+AmmunitionMovingKeysDuringAutoCocking = 0.1, 0.9
+MainCockingSoundAtAutoCocking = true
+
+MainManuallyCockingTime = 0.05
+ReserveManuallyCockingTime = 0.05
+AmmunitionMovingIfCocked = true
+
+BarrelTemperatureIncreasePerShot = 4.0
+BarrelTemperatureDecreaseCoefficient = 0.045
+
+BulletDispertionAngleData = 0.0, 0.0, 700.0, 3.5
+BulletSpeedReducingData = 0.01, 700.0, 1.0, 0.01, 3.5
+BulletMisfireData= 0.0, 0.0, 700.0, 6.0
+
+[DrawAnimation=0]	//цикл отката и заряжания
+	SmoothAsPeriodic = true
+	[GunMode=AutoCocking]
+		Point = 0.0, 0.0
+		Point = 1.0, 1.0
+	[end]
+[end]

@@ -1,0 +1,4 @@
+class_name = "CGameMission"
+object_name = "Game Mission"
+
+sound_script = "LuaScripts/Sound/Ambients.cfg"

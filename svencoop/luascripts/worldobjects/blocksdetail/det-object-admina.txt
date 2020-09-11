@@ -1,0 +1,169 @@
+Class_name = "CStaticBlock"
+object_name = "det-object-Admina"
+detail_type = "DET_BUILDING" //list of types is in \inc\SimulationSystem\DetailTypes.inc
+
+CollisionBody="graphics/BlocksDetail/det-object-Admina.col"
+SoundScript=""
+
+// "Эффекты закрытия пылью и пожара. Выберется тот вариант, для которого: колижн бокс, в котороый зафиксировано попадание, должен быть больше указаного числа, но меньше чем в следующем варианте эффекта.
+StaticEmitter=1,"luascripts\worldobjects\emitters\DetBuildingDemolition05.txt"
+StaticEmitter=5,"luascripts\worldobjects\emitters\DetBuildingDemolition10.txt"
+StaticEmitter=10,"luascripts\worldobjects\emitters\DetBuildingDemolition30.txt"
+StaticEmitter=30,"luascripts\worldobjects\emitters\DetBuildingDemolition50.txt"
+
+CrashDelay=1				// Задержка на разрушение, что бы успел родиться взрыв
+
+Shield=0					// Броня
+energyloss="",true,20,300		// Потеря энергии пули при попадании, true - проверка на входе и выходе в колижн-бокс, первое эквивалентная броня на входе и выходе, второе джоулей на каждый метр пути внутри колижена
+energyloss="#",true,1,1000		// Потеря энергии пули при попадании в блок с низкой прочностью (колижн помечен символом #)
+BallisticsMaxDurability=70000	// Предел Durability, умноженный на BallisticsDurabilityK, задаваемого в миссии, выше которого не будет дамага от пуль и осколков (только фугасный)
+WeakDurability=100.0			// Durability для хрупких частей кварталла (помеченых в колижене #), остальные берут Durability из миссии. Уменьшено в BallisticsDurabilityK=40
+BallisticsDurabilityK=40		// Коэффициент корреции повреждений, получаемых от пуль (BeamHit) и осколков
+
+logtreshold=0.0001
+
+CollisionStrength=0.4,4e6	// Сопротивление взаимопроникновению при столкновении [0..1], потребный импульс для разрушения (при проникновении больше 0.5м разрушится в любом случае)
+CollisionWeakStrength=0.2,1e6	// То же, но для хрупких частей кварталла (помеченых в колижене #)
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\plankfences01_D.txt"
+   BlockRef=1,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=-95.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\plankfences01_D.txt"
+   BlockRef=2,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=-95.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\plankfences01_D.txt"
+   BlockRef=3,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=-1.73028e-005
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\plankfences01_D.txt"
+   BlockRef=4,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=2.09518
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\plankfences01_D.txt"
+   BlockRef=5,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=-0.70615
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\plankfences01_D.txt"
+   BlockRef=6,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=-1.73028e-005
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\plankfences01_D.txt"
+   BlockRef=7,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=-1.73028e-005
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\plankfences01_D.txt"
+   BlockRef=8,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=90.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\lavka01_D.txt"
+   BlockRef=9,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=-85.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\Admina01_D.txt"
+   BlockRef=16,7 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=16,7 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=16,7 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=16,7 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=15,6 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=10,1 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=11,2 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=14,5 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=14,5 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=12,3 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=13,4 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=0.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\plankfences01_D.txt"
+   BlockRef=17,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=-1.12768
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\plankfences01_D.txt"
+   BlockRef=18,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=-1.12768
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\plankfences01_D.txt"
+   BlockRef=19,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=93.8723
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\plankfences01_D.txt"
+   BlockRef=20,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=95.9675
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\plankfences01_D.txt"
+   BlockRef=21,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=-0.70615
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\plankfences01_D.txt"
+   BlockRef=22,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=-1.73028e-005
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\plankfences01_D.txt"
+   BlockRef=23,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=0.859822
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\plankfences01_D.txt"
+   BlockRef=24,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=-90.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\lavka01_D.txt"
+   BlockRef=25,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=-93.4968
+[end]
+

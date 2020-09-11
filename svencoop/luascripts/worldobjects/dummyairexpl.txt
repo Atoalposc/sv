@@ -1,0 +1,18 @@
+Class_name = "CStaticEmitter"
+object_name = "trash"
+
+//////	PhysicsBody properties
+VisualImage=0,"graphics\effects\Arm\explSkyShBlk.epl",false
+visualradius=4
+
+SoundScript="LuaScripts\Sound\explosions\HE\Ground_Med.cfg"
+SoundStrength=1.0
+
+duration=1.0
+range=0,0.25
+loop=false
+
+SoundTime=12
+destroy_pause=12
+
+network=false

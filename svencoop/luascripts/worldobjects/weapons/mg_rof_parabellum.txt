@@ -1,0 +1,73 @@
+
+Name = "Parabellum LMG 14" 
+
+Gage = 7.92 // [мм]
+
+Mass = 9.5 // [кг]
+MassPosition_inGunAxis = -0.617, 0.008, 0.000
+MOI_inGunAxis = 0.027, 1.244, 1.260, 0.081, 0.000, 0.000 // [кг*кв.м]
+
+SnappingTime = 0.015
+AutoCockingTime = 0.0707
+
+ShotAnimationPeriod = 0.0857 // SnappingTime + AutoCockingTime
+
+// Паспортная скорострельность: RapidityOfFire = 60 / (SnappingTime + AutoCockingTime) = 700 выстрелов в минуту
+
+MainManuallyCockingTime = 0.7
+//ReserveManuallyCockingTime = 0.7
+
+ShotRate = 0 // Количество выстрелов в одной очереди не ограничено
+
+FireUnLockedSafetyLockPosition = 0.0
+FireLockedSafetyLockPosition = 1.0
+
+FireLockedMaxTriggerPosition = 0.0
+FireTriggerPosition = 0.5
+
+FiringPinPositionKeysDuringMainManuallyCocking = 0.0, 1.0
+//FiringPinPositionKeysDuringReserveManuallyCocking = 0.0, 1.0
+FiringPinPositionKeysDuringAutoCocking = 0.0, 1.0
+
+AmmunitionMovingKeysDuringMainManuallyCocking = 0.75, 0.85
+//AmmunitionMovingKeysDuringReserveManuallyCocking = 0.75, 0.85
+AmmunitionMovingKeysDuringAutoCocking = 0.0, 1.0
+
+CartridgeCaseReleaseDuringMainManuallyCocking = 0.8
+//CartridgeCaseReleaseDuringReserveManuallyCocking = 0.8
+CartridgeCaseReleaseDuringAutoCocking = 0.8
+
+BarrelTemperatureIncreasePerShot = 6.092
+BarrelTemperatureDecreaseCoefficient = 0.045
+
+BulletDispertionAngleData = 0.0, 0.6, 700.0, 3.5 //разброс зафиксированной пушки при 0К нулевой, разброс перегретой 0.6°
+BulletSpeedReducingData = 0.01, 700.0, 0.25, 0.05, 3.5
+BulletMisfireData= 0.0075, 0.04, 700.0, 6.0
+
+CartridgeCasesEjectionPosition = -0.562, -0.024, 0.0
+CartridgeCasesEjectionSpeed = 0.5, -0.5, 0.0
+
+[DrawAnimation=0] // Продольное движение затвора
+
+	[GunMode=AutoCocking]
+		Point = 0.0, 0.0
+		Point = 0.8, 1.0
+		Point = 1.0, 0.0
+	[end]
+[end]
+
+[DrawAnimation=2] // Поворот ручки затвора
+
+	[GunMode=AutoCocking]
+		Point = 0.0, 0.0
+		Point = 0.8, 1.0
+		Point = 1.0, 0.0
+	[end]
+
+	[GunMode=MainManuallyCocking]
+		Point = 0.0, 0.0
+		Point = 0.5, 1.0
+		Point = 0.9, 1.0
+		Point = 1.0, 0.0
+	[end]
+[end]

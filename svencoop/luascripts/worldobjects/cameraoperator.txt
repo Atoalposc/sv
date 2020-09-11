@@ -1,0 +1,10 @@
+class_name = "CCameraOperator"
+object_name = "CameraOperator"
+
+//////	PhysicsBody properties
+
+//SoundScript="LuaScripts/Fokker_DR1.cfg"
+
+SendRate=5,50	//normal, attached state
+
+CommandMonitor="LuaScripts/WorldObjects/CameraOperatorMonitor.txt"

@@ -1,0 +1,14 @@
+Class_name = "CStaticEmitter"
+object_name = "trash"
+
+//////	PhysicsBody properties
+
+SoundScript="LuaScripts/Sound/Vehicles/Ring_Bell.cfg"
+SoundStrength=1.0
+
+duration=1.0
+range=0,1
+loop=true
+
+SoundTime=49
+destroy_pause=51

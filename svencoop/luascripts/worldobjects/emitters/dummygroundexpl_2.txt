@@ -1,0 +1,18 @@
+Class_name = "CStaticEmitter"
+object_name = "trash"
+
+//////	PhysicsBody properties
+VisualImage=0,"graphics\effects\arm\hit_shell_he_130-240kg_ground.epl",false
+visualradius=100
+
+SoundScript="LuaScripts\Sound\explosions\Bomb\Ground_Med.cfg"
+SoundStrength=0.5
+
+duration=15.2
+range=0,1.0
+loop=false
+
+SoundTime=10
+destroy_pause=0
+
+network=false

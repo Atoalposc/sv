@@ -1,0 +1,84 @@
+
+//
+// Global AI options (independent from plane type)
+//
+
+[novice]
+    ForestallingAngle           = 15.0
+    ForestallingAltitude        = 0.0
+    TargetCoordinationDistance  = 10000.0
+    WingmanCoordinationDistance = 8000.0
+    SituationTimeout            = 5.0
+    ThreatTreshold              = 0.002 // ~ 300 meters
+    CoveredThreatTreshold	= 0.0002 // ~ 3000 meters
+    DVisNight                   = 200
+    CriticalTargetCaptureTime   = 300.0
+    CriticalTargetReleaseTime   = 360.0
+    8OZ_Timer_ON_Min		= 15.36		// таймер, по истечении которого проводится проверка на режим атаки 8OZ, обязательная часть
+    8OZ_Timer_ON_Add		= 46.08		// таймер, по истечении которого проводится проверка на режим атаки 8OZ, рандомная  часть	
+    8OZ_Timer_OFF_Min		= 34.56		// таймер, пока > 0 режим атаки 8OZ не прекращается, обязательная часть
+    8OZ_Timer_OFF_Add		= 120.96	// таймер, пока > 0 режим атаки 8OZ не прекращается, рандомная часть
+    8OZ_DistanceTreshold	= 400.0		// расстояние , при проверке на режим атаки 8OZ если цель дальше 8OZ_DistanceTreshold - 8OZ включается
+	HitRateToDodge			= 2
+	PursuitReturnTime       = 0.1       // в часах
+[end]
+
+[normal]
+    ForestallingAngle           = 25.0
+    ForestallingAltitude        = 125.0
+    TargetCoordinationDistance  = 10000.0
+    WingmanCoordinationDistance = 8000.0
+    SituationTimeout            = 3.0
+    ThreatTreshold              = 0.0016 // 1/600 ~ 550 meters
+    CoveredThreatTreshold	= 0.0002 // ~ 3000 meters
+    DVisNight                   = 500
+    CriticalTargetCaptureTime   = 300.0
+    CriticalTargetReleaseTime   = 360.0
+    8OZ_Timer_ON_Min		= 19.2		// таймер, по истечении которого проводится проверка на режим атаки 8OZ, обязательная часть
+    8OZ_Timer_ON_Add		= 57.6		// таймер, по истечении которого проводится проверка на режим атаки 8OZ, рандомная  часть	
+    8OZ_Timer_OFF_Min		= 28.8		// таймер, пока > 0 режим атаки 8OZ не прекращается, обязательная часть
+    8OZ_Timer_OFF_Add		= 100.8		// таймер, пока > 0 режим атаки 8OZ не прекращается, рандомная часть
+    8OZ_DistanceTreshold	= 600.0		// расстояние , при проверке на режим атаки 8OZ если цель дальше 8OZ_DistanceTreshold - 8OZ включается
+	HitRateToDodge			= 3
+	PursuitReturnTime       = 0.1       // в часах
+[end]
+
+[high]
+    ForestallingAngle           = 30
+    ForestallingAltitude        = 250
+    TargetCoordinationDistance  = 10000
+    WingmanCoordinationDistance = 8000
+    SituationTimeout            = 2
+    ThreatTreshold              = 0.0012 // ~ 800 meters
+    CoveredThreatTreshold	= 0.0001 // ~ 6000 meters
+    DVisNight                   = 1000
+    CriticalTargetCaptureTime   = 300.0
+    CriticalTargetReleaseTime   = 360.0
+    8OZ_Timer_ON_Min		= 24.0		// таймер, по истечении которого проводится проверка на режим атаки 8OZ, обязательная часть
+    8OZ_Timer_ON_Add		= 72.0		// таймер, по истечении которого проводится проверка на режим атаки 8OZ, рандомная  часть	
+    8OZ_Timer_OFF_Min		= 24.0		// таймер, пока > 0 режим атаки 8OZ не прекращается, обязательная часть
+    8OZ_Timer_OFF_Add		= 84.0		// таймер, пока > 0 режим атаки 8OZ не прекращается, рандомная часть
+    8OZ_DistanceTreshold	= 800.0		// расстояние , при проверке на режим атаки 8OZ если цель дальше 8OZ_DistanceTreshold - 8OZ включается
+	HitRateToDodge			= 4
+	PursuitReturnTime       = 0.1       // в часах
+[end]
+
+[ace]
+    ForestallingAngle           = 45
+    ForestallingAltitude        = 500
+    TargetCoordinationDistance  = 10000
+    WingmanCoordinationDistance = 8000
+    SituationTimeout            = 1
+    ThreatTreshold              = 0.0008 // ~ 1.8 km
+    CoveredThreatTreshold	= 0.00007 // ~ 10000 meters
+    DVisNight                   = 2000
+    CriticalTargetCaptureTime   = 300.0
+    CriticalTargetReleaseTime   = 360.0
+    8OZ_Timer_ON_Min		= 30.0		// таймер, по истечении которого проводится проверка на режим атаки 8OZ, обязательная часть
+    8OZ_Timer_ON_Add		= 90.0		// таймер, по истечении которого проводится проверка на режим атаки 8OZ, рандомная  часть	
+    8OZ_Timer_OFF_Min		= 20.0		// таймер, пока > 0 режим атаки 8OZ не прекращается, обязательная часть
+    8OZ_Timer_OFF_Add		= 70.0		// таймер, пока > 0 режим атаки 8OZ не прекращается, рандомная часть
+    8OZ_DistanceTreshold	= 1000.0	// расстояние , при проверке на режим атаки 8OZ если цель дальше 8OZ_DistanceTreshold - 8OZ включается
+	HitRateToDodge			= 5
+	PursuitReturnTime       = 0.1       // в часах
+[end]

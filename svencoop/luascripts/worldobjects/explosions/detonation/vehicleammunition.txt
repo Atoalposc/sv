@@ -1,0 +1,37 @@
+Class_name = "CBatchExplosion"
+object_name = "Explosion"
+
+// ¬зрыв, 10кг “Ќ“, 10кг осколков при 800м/с нач. скорости, калибр 50мм
+
+//////	PhysicsBody properties
+VisualImage=0,"graphics\effects\Surf\vehicleammunition.epl",false
+VisualRadius=24
+ImageAttr=17		//IA_NOCLIP | IA_NOMINPIXELS
+
+SoundScript="LuaScripts\Sound\explosions\Bomb\Ground_Med.cfg"
+
+ExplosionPower=0.4
+Animation=1
+LiveTime=10.33
+AnimationTime=10.33
+Ranges=1, 0.01, 1.0, 0.0
+
+// Параметры Sphere Hit, внешний взрыв
+
+Radius=32.7	// Радиус сферы воздействия взрыва, определяющий выборку объектов
+TNT_equ=10	// Тротилловый эквивалент для моделирования атмосферной ударной волны
+
+// Фугасное воздействие: дальность, (-1 не использ.), пары (броня, дамаг за броней)
+ArmorFoug=0.0,-1,	63,31283,	0,62566
+ArmorFoug=2.0,-1,	3,1499,		0,2997
+ArmorFoug=8.0,-1,				0,188
+ArmorFoug=15.4,-1,				0,50
+
+// Осколочное воздействие
+ShrapnelQuantity=8000
+FragmentMass=0.0005
+// Единичный осколок: дальность, скорость, пары (броня, дамаг за броней)
+ArmorShr=0.0,1171,	35,34,	28,86,	0,137
+ArmorShr=3.2,1024,	22,26,	18,66,	0,105
+ArmorShr=16.3,576,	3,8,	2,21,	0,33
+ArmorShr=32.7,304,					0,9

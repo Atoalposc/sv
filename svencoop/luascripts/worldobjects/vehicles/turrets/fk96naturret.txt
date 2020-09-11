@@ -1,0 +1,70 @@
+Class_name = "CVehicleTurret"
+object_name = "HowitzerTurret"
+// Полевая пушка 7.7 cm FK 96 n.A.
+//SoundScript="LuaScripts\Sound\Vehicles\CannonAA_Shot_Large.cfg"
+
+[attach=0]
+	position= 0.0, 0.0, 0
+	object = "LuaScripts/WorldObjects/Bots/BotGunnerFieldCannon.txt"
+[end]
+
+PitchPoint = 0, 0, 0
+
+AngleYawMin      = -180.0
+AngleYawMax	     = 180.0
+AnglePitchMin    = -10.0
+AnglePitchMax    = 15.0
+AnglePitchDef    = 3.0
+YawArgNum        = 221
+PitchArgNum      = 241 
+YawArgMin        = 0.0
+YawArgMax        = 1.0
+PitchArgMin      = 0.0
+PitchArgMax      = 1.0
+
+YawAngularSpeed    = 18.0
+PitchAngularSpeed  = 18.0
+
+FireArgumentNum  = 64100
+AttackAnimationArgNum = 61
+
+FireAnimationTime    = 0.4
+AttackAnimationTime  = 0.4
+
+MuzzleDisplacement = 2.0, 0.342, 0
+
+AttackDistance   = 5500.0		//AI max aim distance versus ground point
+AttackDistanceTrgGnd = 2000.0		//AI max aim distance versus ground target
+AttackDistanceTrgAir = 1.0		//AI max aim distance versus air target
+
+[bullet=1]
+	BulletScript = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_76_HE.txt" //ОФ-350
+	TargetingScript = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_76_HE_465ms.bin"
+	ExplosionScript = "LuaScripts/WorldObjects/Explosions/Small/Ground.txt"
+	BulletsCount = 60
+	StartBulletSpeed = 465.0
+	RealPhysicBullet = true
+	PriorityArmorMin = 0.0
+	PriorityArmorMax = 10.0
+[end]
+
+[bullet=2]
+	BulletScript = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_76_CV.txt" //БР-350Б
+	TargetingScript = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_76_CV_465ms.bin"
+	ExplosionScript = ""
+	BulletsCount = 20
+	StartBulletSpeed = 465.0
+	RealPhysicBullet = true
+	PriorityArmorMin = 10.0
+	PriorityArmorMax = 1000.0
+[end]
+
+VisibleTraceNum = 1
+NumBulletsInQueue = 1
+QueueRechargeTime   = 6.0
+BulletRechargeTime  = 1.0
+
+NeedFuse = false
+
+IsSoundLooped = false
+SoundNumber = 1

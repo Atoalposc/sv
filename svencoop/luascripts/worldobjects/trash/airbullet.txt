@@ -1,0 +1,17 @@
+//************** This is for pass-by bullets sounds (invisible effects)
+
+Class_name = "CBatchTrash"
+
+
+//////	PhysicsBody properties
+ImageAttr=4	//IA_NOINTERPOLATION
+
+
+SoundScript="LuaScripts/Sound/explosions/Bullet/Pass_By.cfg"
+SoundTime=1
+SoundStrength=1
+
+radius=1.0
+
+lifetime=1
+

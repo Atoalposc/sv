@@ -1,0 +1,107 @@
+Class_name = "CBotCharacter"
+object_name = "BotPilotNPC_A20B_RAF43"
+detail_type = "DET_INFANTRY" //list of types is in \inc\SimulationSystem\DetailTypes.inc
+
+//////	PhysicsBody properties
+VisualImage=2,"graphics/characters/Pilot_Brit/Pilot_Brit_%s.mgm",true
+CollisionBody="graphics/characters/Pilot_Brit/Pilot_Brit.col"
+Animator="graphics/characters/Keyframes/A20B/Pilot2_A20B.chr","GOT_PLANE"
+Animator="graphics/Characters/Keyframes/A20B/Pilot2_A20OnField.chr","GOT_NONE"
+
+[attach=0]
+	position= 0.2, 0.72, 0
+	object = "LuaScripts/WorldObjects/Bots/BotHead.txt"
+[end]
+
+SoundScript="LuaScripts/Sound/Vehicles/BotSound.cfg"
+
+NeckAngleConstrX=-100,100;
+NeckAngleConstrY=-175.0,175.0;
+NeckAngleConstrZ=-120,120;
+
+NeckSlideConstrX=-0.40,0.40;
+NeckSlideConstrY=-0.45,0.45;
+NeckSlideConstrZ=-0.45,0.45;
+
+ScarfAxisYArg=10
+ScarfAxisZArg=11
+ScarfPhaseArg=12
+
+ProtectiveGlassesOnEyesArg=24
+OxygenMaskOnFaceArg=25
+
+energyloss="",true,0.1,10000 // Потеря энергии пули при попадании, true - проверка на входе и выходе в колижн-бокс, первое эквивалентная броня на входе и выходе, второе джоулей на каждый метр пути внутри колижена
+
+//////	Bot specific
+Controller="LuaScripts/WorldObjects/Bots/Ejector_AI.txt"
+
+// Damage model
+Armor=0 // толщина брони
+LifeRate=500 // Масштаб пулевых и фугасных повреждений
+LifeRateFrag=1500 // Масштаб осколочных повреждений
+HeadConvexPrefix="Head" // Префикс имени конвекса колижена головы
+HeadArmor=0 // толщина брони головы
+HeadLifeRate=200 // Масштаб пулевых и фугасных повреждений головы
+HeadLifeRateFrag=600 // Масштаб осколочных повреждений головы
+Firing=1 // Минимальное значение поджигания у средства поражения для зажигания объекта
+DestroyDelay=15 // задержка на удаление объекта после смерти
+MinEjectAlt=10 // ограничение на минимальную высоту выпрыгивания
+
+RepairSpeed=0.003333	// Скорость исцеления, долей жизни в секунду (полное излечение за 5 минут)
+RepairSource=1	// Тип мастерской, необходимой для исправления
+//	VMRI_REPAIR=0
+//	VMRI_REHEAL=1
+//	VMRI_REARM=2
+//	VMRI_REFUEL=3
+//	VMRI_SERVICEREPAIR=4
+
+Animator="graphics/characters/Pilot_A20B/Pilot2_A20B.chr"
+
+//логирование повреждений
+logtreshold=0.0001
+
+//// Eject properties ////
+
+EjectDelay=1.8, 0.001	//	Delay from Eject button press to detaching from plane (sec), power of bot moving function to eject pos (0.001 - instantly)
+EjectDelay=0.1, 0.001	//	Eject delay for case of negative G ejection
+ParachuteDelay=2	//	Opening parachute delay while free fall (sec)
+MaxParachuteSpeed=60	//	m/s
+
+SplashConfig="LuaScripts\WorldObjects\Emitters\WaterSpray5_1.txt"
+
+[Parachute]
+	MaxOpeningTension=40.0f	//	Slings tension while opening parachute (kg)
+
+	MinRad=0.5f
+	MaxRad=4.0f
+	MaxSlings=8.4f
+
+	//MaxRad=2.9f
+	//MaxSlings=6.0f
+
+	SlingsDuration=2.5f
+	PDuration=1
+
+	VisibleParachute="LuaScripts/WorldObjects/Bots/Parachute01Usaf.txt"
+
+	SlingsAttach=0.06f,0.62f,0.0f
+[end]
+
+ImpulseToDestroy = 500		// Определяет силу удара обеъкта об танк, нужную для его уничтожения. Подвижные объекты на 6 категорий по размерам. Автомобили, малые грузовики, большие грузовики, малые танки, средние танки, большие танки.
+ImpulseMinimumLevel = 100		// Определяет минимальную силу удара об танк, нужную для его повреждения. Для пушек снижено что бы их можно было давить.
+
+GUIHealthMessage=31		// Параметр, определяющий то, какое техночат-сообщение будет для данного бота
+//  1 - Vehicle Driver
+//  4 - Vehicle Commander
+//  7 - Vehicle Gunner
+// 10 - Vehicle Machinegunner
+// 13 - Vehicle Radioman
+// 16 - Vehicle Loader
+// 19 - Vehicle Plugman
+// 22 - Airplane Pilot
+// 25 - Airplane Commander
+// 28 - Airplane Co-Pilot
+// 31 - Airplane Navigator
+// 34 - Airplane Radioman
+// 37 - Airplane Gunner
+// 40 - Airplane Waist Gunner

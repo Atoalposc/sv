@@ -1,0 +1,70 @@
+
+Name = "DT"
+
+Gage = 7.62 // [мм]
+
+Mass = 0.001 // [кг] чтобы не плодить пушки из-за разных расстояний от среза ствола до выхода из фюзеляжа, масса и момент инерции перенесены в лафет
+MassPosition_inGunAxis = -0.605, 0.022, 0.0
+MOI_inGunAxis = 0.001, 0.001, 0.001, 0.0, 0.0, 0.0 // [кг*кв.м]
+
+SnappingTime = 0.01
+AutoCockingTime = 0.09
+
+ShotAnimationPeriod = 0.1 // SnappingTime + AutoCockingTime
+
+// паспортная скорострельность: RapidityOfFire = 60 / (SnappingTime + AutoCockingTime) = 600 выстрелов в минуту
+
+MainManuallyCockingTime = 0.7
+ReserveManuallyCockingTime = 0.7
+
+ShotRate = 0 // количество выстрелов в одной очереди не ограничено
+
+FireUnLockedSafetyLockPosition = 0.0
+FireLockedSafetyLockPosition = 1.0
+
+FireLockedMaxTriggerPosition = 0.0
+FireTriggerPosition = 0.5
+
+FiringPinPositionKeysDuringMainManuallyCocking = 0.0, 1.0
+FiringPinPositionKeysDuringReserveManuallyCocking = 0.0, 1.0
+FiringPinPositionKeysDuringAutoCocking = 0.0, 1.0
+
+AmmunitionMovingKeysDuringMainManuallyCocking = 0.0, 1.0
+AmmunitionMovingKeysDuringReserveManuallyCocking = 0.0, 1.0
+AmmunitionMovingKeysDuringAutoCocking = 0.0, 1.0
+
+AmmunitionMovingIfCocked = false
+
+CartridgeCaseReleaseDuringMainManuallyCocking = 0.5
+CartridgeCaseReleaseDuringReserveManuallyCocking = 0.5
+cartridgeCaseReleaseDuringAutoCocking = 0.5
+
+BarrelTemperatureIncreasePerShot = 6.6
+BarrelTemperatureDecreaseCoefficient = 0.045
+
+BulletDispertionAngleData = 0.0, 0.6, 700.0, 3.5 //разброс зафиксированной пушки при 0К нулевой, разброс перегретой 0.6°
+BulletSpeedReducingData = 0.01, 700.0, 0.25, 0.05, 3.5
+BulletMisfireData= 0.0, 0.02, 700.0, 6.0
+
+CartridgeCasesEjectionPosition = -0.135, -0.035, 0.0
+CartridgeCasesEjectionSpeed = 0.0, -1.0, 0.0
+
+[DrawAnimation=0] // Движение ручки взведения
+
+	[GunMode=MainManuallyCocking]
+		Point = 0.00, 0.0
+		Point = 0.70, 1.0
+		Point = 0.85, 1.0
+		Point = 0.90, 0.0
+	[end]
+[end]
+
+[DrawAnimation=1] // Движение ручки взведения
+
+	[GunMode=ReserveManuallyCocking]
+		Point = 0.00, 0.0
+		Point = 0.70, 1.0
+		Point = 0.85, 1.0
+		Point = 0.90, 0.0
+	[end]
+[end]

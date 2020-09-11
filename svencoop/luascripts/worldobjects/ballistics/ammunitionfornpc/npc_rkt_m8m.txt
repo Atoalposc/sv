@@ -1,0 +1,26 @@
+class_name = "CBatchRocketFireworks"
+
+VisualImage=0,"graphics/Ships/TorpBoatG5s11b/rocket_m8m.mgm",false
+VisualRadius=10
+
+Lifetime=5
+Mass=5.86
+Radius=0.065
+
+ImageAttr=4;
+smokeArg=50211
+
+Armor=-1,0,	0,0
+
+// true - сохранять ориентацию полученную в момент выстрела. Ракета не ориентируется по потоку
+// полезно для ракет запускаемых на ходу
+HoldOrientation=true
+
+HitDummy="LuaScripts/WorldObjects/Explosions/Bombs/HE_082mm_3kg_560g_object.txt"
+HitMisc="LuaScripts/WorldObjects/Explosions/Bombs/HE_082mm_3kg_560g_object.txt"
+HitWater="LuaScripts/WorldObjects/Explosions/Bombs/HE_082mm_3kg_560g_water.txt"
+HitGround="LuaScripts/WorldObjects/Explosions/Bombs/HE_082mm_3kg_560g_ground.txt"
+HitArmor="LuaScripts/WorldObjects/Explosions/Bombs/HE_082mm_3kg_560g_object.txt"
+HitBuilding="LuaScripts/WorldObjects/Explosions/Bombs/HE_082mm_3kg_560g_building.txt"
+HitMetal="LuaScripts/WorldObjects/Explosions/Bombs/HE_082mm_3kg_560g_object.txt"
+HitForest="LuaScripts/WorldObjects/Explosions/Bombs/HE_082mm_3kg_560g_object.txt"

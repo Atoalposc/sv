@@ -1,0 +1,79 @@
+class_name = "CAttachedVehicle"
+object_name = "MG-34 AA turret"
+
+
+//////	PhysicsBody properties
+//VisualImage = <int TYPE>,<string File_PathName>,<bool cast_shadows>
+
+VisualImage=0,"graphics/Artillery/mg34-aa/mg34-aa.mgm",true
+
+CollisionBody="graphics/Artillery/mg34-aa/mg34-aa.col"
+
+SoundScript="LuaScripts\Sound\Vehicles\MG-34_AA.cfg"
+
+[attach=0]
+	position= 0.0, 0.0, 0.0
+	object = "LuaScripts/WorldObjects/Vehicles/Turrets/mg34-aaTurret.txt"
+[end]
+
+TargetHeight = 1.0			// Дельта по высоте к центру модели используемая при прицеливании и оценке видимости
+
+//////	Controled body specific
+
+Mass                 	= 100.0
+
+// Damage model
+
+energyloss="",true,0.5,300		// Потеря энергии пули при попадании, true - проверка на входе и выходе в колижн-бокс, первое эквивалентная броня на входе и выходе, второе джоулей на каждый метр пути внутри колижена
+
+RegenerationMax = 1.0		// До какого Life само-чиниться танк
+RegenerationMin = 0.5		// Минимальное значение Life, ниже которого починки не будет
+RegenerationPercent = 0.0	// Скорость восстановления, долей Life в секунду
+
+Firing=0.0				// Скорость сгорания боекомплекта от пожара, долей Life в секунду
+SmokeStartHealth = 0.0		// Лайф двигателя, при котором начнется дым из двигателя
+MinFiringHealth = 0.0		// Лайф боекомплекта, при котором начнется пожар
+MinMovementHealth = 0.0		// Лайф двигателя, при котором перестанет ездить
+MinAttackHealth = 0.0		// Лайф объекта, при котором перестанет стрелять
+
+FireEffectTime = 0.0		// Сколько будет гореть по времени после взрыва
+DestructArg = 281
+SmokeArgBase    = 60000
+SmokeArgTotalNum = 1
+FiringArg = 60100
+
+ExplosionScript = "LuaScripts/WorldObjects/explosions/Detonation/VehicleNoFire.txt"
+
+CriticalWaterLevel = 1.5		// Гулбже начнет умирать
+CriticalHeigthLevel = 3.0		// При падении с большей высоты умрет
+DivingSpeed = 0.8				// Скорость погружения в воду
+ImpulseToDestroy = 5000		// Определяет силу удара обеъкта об танк, нужную для его уничтожения
+ImpulseMinimumLevel = 1000	// Определяет минимальную силу удара об танк, нужную для его смещения (видимо)
+
+//логирование повреждений
+logtreshold=0.0001
+
+[CrewEscape]
+	EscapeHealth=0.75f
+	EscapeAtLeast=1
+	DistanceToRun=50.0f
+	EscapePos=-2.1,0,0
+
+	EscapeVisArg=1000
+	
+	Bot="LuaScripts\WorldObjects\Bots\BotField_SoldierGER.txt"
+[end]
+
+Armor=0					// Толщина брони, общий параметр, нужен для других ИИ для определения типа снаряда
+
+// Модель повреждения. Исходный убалансированный лайф объекта до введения простой модели 500.
+
+[DmgElement = ammo]
+	damageablePart="collision"
+	LifeRate=500
+	LifeRateFrag=500
+	Armor=0
+	CollisioDamageSens=1
+[End]
+
+DebugInfo = false				// Позволяет выводить скорость танка и значение оси газа для настройки двигателя

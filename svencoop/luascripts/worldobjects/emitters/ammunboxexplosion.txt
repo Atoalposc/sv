@@ -1,0 +1,14 @@
+Class_name = "CStaticEmitter"
+object_name = "explosion_sky_pp"
+
+//////	PhysicsBody properties
+VisualImage=0,"graphics\\effects\\explosions\\explosion_sky_pp.epl",false
+//VisualImage=0,"graphics\\effects\\smoke.epl",false
+
+SoundScript="LuaScripts/Sound/explosions/Splash/ground.cfg"
+
+duration=0.1
+range=0,0.1
+loop=false
+
+destroy_pause=5

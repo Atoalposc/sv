@@ -1,0 +1,73 @@
+Class_name = "CRocket"
+object_name = "RKT_RUS_ROS82_1000"
+
+//////	PhysicsBody properties
+VisualImage=0,"graphics/Ammo/Rocket_ROS82.mgm",false
+SoundScript="LuaScripts/Sound/Vehicles/Rocket_280.cfg"
+
+//CollisionBody="graphics/ammo/ammo.col"
+
+visualradius=5
+
+ImageAttr=1
+VisArg=100
+
+NoDirecion=false
+CalcWind=true
+ProcessNetwork=true
+
+Armor=0,800,		27,19430,	22,48575,	0,77719
+Armor=500,550,		16,9194,	13,22985,	0,36776
+Armor=2000,350,		8,3731,		7,9327,		0,14924
+Armor=5000,200,		4,1211,		3,3028,		0,4845
+Armor=15000,100,	2,0,		1,303,		0,1211
+
+DefaultStartSpeed=0		//дефолтна€ начальна€ скорость, нужно устанавливать в максимальную траекторную +200м/с при "простреле" ракеты утилитой баллистического калькул€тора, дл€ этой ракеты 340м/с + 200м/с = 540м/с
+MaxDistance=2000		//предельна€ дальность, дальше которой объект удалитс€
+Mass=5.86				//масса ракеты
+Mkr=0.96				//значение числа ћаха, после которого начинаетс€ повышение Cx до момента M=1, зависит от формы тела но не от размера
+Mmax=1.5				//значение числа ћаха, до которого завершаетс€ понижение Cx, начавшеес€ при M=1, зависит от формы тела но не от размера
+Cx_0=0.109				//значение к-та сопротивлени€ при (M <= Mkr), зависит от формы тела но не от размера
+Cx_max=0.75				//значение к-та сопротивлени€ при (M = 1), зависит от формы тела но не от размера
+Cx_1=0.52				//значение к-та сопротивлени€ при (M >= Mmax), зависит от формы тела но не от размера
+R=0.0405				//радиус ракеты
+KPhi=0.01				//параметр скорости уменьшени€ угла атаки
+KPhiAcc=0				//параметр ускорени€ уменьшени€ угла атаки
+KJ=7					//параметр общей калибровки уменьшени€ угла атаки
+LiveTime=14.5			//врем€ жизни объекта (ExplodeTime + TimeToDestroy)
+ExplodeTime=4.3			//врем€ самоподрыва
+
+FuseArmDelay=-1			//«адержка до взведени€ взрывател€. ≈сли <=0 то работает стандартный механизм вертушки (таск BOS-744). ≈сли нет - фиксированное значение.
+TimeToDestroy=0		//врем€ жизни объекта после попадани€ в скрытом состо€нии, что бы трейл трассера не пропадал пока не расстворитьс€
+
+ThrustArg=50211
+FlameArg=101
+EngineEffectStopTime=1.2
+
+Spin=-30,30				//Rocket rotation angular speed random limits
+Deviation=0.15			//Deviation of the thrust 
+EngineThrust=7000		//Engine power
+EngineDuration=0.39,0.41	//Engine work time random limits
+
+ReferenceSpin=0			//Ideal rocket rotation angular speed random limits for aiming
+ReferenceEngineDuration=0.30	//Ideal rocket engine work time for aiming (можно подгонять дальность вдали)
+ReferenceEngineThrust=9000			//Тяга двигателя референсной ракеты для Aiming Help (можно подгонять дальность вблизи и вдали)
+ReferenceDistance=2000		//Aiming range limit
+
+HitDefaultDelay=0		//«адержка до взрыва после попадани€ бомбы
+
+debug=false
+
+//	взрывы от детонации бомбы
+
+HitDummy="LuaScripts/WorldObjects/Explosions/Bombs/HE_082mm_3kg_560g_object.txt"
+
+//	эффекты падени€ бомбы
+
+HitMiscEffect="LuaScripts/WorldObjects/Explosions/Effects/hit_ap_12-23mm_building.txt"
+HitWaterEffect="LuaScripts/WorldObjects/Explosions/Effects/hit_ap_12-23mm_water.txt"
+HitGroundEffect="LuaScripts/WorldObjects/Explosions/Effects/hit_ap_12-23mm_ground.txt"
+HitArmorEffect="LuaScripts/WorldObjects/Explosions/Effects/hit_ap_12-23mm_armour.txt"
+HitBuildingEffect="LuaScripts/WorldObjects/Explosions/Effects/hit_ap_12-23mm_building.txt"
+HitMetalEffect="LuaScripts/WorldObjects/Explosions/Effects/hit_ap_12-23mm_armour.txt"
+HitForestEffect="LuaScripts/WorldObjects/Explosions/Effects/hit_ap_12-23mm_building.txt"

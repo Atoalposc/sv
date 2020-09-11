@@ -1,0 +1,25 @@
+Class_name = "CStaticBlock"
+object_name = "RWplatform_eu"
+detail_type = "DET_BUILDING" //list of types is in \inc\SimulationSystem\DetailTypes.inc
+
+CollisionBody="graphics/Blocks/RWplatform_eu.col"
+SoundScript=""
+
+// "Эффекты закрытия пылью и пожара. Выберется тот вариант, для которого: колижн бокс, в котороый зафиксировано попадание, должен быть больше указаного числа, но меньше чем в следующем варианте эффекта.
+StaticEmitter=1,"luascripts\worldobjects\emitters\BuildingDemolition05.txt"
+StaticEmitter=5,"luascripts\worldobjects\emitters\BuildingDemolition10.txt"
+StaticEmitter=10,"luascripts\worldobjects\emitters\BuildingDemolition30.txt"
+StaticEmitter=30,"luascripts\worldobjects\emitters\BuildingDemolition50.txt"
+
+CrashDelay=1				// Задержка на разрушение, что бы успел родиться взрыв
+
+Shield=0					// Броня
+energyloss="",true,20,300		// Потеря энергии пули при попадании, true - проверка на входе и выходе в колижн-бокс, первое эквивалентная броня на входе и выходе, второе джоулей на каждый метр пути внутри колижена
+BallisticsMaxDurability=70000	// Предел Durability, умноженный на BallisticsDurabilityK, задаваемого в миссии, выше которого не будет дамага от пуль и осколков (только фугасный)
+BallisticsDurabilityK=40		// Коэффициент корреции повреждений, получаемых от пуль (BeamHit) и осколков
+
+logtreshold=0.0001
+
+CollisionStrength=0.99,2e7	// Сопротивление взаимопроникновению при столкновении [0..1], потребный импульс для разрушения (при проникновении больше 0.5м разрушится в любом случае)
+CollisionWeakStrength=0.2,1e6	// То же, но для хрупких частей кварталла (помеченых в колижене #)
+DestroyPenetration=1000	// Кастомизация глубины проникновения, приводящей к разрушению объекта. 1000м - отключение разрушения по проникновению.

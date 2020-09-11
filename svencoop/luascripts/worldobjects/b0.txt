@@ -1,0 +1,25 @@
+Class_name = "CStaticBlock"
+object_name = "Block of buildings"
+
+//////	PhysicsBody properties
+//VisualImage=2,"graphics/models/pilot_b.mgm",true
+
+SoundScript=""
+
+CollisionBody="graphics\blocks\b0.col"
+
+TrashWood="LuaScripts\WorldObjects\Trash\Trash.txt"
+TrashArmor="LuaScripts\WorldObjects\Trash\Trash.txt"
+
+
+StaticEmitter=5,"luascripts\worldobjects\emitters\BuildingDust5.txt"
+StaticEmitter=10,"luascripts\worldobjects\emitters\BuildingDust10.txt"
+StaticEmitter=20,"luascripts\worldobjects\emitters\BuildingDust20.txt"
+StaticEmitter=40,"luascripts\worldobjects\emitters\BuildingDust40.txt"
+
+
+TrashWood="LuaScripts\WorldObjects\Trash\Trash.txt"
+TrashArmor="LuaScripts\WorldObjects\Trash\Trash.txt"
+
+
+CrashDelay=0.5

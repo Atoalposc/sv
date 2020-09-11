@@ -1,0 +1,22 @@
+Class_name = "CEjectionPlace"
+object_name = "Ju523mg4e_P2"
+
+[attach=0]
+	position= -0.35,-0.5,0
+	rotation= 0, 180, -5
+	object = "LuaScripts/WorldObjects/Bots/BotPilotNPC_U2_RUSwi.txt"
+[end]
+
+CollisionBody="graphics/planes/Trash/dummy_low.col"	// палка для того, что бы child персонаж попадал в проверку колижена с пулями
+
+[Entrance]
+	EntrancePos= -0.43,-0.5,0
+	EntranceRot= 0,180,0
+	JumpDir=1,1,2
+[end]
+[Entrance]
+	EntrancePos= -0.43,-0.5,0
+	EntranceRot= 0,180,0
+	JumpDir=-2,6,1
+	SelectorDir=0,2,0	// Альтернативный метод покидания при отрицательной перегрузке более 2м/с
+[end]

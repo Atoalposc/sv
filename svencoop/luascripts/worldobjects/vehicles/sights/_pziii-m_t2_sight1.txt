@@ -1,0 +1,10 @@
+Class_name = "CDummyObject"
+object_name = "_PzIII-M_T2_sight1"
+
+VisualImage=1,"graphics\Vehicles\_PzIII-M\_PzIII-M-C3_sight1.mgm",false
+
+Script="LuaScripts\ObjectScripts\Vehicles\ArgReplicator.sc"
+
+ParentReplicateArg=9547
+ParentReplicateArg=1060
+ParentReplicateArg=60210

@@ -1,0 +1,25 @@
+// attach ID shold be in range from 100 to 110
+
+[attach=100] // Stern camera looking forward
+	position = -26.37, 2.44, 0.80
+	rotation = 0, -10, -5
+	object = "LuaScripts/WorldObjects/GoProCamera90.txt"
+[end]
+
+[attach=101] // Nose camera looking backward
+	position = 22.59, 4.09, 0.85
+	rotation = 0, -160, -10
+	object = "LuaScripts/WorldObjects/GoProCamera90.txt"
+[end]
+
+[attach=102] // Bridge camera looking forward
+	position = -0.56, 4.88, 0.69
+	rotation = 0, 20, -15
+	object = "LuaScripts/WorldObjects/GoProCamera90.txt"
+[end]
+
+[attach=103] // Bridge camera looking astern
+	position = 5.83, 4.26, -1.11
+	rotation = 0, 180, -5
+	object = "LuaScripts/WorldObjects/GoProCamera90.txt"
+[end]

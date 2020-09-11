@@ -1,0 +1,74 @@
+Class_name = "CVehicleTurret"
+object_name = "VehicleTurret"
+// Пушка Ф-34
+SoundScript="LuaScripts/Sound/Vehicles/Cannon_Fire.cfg"
+
+[attach=0]
+	position= 0.0, 0.0, 0
+	object = "LuaScripts/WorldObjects/Bots/BotGunnerTankCannon.txt"
+[end]
+
+//SiegeArgNum = 100
+//SiegeTime = 4
+//MaxVehicleSpeedToAttack = 0
+//StopVehicleWhenPointing = true
+
+
+PitchPoint = 0.802, 0.447, -0.046
+
+AngleYawMin      = -180.0
+AngleYawMax	     = 180.0
+AnglePitchMin    = -7.0
+AnglePitchMax    = 25.0
+AnglePitchDef    = 3.0
+YawArgNum        = 221
+PitchArgNum      = 241 
+YawArgMin        = 0.0
+YawArgMax        = 1.0
+PitchArgMin      = 0.0
+PitchArgMax      = 1.0
+
+YawAngularSpeed    = 12.0
+PitchAngularSpeed  = 3.0
+
+FireArgumentNum  = 64100
+AttackAnimationArgNum = 61
+
+FireAnimationTime    = 0.4
+AttackAnimationTime  = 0.4
+
+MuzzleDisplacement = 2.08, 0, 0
+
+AttackDistance   = 5000.0		//AI max aim distance versus ground point
+AttackDistanceTrgGnd = 2000.0		//AI max aim distance versus ground target
+AttackDistanceTrgAir = 1.0		//AI max aim distance versus air target
+
+[bullet=1]
+	BulletScript = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_76_HE.txt" //??-350
+	TargetingScript = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_76_HE.bin"
+	ExplosionScript = "LuaScripts/WorldObjects/Explosions/Small/Ground.txt"
+	BulletsCount = 39
+	StartBulletSpeed = 680.0
+	RealPhysicBullet = true
+	PriorityArmorMin = 0.0
+	PriorityArmorMax = 20.0
+[end]
+
+[bullet=2]
+	BulletScript = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_76_CV.txt" //??-350?
+	TargetingScript = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_76_CV.bin"
+	ExplosionScript = ""
+	BulletsCount = 38
+	StartBulletSpeed = 660.0
+	RealPhysicBullet = true
+	PriorityArmorMin = 20.0
+	PriorityArmorMax = 1000.0
+[end]
+
+VisibleTraceNum = 1
+NumBulletsInQueue = 1
+QueueRechargeTime   = 10.0
+BulletRechargeTime  = 1.0
+
+IsSoundLooped = false
+SoundNumber = 1

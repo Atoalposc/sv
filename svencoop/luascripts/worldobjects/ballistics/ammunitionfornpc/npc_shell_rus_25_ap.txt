@@ -1,0 +1,74 @@
+Class_name = "CBatchBallistics"
+object_name = "NPC_SHELL_RUS_25_AP"
+
+//25мм патрон к пушке 72-К бронебойный
+
+//////	PhysicsBody properties
+VisualImage=0,"graphics/ammo/ammoRac.mgm",false
+visualradius=4
+SoundScript=""
+ImageAttr=21	//IA_NOMINPIXELS | IA_NOINTERPOLATION
+
+//CollisionBody="graphics/ammo/ammo.col"
+
+NoDirecion=true
+NoCollision=true
+
+// дальность, скорость на этой дальности (на 0м - указать на 5км/ч меньше расчетной), пары броня-урон за броней. Броню больше, чем в первой паре, не пробьет
+// за базовый взят урон на дальности 100м при нулевой броне, на макс. броне урон равне 0.25 от базового, на 0.8 макс. брони урон равен 0.5 от базового
+// урон при нулевой броне уменьшается с дальностью по соотношению квадрата скоростей
+// скорости по дальностям взяты из лога утилиты расчета .bin файлов пули (расчет таблиц наведения), на 10км/ч меньше ресчетной
+// т.к. если скорость окажется больше расчетной на данной дальности, то дамага не будет
+// базовый урон расчитан по соотношению кинетических энергий на дальности 100м между данной пулей и референсной пулей SHELL_GER_20x82_AP (=1000)
+
+Armor=1,900,	46,1176,	37,2940,	0,4703
+Armor=500,732,	34,778,		27,1946,	0,3114 // посчитано по референсной точке по бронепробиваемости для данной пули 500м-34мм
+Armor=1000,573,	24,477,		19,1192,	0,1908
+Armor=3000,232,	7,78,		5,195,		0,313
+
+// аэродинамические коэфициенты подобраны исходя из совпадения графика скорости по дальности для эталонной пули (посчитано на балл. калькуляторе)
+
+Gage=25					//калибр
+DefaultStartSpeed=900	//дефолтная начальная скорость при стрельбе из простых пушек (наземка)
+MaxDistance=3000		//предельная дальность, дальше которой объект удалится
+Mass=0.28				//масса пули
+Mkr=0.9					//значение числа Маха, после которого начинается повышение Cx до момента M=1, зависит от формы тела но не от размера
+Mmax=2.4				//значение числа Маха, до которого завершается понижение Cx, начавшееся при M=1, зависит от формы тела но не от размера
+Cx_0=0.3				//значение к-та сопротивления при (M <= Mkr), зависит от формы тела но не от размера
+Cx_max=0.61				//значение к-та сопротивления при (M = 1), зависит от формы тела но не от размера
+Cx_1=0.37				//значение к-та сопротивления при (M >= Mmax), зависит от формы тела но не от размера
+R=0.0125				//радиус пули
+LiveTime=7.6			//время жизни объекта (большее из двух: время полета на MaxDistance или время горения трассера + 3.5с)
+TimeToDestroy=0			//время жизни объекта после попадания в скрытом состоянии, что бы трейл трассера не пропадал пока не расствориться
+TracertShowtime = 2.5	//время горения трассера
+MaxRedirections = 3		//максимальное кол-во рикошетов
+DestroyOnExplosion=false	//используется только для бронебойных пуль (default =true) с целью обеспечить применение Hit..Effect вместо Hit.., при сохранении пробоя препятствия на вылет
+							//что в свою очередь требуется для "прицепления" эффектов попадания по движущейся технике, а так же гарантированной передаче попаданий в сетевой игре
+
+debug=false
+
+// Попадание без рикошета, CBatchExplosion привяжется к объекту и отправится в сеть с привязкой
+HitMisc="LuaScripts/WorldObjects/Explosions/Effects/hit_ap_12-23mm_wood.txt"
+HitArmor="LuaScripts/WorldObjects/Explosions/Effects/hit_ap_12-23mm_armour.txt"
+HitMetal="LuaScripts/WorldObjects/Explosions/Effects/hit_ap_12-23mm_armour.txt"
+
+// Эффект попадания с рикошетом, только для локальной пули без отправки в сеть (,TRUE - не генерировать если не рикошет)
+HitMiscEffect="LuaScripts/WorldObjects/Explosions/Effects/rebound_ap_7-25mm_wood.txt",TRUE
+HitArmorEffect="LuaScripts/WorldObjects/Explosions/Effects/rebound_ap_7-25mm_armour.txt",TRUE
+HitMetalEffect="LuaScripts/WorldObjects/Explosions/Effects/rebound_ap_7-25mm_armour.txt",TRUE
+
+// Эффект попадания для локальной пули без отправки в сеть
+HitDummyEffect=""
+HitWaterEffect="LuaScripts/WorldObjects/Explosions/Effects/hit_ap_12-23mm_water.txt"
+HitGroundEffect="LuaScripts/WorldObjects/Explosions/Effects/hit_ap_12-23mm_ground.txt"
+HitBuildingEffect="LuaScripts/WorldObjects/Explosions/Effects/hit_ap_12-23mm_building.txt"
+HitForestEffect="LuaScripts/WorldObjects/Explosions/Effects/hit_ap_7mm_wood.txt"
+
+shellType = 2
+//        SHELL_TYPE_CV = 1,// Бронебойный - CV - Armour Piercing with Cavity Bursting Charge
+//        SHELL_TYPE_AP = 2,// Бронебойный сплошной - AP - Armour Piercing Solid
+//        SHELL_TYPE_HV = 3,// Подкалиберный - HV - Armour Piercing Composite Rigid (High Velocity)
+//        SHELL_TYPE_HT = 4,// Кумулятивный - HT - Hight Explosive Anti Tank (HEAT)
+//        SHELL_TYPE_SH = 5,// Шрапнельный - SH - Shrapnel
+//        SHELL_TYPE_HE = 6,// Осколочный - HE - High Explosive and Fragmental
+//        SHELL_TYPE_SpHV = 7,// Подкалиберный катушечный - SpHV - Armour Piercing Spool-Shaped (Spool High Velocity)

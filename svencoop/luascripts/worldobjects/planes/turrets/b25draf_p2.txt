@@ -1,0 +1,24 @@
+Class_name = "CEjectionPlace"
+object_name = "B25Draf_P2"
+
+// Скрипт замены пилота и параметры для него
+Script="LuaScripts\ObjectScripts\AlternateBot.sc"
+[AlterBot]			//CountryID, fromYYYYMMDD, tillYYYYMMDD, SeasonsList"sp su au wi", BotConfig. Fist match will be choosen.
+	AlterBotConfig = 103, -1, -1, "", "LuaScripts/WorldObjects/Bots/BotPilotNPC_B25D_USA43.txt"
+	AlterBotConfig = 101, -1, -1, "wi", "LuaScripts/WorldObjects/Bots/BotPilotNPC_B25D_RUSwi.txt"
+	AlterBotConfig = 101, -1, 19430228, "", "LuaScripts/WorldObjects/Bots/BotPilotNPC_B25D_RUS42.txt"
+	AlterBotConfig = 101, -1, -1, "", "LuaScripts/WorldObjects/Bots/BotPilotNPC_B25D_RUS43.txt"
+[end]
+
+[attach=0]
+	position= -0.04,-0.17,0
+	object = "LuaScripts/WorldObjects/Bots/BotPilotNPC_B25D_RAF43.txt"
+[end]
+
+CollisionBody="graphics/planes/Trash/dummy.col"	// палка для того, что бы child персонаж попадал в проверку колижена с пулями
+
+[Entrance]
+	EntrancePos= -0.963, -0.965, -0.376
+	EntranceRot= 0,0,0
+	JumpDir= 0,-6,1
+[end]

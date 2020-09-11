@@ -1,0 +1,39 @@
+Class_name = "CParachutedContainer"
+object_name = "test_container"
+
+//////	PhysicsBody properties
+VisualImage=0,"graphics/ammo/Container_BR21_Bf109R.MGM",true
+CollisionBody="graphics/ammo/Container_BR21_Bf109R.col"
+
+VisualRadius=5
+
+VisArg=100
+
+NoDirecion=false
+CalcWind=false
+ProcessNetwork=true
+
+//LimitT=false
+Rebound=0.01
+Friction=0.5
+MaxDeep=0.1
+DynamicCOG=true
+Ik=2				// подавление неустойчивости из-за вытянутой формы объекта
+
+
+Mass=12.0				//масса бомбы // расчётная
+Mkr=0.8					//значение числа Маха, после которого начинается повышение Cx до момента M=1, зависит от формы тела но не от размера
+Mmax=1.2				//значение числа Маха, до которого завершается понижение Cx, начавшееся при M=1, зависит от формы тела но не от размера
+Cx_0=0.15				//значение к-та сопротивления при (M <= Mkr), зависит от формы тела но не от размера
+Cx_max=0.3				//значение к-та сопротивления при (M = 1), зависит от формы тела но не от размера
+Cx_1=0.4				//значение к-та сопротивления при (M >= Mmax), зависит от формы тела но не от размера
+
+RNDWindFactor=5.0		//коэф-т бокового разброса
+RNDWindChangeTimer=1.0	//таймер на смену к-та бокового разброса (можно сделать зиг-заг)
+
+debug=false
+
+Cp=0.0f,0.3f,0.1f
+
+OnDropLandScript = "LuaScripts/WorldObjects/Emitters/DustBlow1_1.txt"
+OnDropWaterScript = "LuaScripts/WorldObjects/Emitters/WaterSpray1_1.txt"

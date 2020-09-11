@@ -1,0 +1,20 @@
+Class_name = "CBlocksArray"
+
+object="OT_AIRFIELD"
+detail_type = "DET_BUILDING" //list of types is in \inc\SimulationSystem\DetailTypes.inc
+
+// "Эффекты закрытия пылью. Выберется тот вариант, для которого: колижн бокс, в котороый зафиксировано попадание, должен быть больше указаного числа, но меньше чем в следующем варианте эффекта.
+StaticEmitter=5,"luascripts\worldobjects\emitters\BuildingDust5.txt"
+StaticEmitter=10,"luascripts\worldobjects\emitters\BuildingDust10.txt"
+StaticEmitter=20,"luascripts\worldobjects\emitters\BuildingDust20.txt"
+StaticEmitter=40,"luascripts\worldobjects\emitters\BuildingDust40.txt"
+
+CrashDelay=1				// Задержка на разрушение, что бы успел родиться взрыв
+
+Shield=0					// Броня
+energyloss="",true,20,300		// Потеря энергии пули при попадании, первое эквивалентная броня на входе и выходе, второе джоулей на каждый метр пути внутри колижена
+energyloss="#",true,1,1000		// Потеря энергии пули при попадании в блок с низкой прочностью (колижн помечен символом #)
+BallisticsMaxDurability=70000	// Предел Durability, умноженный на BallisticsDurabilityK, задаваемого в миссии, выше которого не будет дамага от пуль и осколков (только фугасный)
+BallisticsDurabilityK=40		// Коэффициент корреции повреждений, получаемых от пуль (BeamHit) и осколков
+
+logtreshold=0.0001

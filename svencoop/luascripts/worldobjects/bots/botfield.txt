@@ -1,0 +1,54 @@
+Class_name = "CBotCharacter"
+
+
+//////	PhysicsBody properties
+VisualImage=0,"graphics/characters/BotField/SoldierRU.MGM",true
+CollisionBody="graphics/characters/BotField/gunner.col"
+
+Animator="graphics/characters/BotField/SoldierRU.chr"
+
+
+//////	Bot specific
+Controller="LuaScripts/WorldObjects/Bots/BotFieldController_AI.txt"
+Controller="LuaScripts/WorldObjects/Bots/BotController_NI.txt"
+
+
+
+
+//VisualImage=2,"graphics/test.mgm",1
+
+SoundScript="LuaScripts/Sound/Vehicles/BotSound.cfg"
+
+[attach=0]
+	position= 0, 0.72, 0
+	object = "LuaScripts/WorldObjects/Bots/BotHeadGunGer.txt"
+[end]
+
+NeckAngleConstrX=-100,100;
+NeckAngleConstrY=-175.0,175.0;
+NeckAngleConstrZ=-120,120;
+
+NeckSlideConstrX=-0.40,0.40;
+NeckSlideConstrY=-0.45,0.45;
+NeckSlideConstrZ=-0.45,0.45;
+
+
+
+// Damage model
+Armor=0 // толщина брони
+LifeRate=300 // жизненный тонус
+LifeRateFrag=300 // У бота свой расчет осколочного воздействия
+Firing=1 // Минимальное значение поджигания у средства поражения для зажигания объекта
+DestroyDelay=15 // задержка на удаление объекта после смерти
+MinEjectAlt=10 // ограничение на минимальную высоту выпрыгивания
+
+
+
+FootLength=0.75
+WalkSpeed=1.1,-0.7
+WalkAccel=0.08,0.1
+
+RunSpeed=3,-0.7
+RunAccel=0.1,0.1
+
+NetworkEnabled=false

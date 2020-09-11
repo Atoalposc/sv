@@ -1,0 +1,51 @@
+Class_name = "CSolidDebris"
+
+VisualImage=0,"graphics/BlocksDetail/barnyard01_D.mgm",true
+CollisionBody="graphics/BlocksDetail/barnyard01_D.col"
+SoundScript=""
+
+
+//CSolidTrash properties
+Spin=false
+DynamicCOG=true
+DestroyDelay=15	//seconds
+Rebound=0
+Friction=0.6
+Mass=10
+MaxDeep=0.13
+GravityK=1
+StabSpin=1
+ik=1
+
+
+
+
+
+//CSolidDebris properties
+	//PartID,	VisibilityArg in MGM
+PartArg=1,101
+PartArg=1,102
+PartArg=1,103
+PartArg=1,104
+PartArg=1,105
+
+
+PartArg=2,201
+PartArg=2,202
+PartArg=2,203
+PartArg=2,204
+PartArg=2,205
+PartArg=2,206
+PartArg=2,207
+
+PartArg=3,301
+PartArg=3,302
+PartArg=3,303
+PartArg=3,304
+PartArg=3,305
+
+PartArg=4,401
+PartArg=4,402
+PartArg=4,403
+PartArg=4,404
+PartArg=4,405

@@ -1,0 +1,103 @@
+Class_name = "CVehicleTorpedoTurret"
+object_name = "TorpedoTurret"
+// торпедный аппарат
+
+[attach=0]
+	position= 0.0, 2.0, 0
+	object = "LuaScripts\WorldObjects\Bots\BotGunnerTorpedoTurret.txt"
+[end]
+
+// Точки подвески 3 торпед
+[attach=1]
+	position= 1.05, 1.573, -1.098
+	convex = "col_gun"
+[end]
+[attach=2]
+	position= 1.05, 1.573, 0.0
+	convex = "col_gun"
+[end]
+[attach=3]
+	position= 1.05, 1.573, 1.098
+	convex = "col_gun"
+[end]
+
+torpedoLeaveSpeed = 17.0     // Скорость выстрела торпеды
+torpedoApproxTurnRadius = 280 // Оценочный радиус разворота торпеды при выстреле, используется для наведения при пуске в сторону от цели
+
+// Описания 3 торпед
+TorpedoConfig = "LuaScripts/WorldObjects/Ballistics/AmmunitionForNPC/NPC_Torpedo_53-38.txt"
+[TorpedoHolder=0]
+	AttachIdx = 1
+	ReloadTime = 13
+	object = "LuaScripts/WorldObjects/Ballistics/AmmunitionForNPC/NPC_Torpedo_53-38.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 8.5, 0.0, 0.0
+	Rotation = 0
+	AttachPos = 1.05, 1.573, -1.098
+	Convex = "col_gun"
+	ThrowSoundType = 2
+	FireArgumentNum  = 64110
+[end]
+[TorpedoHolder=1]
+	AttachIdx = 2
+	ReloadTime = 13
+	object = "LuaScripts/WorldObjects/Ballistics/AmmunitionForNPC/NPC_Torpedo_53-38.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 8.5, 0.0, 0.0
+	Rotation = 0
+	AttachPos = 1.05, 1.573, 0.0
+	Convex = "col_gun"
+	ThrowSoundType = 2
+	FireArgumentNum  = 64111
+[end]
+[TorpedoHolder=2]
+	AttachIdx = 3
+	ReloadTime = 13
+	object = "LuaScripts/WorldObjects/Ballistics/AmmunitionForNPC/NPC_Torpedo_53-38.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 8.5, 0.0, 0.0
+	Rotation = 0
+	AttachPos = 1.05, 1.573, 1.098
+	Convex = "col_gun"
+	ThrowSoundType = 2
+	FireArgumentNum  = 64112
+[end]
+
+
+
+
+PitchPoint = 0.0, 0.0, 0.0
+
+AngleYawMin      = -150.0
+AngleYawMax      = 150.0
+AnglePitchMin    = 0.0
+AnglePitchMax    = 0.0
+AnglePitchDef    = 0
+YawArgNum        = 221
+PitchArgNum      = 241
+YawArgMin        = 0.083333
+YawArgMax        = 0.916667
+PitchArgMin      = 0.5
+PitchArgMax      = 0.5
+
+TotalYawLimits   = 2
+YawLimits0       = -150, -50
+YawLimits1       = 50, 150
+
+YawAngularSpeed    = 6.0
+PitchAngularSpeed  = 1.8
+
+AttackAnimationArgNum = 61
+
+FireAnimationTime    = 1.0
+AttackAnimationTime  = 0.4
+
+MuzzleDisplacement = 5.5, 0, 0
+AttackDistance   = 5000.0
+minAttackDistance = 1000.0
+
+NumBulletsInQueue = 1
+QueueRechargeTime   = 7.5
+BulletRechargeTime  = 0.1
+
+NeedFuse = false

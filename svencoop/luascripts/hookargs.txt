@@ -1,0 +1,1614 @@
+//--------------ВОЗДУШНАЯ ТЕХНИКА---------------- (air)
+
+//  инверсионный след сверх-дальнего ЛОД
+[effect=57200]
+	player="graphics\effects\air\InversionTrailFar.epl"
+	hook=57200
+[end]
+
+[effect=50380]
+	player="graphics\effects\air\firePetrolTankFar.epl"
+	hook=50380
+[end]
+
+//  пожар двигателя в кабине
+[effect=50300]
+	player="graphics\effects\air\fireIntPlane.epl"
+	hook=50390
+[end]
+
+//  пожар двигателя 1
+[effect=50300]
+	player="graphics\effects\air\fireSide.epl"
+	hook=50300
+[end]
+
+//  пожар двигателя 2
+[effect=50301]
+	player="graphics\effects\air\fireSide.epl"
+	hook=50301
+[end]
+
+//  пожар двигателя 3
+[effect=50302]
+	player="graphics\effects\air\fireSide.epl"
+	hook=50302
+[end]
+
+//  пожар двигателя 4
+[effect=50303]
+	player="graphics\effects\air\fireSide.epl"
+	hook=50303
+[end]
+
+
+//  пожар реактивного двигателя на малой скорости 1
+[effect=50300]
+	player="graphics\effects\air\fireSideJetSlow.epl"
+	hook=50350
+[end]
+
+//  пожар реактивного двигателя на малой скорости 2
+[effect=50301]
+	player="graphics\effects\air\fireSideJetSlow.epl"
+	hook=50351
+[end]
+
+//  пожар реактивного двигателя на малой скорости 3
+[effect=50302]
+	player="graphics\effects\air\fireSideJetSlow.epl"
+	hook=50352
+[end]
+
+//  пожар реактивного двигателя на малой скорости 4
+[effect=50303]
+	player="graphics\effects\air\fireSideJetSlow.epl"
+	hook=50353
+[end]
+
+
+//  пожар реактивного двигателя на большой скорости 1
+[effect=50300]
+	player="graphics\effects\air\fireSideJetFast.epl"
+	hook=57050
+[end]
+
+//  пожар реактивного двигателя на большой скорости 2
+[effect=50301]
+	player="graphics\effects\air\fireSideJetFast.epl"
+	hook=57051
+[end]
+
+//  пожар реактивного двигателя на большой скорости 3
+[effect=50302]
+	player="graphics\effects\air\fireSideJetFast.epl"
+	hook=57052
+[end]
+
+//  пожар реактивного двигателя на большой скорости 4
+[effect=50303]
+	player="graphics\effects\air\fireSideJetFast.epl"
+	hook=57053
+[end]
+
+
+//  инверсионный след
+[effect=57100]
+	player="graphics\effects\air\InversionTrail.epl"
+	hook=57100
+[end]
+
+//  белый пилотажный дым
+[effect=57101]
+	player="graphics\effects\air\ShowSmokeTrailWhite.epl"
+	hook=57101
+[end]
+
+//  синий пилотажный дым
+[effect=57102]
+	player="graphics\effects\air\ShowSmokeTrailBlue.epl"
+	hook=57102
+[end]
+
+//  красный пилотажный дым
+[effect=57103]
+	player="graphics\effects\air\ShowSmokeTrailRed.epl"
+	hook=57103
+[end]
+
+//  зеленый пилотажный дым
+[effect=57104]
+	player="graphics\effects\air\ShowSmokeTrailGreen.epl"
+	hook=57104
+[end]
+
+//  желтый пилотажный дым
+[effect=57105]
+	player="graphics\effects\air\ShowSmokeTrailYellow.epl"
+	hook=57105
+[end]
+
+//  черный пилотажный дым
+[effect=57106]
+	player="graphics\effects\air\ShowSmokeTrailBlack.epl"
+	hook=57106
+[end]
+
+//  дымный выхлоп из патрубка 1
+[effect=57000]
+	player="graphics\effects\air\exhaustGas.epl"
+	hook=57000
+[end]
+
+//  дымный выхлоп из патрубка 2
+[effect=57001]
+	player="graphics\effects\air\exhaustGas.epl"
+	hook=57001
+[end]
+
+//  дымный выхлоп из патрубка 3
+[effect=57002]
+	player="graphics\effects\air\exhaustGas.epl"
+	hook=57002
+[end]
+
+//  дымный выхлоп из патрубка 4
+[effect=57003]
+	player="graphics\effects\air\exhaustGas.epl"
+	hook=57003
+[end]
+
+//  дымный выхлоп из патрубка 5
+[effect=57004]
+	player="graphics\effects\air\exhaustGas.epl"
+	hook=57004
+[end]
+
+//  дымный выхлоп из патрубка 6
+[effect=57005]
+	player="graphics\effects\air\exhaustGas.epl"
+	hook=57005
+[end]
+
+//  дымный выхлоп из патрубка 7
+[effect=57006]
+	player="graphics\effects\air\exhaustGas.epl"
+	hook=57006
+[end]
+
+//  дымный выхлоп из патрубка 8
+[effect=57007]
+	player="graphics\effects\air\exhaustGas.epl"
+	hook=57007
+[end]
+
+
+//  огненный выхлоп из патрубка 1
+[effect=57010]
+	player="graphics\effects\air\exhaustGasStart.epl"
+	hook=57010
+[end]
+
+//  огненный выхлоп из патрубка 2
+[effect=57011]
+	player="graphics\effects\air\exhaustGasStart.epl"
+	hook=57011
+[end]
+
+//  огненный выхлоп из патрубка 3
+[effect=57012]
+	player="graphics\effects\air\exhaustGasStart.epl"
+	hook=57012
+[end]
+
+//  огненный выхлоп из патрубка 4
+[effect=57013]
+	player="graphics\effects\air\exhaustGasStart.epl"
+	hook=57013
+[end]
+
+//  огненный выхлоп из патрубка 5
+[effect=57014]
+	player="graphics\effects\air\exhaustGasStart.epl"
+	hook=57014
+[end]
+
+//  огненный выхлоп из патрубка 6
+[effect=57015]
+	player="graphics\effects\air\exhaustGasStart.epl"
+	hook=57015
+[end]
+
+//  огненный выхлоп из патрубка 7
+[effect=57016]
+	player="graphics\effects\air\exhaustGasStart.epl"
+	hook=57016
+[end]
+
+//  огненный выхлоп из патрубка 8
+[effect=57017]
+	player="graphics\effects\air\exhaustGasStart.epl"
+	hook=57017
+[end]
+
+
+
+//  выхлоп реактивного двигателя 1
+[effect=57050]
+	player="graphics\effects\air\exhaustJet.epl"
+	hook=57050
+[end]
+
+//  выхлоп реактивного двигателя 2
+[effect=57051]
+	player="graphics\effects\air\exhaustJet.epl"
+	hook=57051
+[end]
+
+//  выхлоп реактивного двигателя 3
+[effect=57052]
+	player="graphics\effects\air\exhaustJet.epl"
+	hook=57052
+[end]
+
+//  выхлоп реактивного двигателя 4
+[effect=57053]
+	player="graphics\effects\air\exhaustJet.epl"
+	hook=57053
+[end]
+
+//  выхлоп реактивного двигателя 5
+[effect=57054]
+	player="graphics\effects\air\exhaustJet.epl"
+	hook=57054
+[end]
+
+//  выхлоп реактивного двигателя 6
+[effect=57055]
+	player="graphics\effects\air\exhaustJet.epl"
+	hook=57055
+[end]
+
+//  выхлоп реактивного двигателя 7
+[effect=57056]
+	player="graphics\effects\air\exhaustJet.epl"
+	hook=57056
+[end]
+
+//  выхлоп реактивного двигателя 8
+[effect=57057]
+	player="graphics\effects\air\exhaustJet.epl"
+	hook=57057
+[end]
+
+
+//  запуск реактивного двигателя 1
+[effect=57060]
+	player="graphics\effects\air\exhaustJetStart.epl"
+	hook=57060
+[end]
+
+//  запуск реактивного двигателя 2
+[effect=57061]
+	player="graphics\effects\air\exhaustJetStart.epl"
+	hook=57061
+[end]
+
+//  запуск реактивного двигателя 3
+[effect=57062]
+	player="graphics\effects\air\exhaustJetStart.epl"
+	hook=57062
+[end]
+
+//  запуск реактивного двигателя 4
+[effect=57063]
+	player="graphics\effects\air\exhaustJetStart.epl"
+	hook=57063
+[end]
+
+//  запуск реактивного двигателя 5
+[effect=57064]
+	player="graphics\effects\air\exhaustJetStart.epl"
+	hook=57064
+[end]
+
+//  запуск реактивного двигателя 6
+[effect=57065]
+	player="graphics\effects\air\exhaustJetStart.epl"
+	hook=57065
+[end]
+
+//  запуск реактивного двигателя 7
+[effect=57066]
+	player="graphics\effects\air\exhaustJetStart.epl"
+	hook=57066
+[end]
+
+//  запуск реактивного двигателя 8
+[effect=57067]
+	player="graphics\effects\air\exhaustJetStart.epl"
+	hook=57067
+[end]
+
+
+
+//  спрей пробитого бензобака 1
+[effect=50600]
+	player="graphics\effects\air\sprayPetrol.epl"
+	hook=50600
+[end]
+
+//  пожар бензобака 1
+[effect=50601]
+	player="graphics\effects\air\firePetrolTank.epl"
+	hook=50600
+[end]
+
+//  спрей пробитого бензобака 2
+[effect=50602]
+	player="graphics\effects\air\sprayPetrol.epl"
+	hook=50602
+[end]
+
+//  пожар бензобака 2
+[effect=50603]
+	player="graphics\effects\air\firePetrolTank.epl"
+	hook=50602
+[end]
+
+//  спрей пробитого бензобака 3
+[effect=50604]
+	player="graphics\effects\air\sprayPetrol.epl"
+	hook=50604
+[end]
+
+//  пожар бензобака 3
+[effect=50605]
+	player="graphics\effects\air\firePetrolTank.epl"
+	hook=50604
+[end]
+
+//  спрей пробитого бензобака 4
+[effect=50606]
+	player="graphics\effects\air\sprayPetrol.epl"
+	hook=50606
+[end]
+
+//  пожар бензобака 4
+[effect=50607]
+	player="graphics\effects\air\firePetrolTank.epl"
+	hook=50606
+[end]
+
+//  спрей пробитого бензобака 5
+[effect=50608]
+	player="graphics\effects\air\sprayPetrol.epl"
+	hook=50608
+[end]
+
+//  пожар бензобака 5
+[effect=50609]
+	player="graphics\effects\air\firePetrolTank.epl"
+	hook=50608
+[end]
+
+
+//  спрей из маслосистемы 1
+[effect=50610]
+	player="graphics\effects\air\sprayOil.epl"
+	hook=50610
+[end]
+
+//  спрей из маслосистемы 2
+[effect=50611]
+	player="graphics\effects\air\sprayOil.epl"
+	hook=50611
+[end]
+
+//  спрей из маслосистемы 3
+[effect=50612]
+	player="graphics\effects\air\sprayOil.epl"
+	hook=50612
+[end]
+
+//  спрей из маслосистемы 4
+[effect=50613]
+	player="graphics\effects\air\sprayOil.epl"
+	hook=50613
+[end]
+
+//  пар при повреждении водорадиатора 1
+[effect=50650]
+	player="graphics\effects\air\steamCuler.epl"
+	hook=50650
+[end]
+
+//  пар при повреждении водорадиатора 2
+[effect=50651]
+	player="graphics\effects\air\steamCuler.epl"
+	hook=50651
+[end]
+
+//  пар при повреждении водорадиатора 3
+[effect=50652]
+	player="graphics\effects\air\steamCuler.epl"
+	hook=50652
+[end]
+
+//  пар при повреждении водорадиатора 4
+[effect=50653]
+	player="graphics\effects\air\steamCuler.epl"
+	hook=50653
+[end]
+
+//  пыль и след от левого колеса
+[effect=50400]
+	player="graphics\effects\surf\VehicleTrail_PlaneMain.epl"
+	hook=50400
+[end]
+
+//  пыль и след от правого колеса
+[effect=50401]
+	player="graphics\effects\surf\VehicleTrail_PlaneMain.epl"
+	hook=50401
+[end]
+
+//  пыль и след от заднего колеса
+[effect=50402]
+	player="graphics\effects\surf\VehicleTrail_PlaneTail.epl"
+	hook=50402
+[end]
+
+//  пыль от костыля самолета
+[effect=50405]
+	player="graphics\effects\air\dustWheel.epl"
+	hook=50405
+[end]
+
+//  пыль от пропеллера (тянется за самолетом на объекте)
+[effect=50450]
+	player="graphics\effects\surf\dustSnowPropeller.epl"
+	hook=50450
+	hook=50451
+	hook=50452
+[end]
+
+//  пыль и след от фюзеляжа при посадке на брюхо (тянется за самолетом на объекте)
+[effect=50460]
+	player="graphics\effects\surf\VehicleTrail_PlaneFuse.epl"
+	hook=50460
+[end]
+
+//  след от левого поплавка
+[effect=63300]
+	player="graphics\effects\water\keeltrackplanesmall.epl"
+	hook=63300
+[end]
+
+//  след от правого поплавка
+[effect=63301]
+	player="graphics\effects\water\keeltrackplanesmall.epl"
+	hook=63301
+[end]
+
+//  след от фюзеляжа
+[effect=63302]
+	player="graphics\effects\water\keeltrackplanebig.epl"
+	hook=63302
+[end]
+
+//  бурун от левого поплавка
+[effect=63310]
+	player="graphics\effects\water\spayplanesmall.epl"
+	hook=63310
+[end]
+
+//  бурун от правого поплавка
+[effect=63311]
+	player="graphics\effects\water\spayplanesmall.epl"
+	hook=63311
+[end]
+
+//  бурун от фюзеляжа
+[effect=63312]												//->45300
+	player="graphics\effects\water\spayplanebig.epl"
+	hook=63312												//->45300
+[end]
+
+//  крыло жгут с края левого крыла
+[effect=50010]
+	player="graphics\effects\air\stripWingsL.epl"
+	hook=50010
+[end]
+
+//  крыло жгут с края правого крыла
+[effect=50011]
+	player="graphics\effects\air\stripWingsR.epl"
+	hook=50011
+[end]
+
+//  отлом крыла
+[effect=50310]
+	player="graphics\effects\air\crashWings.epl"
+	hook=50310
+[end]
+
+//  отлом деталей
+[effect=50311]
+	player="graphics\effects\air\crashDetails.epl"
+	hook=50311
+[end]
+
+//  тотальный взрыв самолета в воздухе
+[effect=53760]
+	player="graphics\effects\air\explPlaneAir.epl"
+	hook=53760
+[end]
+
+//  тотальный взрыв самолета на земле
+[effect=53770]
+	player="graphics\effects\air\explPlaneGnd.epl"
+	hook=53770
+[end]
+
+//  тотальный взрыв самолета вдоль земли
+[effect=53780]
+	player="graphics\effects\air\explPlaneAlongGnd.epl"
+	hook=53780
+[end]
+
+//  тотальный взрыв самолета на воде
+[effect=53771]
+	player="graphics\effects\air\explPlaneWater.epl"
+	hook=53771
+[end]
+
+//  тотальный взрыв самолета вдоль воды
+[effect=53781]
+	player="graphics\effects\air\explPlaneAlongWater.epl"
+	hook=53781
+[end]
+
+//  тотальный взрыв, файрболы
+[effect=53790]
+	player="graphics\effects\air\explPlaneFireball.epl"
+	hook=53790
+[end]
+
+//  пожар аэростата
+[effect=53850]
+	player="graphics\effects\air\fireAirBaloon.epl"
+	hook=53850
+[end]
+
+//  взрыв аэростата
+[effect=53851]
+	player="graphics\effects\air\explBalloon.epl"
+	hook=53851
+[end]
+
+
+//--------------ВОЗДУШНАЯ ТЕХНИКА, FLying Circus---------------- (air)
+
+//  пожар двигателя в кабине
+[effect=45300]
+	player="graphics\effects\air\fireIntPlane.epl"
+	hook=45390
+[end]
+
+//  пожар двигателя 1
+[effect=45300]
+	player="graphics\effects\air\CircusFireSide.epl"
+	hook=45300
+[end]
+
+//  пожар двигателя 2
+[effect=45301]
+	player="graphics\effects\air\CircusFireSide.epl"
+	hook=45301
+[end]
+
+//  пожар двигателя 3
+[effect=45302]
+	player="graphics\effects\air\CircusFireSide.epl"
+	hook=45302
+[end]
+
+//  пожар двигателя 4
+[effect=45303]
+	player="graphics\effects\air\CircusFireSide.epl"
+	hook=45303
+[end]
+
+
+//  выхлоп из патрубка 1
+[effect=47000]
+	player="graphics\effects\air\CircusExhaustGas.epl"
+	hook=47000
+[end]
+
+//  выхлоп из патрубка 2
+[effect=47001]
+	player="graphics\effects\air\CircusExhaustGas.epl"
+	hook=47001
+[end]
+
+//  выхлоп из патрубка 3
+[effect=47002]
+	player="graphics\effects\air\CircusExhaustGas.epl"
+	hook=47002
+[end]
+
+//  выхлоп из патрубка 4
+[effect=47003]
+	player="graphics\effects\air\CircusExhaustGas.epl"
+	hook=47003
+[end]
+
+
+//  спрей пробитого бензобака
+[effect=45600]
+	player="graphics\effects\air\CircusSprayPetrol.epl"
+	hook=45600
+[end]
+
+//  пожар бензобака
+[effect=45601]
+	player="graphics\effects\air\CircusFirePetrolTank.epl"
+	hook=45600
+[end]
+
+//  спрей пробитого бензобака
+[effect=45602]
+	player="graphics\effects\air\CircusSprayPetrol.epl"
+	hook=45602
+[end]
+
+//  пожар бензобака
+[effect=45603]
+	player="graphics\effects\air\CircusFirePetrolTank.epl"
+	hook=45602
+[end]
+
+
+//  спрей из маслосистемы
+[effect=45610]
+	player="graphics\effects\air\CircusSprayOil.epl"
+	hook=45610
+[end]
+
+//  спрей из маслосистемы
+[effect=45611]
+	player="graphics\effects\air\CircusSprayOil.epl"
+	hook=45611
+[end]
+
+//  спрей из маслосистемы
+[effect=45612]
+	player="graphics\effects\air\CircusSprayOil.epl"
+	hook=45612
+[end]
+
+//  спрей из маслосистемы
+[effect=45613]
+	player="graphics\effects\air\CircusSprayOil.epl"
+	hook=45613
+[end]
+
+//  пар при повреждении водорадиатора 1
+[effect=45650]
+	player="graphics\effects\air\CircusSteamCuler.epl"
+	hook=45650
+[end]
+
+//  пар при повреждении водорадиатора 2
+[effect=45651]
+	player="graphics\effects\air\CircusSteamCuler.epl"
+	hook=45651
+[end]
+
+//  пар при повреждении водорадиатора 3
+[effect=45652]
+	player="graphics\effects\air\CircusSteamCuler.epl"
+	hook=45652
+[end]
+
+//  пар при повреждении водорадиатора 4
+[effect=45653]
+	player="graphics\effects\air\CircusSteamCuler.epl"
+	hook=45653
+[end]
+
+//  пыль от левого колеса самолета
+[effect=45400]
+	player="graphics\effects\surf\VehicleTrail_PlaneTail.epl"
+	hook=45400
+[end]
+
+//  пыль от правого колеса самолета
+[effect=45401]
+	player="graphics\effects\surf\VehicleTrail_PlaneTail.epl"
+	hook=45401
+[end]
+
+//  пыль от костыля самолета, точно
+[effect=45405]
+	player="graphics\effects\air\dustWheel.epl"
+	hook=45405
+[end]
+
+//--------------НАЗЕМНАЯ ТЕХНИКА---------------- (surf)
+
+//  пожар двигателя детального танка
+[effect=61300]
+	player="graphics\effects\air\fireSideVeh.epl"
+	hook=61300
+[end]
+
+//  тушение внешнего пожара двигателя детального танка
+[effect=61350]
+	player="graphics\effects\air\fireExtinguisher.epl"
+	hook=61300
+[end]
+
+//  пар при повреждении водорадиатора детального танка
+[effect=61650]
+	player="graphics\effects\air\steamCulerVeh.epl"
+	hook=61650
+	hook=61651
+	hook=61653
+	hook=61654
+[end]
+
+//  внутренний пожар двигателя детального танка, аргумент внешнего эффекта
+[effect=61300]
+	player="graphics\effects\air\fireIntVeh.epl"
+	hook=61301
+	hook=61302
+	hook=61303
+	hook=61304
+[end]
+
+//  тушение внутреннего пожара двигателя детального танка
+[effect=61350]
+	player="graphics\effects\air\fireExtinguisherInt.epl"
+	hook=61301
+	hook=61302
+	hook=61303
+	hook=61304
+[end]
+
+//  внутренний дым поврежденного двигателя детального танка, аргумент внешнего эффекта
+[effect=60000]
+	player="graphics\effects\air\fireEngineInt.epl"
+	hook=60050
+	hook=60051
+[end]
+
+//  внутренний выстрел из пушки
+[effect=64201]
+	player="graphics\effects\surf\shotGunInt.epl"
+	hook=64201
+[end]
+
+//  выстрел из пушки PC танка, выхлоп вентилирования из люка, 64206 - зарезервирован под эффект газа из закрытого люка, используется для передачи
+[effect=64207]
+	player="graphics\effects\surf\shotGunSmokeHatchVent.epl"
+	hook=64207
+[end]
+
+//  выстрел из пушки PC танка, выхлоп через-моторного вентилирования
+[effect=64208]
+	player="graphics\effects\surf\shotGunSmokeEngVent.epl"
+	hook=64208
+[end]
+
+//  выстрел из пушки PC танка, выхлоп из вентилятора
+[effect=64209]
+	player="graphics\effects\surf\shotGunSmokeVent.epl"
+	hook=64209
+[end]
+
+//  выстрел из пушки, эжектирование газа
+[effect=64205]
+	player="graphics\effects\surf\shotGunBarrelVent.epl"
+	hook=64205
+[end]
+
+//  внутренний выстрел из пулемета, аргумент внешнего эффекта
+[effect=60320]
+	player="graphics\effects\surf\shotMGunInt.epl"
+	hook=64211
+	hook=64212
+[end]
+
+//  выстрел из пушки 1
+[effect=64100]
+	player="graphics\effects\surf\shotGun.epl"
+	hook=64100
+[end]
+
+//  выстрел из пушки 2
+[effect=64105]
+	player="graphics\effects\surf\shotGun.epl"
+	hook=64105
+[end]
+
+//  выстрел из пушки PC танка 1
+[effect=64101]
+	player="graphics\effects\surf\shotTankGun.epl"
+	hook=64101
+[end]
+
+//  выстрел из пушки PC танка 2
+[effect=64102]
+	player="graphics\effects\surf\shotTankGun.epl"
+	hook=64102
+[end]
+
+//  выстрел из торпедного аппарата 1
+[effect=64110]
+	player="graphics\effects\surf\shotTorpedo.epl"
+	hook=64110
+[end]
+
+//  выстрел из торпедного аппарата 2
+[effect=64111]
+	player="graphics\effects\surf\shotTorpedo.epl"
+	hook=64111
+[end]
+
+//  выстрел из торпедного аппарата 3
+[effect=64112]
+	player="graphics\effects\surf\shotTorpedo.epl"
+	hook=64112
+[end]
+
+//  выстрел из торпедного аппарата 4
+[effect=64113]
+	player="graphics\effects\surf\shotTorpedo.epl"
+	hook=64113
+[end]
+
+//  выстрел из пулемета 1
+[effect=64200]
+	player="graphics\effects\surf\light_MGvehicle.epl"
+	hook=64200
+[end]
+
+//  выстрел из пулемета 2
+[effect=64250]
+	player="graphics\effects\surf\light_MGvehicle.epl"
+	hook=64250
+[end]
+
+//  выстрел из пулемета 2
+[effect=64251]
+	player="graphics\effects\surf\light_MGvehicle.epl"
+	hook=64251
+[end]
+
+//  выстрел из пулемета 2
+[effect=64252]
+	player="graphics\effects\surf\light_MGvehicle.epl"
+	hook=64252
+[end]
+
+//  выстрел из пулемета 2
+[effect=64253]
+	player="graphics\effects\surf\light_MGvehicle.epl"
+	hook=64253
+[end]
+
+//  выстрел из пулемета 2
+[effect=64254]
+	player="graphics\effects\surf\light_MGvehicle.epl"
+	hook=64254
+[end]
+
+//  дым поврежденного двигателя 1
+[effect=60000]
+	player="graphics\effects\surf\fireEngineSurfTech.epl"
+	hook=60000
+[end]
+
+//  дым поврежденного двигателя 2
+[effect=60001]
+	player="graphics\effects\surf\fireEngineSurfTech.epl"
+	hook=60001
+[end]
+
+//  дым поврежденного двигателя 3
+[effect=60002]
+	player="graphics\effects\surf\fireEngineSurfTech.epl"
+	hook=60002
+[end]
+
+//  дым поврежденного двигателя 4
+[effect=60003]
+	player="graphics\effects\surf\fireEngineSurfTech.epl"
+	hook=60003
+[end]
+
+//  дым поврежденного двигателя 5
+[effect=60004]
+	player="graphics\effects\surf\fireEngineSurfTech.epl"
+	hook=60004
+[end]
+
+//  пожар всего объекта
+[effect=60100]
+	player="graphics\effects\surf\fireSurfTech.epl"
+	hook=60100
+[end]
+
+//  выхлоп двигателя
+[effect=63000]
+	player="graphics\effects\surf\extGasSurfTech.epl"
+	hook=63000
+	hook=63001
+	hook=63002
+[end]
+
+//  выхлоп двигателя для детального танка
+[effect=64000]
+	player="graphics\effects\surf\extGasSurfTechFullscale.epl"
+	hook=64000
+	hook=64001
+	hook=64002
+[end]
+
+//  выхлоп дизельгенератора башни
+[effect=64030]
+	player="graphics\effects\surf\extGasSurfTechTurret.epl"
+	hook=64030
+[end]
+
+//  сценарный свет кабины для детального танка (привязан к открытию люков)
+[effect=30000]
+	player="graphics\effects\surf\light_dummy_medium.epl"
+	hook=30000
+	hook=30001
+	hook=30002
+	hook=30003
+	hook=30004
+	hook=30005
+	hook=30006
+	hook=30007
+	hook=30008
+	hook=30009
+[end]
+
+//  сценарный свет кабины для детального танка (привязан к открытию форточек)
+[effect=30010]
+	player="graphics\effects\surf\light_dummy_small.epl"
+	hook=30010
+	hook=30011
+	hook=30012
+	hook=30013
+	hook=30014
+	hook=30015
+	hook=30016
+	hook=30017
+	hook=30018
+	hook=30019
+[end]
+
+//  снежная пыль от движения
+[effect=61000]
+	player="graphics\effects\surf\dustSnowMotion.epl"
+	hook=61000
+[end]
+
+//  след и снег из под широких гусениц
+[effect=61010]
+	player="graphics\effects\surf\VehicleTrail_TankWide.epl"
+	hook=61010
+	hook=61011
+[end]
+
+//  след и снег из под узких гусениц
+[effect=61012]
+	player="graphics\effects\surf\VehicleTrail_TankThin.epl"
+	hook=61012
+	hook=61013
+[end]
+
+//  след и снег из под колес грузовика
+[effect=61014]
+	player="graphics\effects\surf\VehicleTrail_TruckWide.epl"
+	hook=61014
+	hook=61015
+[end]
+
+//  след и снег из под колес автомобиля
+[effect=61016]
+	player="graphics\effects\surf\VehicleTrail_TruckThin.epl"
+	hook=61016
+	hook=61017
+[end]
+
+//  снег из под широких гусениц левый для детального танка
+[effect=62010]
+	player="graphics\effects\surf\VehicleTrail_TankWide.epl"
+	hook=62010
+[end]
+
+//  снег из под широких гусениц правый для детального танка
+[effect=62011]
+	player="graphics\effects\surf\VehicleTrail_TankWide.epl"
+	hook=62011
+[end]
+
+//  снег из под широких узких левый для детального танка
+[effect=62012]
+	player="graphics\effects\surf\VehicleTrail_TankThin.epl"
+	hook=62012
+[end]
+
+//  снег из под широких узких правый для детального танка
+[effect=62013]
+	player="graphics\effects\surf\VehicleTrail_TankThin.epl"
+	hook=62013
+[end]
+
+//  дым паравоза
+[effect=63100]
+	player="graphics\effects\surf\smokeTrain.epl"
+	hook=63100
+[end]
+
+//  пар паравоза
+[effect=63101]
+	player="graphics\effects\surf\steamTrain.epl"
+	hook=63101
+	hook=63102
+[end]
+
+//  пар от пробития котла поезда
+	//---1
+	[effect=60010]
+		player="graphics\effects\surf\steamBulletTrain.epl"
+		hook=60010
+	[end]
+
+	//---2
+	[effect=60011]
+		player="graphics\effects\surf\steamBulletTrain.epl"
+		hook=60011
+	[end]
+
+	//---3
+	[effect=60012]
+		player="graphics\effects\surf\steamBulletTrain.epl"
+		hook=60012
+	[end]
+
+	//---4
+	[effect=60013]
+		player="graphics\effects\surf\steamBulletTrain.epl"
+		hook=60013
+	[end]
+
+	//---5
+	[effect=60014]
+		player="graphics\effects\surf\steamBulletTrain.epl"
+		hook=60014
+	[end]
+
+	//---6
+	[effect=60015]
+		player="graphics\effects\surf\steamBulletTrain.epl"
+		hook=60015
+	[end]
+
+	//---7
+	[effect=60016]
+		player="graphics\effects\surf\steamBulletTrain.epl"
+		hook=60016
+	[end]
+
+	//---8
+	[effect=60017]
+		player="graphics\effects\surf\steamBulletTrain.epl"
+		hook=60017
+	[end]
+
+	//---9
+	[effect=60018]
+		player="graphics\effects\surf\steamBulletTrain.epl"
+		hook=60018
+	[end]
+
+	//---10
+	[effect=60019]
+		player="graphics\effects\surf\steamBulletTrain.epl"
+		hook=60019
+	[end]
+
+
+// взрыв котла поезда
+[effect=60020]
+	player="graphics\effects\surf\explTrain.epl"
+	hook=60020
+[end]
+
+//  взрыв наземной техники
+[effect=60101]
+	player="graphics\effects\surf\explSurfTech.epl"
+	hook=60101
+[end]
+
+//  взрыв наземной техники
+[effect=60150]
+	player="graphics\effects\surf\fireExtFuelTank.epl"
+	hook=60150
+[end]
+
+
+
+//  грязь и след левой гусеницы спереди, Pz-III, Pz-IV
+[effect=60401]
+	player="graphics\effects\surf\VehicleTrail_PCTankPz3.epl"
+	hook=60401
+[end]
+//  грязь и след правой гусеницы спереди, Pz-III, Pz-IV
+[effect=60402]
+	player="graphics\effects\surf\VehicleTrail_PCTankPz3.epl"
+	hook=60402
+[end]
+
+//  грязь левой гусеницы сзади
+[effect=60403]
+	player="graphics\effects\surf\VehicleTrail_PCTank_Back.epl"
+	hook=60403
+[end]
+//  грязь правой гусеницы сзади
+[effect=60404]
+	player="graphics\effects\surf\VehicleTrail_PCTank_Back.epl"
+	hook=60404
+[end]
+
+//  грязь и след левой гусеницы спереди, Т-34, КВ-1
+[effect=60405]
+	player="graphics\effects\surf\VehicleTrail_PCTankT34.epl"
+	hook=60405
+[end]
+//  грязь и след правой гусеницы спереди, Т-34, КВ-1
+[effect=60406]
+	player="graphics\effects\surf\VehicleTrail_PCTankT34.epl"
+	hook=60406
+[end]
+
+//  грязь и след левой гусеницы спереди, M4
+[effect=60407]
+	player="graphics\effects\surf\VehicleTrail_PCTankM4.epl"
+	hook=60407
+[end]
+//  грязь и след правой гусеницы спереди, M4
+[effect=60408]
+	player="graphics\effects\surf\VehicleTrail_PCTankM4.epl"
+	hook=60408
+[end]
+
+//  грязь и след левой гусеницы спереди, Pz-VI
+[effect=60409]
+	player="graphics\effects\surf\VehicleTrail_PCTankPz6.epl"
+	hook=60409
+[end]
+//  грязь и след правой гусеницы спереди, Pz-VI
+[effect=60410]
+	player="graphics\effects\surf\VehicleTrail_PCTankPz6.epl"
+	hook=60410
+[end]
+
+
+
+//--------------ВОДНАЯ ТЕХНИКА---------------- (surf)
+
+//  эффект кильватерного следа
+[effect=63222]
+	player="graphics\effects\water\keelTrack.epl"
+	hook=63222
+[end]
+
+//  буруны от носа корабля
+[effect=63221]
+	player="graphics\effects\water\swashShip.epl"
+	hook=63221
+[end]
+
+//  эффект кильватерного следа большого корабля с острым носом
+[effect=63228]
+	player="graphics\effects\water\keelTrackLrg.epl"
+	hook=63228
+[end]
+
+//  буруны от носа корабля большого корабля с острым носом
+[effect=63227]
+	player="graphics\effects\water\swashShipLrg.epl"
+	hook=63227
+[end]
+
+//  всплески от форштевня
+[effect=63224]
+	player="graphics\effects\water\noseSprayShipLrg.epl"
+	hook=63224
+	hook=63226
+[end]
+
+//  всплески от форштевня малого корабля
+[effect=63229]
+	player="graphics\effects\water\noseSprayShipSm.epl"
+	hook=63229
+	hook=63230
+[end]
+
+//  бурун за кормой малого корабля
+[effect=63231]
+	player="graphics\effects\water\tailSprayShipSm.epl"
+	hook=63231
+	hook=63232
+[end]
+
+//  бурун за кормой малого корабля
+[effect=63233]
+	player="graphics\effects\water\tailSprayShipLrg.epl"
+	hook=63233
+	hook=63234
+[end]
+
+//  след от перископа
+[effect=63235]
+	player="graphics\effects\water\keelTrackPeriscope.epl"
+	hook=63235
+[end]
+
+//  бурун от перископа
+[effect=63236]
+	player="graphics\effects\water\noseSprayPeriscope.epl"
+	hook=63236
+[end]
+
+
+//  пожар секции корабля
+
+	//---1
+	[effect=63210]
+		player="graphics\effects\water\fireShip.epl"
+		hook=63210
+	[end]
+
+	//---2
+	[effect=63211]
+		player="graphics\effects\water\fireShip.epl"
+		hook=63211
+	[end]
+
+	//---3
+	[effect=63212]
+		player="graphics\effects\water\fireShip.epl"
+		hook=63212
+	[end]
+
+	//---4
+	[effect=63213]
+		player="graphics\effects\water\fireShip.epl"
+		hook=63213
+	[end]
+
+	//---5
+	[effect=63214]
+		player="graphics\effects\water\fireShip.epl"
+		hook=63214
+	[end]
+
+	//---6
+	[effect=63215]
+		player="graphics\effects\water\fireShipLrg.epl"
+		hook=63215
+	[end]
+
+	//---7
+	[effect=63216]
+		player="graphics\effects\water\fireShipLrg.epl"
+		hook=63216
+	[end]
+
+	//---8
+	[effect=63217]
+		player="graphics\effects\water\fireShipLrg.epl"
+		hook=63217
+	[end]
+
+	//---9
+	[effect=63218]
+		player="graphics\effects\water\fireShipLrg.epl"
+		hook=63218
+	[end]
+
+	//---10
+	[effect=63219]
+		player="graphics\effects\water\fireShipLrg.epl"
+		hook=63219
+	[end]
+
+
+//  выхлоп двигателя корабля
+
+	// ---1
+	[effect=63200]
+		player="graphics\effects\water\exhDiselShip.epl"
+		hook=63200
+		hook=63201
+		hook=63202
+		hook=63203
+		hook=63204
+		hook=63205
+		hook=63206
+		hook=63207
+		hook=63208
+		hook=63209
+	[end]
+
+//  выхлоп парового двигателя корабля
+
+	// ---1
+	[effect=63400]
+		player="graphics\effects\water\exhSteamShip.epl"
+		hook=63400
+		hook=63401
+		hook=63402
+		hook=63403
+		hook=63404
+		hook=63405
+		hook=63406
+		hook=63407
+		hook=63408
+		hook=63409
+	[end]
+
+
+
+
+//  взрыв военного груза в трюме
+[effect=63223]
+	player="graphics\effects\water\explBargeHold.epl"
+	hook=63223
+[end]
+
+//  утопание корабля
+[effect=63225]
+	player="graphics\effects\water\sinkBarge.epl"
+	hook=63225
+[end]
+
+
+//--------------ВООРУЖЕНИЕ---------------- (arm)
+
+
+//  дымный трассер MG
+[effect=1]
+	player="graphics\effects\arm\traceSmoke.epl"
+	hook=50200
+[end]
+
+//  дымный трассер AC
+[effect=2]
+	player="graphics\effects\arm\traceSmokeAC.epl"
+	hook=50205
+[end]
+
+//  световой трассер красный
+[effect=50201]
+	player="graphics\effects\arm\traceRed.epl"
+	hook=50201
+[end]
+
+//  хвост ракеты черный
+[effect=50210]
+	player="graphics\effects\arm\rocketTrace_black.epl"
+	hook=50210
+[end]
+
+//  хвост ракеты серый
+[effect=50211]
+	player="graphics\effects\arm\rocketTrace_gray.epl"
+	hook=50211
+[end]
+
+//  ракета красная
+[effect=64150]
+	player="graphics\effects\arm\arR.epl"
+	hook=64150
+[end]
+
+//  ракета зеленая
+[effect=64151]
+	player="graphics\effects\arm\arG.epl"
+	hook=64151
+[end]
+
+//  ракета желтая
+[effect=64152]
+	player="graphics\effects\arm\arY.epl"
+	hook=64152
+[end]
+
+//  ракета белая
+[effect=64153]
+	player="graphics\effects\arm\arW.epl"
+	hook=64153
+[end]
+
+//  конусная фара 1
+[effect=60200]
+	player="graphics\effects\surf\light_small.epl"
+	hook=60200
+	hook=60201
+[end]
+
+//  конусный прожектор 1
+[effect=60205]
+	player="graphics\effects\surf\light_large.epl"
+	hook=60205
+	hook=60206
+[end]
+
+//  конусный прожектор 2
+[effect=60207]
+	player="graphics\effects\surf\light_large.epl"
+	hook=60207
+	hook=60208
+[end]
+
+//  лампа освещения кабины
+[effect=60210]
+	player="graphics\effects\surf\light_cockpit.epl"
+	hook=60210
+	hook=60211
+	hook=60215
+	hook=60216
+	hook=60217
+[end]
+
+//  лампа освещения кабины, второй набор для света меньшей интенсивности
+[effect=60310]
+	player="graphics\effects\surf\light_cockpit_flood.epl"
+	hook=60310
+	hook=60311
+	hook=60315
+	hook=60316
+	hook=60317
+[end]
+
+//  лампа освещения кабины ультрафиолетовая
+[effect=60212]
+	player="graphics\effects\surf\light_cockpit_uv.epl"
+	hook=60212
+	hook=60213
+[end]
+
+//  вспышка выстрела 1
+[effect=60220]
+	player="graphics\effects\surf\light_gun.epl"
+	hook=60220
+[end]
+
+//  вспышка выстрела 2
+[effect=60230]
+	player="graphics\effects\surf\light_gun.epl"
+	hook=60230
+[end]
+
+//  вспышка выстрела 3
+[effect=60240]
+	player="graphics\effects\surf\light_gun.epl"
+	hook=60240
+[end]
+
+//  вспышка выстрела 4
+[effect=60250]
+	player="graphics\effects\surf\light_gun.epl"
+	hook=60250
+[end]
+
+//  вспышка выстрела 5
+[effect=60260]
+	player="graphics\effects\surf\light_gun.epl"
+	hook=60260
+[end]
+
+//  вспышка выстрела 6
+[effect=60270]
+	player="graphics\effects\surf\light_gun.epl"
+	hook=60270
+[end]
+
+//Search light
+[effect=60300]
+	player="graphics\effects\surf\searchlight.epl"
+	hook=60300
+[end]
+
+//  вспышка выстрела пулеметов PC танка
+[effect=60320]
+	player="graphics\effects\surf\light_gun_4shots.epl"
+	hook=60320
+[end]
+
+//Search light selflight
+[effect=298]
+	player="graphics\effects\surf\searchlight_self.epl"
+	hook=60305
+[end]
+
+//Landing light
+[effect=60399]
+	player="graphics\effects\surf\LandLight.epl"
+	hook=60399
+[end]
+
+//--------------АНГАР----------------
+
+
+//Костер
+[effect=40000]
+	player="graphics\effects\surf\hangarFire.epl"
+	hook=40000
+	hook=40001
+	hook=40002
+	hook=40003
+[end]
+
+//Конический источник
+[effect=40010]
+	player="graphics\effects\Hangar\treeLight-Yellow.epl"
+	hook=40010
+	hook=40011
+	hook=40012
+	hook=40013
+[end]
+
+[effect=40015]
+	player="graphics\effects\Hangar\treeLight-blue.epl"
+	hook=40015
+	hook=40016
+	hook=40017
+	hook=40018
+[end]
+
+//Точечный источник
+[effect=40020]
+	player="graphics\effects\Hangar\treeLight-red.epl"
+	hook=40020
+	hook=40021
+	hook=40022
+	hook=40023
+[end]
+
+[effect=40025]
+	player="graphics\effects\Hangar\treeLight-green.epl"
+	hook=40025
+	hook=40026
+	hook=40027
+	hook=40028
+[end]
+
+
+//Снег
+[effect=40060]
+	player="graphics\effects\Hangar\HangarSnow.epl"
+	hook=40060
+	hook=40061
+	hook=40062
+	hook=40063
+[end]
+
+
+//Il2-backlight
+[effect=40064]
+	player="graphics\effects\Hangar\il2_backlight.epl"
+	hook=40064
+[end]
+

@@ -1,0 +1,574 @@
+Class_name = "CStaticBlock"
+object_name = "det-block-village4-03"
+detail_type = "DET_BUILDING" //list of types is in \inc\SimulationSystem\DetailTypes.inc
+
+CollisionBody="graphics/BlocksDetail/det-block-village4-03.col"
+SoundScript=""
+
+// "Эффекты закрытия пылью и пожара. Выберется тот вариант, для которого: колижн бокс, в котороый зафиксировано попадание, должен быть больше указаного числа, но меньше чем в следующем варианте эффекта.
+StaticEmitter=1,"luascripts\worldobjects\emitters\DetBuildingDemolition05.txt"
+StaticEmitter=5,"luascripts\worldobjects\emitters\DetBuildingDemolition10.txt"
+StaticEmitter=10,"luascripts\worldobjects\emitters\DetBuildingDemolition30.txt"
+StaticEmitter=30,"luascripts\worldobjects\emitters\DetBuildingDemolition50.txt"
+
+CrashDelay=1				// Задержка на разрушение, что бы успел родиться взрыв
+
+Shield=0					// Броня
+energyloss="",true,20,300		// Потеря энергии пули при попадании, true - проверка на входе и выходе в колижн-бокс, первое эквивалентная броня на входе и выходе, второе джоулей на каждый метр пути внутри колижена
+energyloss="#",true,1,1000		// Потеря энергии пули при попадании в блок с низкой прочностью (колижн помечен символом #)
+BallisticsMaxDurability=70000	// Предел Durability, умноженный на BallisticsDurabilityK, задаваемого в миссии, выше которого не будет дамага от пуль и осколков (только фугасный)
+WeakDurability=100.0			// Durability для хрупких частей кварталла (помеченых в колижене #), остальные берут Durability из миссии. Уменьшено в BallisticsDurabilityK=40
+BallisticsDurabilityK=40		// Коэффициент корреции повреждений, получаемых от пуль (BeamHit) и осколков
+
+logtreshold=0.0001
+
+CollisionStrength=0.4,4e6	// Сопротивление взаимопроникновению при столкновении [0..1], потребный импульс для разрушения (при проникновении больше 0.5м разрушится в любом случае)
+CollisionWeakStrength=0.2,1e6	// То же, но для хрупких частей кварталла (помеченых в колижене #)
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\Houseb02_D.txt"
+   BlockRef=5,5 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=3,3 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=3,3 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=4,4 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=1,1 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=2,2 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=5,5 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=5,5 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=-180.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\Houseb01_D.txt"
+   BlockRef=11,6 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=11,6 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=9,4 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=7,2 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=6,1 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=10,5 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=8,3 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=90.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\barnbig01_D.txt"
+   BlockRef=16,5 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=12,1 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=14,3 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=15,4 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=13,2 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=90.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\barnyard01_D.txt"
+   BlockRef=21,5 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=17,1 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=19,3 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=20,4 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=17,1 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=18,2 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=-90.3031
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\biggate02_D.txt"
+   BlockRef=22,1 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=22,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=1.00179e-005
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\fence01_D.txt"
+   BlockRef=23,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=-1.73028e-005
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\housew03_D.txt"
+   BlockRef=28,5 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=28,5 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=28,5 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=26,3 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=25,2 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=24,1 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=27,4 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=90.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\plankfences01_D.txt"
+   BlockRef=29,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=180.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\plankgate01_D.txt"
+   BlockRef=30,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=180.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\shed01_D.txt"
+   BlockRef=31,1 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=31,1 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=31,1 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=31,1 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=31,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=90.0
+   StaticEmitter=5,"luascripts\worldobjects\emitters\DetBuildingDemolitionStack.txt"
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\Stog101_D.txt"
+   BlockRef=32,1 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=32,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=0.0
+   StaticEmitter=5,"luascripts\worldobjects\emitters\DetBuildingDemolitionStack.txt"
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\Stog201_D.txt"
+   BlockRef=35,3 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=33,1 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=34,2 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=-83.5856
+   StaticEmitter=5,"luascripts\worldobjects\emitters\DetBuildingDemolitionStack.txt"
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\bathhouse01_D.txt"
+   BlockRef=36,1 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=36,1 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=36,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=-180.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\barnbig01_D.txt"
+   BlockRef=41,5 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=37,1 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=39,3 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=40,4 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=38,2 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=-1.73028e-005
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\bathhouse01_D.txt"
+   BlockRef=42,1 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=42,1 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=42,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=-90.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\bathhouse01_D.txt"
+   BlockRef=43,1 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=43,1 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=43,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=1.00179e-005
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\fence01_D.txt"
+   BlockRef=44,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=90.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\plankfences01_D.txt"
+   BlockRef=45,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=180.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\plankfences01_D.txt"
+   BlockRef=46,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=180.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\plankfences01_D.txt"
+   BlockRef=47,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=180.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\fence01_D.txt"
+   BlockRef=48,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=0.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\fence01_D.txt"
+   BlockRef=49,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=-90.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\fence01_D.txt"
+   BlockRef=50,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=-90.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\fence01_D.txt"
+   BlockRef=51,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=-180.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\fence01_D.txt"
+   BlockRef=52,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=-90.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\fence01_D.txt"
+   BlockRef=53,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=90.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\fence01_D.txt"
+   BlockRef=54,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=90.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\fence01_D.txt"
+   BlockRef=55,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=90.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\fence01_D.txt"
+   BlockRef=56,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=-1.73028e-005
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\plankfences01_D.txt"
+   BlockRef=57,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=180.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\plankfences01_D.txt"
+   BlockRef=58,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=180.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\plankfences01_D.txt"
+   BlockRef=59,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=180.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\plankfences01_D.txt"
+   BlockRef=60,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=180.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\plankfences01_D.txt"
+   BlockRef=61,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=180.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\plankfences01_D.txt"
+   BlockRef=62,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=180.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\plankfences01_D.txt"
+   BlockRef=63,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=-180.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\housew02_D.txt"
+   BlockRef=68,5 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=68,5 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=68,5 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=66,3 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=65,2 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=64,1 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=67,4 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=0.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\Cart01_D.txt"
+   BlockRef=69,1 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=69,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=5.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\plankfences01_D.txt"
+   BlockRef=70,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=180.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\plankfences01_D.txt"
+   BlockRef=71,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=180.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\Stog201_D.txt"
+   BlockRef=74,3 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=72,1 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=73,2 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=-90.0
+   StaticEmitter=5,"luascripts\worldobjects\emitters\DetBuildingDemolitionStack.txt"
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\plankfences01_D.txt"
+   BlockRef=75,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=180.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\shed01_D.txt"
+   BlockRef=76,1 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=76,1 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=76,1 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=76,1 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=76,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=-180.0
+   StaticEmitter=5,"luascripts\worldobjects\emitters\DetBuildingDemolitionStack.txt"
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\fence01_D.txt"
+   BlockRef=77,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=-90.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\fence01_D.txt"
+   BlockRef=78,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=-90.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\fence01_D.txt"
+   BlockRef=79,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=-90.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\fence01_D.txt"
+   BlockRef=80,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=90.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\fence01_D.txt"
+   BlockRef=81,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=0.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\fence01_D.txt"
+   BlockRef=82,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=0.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\fence01_D.txt"
+   BlockRef=83,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=0.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\fence01_D.txt"
+   BlockRef=84,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=-90.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\fence01_D.txt"
+   BlockRef=85,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=-90.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\Stog101_D.txt"
+   BlockRef=86,1 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=86,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=0.0
+   StaticEmitter=5,"luascripts\worldobjects\emitters\DetBuildingDemolitionStack.txt"
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\shed01_D.txt"
+   BlockRef=87,1 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=87,1 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=87,1 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=87,1 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=87,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=0.0
+   StaticEmitter=5,"luascripts\worldobjects\emitters\DetBuildingDemolitionStack.txt"
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\fence01_D.txt"
+   BlockRef=88,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=180.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\fence01_D.txt"
+   BlockRef=89,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=180.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\fence01_D.txt"
+   BlockRef=90,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=180.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\fence01_D.txt"
+   BlockRef=91,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=-180.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\fence01_D.txt"
+   BlockRef=92,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=180.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\WC01_D.txt"
+   BlockRef=93,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=-89.1641
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\lavka01_D.txt"
+   BlockRef=94,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=83.825
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\korito01_D.txt"
+   BlockRef=95,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=-18.6356
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\korito01_D.txt"
+   BlockRef=96,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=150.408
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\lavka01_D.txt"
+   BlockRef=97,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=-85.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\kazan02_D.txt"
+   BlockRef=98,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=180.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\lavka01_D.txt"
+   BlockRef=99,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=95.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\Cart01_D.txt"
+   BlockRef=100,1 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=100,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=-110.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\kazan02_D.txt"
+   BlockRef=101,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=180.0
+[end]
+

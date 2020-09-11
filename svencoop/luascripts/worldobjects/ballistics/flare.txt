@@ -1,0 +1,23 @@
+StartSpeed=90
+LockTime=4.0	//seconds
+
+[ColorIdx=0]
+	Count=50
+//        Name="Красная ракета"
+	FName="LuaScripts/WorldObjects/Ballistics/FlareRed.txt"
+[end]
+[ColorIdx=1]
+	Count=50
+//        Name="Зеленая ракета"
+	FName="LuaScripts/WorldObjects/Ballistics/FlareGreen.txt"
+[end]
+[ColorIdx=2]
+	Count=50
+//        Name="Белая ракета"
+	FName="LuaScripts/WorldObjects/Ballistics/FlareWhite.txt"
+[end]
+[ColorIdx=3]
+	Count=50
+//        Name="Пуля"
+	FName="LuaScripts/WorldObjects/Ballistics/BULLET_PISTOL.txt"
+[end]

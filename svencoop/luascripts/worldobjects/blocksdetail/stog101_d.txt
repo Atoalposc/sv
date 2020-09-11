@@ -1,0 +1,31 @@
+Class_name = "CSolidDebris"
+
+VisualImage=0,"graphics/BlocksDetail/Stog101_D.mgm",true
+CollisionBody="graphics/BlocksDetail/Stog101_D.col"
+SoundScript=""
+
+
+//CSolidTrash properties
+Spin=false
+DynamicCOG=true
+DestroyDelay=15	//seconds
+Rebound=0
+Friction=0.6
+Mass=10
+MaxDeep=0.13
+GravityK=1
+StabSpin=1
+ik=1
+
+
+
+
+
+//CSolidDebris properties
+PartArg=1,101	//PartID,	VisibilityArg in MGM
+PartArg=1,102
+PartArg=1,103
+PartArg=1,104
+PartArg=1,105
+PartArg=1,106
+PartArg=1,107

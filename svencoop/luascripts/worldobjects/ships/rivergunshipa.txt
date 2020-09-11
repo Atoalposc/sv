@@ -1,0 +1,293 @@
+class_name = "CShip"
+object_name = "Gun Ship type A"
+detail_type = "DET_SHIP" //list of types is in \inc\SimulationSystem\DetailTypes.inc
+
+//////	PhysicsBody properties
+//VisualImage = <int TYPE>,<string File_PathName>,<bool cast_shadows>
+
+VisualImage=0,"graphics/ships/RiverGunShipA/RiverGunShipA.mgm",true
+DistantLOD="LuaScripts/WorldObjects/Ships/DistantLODs/RiverGunShipA_Distant.txt"
+DLODArgs=63221,63222
+
+ImageAttr=27	// IA_NOCLIP | IA_NOCLIP_ANIM | IA_NOMINZ | IA_NOMINPIXELS
+//	IA_DEFAULT=0,
+//	IA_NOCLIP=1,
+//	IA_NOCLIP_ANIM=2,
+//	IA_NOROTINTERPOLATION=4,
+//	IA_NOMINZ=8,
+//	IA_NOMINPIXELS=16,
+//	IA_NOPOSINTERPOLATION=32,
+//	IA_CLOSEVIEWARG=64,
+//	IA_ALWAYSVISIBLE=128,
+//	IA_SCALEARG=256,
+//	ImageAttr=Attr1+Attr2+...+AttrN
+
+CollisionBody="graphics/ships/RiverGunShipA/RiverGunShipA.col"
+
+SoundScript="LuaScripts/Sound/Vehicles/RiverGunShipA.cfg"
+
+[attach=0]
+	position= 15.415, 1.474, 0
+	object = "LuaScripts/WorldObjects/Ships/Turrets/RiverGunShipA-Gun.txt"
+[end]
+
+[attach=1]
+	position= -14.216, 1.474, 0
+	rotation= 0, 180, 0
+	object = "LuaScripts/WorldObjects/Ships/Turrets/RiverGunShipA-Gun.txt"
+[end]
+
+[attach=2]
+	position= 7.107, 6.021, 0
+	object = "LuaScripts/WorldObjects/Ships/Turrets/1124-MG.txt"
+[end]
+
+[attach=3]
+	position= 2.843, 4.423, -4.718
+	rotation= 0, 270, 0
+	object = "LuaScripts/WorldObjects/Ships/Turrets/1124-Flak.txt"
+[end]
+
+[attach=4]
+	position= 2.843, 4.423, 4.718
+	rotation= 0, 90, 0
+	object = "LuaScripts/WorldObjects/Ships/Turrets/1124-Flak.txt"
+[end]
+
+[attach=5]
+	position= 0.0, 0.0, 0
+	object = "LuaScripts/WorldObjects/Bots/BotShipper.txt"
+[end]
+
+[attach=6]
+	position= 7.7, 5.5, -2.2
+	rotation= 30, 0, 0
+	object = "LuaScripts/WorldObjects/FlareGun.txt"
+[end]
+
+AttachedCameras = "LuaScripts\WorldObjects\fixcameras\Vehicles\RiverGunShipA.txt"
+
+CommandMonitor="LuaScripts/WorldObjects/VehicleMonitor.txt"
+
+
+//логирование повреждений
+logtreshold=0.0001
+MaxDeleteTime = 600
+
+length = 53
+height = 1.26
+width  = 7.8
+
+TotalPoints = 6
+
+point0 = 18, 0, -3.6, 140, 1.5, 0.5
+point1 = 18, 0, 3.6, 140, 1.5, 0.5
+point2 = 0, 0, -3.6, 140, 1.5, 0.5
+point3 = 0, 0, 3.6, 140, 1.5, 0.5
+point4 = -18, 0, -3.6, 140, 1.5, 0.5
+point5 = -18, 0, 3.6, 140, 1.5, 0.5
+
+// имитация волн. Для реки, когда нет 3D волнения.
+MaxWaveTime = 8		// период
+WavePointSize = 1.5	// амплитуда
+MaxWave = 50000		// максимальное усилие
+
+Cx = 4000.0					// демпфирование качки
+Cw = 100.0					// общий параметр вязкого трения воды
+
+sendrate = 20				// Делитель базовой частоты 50Гц отправки позиции в сеть (=20 значит что частота 2.5Гц)
+
+mass = 400000.0
+MaxEngineForce = 65000.0
+MinEngineForce = 100
+Csf=1.5
+PrioritySpeed=5.4
+MaxPropRotationRPM=40.0	// скорость вращения (оборотов/минуту) винта на максимальном газу
+PropRotationSmoothK=0.01	// коэффициент сглаживания изменения скорости вращения
+TurnShift=0.5				// скорость перекладки руля в долях хода в секунду
+RudderAngle=70				// предельный угол отклонения руля
+Cwx=15						// поэлементный параметр вязкого трения воды, продольный, равен Cw если не задан
+Cwz=500						// поэлементный параметр вязкого трения воды, поперечный, равен Cwx*20 если не задан
+Cang=0.2					// демфирование поворота
+RudderPos=-10,-1.2,0		// позиция приложения силы тяги (ставими на винты)
+FrictionPos=0,-3,0			// позиция приложения силы сопротивления воды
+GlidingK = 0.0				// коэффициент соотношения между сопротивлением вдоль оси X и подъемной силой (глиссирование). По умолчанию - 0
+GlidingPosK = 0.8			// коэффициент смещения глиссирующей силы. 1 - в носу, 0 - в центре.
+
+// Damage model
+
+energyloss="",true,5.0,1000		// Потеря энергии пули при попадании, true - проверка на входе и выходе в колижн-бокс, первое эквивалентная броня на входе и выходе, второе джоулей на каждый метр пути внутри колижена
+
+Armor=5						// Толщина дефолтной брони
+
+LifeRate=350000
+LifeRateFrag=350000
+
+EngineExhaustArg = 63400
+BackTrailArg = 63222
+FrontTrailArg = 63221
+PropSprayArg=63231
+
+[splash]
+	pos = 27.852, 0.0, 0
+	splashArg = 63229
+	SplashTotalTime = 1.0
+	SplashAttackTime = 0.1
+	SplashKoeff = 30
+	startArgValue = 0.5
+	
+	splashDiffHeight = 1.5
+	// time = splashStackCount * splashstacktime
+	splashStackCount = 50
+	splashstacktime = 0.1
+[end]
+
+floathook=27.852, 0.3, 0,	100,false	//x,y,z, Arg, 3D water, аргумент перемещения хука следа от форштевня
+floathook=-26.452, 0.3, 0,	101,false	// аргумент перемещения хука кильватерного следа
+floathook=27.852, 0.3, 0,	102,true	// аргумент перемещения хука всплесков форштевня
+floathook=3.18, 0.3, -6.27,	103,true	// аргумент перемещения хука буруна от винтов
+floathook=3.18, 0.3, 6.27,	104,true	// аргумент перемещения хука буруна от винтов
+
+OneSectionMode = true
+SectionsHealthPercent = 1.0f
+
+CommandSectionId = 3
+
+MinMovementHealth = 0.3
+
+SinkEffectScript = "LuaScripts/WorldObjects/Trash/SinkBarge.txt"
+
+[section=0]
+	Armor=5
+	LifeRate=350000
+	LifeRateFrag=350000
+
+	ConvexName = "collision_1"
+
+	// effect
+	EffectCoord = 23.5, 0.9, 2.2
+	ExplosionScript = "LuaScripts/WorldObjects/explosions/Detonation/Barge.txt"
+
+	DestructArg = 761
+	FiringArg = 63210
+	SmokeArgBase = 63210
+	SmokeArgTotalNum = 1
+	SmokeStartHealth = 0.48			// Лайф, при котором начинается пожар
+	FireEffectTime = 300.0			// Время пожара при полном уничтожении
+
+	RegenerationMax = 0.49			// До какого Life само-чиниться
+	RegenerationMin = 0.2			// Минимальное значение Life, ниже которого починки не будет
+	RegenerationPercent = 0.0016	// Скорость восстановления, долей Life в секунду
+	Firing=0.0008					// Скорость сгорания от большого пожара, долей Life в секунду
+
+	MinMovementHealth = 0.2			// Лайф, при котором перестанет ездить
+	MinAttackHealth = 0.05			// Лайф, при котором перестанет стрелять
+
+	CollisionLifeRate = 800000		// Определяет силу стороной, где секция корабля, нужную для ее уничтожения. Приведение по массе к \Ships\1124.txt. Надстройки в 5 раз меньше.
+	CollisionMinImpulse = 16000		// Определяет минимальную нужную для повреждения (0.02 of CollisionLifeRate).
+	AlwaysColDamage=false			// True - повреждается от столкновения с любого направления
+
+	pointsTotal= 1
+	point0 = 1
+[end]
+
+[section=1]
+	Armor=5
+	LifeRate=350000
+	LifeRateFrag=350000
+
+	ConvexName = "collision_3"
+
+	// effect
+	EffectCoord = -9.0, 1.2, -1.0
+	ExplosionScript = "LuaScripts/WorldObjects/explosions/Detonation/Barge.txt"
+
+	DestructArg = 771
+	FiringArg = 63211
+	SmokeArgBase = 63211
+	SmokeArgTotalNum = 1
+	SmokeStartHealth = 0.48			// Лайф, при котором начинается пожар
+	FireEffectTime = 300.0			// Время пожара при полном уничтожении
+
+	RegenerationMax = 0.49			// До какого Life само-чиниться
+	RegenerationMin = 0.2			// Минимальное значение Life, ниже которого починки не будет
+	RegenerationPercent = 0.0016	// Скорость восстановления, долей Life в секунду
+	Firing=0.0008					// Скорость сгорания от большого пожара, долей Life в секунду
+
+	MinMovementHealth = 0.2			// Лайф, при котором перестанет ездить
+	MinAttackHealth = 0.05			// Лайф, при котором перестанет стрелять
+
+	CollisionLifeRate = 800000		// Определяет силу стороной, где секция корабля, нужную для ее уничтожения. Приведение по массе к \Ships\1124.txt. Надстройки в 5 раз меньше.
+	CollisionMinImpulse = 16000		// Определяет минимальную нужную для повреждения (0.02 of CollisionLifeRate).
+	AlwaysColDamage=false			// True - повреждается от столкновения с любого направления
+
+	pointsTotal= 1
+	point0 = 2
+[end]
+
+[section=2]
+	Armor=5
+	LifeRate=350000
+	LifeRateFrag=350000
+
+	ConvexName = "collision_2"
+
+	// effect
+	EffectCoord = -20.0, 0.5, -3.8
+	ExplosionScript = "LuaScripts/WorldObjects/explosions/Detonation/Barge.txt"
+
+	DestructArg = 781
+	FiringArg = 63212
+	SmokeArgBase = 63212
+	SmokeArgTotalNum = 1
+	SmokeStartHealth = 0.48			// Лайф, при котором начинается пожар
+	FireEffectTime = 300.0			// Время пожара при полном уничтожении
+
+	RegenerationMax = 0.49			// До какого Life само-чиниться
+	RegenerationMin = 0.2			// Минимальное значение Life, ниже которого починки не будет
+	RegenerationPercent = 0.0016	// Скорость восстановления, долей Life в секунду
+	Firing=0.0008					// Скорость сгорания от большого пожара, долей Life в секунду
+
+	MinMovementHealth = 0.2			// Лайф, при котором перестанет ездить
+	MinAttackHealth = 0.05			// Лайф, при котором перестанет стрелять
+
+	CollisionLifeRate = 800000		// Определяет силу стороной, где секция корабля, нужную для ее уничтожения. Приведение по массе к \Ships\1124.txt. Надстройки в 5 раз меньше.
+	CollisionMinImpulse = 16000		// Определяет минимальную нужную для повреждения (0.02 of CollisionLifeRate).
+	AlwaysColDamage=false			// True - повреждается от столкновения с любого направления
+
+	pointsTotal= 1
+	point0 = 4
+
+[end]
+
+[section=3]
+	Armor=5
+	LifeRate=175000
+	LifeRateFrag=175000
+
+	InfluenceOnTotalHealth = false
+
+	ConvexName = "collision_4"
+
+	// effect
+	EffectCoord = 7.45, 5.2, 1.5
+	ExplosionScript = "LuaScripts/WorldObjects/explosions/Detonation/VehicleNoDmg.txt"
+
+	DestructArg = 901
+	FiringArg = 63213
+	SmokeArgBase = 63213
+	SmokeArgTotalNum = 1
+	SmokeStartHealth = 0.48			// Лайф, при котором начинается пожар
+	FireEffectTime = 300.0			// Время пожара при полном уничтожении
+
+	RegenerationMax = 0.49			// До какого Life само-чиниться
+	RegenerationMin = 0.2			// Минимальное значение Life, ниже которого починки не будет
+	RegenerationPercent = 0.0016	// Скорость восстановления, долей Life в секунду
+	Firing=0.0008					// Скорость сгорания от большого пожара, долей Life в секунду
+
+	CollisionLifeRate = 160000		// Определяет силу стороной, где секция корабля, нужную для ее уничтожения. Приведение по массе к \Ships\1124.txt. Надстройки в 5 раз меньше.
+	CollisionMinImpulse = 3200		// Определяет минимальную нужную для повреждения (0.02 of CollisionLifeRate).
+	AlwaysColDamage=false			// True - повреждается от столкновения с любого направления
+[end]
+
+DebugInfo = false

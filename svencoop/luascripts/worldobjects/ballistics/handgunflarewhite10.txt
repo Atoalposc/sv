@@ -1,0 +1,17 @@
+VisAnimVal=0.15
+
+LockTime=0.5	//seconds
+
+SelfShoot=true
+
+ContentName="defaultHandgun",4
+
+[clip]
+	ReloadDelay=3
+	Capacity=1
+	Ammo=10
+	StartSpeed=90
+	FName="LuaScripts/WorldObjects/Ballistics/FlareWhite.txt"
+	FireSound=3,4
+	ReloadSound=5
+[end]

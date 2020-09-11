@@ -1,0 +1,43 @@
+Class_name = "CBatchExplosion"
+object_name = "HE_328mm_213kg_66kg_water"
+
+// БЧ снаряда/бомбы, расчитнано из ТНТ=66кг, массы снаряда 213кг, калибра 328мм
+
+//////	PhysicsBody properties
+VisualImage=0,"graphics\effects\Arm\hit_shell_he_130-240kg_water.epl",false
+VisualRadius=100
+ImageAttr=17		//IA_NOCLIP | IA_NOMINPIXELS
+
+SoundScript="LuaScripts\Sound\explosions\Bomb\Water_Med.cfg"
+
+ExplosionPower=0.5			// Сила звука взрыа, переменная для FMOD
+Animation=1					// Номер хука взрыва
+LiveTime=8.1					// Время жизни взрыва
+AnimationTime=8.1				// Время анимации взрыва
+Ranges=1,0.01,0.99,0		// (кол-во вариантов, начало 1го диапазона, конец 1-го диапазона, дельта прибавляемая к границам для следующего диапазона)
+//"RangesCnt, Range0Start, fRange0End, fRangeStep"; ARG=m_fRange0Start+(m_fRange0End-m_fRange0Start)*t+m_fRangeStep*data->m_RangeIdx
+//Ranges=1,0.01,0.99,0
+//Ranges=2,0.01,0.49,0.5
+//Ranges=3,0.01,0.32,0.33
+//Ranges=4,0.01,0.24,0.25
+//Ranges=5,0.01,0.19,0.2
+
+// Параметры Sphere Hit, внешний взрыв
+
+Radius=85.4	// Радиус сферы воздействия взрыва, определяющий выборку объектов
+TNT_equ=66	// Тротилловый эквивалент для моделирования атмосферной ударной волны
+
+// Фугасное воздействие: дальность, (-1 не использ.), пары (броня, дамаг за броней)
+ArmorFoug=0.0,-1,	196,98178,	0,196355
+ArmorFoug=3.3,-1,	4,1873,		0,3745
+ArmorFoug=14.7,-1,				0,193
+ArmorFoug=28.9,-1,				0,50
+
+// Осколочное воздействие
+ShrapnelQuantity=14863
+FragmentMass=0.0040
+// Единичный осколок: дальность, скорость, пары (броня, дамаг за броней)
+ArmorShr=0.0,1147,	184,260,	147,651,	0,1042
+ArmorShr=8.4,961,	99,183,		79,457,		0,731
+ArmorShr=42.7,454,	7,41,		6,102,		0,163
+ArmorShr=85.4,215,				1,9,		0,37

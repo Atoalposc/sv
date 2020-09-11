@@ -1,0 +1,18 @@
+Class_name = "CBatchTrash"
+
+
+//////	PhysicsBody properties
+SoundScript="LuaScripts\Sound\explosions\Splash\Tree_Fall.cfg"
+SoundTime=3
+SoundStrength=1
+
+VisualRadius=1
+ImageAttr=4	//IA_NOINTERPOLATION
+
+radius=1
+mass=2
+
+horiz_friction=0.3
+
+lifetime=5
+

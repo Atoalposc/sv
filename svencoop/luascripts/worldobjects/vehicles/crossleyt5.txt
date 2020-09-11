@@ -1,0 +1,199 @@
+class_name = "CTruck"
+object_name = "Crossley T5"
+detail_type = "DET_TRANSPORT" //list of types is in \inc\SimulationSystem\DetailTypes.inc
+
+VisualImage=0,"graphics/vehicles/CrossleyT5/CrossleyT5.mgm",true
+
+ImageAttr=24	// IA_NOMINPIXELS | IA_NOMINPIXELS
+//	IA_DEFAULT=0,
+//	IA_NOCLIP=1,
+//	IA_NOCLIP_ANIM=2,
+//	IA_NOROTINTERPOLATION=4,
+//	IA_NOMINZ=8,
+//	IA_NOMINPIXELS=16,
+//	IA_NOPOSINTERPOLATION=32,
+//	IA_CLOSEVIEWARG=64,
+//	IA_ALWAYSVISIBLE=128,
+//	IA_SCALEARG=256,
+//	ImageAttr=Attr1+Attr2+...+AttrN
+
+CollisionBody="graphics/vehicles/CrossleyT5/CrossleyT5_Phys.col"
+HitBody="graphics/vehicles/CrossleyT5/CrossleyT5.col"
+
+SoundScript="LuaScripts/Sound/Vehicles/Horch830.cfg"
+
+[attach=0]
+	position= -0.386,1.003,0.285
+	object = "LuaScripts/WorldObjects/Bots/BotDriverTruck.txt"
+[end]
+
+[attach=1]
+	position= -0.1, 1.5, -1
+	rotation= 30, 0, 0
+	object = "LuaScripts/WorldObjects/FlareGun.txt"
+[end]
+
+[attach=2]
+	position= -0.1, 1.5, 0.0
+	object = "LuaScripts/WorldObjects/Spotter.txt"
+[end]
+
+TargetHeight = 1.0			// Дельта по высоте к центру модели используемая при прицеливании и оценке видимости
+
+CommandMonitor="LuaScripts/WorldObjects/VehicleMonitor.txt"
+
+sendrate = 10				// Делитель базовой частоты 50Гц отправки позиции в сеть (=10 значит что частота 5Гц)
+
+PrioritySpeed = 10.0		// Референсная скорость по полю, быстрее этой скорости не ездит, на этой скорости сила эффекта пыли становится максимальной
+PrioritySpeedRoad = 20.0	// Референсная скорость по дороге, быстрее этой скорости не ездит (референса нет)
+Mass = 1370.0				// Полная масса танка (референса нет)
+StartEngineForce = 30.0		// Приемистость двигателя, при повышении так же падает макс мощность на ту же величину
+MaxEngineForce = 8800.0		// Максимально возможная сила двигателя, лучше настраивать так, что бы на ровной поверхности на макс скорости газ был 0.95, тогда эффект выхлопа будет соотвтетсвовать задумке
+MaxTransmissionKoeff = 1.1	// Коэфициент понижения передачи на околонулевой скорости, натраивать так, что бы в миссии \Missions\TestTank_hill.Mission в гору шел около 1.6..1.8м/с
+WheelRadius = 0.427			// Радиус колеса
+Cdrag = 15.0				// Коэфициент сопротивления воздушной среды, пропорциональный квадрату скорости движения
+Crr = 300.0					// Коэфициент сопротивления движению, пропорционального скорости движения
+CrrOffRoad = 520.0			// Коэфициент сопротивления движению по бездорожью, пропорционального скорости движения. Настраивать так, что бы газ на макс скорости по бездорожью на ровной поверхности был 0.95.
+CrrExt = 3500.0				// Коэфициент сопротивления воздушной среды, пропорциональный скорости движения
+Cbraking = 3000.0			// Коэфициент эффективности тормозов
+Csf = 0.17					// Коэфициент сухого трения об поверхность, пропорционален массе, поидее зависит только от типа ходовой части (колеса или гусеницы)
+CsfOffRoad = 0.25			// Коэфициент сухого трения об поверхность по бездорожью. Подбирать совместно с CrrOffRoad.
+Cang = 30.0					// Коэфициент демфирования угловых скоростей
+LengthBetweenAxis = 3.6		// Колесная база (растсояние между осями)
+LengthBetweenWheels = 1.77	// Колея (габарит по внешним сторонам колес)
+MaxTurningAngle = 20.0		// Максимальный угол поворота управляемых колес
+OrientSmoothParam = 0.01	// Сглаживание угловых вращений на резких вертикальных перегибах/обрывах
+WheelSmokeArg = 61016		// Аргумент включения фар
+LightsCount = 1				// Кол-во источников света фар
+LightsArgBase = 60200		// Аргумент включения фар
+FreezeOnDestroy=true		// Поведение после уничтожения, true - замирает на месте, если нет - физично перемещается при столкновениях
+
+energyloss="",true,1,200		// Потеря энергии пули при попадании, true - проверка на входе и выходе в колижн-бокс, первое эквивалентная броня на входе и выходе, второе джоулей на каждый метр пути внутри колижена
+
+RegenerationMax = 1.0		// До какого Life само-чиниться танк
+RegenerationMin = 0.5		// Минимальное значение Life, ниже которого починки не будет
+RegenerationPercent = 0.0	// Скорость восстановления, долей Life в секунду
+
+Firing=0.002				// Скорость сгорания боекомплекта от пожара, долей Life в секунду
+SmokeStartHealth = 0.5		// Лайф двигателя, при котором начнется дым из двигателя
+MinFiringHealth = 0.5		// Лайф боекомплекта, при котором начнется пожар
+MinMovementHealth = 0.25	// Лайф двигателя, при котором перестанет ездить
+MinAttackHealth = 0.10		// Лайф объекта, при котором перестанет стрелять
+
+FireEffectTime = 300.0		// Сколько будет гореть по времени после взрыва
+DestructArg = 281			// Аргумент дамага
+SmokeArgBase    = 60000		// Аргумент малого пожара
+SmokeArgTotalNum = 4		// Кол-во вариантов пожара, 1-й вариант будет по хуку 60000, второй по 60001, третий по 60002 и т.д.
+FiringArg = 60100			// Аргумент большого пожара
+
+ExplosionScript = "LuaScripts/WorldObjects/explosions/Detonation/VehicleNoDmg.txt"	// Эффект при полном взрыве
+OnDropLandScript = "LuaScripts/WorldObjects/Emitters/DustBlow5_3.txt"			// Эффект при падении на землю
+OnDropWaterScript = "LuaScripts/WorldObjects/Emitters/WaterSpray5_3.txt"		// Эффект при падении на воду
+
+CriticalWaterLevel = 1.5		// Гулбже начнет умирать
+CriticalHeigthLevel = 3.0		// При падении с большей высоты умрет
+DivingSpeed = 0.8				// Скорость погружения в воду
+
+ImpulseToDestroy = 6700		// Определяет силу удара обеъкта об танк, нужную для его уничтожения. Подвижные объекты на 6 категорий по размерам. Автомобили, малые грузовики, большие грузовики, малые танки, средние танки, большие танки.
+ImpulseMinimumLevel = 1350		// Определяет минимальную силу удара об танк, нужную для его повреждения. Для пушек снижено что бы их можно было давить.
+ColDamageDelay=0.5				// Интервалы проверки дамага от колижена (важно для случая, когда один объект вошел в другой, определяет скорость умирания от этого)
+
+logtreshold=0.0001				// Минимальный шаг дамага, записываемый в лог миссии
+
+
+[moveDeviator]
+  HiFreqAmp = 0.2f
+  MaxDeviation = 1.0f
+  Periods = 2.1, 0.4;
+[end]
+accelDirK = 0.3
+accelDirSmooth = 0.15
+accelSideK = 0.3
+accelSideSmooth = 0.15
+
+[CrewEscape]
+	EscapeHealth=0.0f
+	EscapeAtLeast=1
+	DistanceToRun=50.0f
+	EscapePos=-0.15,0,-1.2
+
+	EscapeVisArg=1000
+	
+	Bot="LuaScripts\WorldObjects\Bots\BotField_SoldierRUhat.txt"
+	Bot="LuaScripts\WorldObjects\Bots\BotField_SoldierRU.txt"
+	Bot="LuaScripts\WorldObjects\Bots\BotField_SoldierRU.txt"
+[end]
+
+Armor=0					// Толщина брони, общий параметр, нужен для других ИИ для определения типа снаряда
+
+// Модель повреждения. Исходный убалансированный лайф объекта до введения простой модели 2500.
+
+[DmgElement = ammo]
+	damageablePart="ammo"
+	LifeRate=2500
+	LifeRateFrag=2500
+	Armor=0
+	CollisioDamageSens=0.5
+[End]
+
+[DmgElement = crew]
+	damageablePart="crew"
+	LifeRate=500		// фиксированно 500 для всех
+	LifeRateFrag=500
+	Armor=0
+	CollisioDamageSens=0
+[End]
+
+[DmgElement = hull]
+	damageablePart="hull_1"
+	LifeRate=1250		// 0.5 от исходного лайфа
+	LifeRateFrag=1250
+	Armor=0
+	CollisioDamageSens=1
+[End]
+
+[DmgElement = engine]
+	damageablePart="engine"
+	LifeRate=1250		// 0.5 от исходного лайфа
+	LifeRateFrag=1250
+	Armor=5
+	CollisioDamageSens=1
+[End]
+
+[DmgElement = wheel_FL]
+	damageablePart="wheel_FL"
+	LifeRate=650		// фиксировано для автомобиля
+	LifeRateFrag=650
+	Armor=0
+	DamageArg=291
+	CollisioDamageSens=1
+[End]
+
+[DmgElement = wheel_FR]
+	damageablePart="wheel_FR"
+	LifeRate=650		// фиксировано для автомобиля
+	LifeRateFrag=650
+	Armor=0
+	DamageArg=293
+	CollisioDamageSens=1
+[End]
+
+[DmgElement = wheel_RL]
+	damageablePart="wheel_RL"
+	LifeRate=650		// фиксировано для автомобиля
+	LifeRateFrag=650
+	Armor=0
+	DamageArg=294
+	CollisioDamageSens=1
+[End]
+
+[DmgElement = wheel_RR]
+	damageablePart="wheel_RR"
+	LifeRate=650		// фиксировано для автомобиля
+	LifeRateFrag=650
+	Armor=0
+	DamageArg=292
+	CollisioDamageSens=1
+[End]
+
+DebugInfo = false				// Позволяет выводить скорость танка и значение оси газа для настройки двигателя

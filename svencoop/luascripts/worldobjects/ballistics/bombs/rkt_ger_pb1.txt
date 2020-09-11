@@ -1,0 +1,60 @@
+Class_name = "CCumulativeRocket"
+object_name = "RKT_GER_PB1"
+
+//////	PhysicsBody properties
+VisualImage=0,"graphics/Ammo/Rocket_Pb1.mgm",false
+SoundScript="LuaScripts/Sound/Vehicles/Rocket_280.cfg"
+
+//CollisionBody="graphics/ammo/ammo.col"
+
+visualradius=5
+
+ImageAttr=1
+VisArg=100
+
+NoDirecion=false
+CalcWind=true
+ProcessNetwork=true
+
+Armor=0,0,		230,50,	0,100 // На всякий случай оставлен минимальный дамаг, для статистики и т.п.
+
+DefaultStartSpeed=0		//дефолтная начальная скорость, нужно устанавливать в максимальную траекторную +200м/с при "простреле" ракеты утилитой баллистического калькулятора, для этой ракеты 340м/с + 200м/с = 540м/с
+MaxDistance=8000		//предельная дальность, дальше которой объект удалится
+Mass=5.5				//масса ракеты за вычетом 1кг зарЯда двигателЯ
+Mkr=0.96				//значение числа Маха, после которого начинается повышение Cx до момента M=1, зависит от формы тела но не от размера
+Mmax=1.5				//значение числа Маха, до которого завершается понижение Cx, начавшееся при M=1, зависит от формы тела но не от размера
+Cx_0=0.109				//значение к-та сопротивления при (M <= Mkr), зависит от формы тела но не от размера
+Cx_max=0.75				//значение к-та сопротивления при (M = 1), зависит от формы тела но не от размера
+Cx_1=0.52				//значение к-та сопротивления при (M >= Mmax), зависит от формы тела но не от размера
+R=0.044					//радиус ракеты
+KPhi=0.01				//параметр скорости уменьшения угла атаки
+KPhiAcc=0				//параметр ускорения уменьшения угла атаки
+KJ=7					//параметр общей калибровки уменьшения угла атаки
+LiveTime=30				//время жизни объекта (большее из двух: время полета на MaxDistance или время горения трассера + TimeToDestroy)
+ExplodeTime=0			//время самоподрыва (=0 - самоподрыва нет)
+
+TimeToDestroy=0		//время жизни объекта после попадания в скрытом состоянии, что бы трейл трассера не пропадал пока не расствориться
+
+ThrustArg=50211
+FlameArg=101
+EngineEffectStopTime=1.2
+
+Spin=25,45				//Rocket rotation angular speed random limits
+Deviation=0.4			//Deviation of the thrust 
+EngineThrust=5100		//Engine power
+EngineDuration=0.44,0.46	//Engine work time random limits
+
+ReferenceSpin=35			//Ideal rocket rotation angular speed random limits for aiming
+ReferenceEngineDuration=0.6	//Ideal rocket engine work time for aiming (можно подгонять дальность вдали)
+ReferenceEngineThrust=5100			//Тяга двигателя референсной ракеты для Aiming Help (можно подгонять дальность вблизи и вдали)
+ReferenceDistance=5000		//Aiming range limit
+
+FuseArmDelay=-1			//Задержка до взведения взрывателя. Если <=0 то работает стандартный механизм вертушки (таск BOS-744). Если нет - фиксированное значение.
+HitDefaultDelay=0		//Задержка до взрыва после попадания бомбы
+
+debug=false
+
+HitDummy=""
+
+HitItemConfig = "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_GER_PB1_HIT.txt"	// Конфиг "пули" которой заменяется ракета при попадании по HitArmor
+HitItemStartSpeed = 2000	// Начальная скорость "пули" которой заменяется ракета при попадании по HitArmor, если параметр не задан, то скорость будет равна скорости ракеты в момент попадания

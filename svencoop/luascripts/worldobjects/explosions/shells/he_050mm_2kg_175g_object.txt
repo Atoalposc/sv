@@ -1,0 +1,43 @@
+Class_name = "CBatchExplosion"
+object_name = "HE_050mm_2kg_175g_object"
+
+// БЧ 50мм немецкого снаряда 5 cm Sprgr.Patr. 38 к пушке KwK 39 L/60, расчитнано из ТНТ=175г, массы пули 1.81кг, калибра 50мм
+
+////// PhysicsBody properties
+VisualImage=0,"graphics\effects\Arm\hit_shell_he_200-1000g_object.epl",false
+visualradius=12
+//ImageAttr=17		//IA_NOCLIP | IA_NOMINPIXELS
+
+SoundScript="LuaScripts\Sound\explosions\HE\Metal_Med.cfg"
+
+ExplosionPower=0.5			// Сила звука взрыа, переменная для FMOD
+Animation=1					// Номер хука взрыва
+LiveTime=7.08				// Время жизни взрыва
+AnimationTime=7.08			// Время анимации взрыва
+Ranges=3,0.01,0.32,0.33		// (кол-во вариантов, начало 1го диапазона, конец 1-го диапазона, дельта прибавляемая к границам для следующего диапазона)
+//"RangesCnt, Range0Start, fRange0End, fRangeStep"; ARG=m_fRange0Start+(m_fRange0End-m_fRange0Start)*t+m_fRangeStep*data->m_RangeIdx
+//Ranges=1,0.01,0.99,0
+//Ranges=2,0.01,0.49,0.5
+//Ranges=3,0.01,0.32,0.33
+//Ranges=4,0.01,0.24,0.25
+//Ranges=5,0.01,0.19,0.2
+
+// Параметры Sphere Hit, внешний взрыв
+
+Radius=17.0	// Радиус сферы воздействия взрыва, определяющий выборку объектов
+TNT_equ=0.175	// Тротилловый эквивалент для моделирования атмосферной ударной волны
+
+// Фугасное воздействие: дальность, (-1 не использ.), пары (броня, дамаг за броней)
+ArmorFoug=0.0,-1,	6,3103,	0,6206
+ArmorFoug=0.9,-1,	1,555,	0,1109
+ArmorFoug=2.3,-1,			0,158
+ArmorFoug=4.0,-1,			0,50
+
+// Осколочное воздействие
+ShrapnelQuantity=361
+FragmentMass=0.0018
+// Единичный осколок: дальность, скорость, пары (броня, дамаг за броней)
+ArmorShr=0.0,740,	11,50,	9,124,	0,198
+ArmorShr=1.7,705,	9,45,	7,112,	0,180
+ArmorShr=8.5,579,	5,30,	4,76,	0,121
+ArmorShr=17.0,457,			2,19,	0,76

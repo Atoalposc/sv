@@ -1,0 +1,47 @@
+class_name = "CRobotCameraOperator"
+object_name = "RobotCameraOperator"
+
+//////	PhysicsBody properties
+//SoundScript="LuaScripts/Fokker_DR1.cfg"
+
+
+shiftBackMax=20.0
+shiftBackMin=0.5
+
+cameraFovMax=100.0
+cameraFovMin=30.0
+	
+shiftTop=1.5
+cameraWidth=0.8
+
+[COSTATE]
+	default=1
+	far=1
+	shiftBack=20.0
+	cameraFov=100.0
+[end]
+
+[COSTATE]	
+	shiftBack=6.5
+	cameraFov=80.0
+[end]
+
+[COSTATE]
+	zoom=1
+	shiftBack=0.5
+	cameraFov=30.0
+[end]
+
+poismooth=0.09
+positionSmooth=0.118
+correctionSmooth=0.05
+
+[POSDeviation]
+	MaxDeviation=1.0f;
+	Periods=20,12;
+[end]
+
+[POIDeviation]
+	MaxDeviation=0.03f;
+	Periods=0.2,0.13;
+[end]

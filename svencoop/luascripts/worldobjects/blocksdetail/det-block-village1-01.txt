@@ -1,0 +1,133 @@
+Class_name = "CStaticBlock"
+object_name = "det-block-village1-01"
+detail_type = "DET_BUILDING" //list of types is in \inc\SimulationSystem\DetailTypes.inc
+
+CollisionBody="graphics/BlocksDetail/det-block-village1-01.col"
+SoundScript=""
+
+// "Эффекты закрытия пылью и пожара. Выберется тот вариант, для которого: колижн бокс, в котороый зафиксировано попадание, должен быть больше указаного числа, но меньше чем в следующем варианте эффекта.
+StaticEmitter=1,"luascripts\worldobjects\emitters\DetBuildingDemolition05.txt"
+StaticEmitter=5,"luascripts\worldobjects\emitters\DetBuildingDemolition10.txt"
+StaticEmitter=10,"luascripts\worldobjects\emitters\DetBuildingDemolition30.txt"
+StaticEmitter=30,"luascripts\worldobjects\emitters\DetBuildingDemolition50.txt"
+
+CrashDelay=1				// Задержка на разрушение, что бы успел родиться взрыв
+
+Shield=0					// Броня
+energyloss="",true,20,300		// Потеря энергии пули при попадании, true - проверка на входе и выходе в колижн-бокс, первое эквивалентная броня на входе и выходе, второе джоулей на каждый метр пути внутри колижена
+energyloss="#",true,1,1000		// Потеря энергии пули при попадании в блок с низкой прочностью (колижн помечен символом #)
+BallisticsMaxDurability=70000	// Предел Durability, умноженный на BallisticsDurabilityK, задаваемого в миссии, выше которого не будет дамага от пуль и осколков (только фугасный)
+WeakDurability=100.0			// Durability для хрупких частей кварталла (помеченых в колижене #), остальные берут Durability из миссии. Уменьшено в BallisticsDurabilityK=40
+BallisticsDurabilityK=40		// Коэффициент корреции повреждений, получаемых от пуль (BeamHit) и осколков
+
+logtreshold=0.0001
+
+CollisionStrength=0.4,4e6	// Сопротивление взаимопроникновению при столкновении [0..1], потребный импульс для разрушения (при проникновении больше 0.5м разрушится в любом случае)
+CollisionWeakStrength=0.2,1e6	// То же, но для хрупких частей кварталла (помеченых в колижене #)
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\barnbig01_D.txt"
+   BlockRef=5,5 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=1,1 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=3,3 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=4,4 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=2,2 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=180.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\plankfences01_D.txt"
+   BlockRef=6,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=180.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\plankgate01_D.txt"
+   BlockRef=7,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=180.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\plankfences01_D.txt"
+   BlockRef=8,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=180.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\plankfences01_D.txt"
+   BlockRef=9,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=180.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\plankfences01_D.txt"
+   BlockRef=10,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=180.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\plankfences01_D.txt"
+   BlockRef=11,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=180.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\HouseB01_D.txt"
+   BlockRef=17,6 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=17,6 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=15,4 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=13,2 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=12,1 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=16,5 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=14,3 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=90.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\Stog201_D.txt"
+   BlockRef=20,3 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=18,1 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=19,2 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=175.0
+   StaticEmitter=5,"luascripts\worldobjects\emitters\DetBuildingDemolitionStack.txt"
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\bathhouse01_D.txt"
+   BlockRef=21,1 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=21,1 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=21,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=0.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\lavka01_D.txt"
+   BlockRef=22,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=-90.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\Cart01_D.txt"
+   BlockRef=23,1 //This block's BuildingID => PartID in SolidDebris file
+   BlockRef=23,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=-145.0
+[end]
+
+
+[SolidDebrisSingle]
+   SolidDebris="LuaScripts\WorldObjects\BlocksDetail\kazan02_D.txt"
+   BlockRef=24,1 //This block's BuildingID => PartID in SolidDebris file
+   AddRot=180.0
+[end]
+

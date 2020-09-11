@@ -1,0 +1,8 @@
+Class_name = "CPlatformInputController"
+
+
+//////	Controller specific
+Artificial=false;
+
+ControlledType="GOT_PHYS_PLATFORM";
+

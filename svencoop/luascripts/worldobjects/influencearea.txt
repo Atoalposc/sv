@@ -1,0 +1,8 @@
+class_name = "CInfluenceArea"
+object_name = "Influence Area"
+
+//////	PhysicsBody properties
+
+SendRate=5,50	//normal, attached state
+
+CommandMonitor="LuaScripts/WorldObjects/InfluenceAreaMonitor.txt"

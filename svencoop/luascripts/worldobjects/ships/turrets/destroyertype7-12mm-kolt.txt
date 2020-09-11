@@ -1,0 +1,69 @@
+class_name = "CAttachedVehicle"
+object_name = "Kolt Twin turret"
+
+
+//////	PhysicsBody properties
+//VisualImage = <int TYPE>,<string File_PathName>,<bool cast_shadows>
+
+VisualImage=0,"graphics/Ships/DestroyerType7/Type7-12mm-kolt.mgm",true
+
+CollisionBody="graphics/Ships/DestroyerType7/Type7-12mm-kolt.col"
+
+SoundScript="LuaScripts\Sound\Vehicles\DShK_Double.cfg"
+
+[attach=0]
+	position= 0.0, 0.0, 0.0
+	object = "LuaScripts/WorldObjects/Ships/Turrets/DestroyerType7-12mm-koltTurret.txt"
+[end]
+
+TargetHeight = 1.0			// Дельта по высоте к центру модели используемая при прицеливании и оценке видимости
+
+//////	Controled body specific
+
+Mass=200.0					// Полная масса танка
+
+
+energyloss="",true,0.5,300		// Потеря энергии пули при попадании, true - проверка на входе и выходе в колижн-бокс, первое эквивалентная броня на входе и выходе, второе джоулей на каждый метр пути внутри колижена
+
+RegenerationMax = 1.0		// До какого Life само-чиниться танк
+RegenerationMin = 0.5		// Минимальное значение Life, ниже которого починки не будет
+RegenerationPercent = 0.0	// Скорость восстановления, долей Life в секунду, похоже что не работает
+
+Firing=0.0008				// Скорость сгорания от большого пожара, долей Life в секунду
+SmokeStartHealth = 0.25		// Лайф, при котором начнется малый пожар
+MinFiringHealth = 0.15		// Лайф, при котором начнется большой пожар
+MinMovementHealth = 0.25	// Лайф, при котором перестанет ездить
+MinAttackHealth = 0.1		// Лайф, при котором перестанет стрелять
+
+FireEffectTime = 100.0		// Сколько будет гореть по времени
+DestructArg = 281			// Аргумент дамага
+SmokeArgBase    = 60001		// Аргумент малого пожара
+SmokeArgTotalNum = 1		// Кол-во вариантов пожара, 1-й вариант будет по хуку 60000, второй по 60001, третий по 60002 и т.д.
+FiringArg = 60000			// Аргумент большого пожара
+
+ExplosionScript = "LuaScripts/WorldObjects/explosions/Detonation/VehicleNoDmg.txt"
+OnDropLandScript = "LuaScripts/WorldObjects/Emitters/DustBlow5_3.txt"			// Эффект при падении на землю
+OnDropWaterScript = "LuaScripts/WorldObjects/Emitters/WaterSpray5_3.txt"		// Эффект при падении на воду
+
+CriticalWaterLevel = 1.5		// Гулбже начнет умирать
+CriticalHeigthLevel = 3.0		// При падении с большей высоты умрет
+DivingSpeed = 0.8				// Скорость погружения в воду
+ImpulseToDestroy = 5000		// Определяет силу удара обеъкта об танк, нужную для его уничтожения
+ImpulseMinimumLevel = 1000	// Определяет минимальную силу удара об танк, нужную для его смещения (видимо)
+
+//логирование повреждений
+logtreshold=0.0001
+
+Armor=0					// Толщина брони, общий параметр, нужен для других ИИ для определения типа снаряда
+
+// Модель повреждения. Исходный убалансированный лайф объекта до введения простой модели 1500.
+
+[DmgElement = ammo]
+	damageablePart="col_gun"
+	LifeRate=1500
+	LifeRateFrag=1500
+	Armor=0
+	CollisioDamageSens=1
+[End]
+
+DebugInfo = false

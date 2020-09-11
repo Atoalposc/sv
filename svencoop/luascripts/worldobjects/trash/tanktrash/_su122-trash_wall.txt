@@ -1,0 +1,15 @@
+Class_name = "CSolidTrash"
+
+VisualImage=0,"graphics\Vehicles\_SU122\_SU122-trash_turret_sideL.MGM",true
+CollisionBody="graphics\Vehicles\_SU122\_SU122-trash_turret_sideL.col"
+
+Friction=0.8
+Mass=300
+//MaxDeep=0.1
+TLimit=0
+Ik=3.0
+DynamicCOG=true
+
+//Spin=false
+ImageArg=1007
+ImagePhase=0.85

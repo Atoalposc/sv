@@ -1,0 +1,12 @@
+Class_name = "CBatchTrashAnimated"
+object_name = "ExplosionBalloon"
+
+//////	PhysicsBody properties
+VisualImage=0,"graphics/effects/Air/explBalloon.mgm",false
+visualradius=5
+SoundScript=""
+
+Animation=53851
+LiveTime=12
+AnimationTime=10
+Ranges=3,0.01,0.32,0.33

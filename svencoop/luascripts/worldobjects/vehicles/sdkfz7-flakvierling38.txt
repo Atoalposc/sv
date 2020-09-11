@@ -1,0 +1,243 @@
+class_name = "CTank"
+object_name = "Sd Kfz 7 Flakvierling 38"
+detail_type = "DET_AAA" //list of types is in \inc\SimulationSystem\DetailTypes.inc
+
+VisualImage=0,"graphics/vehicles/SdKfz7/SdKfz7-Flakvierling38.mgm",true
+
+ImageAttr=24	// IA_NOMINPIXELS | IA_NOMINPIXELS
+//	IA_DEFAULT=0,
+//	IA_NOCLIP=1,
+//	IA_NOCLIP_ANIM=2,
+//	IA_NOROTINTERPOLATION=4,
+//	IA_NOMINZ=8,
+//	IA_NOMINPIXELS=16,
+//	IA_NOPOSINTERPOLATION=32,
+//	IA_CLOSEVIEWARG=64,
+//	IA_ALWAYSVISIBLE=128,
+//	IA_SCALEARG=256,
+//	ImageAttr=Attr1+Attr2+...+AttrN
+
+CollisionBody="graphics/vehicles/SdKfz7/SdKfz7-Flakvierling38_Phys.col"
+HitBody="graphics/vehicles/SdKfz7/SdKfz7-Flakvierling38.col"
+
+ConvexAnimThreshold=0.0005	// Дискретность анимаций
+
+SoundScript="LuaScripts/Sound/Vehicles/SdKfz7_Flak38.cfg"
+
+[attach=0]
+	position= -0.17, 0.7, 0
+	object = "LuaScripts/WorldObjects/Bots/BotDriverTank.txt"
+[end]
+
+[attach=1]
+	position= -0.687,1.357,0.008
+	object = "LuaScripts/WorldObjects/Vehicles/Turrets/SdKfz7-Flakvierling38Turret.txt"
+[end]
+
+[attach=2]
+	position= -0.6, 2.3, -0.3
+	rotation= 30, 90, 0
+	object = "LuaScripts/WorldObjects/FlareGun.txt"
+[end]
+
+[attach=3]
+	position= -0.6, 2.3, 0.0
+	object = "LuaScripts/WorldObjects/Spotter.txt"
+[end]
+
+TargetHeight = 1.1			// Дельта по высоте к центру модели используемая при прицеливании и оценке видимости
+
+CommandMonitor="LuaScripts/WorldObjects/VehicleMonitor.txt"
+
+sendrate = 10				// Делитель базовой частоты 50Гц отправки позиции в сеть (=10 значит что частота 5Гц)
+
+PrioritySpeed = 5.4			// Референсная скорость по полю, быстрее этой скорости не ездит, на этой скорости сила эффекта пыли становится максимальной
+PrioritySpeedRoad = 13.9	// Референсная скорость по дороге, быстрее этой скорости не ездит
+Mass = 13040.0				// Полная масса танка
+WidthTrack = 2.16			// Полный габарит колеи, т.е. от края правого следа до края левого следа
+LengthTrack = 5.1			// Длинна поверхности касания гусеницы
+StartEngineForce = 100.0	// Приемистость двигателя, при повышении так же падает макс мощность на ту же величину
+MaxEngineForce = 62000.0	// Максимально возможная сила двигателя, лучше настраивать так, что бы на ровной поверхности на макс скорости газ был 0.95, тогда эффект выхлопа будет соотвтетсвовать задумке
+MaxTransmissionKoeff = 2.5	// Коэфициент понижения передачи на околонулевой скорости, натраивать так, что бы в миссии \Missions\TestTank_hill.Mission в гору шел около 1.1..1.2м/с
+TrackDistance = 1.08		// Длинна протяга гусеницы за один цикл анимации
+WheelRadius = 2.478			// Радиус опорных катков, для высчета частоты вращения. На SdKfz7 катки заанимированы на 6 оборотов, что бы анимация меньших катков работала синхронно, поэтому радиус указан в 7 раз больший
+CrrExt = 4000.0				// Коэфициент сопротивления воздушной среды, пропорциональный скорости движения
+Crr = 2000.0				// Коэфициент сопротивления движению, пропорционального скорости движения
+CrrOffRoad = 4200.0			// Коэфициент сопротивления движению по бездорожью, пропорционального скорости движения. Настраивать так, что бы газ на макс скорости по бездорожью на ровной поверхности был 0.95.
+Cdrag = 30.0				// Коэфициент сопротивления воздушной среды, пропорциональный квадрату скорости движения
+Csf = 0.25					// Коэфициент сухого трения об поверхность, пропорционален массе, поидее зависит только от типа ходовой части (колеса или гусеницы)
+CsfOffRoad = 0.30			// Коэфициент сухого трения об поверхность по бездорожью. Подбирать совместно с CrrOffRoad.
+Crt = 10.0					// Не используется
+Cbraking = 9000.0			// Коэфициент эффективности тормозов
+Cang = 30.0					// Коэфициент демфирования угловых скоростей
+MaxTurningAngle = 20.0		// Максимальный угол поворота управляемых колес
+OrientSmoothParam = 0.01	// Сглаживание угловых вращений на резких вертикальных перегибах/обрывах
+WheelSmokeArg = 61010		// Аргумент следов и пыли из под колес
+LightsCount = 1				// Кол-во источников света фар
+LightsArgBase = 60200		// Аргумент включения фар
+FreezeOnDestroy=true		// Поведение после уничтожения, true - замирает на месте, если нет - физично перемещается при столкновениях
+
+energyloss="",true,1,200		// Потеря энергии пули при попадании, true - проверка на входе и выходе в колижн-бокс, первое эквивалентная броня на входе и выходе, второе джоулей на каждый метр пути внутри колижена
+
+RegenerationMax = 1.0		// До какого Life само-чиниться танк
+RegenerationMin = 0.5		// Минимальное значение Life, ниже которого починки не будет
+RegenerationPercent = 0.0	// Скорость восстановления, долей Life в секунду
+
+Firing=0.002				// Скорость сгорания боекомплекта от пожара, долей Life в секунду
+SmokeStartHealth = 0.5		// Лайф двигателя, при котором начнется дым из двигателя
+MinFiringHealth = 0.5		// Лайф боекомплекта, при котором начнется пожар
+MinMovementHealth = 0.25	// Лайф двигателя, при котором перестанет ездить
+MinAttackHealth = 0.10		// Лайф объекта, при котором перестанет стрелять
+
+FireEffectTime = 300.0		// Сколько будет гореть по времени после взрыва
+DestructArg = 281			// Аргумент дамага
+SmokeArgBase    = 60000		// Аргумент малого пожара
+SmokeArgTotalNum = 4		// Кол-во вариантов пожара, 1-й вариант будет по хуку 60000, второй по 60001, третий по 60002 и т.д.
+FiringArg = 60100			// Аргумент большого пожара
+
+ExplosionScript = "LuaScripts/WorldObjects/explosions/Detonation/VehicleAmmunition.txt"	// Эффект при полном взрыве
+OnDropLandScript = "LuaScripts/WorldObjects/Emitters/DustBlow5_3.txt"			// Эффект при падении на землю
+OnDropWaterScript = "LuaScripts/WorldObjects/Emitters/WaterSpray5_3.txt"		// Эффект при падении на воду
+
+CriticalWaterLevel = 1.5		// Гулбже начнет умирать
+CriticalHeigthLevel = 3.0		// При падении с большей высоты умрет
+DivingSpeed = 0.8				// Скорость погружения в воду
+
+ImpulseToDestroy = 43000		// Определяет силу удара обеъкта об танк, нужную для его уничтожения. Подвижные объекты на 7 категорий по размерам. Плюс приведение по массе.
+ImpulseMinimumLevel = 8500		// Определяет минимальную силу удара об танк, нужную для его повреждения. Для пушек снижено что бы их можно было давить.
+ColDamageDelay=0.5				// Интервалы проверки дамага от колижена (важно для случая, когда один объект вошел в другой, определяет скорость умирания от этого)
+
+logtreshold=0.0001				// Минимальный шаг дамага, записываемый в лог миссии
+
+
+[moveDeviator]
+  HiFreqAmp = 0.2f
+  MaxDeviation = 1.0f
+  Periods = 2.1, 0.4;
+[end]
+accelDirK = 0.3
+accelDirSmooth = 0.15
+accelSideK = 0.3
+accelSideSmooth = 0.15
+
+[CrewEscape]
+	EscapeHealth=0.0f
+	EscapeAtLeast=2
+	DistanceToRun=50.0f
+	EscapePos=0.43,0,-2.0
+	EscapeVisArg=1000
+	Bot="LuaScripts\WorldObjects\Bots\BotField_SoldierGERlateOfcr.txt"
+	Bot="LuaScripts\WorldObjects\Bots\BotField_SoldierGERlate.txt"
+	Bot="LuaScripts\WorldObjects\Bots\BotField_SoldierGERlate.txt"
+	Bot="LuaScripts\WorldObjects\Bots\BotField_SoldierGERlate.txt"
+[end]
+
+Armor=0					// Толщина брони, общий параметр, нужен для других ИИ для определения типа снаряда
+
+// Модель повреждения. Исходный убалансированный лайф объекта до введения простой модели 8000.
+
+[DmgElement = ammo]
+	damageablePart="ammo"
+	LifeRate=8000
+	LifeRateFrag=8000
+	Armor=0
+	CollisioDamageSens=0.5
+[End]
+
+[DmgElement = crew]
+	damageablePart="crew"
+	LifeRate=500		// фиксированно 500 для всех
+	LifeRateFrag=500
+	Armor=0
+	CollisioDamageSens=0
+[End]
+
+[DmgElement = hull]
+	damageablePart="hull_1"
+	LifeRate=4000		// 0.5 от исходного лайфа
+	LifeRateFrag=4000
+	Armor=0
+	CollisioDamageSens=1
+[End]
+
+[DmgElement = engine]
+	damageablePart="engine"
+	LifeRate=4000		// 0.5 от исходного лайфа
+	LifeRateFrag=4000
+	Armor=5
+	CollisioDamageSens=1
+[End]
+
+[DmgElement = wheel_FL]
+	damageablePart="wheel_FL"
+	LifeRate=2000		// 0.25 от исходного лайфа
+	LifeRateFrag=2000
+	Armor=0
+	DamageArg=291
+	CollisioDamageSens=1
+[End]
+
+[DmgElement = wheel_FR]
+	damageablePart="wheel_FR"
+	LifeRate=2000		// 0.25 от исходного лайфа
+	LifeRateFrag=2000
+	Armor=0
+	DamageArg=292
+	CollisioDamageSens=1
+[End]
+
+[DmgElement = track_L]
+	damageablePart="track_L"
+	LifeRate=4000		// 0.5 от исходного лайфа
+	LifeRateFrag=4000
+	[ArmorBox]			// Броня от бронебойных пуль (BeamHit) и взрывов (SphereHit)
+		FovH=90			// Полный угол горизонтального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+		FovV=90			// Полный угол вертикального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+						// Остальные 5 раструбов определяются автоматически по центральной симметрии относительно переднего
+		ArmorFront=10
+		ArmorBack=10
+		ArmorTop=10
+		ArmorBottom=10
+		ArmorRight=30
+		ArmorLeft=30
+	[end]
+	DamageArg=293
+	CollisioDamageSens=1
+[End]
+
+[DmgElement = track_R]
+	damageablePart="track_R"
+	LifeRate=4000		// 0.5 от исходного лайфа
+	LifeRateFrag=4000
+	[ArmorBox]			// Броня от бронебойных пуль (BeamHit) и взрывов (SphereHit)
+		FovH=90			// Полный угол горизонтального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+		FovV=90			// Полный угол вертикального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+						// Остальные 5 раструбов определяются автоматически по центральной симметрии относительно переднего
+		ArmorFront=10
+		ArmorBack=10
+		ArmorTop=10
+		ArmorBottom=10
+		ArmorRight=30
+		ArmorLeft=30
+	[end]
+	DamageArg=294
+	CollisioDamageSens=1
+[End]
+
+[DmgElement = turret]
+	damageablePart="turret"
+	LifeRate=4000		// 0.5 от исходного лайфа для пушек, 2000 для пулеметов
+	LifeRateFrag=4000
+	Armor=0
+	CollisioDamageSens=0
+[End]
+
+[DmgElement = gun]
+	damageablePart="gun_1","gun_2","gun_3","gun_4"
+	LifeRate=10000		// 10000 пулемёты и автопушки, 20000 легике пушки, 30000 средние пушки, 50000 тяжелые пушки
+	LifeRateFrag=5000		// x0.5
+	Armor=5				// 5 пулемёты и автопушки, 10 легике пушки, 20 средние пушки, 30 тяжелые пушки
+	CollisioDamageSens=0
+[End]
+
+DebugInfo = false				// Позволяет выводить скорость танка и значение оси газа для настройки двигателя

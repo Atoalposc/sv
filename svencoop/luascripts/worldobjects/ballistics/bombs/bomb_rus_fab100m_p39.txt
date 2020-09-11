@@ -1,0 +1,78 @@
+Class_name = "CBallistics"
+object_name = "BOMB_RUS_FAB100M_P39"
+
+//////	PhysicsBody properties
+VisualImage=0,"graphics/Ammo/Bomb_FAB100_P39.mgm",false
+
+visualradius=5
+
+VisArg=100
+
+NoDirecion=false
+CalcWind=true
+ProcessNetwork=true
+
+Armor=-1,370,	45,73813,	36,184532,	0,295251
+Armor=-1,50,	3,1348,		2,3370,		0,5392
+
+DefaultStartSpeed=0		//дефолтная начальная скорость, нужно устанавливать в 40 при "простреле" бомбы утилитой балистического калькулятора
+MaxDistance=25000		//предельная дальность, дальше которой объект удалится
+Mass=104				//масса бомбы
+Mkr=0.8					//значение числа Маха, после которого начинается повышение Cx до момента M=1, зависит от формы тела но не от размера
+Mmax=1.2				//значение числа Маха, до которого завершается понижение Cx, начавшееся при M=1, зависит от формы тела но не от размера
+Cx_0=0.15				//значение к-та сопротивления при (M <= Mkr), зависит от формы тела но не от размера
+Cx_max=0.3				//значение к-та сопротивления при (M = 1), зависит от формы тела но не от размера
+Cx_1=0.4				//значение к-та сопротивления при (M >= Mmax), зависит от формы тела но не от размера
+R=0.14					//радиус бомбы
+KPhi=0.01				//параметр скорости уменьшения угла атаки
+KPhiAcc=0.0				//параметр ускорения уменьшения угла атаки
+KJ=7					//параметр общей калибровки уменьшения угла атаки
+LiveTime=70				//время жизни объекта
+TimeToDestroy=0			//время жизни объекта после попадания в скрытом состоянии, что бы трейл трассера не пропадал пока не расствориться
+
+Spin=-1.5,1.5			//Rocket rotation angular speed random limits
+Deviation=1				//Deviation of the thrust 
+EngineThrust=0			//Engine power
+EngineDuration=1000.0,1000.1	//Engine work time random limits. In bomb - it's spinning time.
+
+RNDWindFactor=0.05		//коэф-т бокового разброса
+RNDWindChangeTimer=100.0	//таймер на смену к-та бокового разброса (можно сделать зиг-заг)
+
+FuseArmDelay=-1			//Задержка до взведения взрывателя. Если <=0 то работает стандартный механизм вертушки (таск BOS-744). Если нет - фиксированное значение.
+HitDefaultDelay=2		//Задержка до взрыва после попадания бомбы
+ExplosionExternalControl=true	//Управляемая из GUI задержка взрыва
+
+debug=false
+
+// Настройки рикошета, рандомы тем меньше, чем тяжелее бомба. Не острый нос и коробчатый стабилизатор немного снижает скорость отскока.
+VelDecK = 0.9			// Коэфициент падения скорости при нулевом угле к поверхности, 0..1
+VelDecKRnd = 0.25		// Рандом на него (равномерный в сторону уменьшения, значение задает нижнюю границу диапазона) -[0..1]*rnd
+VelDirKRnd = 12.0		// Рандом изменения направления отскока по горизонтали, нормаьлное распределение, град
+VelPitchKRnd = 0.4		// Коэффициент рандома изменения угла отскока по вертикали, +-[0..1]*rnd * УГОЛ, [0..1]
+VelAngMax = 20.0		// Максимальный угол к поверхности для возможности рикошета, при этом угле скорость отскока =0, град
+VelAngMaxRnd = 8.0		// Рандом на него (равномерный в сторону уменьшения, значение задает нижнюю границу диапазона) -[0..1]*rnd, град
+VelXMin = 45.0			// Минимальная продольная состовляющая скорости для возможности рикошета, м/с
+VelXMinRnd = 15.0		// Рандом на неё (равномерный в сторону уменьшения, значение задает нижнюю границу диапазона)  -[0..1]*rnd, м/с
+OrientDev = 25.0		// максимальное отклонение ориентации от направления вектора скорости после рикошета, нормаьлное распределение, град 
+
+// эффекты падения бомбы
+
+HitDummyEffect=""
+HitMiscEffect="LuaScripts/WorldObjects/Explosions/Effects/hit_bomb_object.txt"
+HitWaterEffect="LuaScripts/WorldObjects/Explosions/Effects/hit_bomb_water.txt"
+HitGroundEffect="LuaScripts/WorldObjects/Explosions/Effects/hit_bomb_ground.txt"
+HitArmorEffect="LuaScripts/WorldObjects/Explosions/Effects/hit_bomb_object.txt"
+HitBuildingEffect="LuaScripts/WorldObjects/Explosions/Effects/hit_bomb_object.txt"
+HitMetalEffect="LuaScripts/WorldObjects/Explosions/Effects/hit_ap_37-50mm_wood.txt"
+HitForestEffect="LuaScripts/WorldObjects/Explosions/Effects/hit_bomb_object.txt"
+
+//	взрывы от детонации бомбы
+
+HitDummy="LuaScripts/WorldObjects/Explosions/Bombs/HE_280mm_100kg_30kg_object.txt"
+HitMisc="LuaScripts/WorldObjects/Explosions/Bombs/HE_280mm_100kg_30kg_object.txt"
+HitWater="LuaScripts/WorldObjects/Explosions/Bombs/HE_280mm_100kg_30kg_water.txt"
+HitGround="LuaScripts/WorldObjects/Explosions/Bombs/HE_280mm_100kg_30kg_ground.txt"
+HitArmor="LuaScripts/WorldObjects/Explosions/Bombs/HE_280mm_100kg_30kg_object.txt"
+HitBuilding="LuaScripts/WorldObjects/Explosions/Bombs/HE_280mm_100kg_30kg_building.txt"
+HitMetal="LuaScripts/WorldObjects/Explosions/Bombs/HE_280mm_100kg_30kg_object.txt"
+HitForest="LuaScripts/WorldObjects/Explosions/Bombs/HE_280mm_100kg_30kg_object.txt"

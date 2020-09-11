@@ -1,0 +1,13 @@
+Class_name = "CBanner"
+
+VisualImage=0,"graphics\Flag\banner.mgm",true
+
+AxisXArg=22
+AxisZArg=21
+AxisYArg=23
+
+PhaseArg=20
+ColorArg=24
+ColorVal=0.75
+
+VisualRadius = 2

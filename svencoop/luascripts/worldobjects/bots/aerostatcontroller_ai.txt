@@ -1,0 +1,9 @@
+Class_name = "CAerostatAI"
+object_name = "Aerostat controller AI"
+
+
+//////	Controller specific
+Artificial=true;
+
+ControlledType="GOT_AEROSTAT";
+

@@ -1,0 +1,15 @@
+Class_name = "CStaticEmitter"
+object_name = "trash"
+
+//////	PhysicsBody properties
+VisualImage=0,"graphics\effects\Air\dustBlow.epl",false
+
+SoundScript="LuaScripts/Sound/explosions/Splash/ground.cfg"
+SoundStrength=0.4
+SoundTime=2
+
+duration=0.6
+range=0.4,0
+loop=false
+
+destroy_pause=5

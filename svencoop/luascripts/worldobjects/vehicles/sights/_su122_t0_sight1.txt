@@ -1,0 +1,9 @@
+Class_name = "CDummyObject"
+object_name = "_SU122_T0_sight1"
+
+VisualImage=1,"graphics\Vehicles\_SU122\_SU122-C1_sight1.mgm",false
+
+Script="LuaScripts\ObjectScripts\Vehicles\ArgReplicator.sc"
+
+ParentReplicateArg=1055
+ParentReplicateArg=60210

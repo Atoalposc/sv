@@ -1,0 +1,59 @@
+
+//
+// Simple gear works at true speed that is greater than "SimpleGearModelTS"
+// Complex gear works at true speed that is lesser than "ComplexGearModelTS"
+//
+
+SimpleGearModelTS = 1.0
+ComplexGearModelTS = 0.5
+
+
+//
+// This value determines how fast one formation transforms to another.
+//
+
+FormationBlendingTime = 20.0
+
+//
+// Radius of fly-around maneuver in idle mode
+//
+
+StandByRadius = 1000.0
+
+//
+// Ranges for PID controllers
+// Roll, Yaw & Pitch are given in degrees. Speed (throttle) is non-dimensional value.
+//
+
+RollRange = 180
+YawRange = 90
+PitchRange = 180
+SpeedRange = 1000
+
+// Стешов. Пар-ры для поиска ведущим ведомых и оценки отставания
+WingmanSearchT = 30.0 	//Период проверки дальности до ведомых
+WingmanSearchDMax = 7000.0 //Критическая дальность
+WingmanSearchDMin = 3000.0 //Минимально достаточная дальность для прекращения ожидания и поиска
+WingmanSearchTimesToSearch = 3 //Кол-во последовательных превышений дальности (с увеличением), приводящее к включению режима поиска
+WingmanSearchWait   = 3 //Кол-во проверок дальности, характеризующих продолжительность режима ожидания
+WingmanSearchLength	   = 6 //Кол-во проверок дальности, характеризующих продолжительность режима поиска
+
+SeniourWingmanTOSpeedTreshold = 20.0 // лимит скорости старшего ведомого, при превышении этого лимита разрешено взлетать боту-ведомому, в м/с.
+
+WingmanRadioTimeoutMin = 5.0   // (секунды)таймаут радиосообщений для ведомого, таймер ставится рандомно от Min до Max .
+WingmanRadioTimeoutMax = 45.0   // (секунды)таймаут радиосообщений для ведомого.
+
+DeepDiveDecision_TimeLimit = 60.0 // (секунды) лимит времени на климб до высоты отвесного пикирования. Если АИ с текущей высоты поднимется до высоты отвесной бомбардировки за время меньшее указанного - строится заход на отвесное пике, в противном случае - на пологое.
+
+
+
+testFlag = 0  // 0 - нет теста, 1 - тест питч углу аттаки, 2- тест ролл, 3- тест yaw, 4- тест speed, 5 - тест питч по углу тангажа, 6- тест питч по верт скорости, 8-вираж с заданной скоростью, 9 - боевой разворот, 10 крит. угол атаки, 11 - руление курс, 12 - руление скорость.
+testSinus = 0  // 1 - входное значение - синус с периодом 4*testTimer и макс знач = testValue, 0 - ступенька
+testTimer = 3	//таймер теста
+testValue = 10	// Тестовые отклонения тестируемого параметра
+testBasis = 0.0		// Базовый уровень, от которого задаются тестовые отклонения
+testSpeed = 320.0	// целевая скорость, все оси тестируются на ней, тест скорости - testSpeed +-testValue 
+
+ShowAIDebugInfo = false  // флаг отображения дебаг инфы манёвров и стейтмашины боя, а так-же включения тест режима
+
+ShowVisibilitySectors = false  // флаг отображения секторов видимости  true - показывает сектора, false - нет

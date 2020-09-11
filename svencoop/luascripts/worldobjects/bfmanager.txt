@@ -1,0 +1,43 @@
+Class_name = "CBFManager"
+object_name = "BFManager"
+
+BotClass=1,"LuaScripts\WorldObjects\Bots\BotField_SoldierRUhat.txt",101
+BotClass=1,"LuaScripts\WorldObjects\Bots\BotField_SoldierGBRlate.txt",102
+BotClass=1,"LuaScripts\WorldObjects\Bots\BotField_SoldierUSAlate.txt",103
+BotClass=1,"LuaScripts\WorldObjects\Bots\BotField_SoldierGERhat.txt",201
+BotClass=1,"LuaScripts\WorldObjects\Bots\BotField_SoldierGBRww1.txt",301
+BotClass=1,"LuaScripts\WorldObjects\Bots\BotField_SoldierGBRww1.txt",302
+BotClass=1,"LuaScripts\WorldObjects\Bots\BotField_SoldierGBRww1.txt",303
+BotClass=1,"LuaScripts\WorldObjects\Bots\BotField_SoldierGBRww1.txt",304
+BotClass=1,"LuaScripts\WorldObjects\Bots\BotField_SoldierGBRww1.txt",305
+BotClass=1,"LuaScripts\WorldObjects\Bots\BotField_SoldierGERww1.txt",401
+BotClass=1,"LuaScripts\WorldObjects\Bots\BotField_SoldierGERww1.txt",402
+
+//AmbientSound=<MGM_name_filter>,<CBatchTrash cfg>,<Probability>
+
+AmbientSound="village","LuaScripts\WorldObjects\Trash\AmbientSndDogBark.txt",0.05
+AmbientSound="village","LuaScripts\WorldObjects\Trash\AmbientSndDogPack.txt",0.03
+AmbientSound="village","LuaScripts\WorldObjects\Trash\AmbientSndDogHowl.txt",0.02
+
+AmbientSound="country","LuaScripts\WorldObjects\Trash\AmbientSndDogBark.txt",0.05
+AmbientSound="country","LuaScripts\WorldObjects\Trash\AmbientSndDogPack.txt",0.03
+AmbientSound="country","LuaScripts\WorldObjects\Trash\AmbientSndDogHowl.txt",0.02
+
+AmbientSound="townblock","LuaScripts\WorldObjects\Trash\AmbientSndGunshot.txt",0.3
+AmbientSound="townblock","LuaScripts\WorldObjects\Trash\AmbientSndBurst.txt",0.2
+
+AmbientSound="oct","LuaScripts\WorldObjects\Trash\AmbientSndGunshot.txt",0.3
+AmbientSound="oct","LuaScripts\WorldObjects\Trash\AmbientSndBurst.txt",0.2
+
+AmbientSound="stz","LuaScripts\WorldObjects\Trash\AmbientSndGunshot.txt",0.3
+AmbientSound="stz","LuaScripts\WorldObjects\Trash\AmbientSndBurst.txt",0.2
+
+AmbientSound="stalingrad","LuaScripts\WorldObjects\Trash\AmbientSndGunshot.txt",0.3
+AmbientSound="stalingrad","LuaScripts\WorldObjects\Trash\AmbientSndBurst.txt",0.2
+
+AmbientSound="bar_","LuaScripts\WorldObjects\Trash\AmbientSndGunshot.txt",0.3
+AmbientSound="bar_","LuaScripts\WorldObjects\Trash\AmbientSndBurst.txt",0.2
+
+AmbientSound="chapel","LuaScripts\WorldObjects\Trash\AmbientSndBell.txt",0.05
+AmbientSound="cerkvoznes","LuaScripts\WorldObjects\Trash\AmbientSndBell.txt",0.05
+AmbientSound="vl_001","LuaScripts\WorldObjects\Trash\AmbientSndBell.txt",0.05

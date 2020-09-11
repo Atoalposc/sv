@@ -1,0 +1,44 @@
+Class_name = "CBatchExplosion"
+object_name = "HE_045mm_1kg_360g_building"
+
+// БЧ 45мм советского каморного снаряда БР-240 пушке 53-К, расчитнано из ТНТ=360г, массы пули 1.43кг, калибра 45мм.
+// Т.к. заряд в каморе большой, то начальная скорость осколков взята 800 м/с, а не 400 м/с, масса осколка 10г.
+
+////// PhysicsBody properties
+VisualImage=0,"graphics\effects\Arm\hit_shell_he_20-100g_object.epl"
+visualradius=4
+//ImageAttr=17		//IA_NOCLIP | IA_NOMINPIXELS
+
+SoundScript="LuaScripts\Sound\explosions\HE\Ground_Small.cfg"
+
+ExplosionPower=0.5			// Сила звука взрыа, переменная для FMOD
+Animation=1					// Номер хука взрыва
+LiveTime=2.66				// Время жизни взрыва
+AnimationTime=2.66			// Время анимации взрыва
+Ranges=1,0.01,0.99,0		// (кол-во вариантов, начало 1го диапазона, конец 1-го диапазона, дельта прибавляемая к границам для следующего диапазона)
+//"RangesCnt, Range0Start, fRange0End, fRangeStep"; ARG=m_fRange0Start+(m_fRange0End-m_fRange0Start)*t+m_fRangeStep*data->m_RangeIdx
+//Ranges=1,0.01,0.99,0
+//Ranges=2,0.01,0.49,0.5
+//Ranges=3,0.01,0.32,0.33
+//Ranges=4,0.01,0.24,0.25
+//Ranges=5,0.01,0.19,0.2
+
+// Параметры Sphere Hit, внешний взрыв
+
+Radius=22.5	// Радиус сферы воздействия взрыва, определяющий выборку объектов
+TNT_equ=0.36	// Тротилловый эквивалент для моделирования атмосферной ударной волны
+
+// Фугасное воздействие: дальность, (-1 не использ.), пары (броня, дамаг за броней)
+ArmorFoug=0.0,-1,	9,4654,	0,9308
+ArmorFoug=1.0,-1,	1,705,	0,1410
+ArmorFoug=2.8,-1,			0,166
+ArmorFoug=5.1,-1,			0,50
+
+// Осколочное воздействие
+ShrapnelQuantity=633
+FragmentMass=0.0007
+// Единичный осколок: дальность, скорость, пары (броня, дамаг за броней)
+ArmorShr=0.0,1113,	11,42,	9,105,	0,168
+ArmorShr=2.1,1027,	10,36,	8,89,	0,143
+ArmorShr=11.2,719,	3,17,	2,44,	0,70
+ArmorShr=22.5,461,			1,7,	0,29

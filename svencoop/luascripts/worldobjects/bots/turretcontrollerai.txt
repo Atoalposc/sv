@@ -1,0 +1,84 @@
+Class_name = "CTurretRadioAI"
+object_name = "CTurretRadioAI"
+
+//////	Controller specific
+Artificial=true;
+
+ControlledType="GOT_VEHICLE_TURRET";
+
+// формула расчета зоны ошибки прицеливания
+
+// формула расчета
+// ошибка_по_оси (метров) = tan(  
+//								случайное_число  * (AddCoef + ProjSpeedCoef * разница_скоростей_в_плоскости_прицела (в метрах в секунду) )  
+//								* (текущая_перегрузка * OverloadCoef + CoefLow/Hi/Ace)
+//						       ) 
+//								* расстояние_до_цели;
+// случайное_число - это число от -1.0 до 1.0
+// tan - это тангенс. в зависимости от тангенса угла ошибки и расстояния до цели получается итоговая зона
+
+// коэффициент переовда разности скорости скоростей объекта на котором стоит турель и цели, в плоскости прицеливания, в углы ошибки
+ProjSpeedCoef = 0.05f;
+
+// коэффициент ошибки прицеливания по умолчанию
+AddCoef = 0.05f;
+
+// максимальная перегрузка в стандартных единицах при которых стрелок перестаёт наводится и стрелять
+MaxBotOverload = 8.0f;
+
+// коэффициент перевода перегрузки в единицы прицеливания
+OverloadCoef = 0.02f;
+
+// коэффициенты для зависимости итоговой области стрельбы от уровня ИИ
+CoefLow		= 20.0f;
+CoefMed		= 3.0f;
+CoefHigh	= 1.0f;
+CoefAce		= 0.5f;
+
+// время за которе ошибочный прицел проходит от одной точки до другой 
+// и время за которое происходит ошибок прицела
+ErrorCircleTime = 2.0f;
+ErrorChangeTime = 1.0f;
+
+// время ожидания после наведения на предполагаемую точку, как бы для более точного прицеливания
+MaxWaitTime = 0.1f;	
+
+// коэффициент, на который домножается итоговая ошибка для уменьшения её при стрельбе по наземным целям
+GroundTargetErrorCoeff = 0.1f;
+
+// коэффициент, на который домножается итоговая ошибка для уменьшения её при стрельбе по аэростатам
+BalloonTargetErrorCoeff = 0.1f;
+
+// время стрельбы - непрерывной очереди, и далее время ожидания
+FireShootTimeMin = 1.0f;
+FireShootTimeMax = 1.5f;
+
+FireWaitTimeMin = 1.0f;	
+FireWaitTimeMax = 2.0f;
+
+// время поиска цели, каждый период происходит проверка, чем чаще - тем больше тормозов естесвтенно
+// далее дистанции поиска для уровней ИИ, типа например Low ИИ цели дальше 400 метров цели не воспринимает - не видит, боится и т.п.
+
+MaxSearchTime  = 1.0f;
+
+// количество патронов, достаточное для того, чтобы начинать стрелять издалека (с утроенной дистанции)
+EnoughAmmoCount = 150;
+
+SearchDistanceLow   = 900.0f;
+SearchDistanceMed   = 1500.0f;
+SearchDistanceHigh  = 2100.0f;
+SearchDistanceAce   = 2400.0f;
+
+SearchDistanceMinLow   = 600.0f;
+SearchDistanceMinMed   = 1200.0f;
+SearchDistanceMinHigh  = 1800.0f;
+SearchDistanceMinAce   = 2100.0f;
+
+SearchDistanceAttackBalloon				= 1500.0f;
+SearchDistanceAttackGround				= 1500.0f;
+SearchDistanceShort						= 0.4;
+SearchDistanceMedium					= 2.0;
+BackFire3DAngle							= 30.0; 
+BackFireDistance						= 600.0;
+BackFirePlanePriorityType				= 2;
+BackFireResetToDefaultTime				= 5.0;

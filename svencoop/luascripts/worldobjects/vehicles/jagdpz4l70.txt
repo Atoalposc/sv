@@ -1,0 +1,292 @@
+class_name = "CTank"
+object_name = "JagdPz IV L70"
+detail_type = "DET_TANK" //list of types is in \inc\SimulationSystem\DetailTypes.inc
+
+VisualImage=0,"graphics/vehicles/JagdPz4L70/JagdPz4L70.mgm",true
+
+ImageAttr=24	// IA_NOMINPIXELS | IA_NOMINPIXELS
+//	IA_DEFAULT=0,
+//	IA_NOCLIP=1,
+//	IA_NOCLIP_ANIM=2,
+//	IA_NOROTINTERPOLATION=4,
+//	IA_NOMINZ=8,
+//	IA_NOMINPIXELS=16,
+//	IA_NOPOSINTERPOLATION=32,
+//	IA_CLOSEVIEWARG=64,
+//	IA_ALWAYSVISIBLE=128,
+//	IA_SCALEARG=256,
+//	ImageAttr=Attr1+Attr2+...+AttrN
+
+CollisionBody="graphics/vehicles/JagdPz4L70/JagdPz4L70_Phys.col"
+HitBody="graphics/vehicles/JagdPz4L70/JagdPz4L70.col"
+
+SoundScript="LuaScripts/Sound/Vehicles/Stug40L43.cfg"
+
+[attach=0]
+	position= -0.17, 0.7, 0
+	object = "LuaScripts/WorldObjects/Bots/BotDriverTank.txt"
+[end]
+
+[attach=1]
+	position= 0.207, 1.583, 1.483
+	object = "LuaScripts/WorldObjects/Vehicles/Turrets/JagdPz4L70TurretMain.txt"
+[end]
+
+[attach=2]
+	position= 0.4, 2.0, -0.5
+	rotation= 30, 0, 0
+	object = "LuaScripts/WorldObjects/FlareGun.txt"
+[end]
+
+[attach=3]
+	position= 0.0, 2.0, 0.0
+	object = "LuaScripts/WorldObjects/Spotter.txt"
+[end]
+
+TargetHeight = 1.3			// Дельта по высоте к центру модели используемая при прицеливании и оценке видимости
+
+CommandMonitor="LuaScripts/WorldObjects/VehicleMonitor.txt"
+
+sendrate = 20				// Делитель базовой частоты 50Гц отправки позиции в сеть (=20 значит что частота 2.5Гц)
+
+PrioritySpeed = 5.0			// Референсная скорость по полю, быстрее этой скорости не ездит, на этой скорости сила эффекта пыли становится максимальной
+PrioritySpeedRoad = 11.1	// Референсная скорость по дороге, быстрее этой скорости не ездит
+Mass = 25800.0				// Полная масса танка
+WidthTrack = 2.73			// Полный габарит колеи, т.е. от края правого следа до края левого следа
+LengthTrack = 3.495			// Длинна поверхности касания гусеницы
+StartEngineForce = 100.0	// Приемистость двигателя, при повышении так же падает макс мощность на ту же величину
+MaxEngineForce = 89500.0	// Максимально возможная сила двигателя, лучше настраивать так, что бы на ровной поверхности на макс скорости газ был 0.95, тогда эффект выхлопа будет соотвтетсвовать задумке
+MaxTransmissionKoeff = 3.5	// Коэфициент понижения передачи на околонулевой скорости, натраивать так, что бы в миссии \Missions\TestTank_hill.Mission в гору шел около 1.1..1.2м/с
+TrackDistance = 1.326		// Длинна протяга гусеницы за один цикл анимации
+WheelRadius = 1.412			// Радиус опорных катков, для высчета частоты вращения. На Jagdpanzer IV катки заанимированы на 6 оборота, что бы анимация меньших катков работала синхронно, поэтому радиус указан в 6 раза больший
+CrrExt = 4000.0				// Коэфициент сопротивления воздушной среды, пропорциональный скорости движения
+Crr = 2000.0				// Коэфициент сопротивления движению, пропорционального скорости движения
+CrrOffRoad = 4900.0			// Коэфициент сопротивления движению по бездорожью, пропорционального скорости движения. Настраивать так, что бы газ на макс скорости по бездорожью на ровной поверхности был 0.95.
+Cdrag = 50.0				// Коэфициент сопротивления воздушной среды, пропорциональный квадрату скорости движения
+Csf = 0.25					// Коэфициент сухого трения об поверхность, пропорционален массе, поидее зависит только от типа ходовой части (колеса или гусеницы)
+CsfOffRoad = 0.25			// Коэфициент сухого трения об поверхность по бездорожью. Подбирать совместно с CrrOffRoad.
+Crt = 10.0					// Не используется
+Cbraking = 9000.0			// Коэфициент эффективности тормозов
+Cang = 30.0					// Коэфициент демфирования угловых скоростей
+MaxTurningAngle=90.0,30.0,5.0	// Максимальный угол поворота управляемых колес. При нулевой скорости, При 0.5*PrioritySpeed, скорость перекладки (дефолт 1.3)
+OrientSmoothParam = 0.01	// Сглаживание угловых вращений на резких вертикальных перегибах/обрывах
+WheelSmokeArg = 61012		// Аргумент включения фар
+LightsCount = 1				// Кол-во источников света фар
+LightsArgBase = 60200		// Аргумент включения фар
+FreezeOnDestroy=true		// Поведение после уничтожения, true - замирает на месте, если нет - физично перемещается при столкновениях
+
+RegenerationMax = 1.0		// До какого Life само-чиниться танк
+RegenerationMin = 0.5		// Минимальное значение Life, ниже которого починки не будет
+RegenerationPercent = 0.0	// Скорость восстановления, долей Life в секунду
+
+Firing=0.002				// Скорость сгорания боекомплекта от пожара, долей Life в секунду
+SmokeStartHealth = 0.5		// Лайф двигателя, при котором начнется дым из двигателя
+MinFiringHealth = 0.5		// Лайф боекомплекта, при котором начнется пожар
+MinMovementHealth = 0.25	// Лайф двигателя, при котором перестанет ездить
+MinAttackHealth = 0.10		// Лайф объекта, при котором перестанет стрелять
+
+FireEffectTime = 300.0		// Сколько будет гореть по времени после взрыва
+DestructArg = 281			// Аргумент дамага
+SmokeArgBase    = 60000		// Аргумент малого пожара
+SmokeArgTotalNum = 4		// Кол-во вариантов пожара, 1-й вариант будет по хуку 60000, второй по 60001, третий по 60002 и т.д.
+FiringArg = 60100			// Аргумент большого пожара
+
+ExplosionScript = "LuaScripts/WorldObjects/explosions/Detonation/TankExplosion.txt"	// Эффект при полном взрыве
+OnDropLandScript = "LuaScripts/WorldObjects/Emitters/DustBlow5_3.txt"			// Эффект при падении на землю
+OnDropWaterScript = "LuaScripts/WorldObjects/Emitters/WaterSpray5_3.txt"		// Эффект при падении на воду
+
+CriticalWaterLevel = 1.5		// Гулбже начнет умирать
+CriticalHeigthLevel = 3.0		// При падении с большей высоты умрет
+DivingSpeed = 0.8				// Скорость погружения в воду
+
+ImpulseToDestroy = 477500		// Определяет силу удара обеъкта об танк, нужную для его уничтожения. Подвижные объекты на 7 категорий по размерам. Плюс приведение по массе.
+ImpulseMinimumLevel = 95500		// Определяет минимальную силу удара об танк, нужную для его повреждения. Для пушек снижено что бы их можно было давить.
+ColDamageDelay=0.5				// Интервалы проверки дамага от колижена (важно для случая, когда один объект вошел в другой, определяет скорость умирания от этого)
+
+logtreshold=0.0001				// Минимальный шаг дамага, записываемый в лог миссии
+
+
+[moveDeviator]
+  HiFreqAmp = 0.2f
+  MaxDeviation = 1.0f
+  Periods = 2.1, 0.4;
+[end]
+accelDirK = 0.3
+accelDirSmooth = 0.15
+accelSideK = 0.3
+accelSideSmooth = 0.15
+
+// Модель повреждения. Исходный убалансированный лайф объекта до введения простой модели 30000.
+
+energyloss="",true,5.0,200		// Потеря энергии пули при попадании, true - проверка на входе и выходе в колижн-бокс, первое эквивалентная броня на входе и выходе, второе джоулей на каждый метр пути внутри колижена
+energyloss="#hull_1",true,0,1
+energyloss="#hull_2",true,0,1
+energyloss="tower",false,80,1
+energyloss="#track_L",false,16.0,1000
+energyloss="#track_R",false,16.0,1000
+energyloss="#gun",true,10.0,1000
+
+energyloss="armor_09",false,60,1		//Hull bow upper armour plate, 60mm, K=1.0
+energyloss="armor_08",false,20,1		//Hull bow middle top armour plate, 20mm, K=1.0
+energyloss="armor_07",false,80,1		//Hull bow middle armour plate, 80mm, K=1.0
+energyloss="armor_06",false,50,1		//Hull bow lower armour plate, 50mm, K=1.0
+energyloss="armor_11",false,30,1		//Hull cabin stern armour plate, 30mm, K=1.0
+energyloss="armor_03",false,22,1		//Hull stern armour plate, 22mm, K=1.0
+energyloss="armor_05",false,22,1		//Hull stern lower armour plate, 22mm, K=1.0
+energyloss="armor_10",false,20,1		//Hull roof armour plate, 20mm, K=1.0
+energyloss="armor_12",false,10,1		//Hull engine roof armour plate, 10mm, K=1.0
+energyloss="armor_16",false,30,1		//Hull left forward armour plate, 30mm, K=1.0
+energyloss="armor_01",false,30,1		//Hull left backward armour plate, 30mm, K=1.0
+energyloss="armor_13",false,40,1		//Hull left cabin armour plate, 40mm, K=1.0
+energyloss="armor_15",false,30,1		//Hull right forward armour plate, 30mm, K=1.0
+energyloss="armor_02",false,30,1		//Hull right backward armour plate, 30mm, K=1.0
+energyloss="armor_14",false,40,1		//Hull right cabin armour plate, 40mm, K=1.0
+energyloss="armor_04",false,10,1		//Hull bottom armour plate, 10mm, K=1.0
+energyloss="armor_17",false,10,1		//Hull bottom under track armour plate, 10mm, K=1.0
+energyloss="armor_18",false,10,1		//Hull bottom under track armour plate, 10mm, K=1.0
+
+Armor=80			// Толщина брони, общий параметр, нужен для других ИИ для определения типа снаряда
+
+[ReflectArmorBox]	// Для расчета рикошета там, где внешний колижн energyloss=0,1. Если данный блок есть, то броня задана по сторонам, если блока нет, то используется общий параметр Armor=
+	FovH=90			// Полный угол горизонтального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+	FovV=165		// Полный угол вертикального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+					// Остальные 5 раструбов определяются автоматически по центральной симметрии относительно переднего
+	ArmorFront=78
+	ArmorBack=22
+	ArmorTop=20
+	ArmorBottom=10
+	ArmorRight=30
+	ArmorLeft=30
+[end]
+
+[DmgElement = ammo]
+	damageablePart="ammo"
+	LifeRate=30000
+	LifeRateFrag=30000
+	Armor=5				// Броня от бронебойных пуль (BeamHit)
+	[SphereHitArmorBox]	// Если данный блок есть, то броня от осколочного воздействия задана по сторонам, если блока нет, то используется общий параметр SphereHitProtection, если и его нет - то используется от Armor/ArmorBox
+		FovH=90			// Полный угол горизонтального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+		FovV=165		// Полный угол вертикального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+					// Остальные 5 раструбов определяются автоматически по центральной симметрии относительно переднего
+		ArmorFront=78
+		ArmorBack=22
+		ArmorTop=25
+		ArmorBottom=15
+		ArmorRight=30
+		ArmorLeft=30
+	[end]
+	CollisioDamageSens=0.5
+[End]
+
+[DmgElement = crew]
+	damageablePart="crew"
+	LifeRate=500		// фиксированно 500 для всех
+	LifeRateFrag=500
+	Armor=0				// Броня от бронебойных пуль (BeamHit) задана нулевой т.к. объект находится внутри другого бронированного объема
+	[SphereHitArmorBox]	// Если данный блок есть, то броня от осколочного воздействия задана по сторонам, если блока нет, то используется общий параметр SphereHitProtection, если и его нет - то используется от Armor/ArmorBox
+		FovH=90			// Полный угол горизонтального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+		FovV=160		// Полный угол вертикального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+					// Остальные 5 раструбов определяются автоматически по центральной симметрии относительно переднего
+		ArmorFront=78
+		ArmorBack=22
+		ArmorTop=20
+		ArmorBottom=10
+		ArmorRight=30
+		ArmorLeft=30
+	[end]
+	CollisioDamageSens=0
+[End]
+
+[DmgElement = hull]
+	damageablePart="#hull_1","#hull_2"
+	LifeRate=15000		// 0.5 от исходного лайфа
+	LifeRateFrag=15000
+	Armor=5
+	CollisioDamageSens=1
+[End]
+
+[DmgElement = engine]
+	damageablePart="engine"
+	LifeRate=15000		// 0.5 от исходного лайфа
+	LifeRateFrag=15000
+	Armor=5				// Броня от бронебойных пуль (BeamHit)
+	[SphereHitArmorBox]	// Если данный блок есть, то броня от осколочного воздействия задана по сторонам, если блока нет, то используется общий параметр SphereHitProtection, если и его нет - то используется от Armor/ArmorBox
+		FovH=90			// Полный угол горизонтального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+		FovV=165		// Полный угол вертикального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+					// Остальные 5 раструбов определяются автоматически по центральной симметрии относительно переднего
+		ArmorFront=78
+		ArmorBack=22
+		ArmorTop=25
+		ArmorBottom=15
+		ArmorRight=30
+		ArmorLeft=30
+	[end]
+	CollisioDamageSens=1
+[End]
+
+[DmgElement = track_L]
+	damageablePart="#track_L"
+	LifeRate=15000		// 0.5 от исходного лайфа
+	LifeRateFrag=15000
+	[ArmorBox]			// Броня от бронебойных пуль (BeamHit) и взрывов (SphereHit)
+		FovH=90			// Полный угол горизонтального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+		FovV=90			// Полный угол вертикального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+						// Остальные 5 раструбов определяются автоматически по центральной симметрии относительно переднего
+		ArmorFront=15
+		ArmorBack=15
+		ArmorTop=50
+		ArmorBottom=15
+		ArmorRight=45
+		ArmorLeft=45
+	[end]
+	DamageArg=293
+	CollisioDamageSens=1
+[End]
+
+[DmgElement = track_R]
+	damageablePart="#track_R"
+	LifeRate=15000		// 0.5 от исходного лайфа
+	LifeRateFrag=15000
+	[ArmorBox]			// Броня от бронебойных пуль (BeamHit) и взрывов (SphereHit)
+		FovH=90			// Полный угол горизонтального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+		FovV=90			// Полный угол вертикального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+						// Остальные 5 раструбов определяются автоматически по центральной симметрии относительно переднего
+		ArmorFront=15
+		ArmorBack=15
+		ArmorTop=50
+		ArmorBottom=15
+		ArmorRight=45
+		ArmorLeft=45
+	[end]
+	DamageArg=294
+	CollisioDamageSens=1
+[End]
+
+[DmgElement = turret]
+	damageablePart="tower"
+	LifeRate=15000		// 0.5 от исходного лайфа для пушек, 2000 для пулеметов
+	LifeRateFrag=15000
+	Armor=80				// Броня от бронебойных пуль (BeamHit)
+	[SphereHitArmorBox]			// Если данный блок есть, то броня задана по сторонам, если блока нет, то используется общий параметр Armor=
+		FovH=90			// Полный угол горизонтального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+		FovV=165		// Полный угол вертикального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+					// Остальные 5 раструбов определяются автоматически по центральной симметрии относительно переднего
+		ArmorFront=80
+		ArmorBack=30
+		ArmorTop=80
+		ArmorBottom=80
+		ArmorRight=80
+		ArmorLeft=80
+	[end]
+	CollisioDamageSens=0
+[End]
+
+[DmgElement = gun]
+	damageablePart="gun"
+	LifeRate=30000		// 10000 пулемёты и автопушки, 20000 легике пушки, 30000 средние пушки, 50000 тяжелые пушки
+	LifeRateFrag=15000	// x0.5
+	Armor=20			// 5 пулемёты и автопушки, 10 легике пушки, 20 средние пушки, 30 тяжелые пушки
+	CollisioDamageSens=0
+[End]
+
+DebugInfo = false				// Позволяет выводить скорость танка и значение оси газа для настройки двигателя

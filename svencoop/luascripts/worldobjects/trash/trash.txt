@@ -1,0 +1,6 @@
+Class_name = "CTrash"
+object_name = "trash"
+
+//////	PhysicsBody properties
+VisualImage=0,"graphics/planes/trash/trash.mgm",false
+

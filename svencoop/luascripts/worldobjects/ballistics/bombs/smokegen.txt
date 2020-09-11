@@ -1,0 +1,70 @@
+Class_name = "CBallistics"
+object_name = "SMOKEGEN"
+
+//////	PhysicsBody properties
+VisualImage=0,"graphics/Ammo/SmokeGen.mgm",false
+
+VisualRadius=5
+
+VisArg=100
+
+NoDirecion=false
+CalcWind=true
+ProcessNetwork=true
+
+Armor=0,800,		37,64063,	30,160157,	0,256252
+Armor=500,550,		22,30314,	17,75785,	0,121257
+Armor=2000,350,		11,12301,	9,30754,	0,49206
+Armor=5000,200,		5,3994,		4,9985,		0,15976
+Armor=15000,100,	2,998,		1,2496,		0,3994
+
+DefaultStartSpeed=0		//дефолтная начальная скорость, нужно устанавливать в максимальную траекторную +200м/с при "простреле" ракеты утилитой баллистического калькулятора, для этой ракеты 340м/с + 200м/с = 540м/с
+MaxDistance=15000		//предельная дальность, дальше которой объект удалится
+Mass=19.32				//масса ракеты
+Mkr=0.97				//значение числа Маха, после которого начинается повышение Cx до момента M=1, зависит от формы тела но не от размера
+Mmax=1.05				//значение числа Маха, до которого завершается понижение Cx, начавшееся при M=1, зависит от формы тела но не от размера
+Cx_0=0.125				//значение к-та сопротивления при (M <= Mkr), зависит от формы тела но не от размера
+Cx_max=0.2				//значение к-та сопротивления при (M = 1), зависит от формы тела но не от размера
+Cx_1=0.425				//значение к-та сопротивления при (M >= Mmax), зависит от формы тела но не от размера
+R=0.066					//радиус ракеты
+KPhi=0.01				//параметр скорости уменьшения угла атаки
+KPhiAcc=0				//параметр ускорения уменьшения угла атаки
+KJ=7					//параметр общей калибровки уменьшения угла атаки
+LiveTime=45				//время жизни объекта (большее из двух: время полета на MaxDistance или время горения трассера + TimeToDestroy)
+ExplodeTime=0			//время самоподрыва (=0 - самоподрыва нет)
+
+Spin=-1.5,1.5			//Rocket rotation angular speed random limits
+Deviation=1				//Deviation of the thrust 
+EngineThrust=0			//Engine power
+EngineDuration=1000.0,1000.1	//Engine work time random limits. In bomb - it's spinning time.
+
+RNDWindFactor=0.05		//коэф-т бокового разброса
+RNDWindChangeTimer=100.0	//таймер на смену к-та бокового разброса (можно сделать зиг-заг)
+
+FuseArmDelay=-1			//Задержка до взведения взрывателя. Если <=0 то работает стандартный механизм вертушки (таск BOS-744). Если нет - фиксированное значение.
+HitDefaultDelay=2		//Задержка до взрыва после попадания бомбы
+ExplosionExternalControl=true	//Управляемая из GUI задержка взрыва
+
+debug=false
+
+// Настройки рикошета, рандомы тем меньше, чем тяжелее бомба. Не острый нос и коробчатый стабилизатор немного снижает скорость отскока.
+VelDecK = 0.9			// Коэфициент падения скорости при нулевом угле к поверхности, 0..1
+VelDecKRnd = 0.3		// Рандом на него (равномерный в сторону уменьшения, значение задает нижнюю границу диапазона) -[0..1]*rnd
+VelDirKRnd = 15.0		// Рандом изменения направления отскока по горизонтали, нормаьлное распределение, град
+VelPitchKRnd = 0.5		// Коэффициент рандома изменения угла отскока по вертикали, +-[0..1]*rnd * УГОЛ, [0..1]
+VelAngMax = 20.0		// Максимальный угол к поверхности для возможности рикошета, при этом угле скорость отскока =0, град
+VelAngMaxRnd = 10.0		// Рандом на него (равномерный в сторону уменьшения, значение задает нижнюю границу диапазона) -[0..1]*rnd, град
+VelXMin = 45.0			// Минимальная продольная состовляющая скорости для возможности рикошета, м/с
+VelXMinRnd = 15.0		// Рандом на неё (равномерный в сторону уменьшения, значение задает нижнюю границу диапазона)  -[0..1]*rnd, м/с
+OrientDev = 30.0		// максимальное отклонение ориентации от направления вектора скорости после рикошета, нормаьлное распределение, град 
+
+// эффекты падения бомбы
+
+HitDummyEffect=""
+HitMiscEffect="LuaScripts/WorldObjects/Explosions/Effects/hit_bomb_object.txt"
+HitWaterEffect="LuaScripts/WorldObjects/Explosions/Effects/hit_bomb_water.txt"
+HitGroundEffect="LuaScripts/WorldObjects/Explosions/Effects/hit_bomb_ground.txt"
+HitArmorEffect="LuaScripts/WorldObjects/Explosions/Effects/hit_bomb_object.txt"
+HitBuildingEffect="LuaScripts/WorldObjects/Explosions/Effects/hit_bomb_object.txt"
+HitMetalEffect="LuaScripts/WorldObjects/Explosions/Effects/hit_ap_37-50mm_wood.txt"
+HitForestEffect="LuaScripts/WorldObjects/Explosions/Effects/hit_bomb_object.txt"

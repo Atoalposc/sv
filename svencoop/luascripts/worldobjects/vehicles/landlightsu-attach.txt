@@ -1,0 +1,38 @@
+Class_name = "CSpotlight"
+object_name = "Landlight"
+
+
+//////	PhysicsBody properties
+//VisualImage = <int TYPE>,<string File_PathName>,<bool cast_shadows>
+
+VisualImage=0,"graphics\Artillery\SearchlightSU\LandlightSU-attach.mgm",false
+//CollisionBody="graphics\Artillery\SearchlightSU\LandlightSU.col"
+ImageAttr=25	//IA_NOCLIP | IA_NOMINPIXELS | IA_NOMINZ
+//	IA_DEFAULT=0,
+//	IA_NOCLIP=1,
+//	IA_NOCLIP_ANIM=2,
+//	IA_NOROTINTERPOLATION=4,
+//	IA_NOMINZ=8,
+//	IA_NOMINPIXELS=16,
+//	IA_NOPOSINTERPOLATION=32,
+//	IA_CLOSEVIEWARG=64,
+//	IA_ALWAYSVISIBLE=128,
+//	IA_SCALEARG=256,
+//	ImageAttr=Attr1+Attr2+...+AttrN
+
+//SoundScript="LuaScripts/FokkerD7.cfg"
+
+ArgAxisY=221			// Аргумент горизонтального поворота
+ArgAxisZ=241			// Аргумент вертикального поворота
+ArgDamage=281			// Аргумент дамага
+ArgBeamVis=298			// Аргумент включения луча
+ArgLightPos=299			// Аргумент перемещения источника света вдоль луча
+ArgLightVis=300			// Аргумент включения источника света
+ArgLightBright=60399	// Аргумент яркости источника света
+SearchRad=10			// Дальность действия предельная
+SearchAngle=1			// Угол в котором луч начинает "чувствовать" цель
+BeamRadStart=1			// Радиус луча в начале (влияет на возможность упустить цель)
+BeamRadEnd=2			// Радиус луча в конце (влияет на возможность упустить цель)
+MinZAngle=1				// Минимально допустимый угол подъема луча
+
+energyloss="",true,0.5,300		// Потеря энергии пули при попадании, true - проверка на входе и выходе в колижн-бокс, первое эквивалентная броня на входе и выходе, второе джоулей на каждый метр пути внутри колижена

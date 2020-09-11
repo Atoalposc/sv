@@ -1,0 +1,15 @@
+class_name = "CBatchTrash"
+
+
+VisualImage=0,"graphics/ammo/case23-25mm.mgm",false
+VisualRadius=0.5
+//SoundScript="LuaScripts/Sound/explosions/Splash/water.cfg"
+
+Lifetime=2
+Mass=0.5
+Radius=0.1
+
+ImageAttr=4;	//No rotation interpolation
+
+SoundStrength=1
+SoundTime=2

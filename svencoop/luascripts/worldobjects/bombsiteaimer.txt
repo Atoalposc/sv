@@ -1,0 +1,14 @@
+Class_name = "CBombSiteAim"
+object_name = "Bombsite Aimer"
+
+//////	PhysicsBody properties
+VisualImage=0,"graphics/Ammo/gbr_1650lb.mgm",false
+#CollisionBody="graphics/characters/pilot_f1/pilot_f1.col"
+
+smoothparam = 0.1
+fovsmoothparam = 1.0
+
+maxf = 45.0
+maxb = 10.0
+maxl = 20.0
+maxr = 20.0

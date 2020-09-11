@@ -1,0 +1,80 @@
+Class_name = "CBatchBallistics"
+object_name = "SHELL_RUS_76_AP"
+
+//76мм "БР-350БСП" к пушке Ф-34/ЗИС-5 бронебойный сплошной.
+
+//////	PhysicsBody properties
+VisualImage=0,"graphics/ammo/ammoRac.mgm",false
+visualradius = 3
+ImageAttr=4	//IA_NOROTINTERPOLATION
+
+//CollisionBody="graphics/ammo/ammo.col"
+
+NoDirecion=true
+NoCollision=true
+
+// дальность, скорость на этой дальности (на 0м - указать на 5км/ч меньше расчетной), пары броня-урон за броней. Броню больше, чем в первой паре, не пробьет
+// за базовый взят урон на дальности 100м при нулевой броне, на макс. броне урон равне 0.25 от базового, на 0.8 макс. брони урон равен 0.5 от базового
+// урон при нулевой броне уменьшается с дальностью по соотношению квадрата скоростей
+// скорости по дальностям взяты из лога утилиты расчета .bin файлов пули (расчет таблиц наведения), на 10км/ч меньше ресчетной
+// т.к. если скорость окажется больше расчетной на данной дальности, то дамага не будет
+// базовый урон расчитан по соотношению кинетических энергий на дальности 100м между данной пулей и референсной пулей SHELL_GER_20x82_AP (=1000)
+
+Armor=0,660,	87,14905,	70,37262,	0,59619
+Armor=500,585,	73,11714,	59,29284,	0,46855 // посчитано по референсной точке по бронепробиваемости для данной пули 1700м-51мм
+Armor=1000,524,	62,9385,	50,23463,	0,37541
+Armor=2000,429,	47,6309,	38,15772,	0,25235
+Armor=4000,315,	30,3386,	24,8465,	0,13543
+
+// аэродинамические коэфициенты подобраны исходя из совпадения графика бронепробиваемости по дальности для эталонной пули
+
+DefaultStartSpeed=660	//дефолтная начальная скорость при стрельбе из простых пушек (наземка)
+MaxDistance=6000		//предельная дальность, дальше которой объект удалится
+Mass=6.6				//масса пули
+Mkr=0.92				//значение числа Маха, после которого начинается повышение Cx до момента M=1, зависит от формы тела но не от размера
+Mmax=2.2				//значение числа Маха, до которого завершается понижение Cx, начавшееся при M=1, зависит от формы тела но не от размера
+Cx_0=0.28				//значение к-та сопротивления при (M <= Mkr), зависит от формы тела но не от размера
+Cx_max=0.39				//значение к-та сопротивления при (M = 1), зависит от формы тела но не от размера
+Cx_1=0.65				//значение к-та сопротивления при (M >= Mmax), зависит от формы тела но не от размера
+R=0.038					//радиус пули
+LiveTime=17				//время жизни объекта
+TimeToDestroy=0			//время жизни объекта после попадания в скрытом состоянии (0 т.к. нет дымного трассера)
+TracertShowtime = 10	//время горения трассера
+MaxRedirections = 3		//максимальное кол-во рикошетов
+DestroyOnExplosion=false	//используется только для бронебойных пуль (default =true) с целью обеспечить применение Hit..Effect вместо Hit.., при сохранении пробоя препятствия на вылет
+							//что в свою очередь требуется для "прицепления" эффектов попадания по движущейся технике, а так же гарантированной передаче попаданий в сетевой игре
+
+debug=false
+
+// Попадание без рикошета, CBatchExplosion привяжется к объекту и отправится в сеть с привязкой
+HitMisc="LuaScripts/WorldObjects/Explosions/Effects/hit_ap_75-88mm_misc.txt"
+HitArmor="LuaScripts/WorldObjects/Explosions/Effects/hit_ap_75-88mm_armour.txt"
+HitMetal="LuaScripts/WorldObjects/Explosions/Effects/hit_ap_75-88mm_armour.txt"
+
+// Эффект попадания с рикошетом, только для локальной пули без отправки в сеть (,TRUE - не генерировать если не рикошет)
+HitMiscEffect="LuaScripts/WorldObjects/Explosions/Effects/rebound_ap_57-100mm_misc.txt",TRUE
+HitArmorEffect="LuaScripts/WorldObjects/Explosions/Effects/rebound_ap_57-100mm_armour.txt",TRUE
+HitMetalEffect="LuaScripts/WorldObjects/Explosions/Effects/rebound_ap_57-100mm_armour.txt",TRUE
+
+// Эффект попадания для локальной пули без отправки в сеть
+HitDummyEffect=""
+HitWaterEffect="LuaScripts/WorldObjects/Explosions/Effects/hit_ap_75-88mm_water.txt"
+HitGroundEffect="LuaScripts/WorldObjects/Explosions/Effects/hit_ap_75-88mm_ground.txt"
+HitBuildingEffect="LuaScripts/WorldObjects/Explosions/Effects/hit_ap_75-88mm_building.txt"
+HitForestEffect="LuaScripts/WorldObjects/Explosions/Effects/hit_ap_7mm_wood.txt"
+
+// блок для совместимости с турелью PC танка
+
+Gage=76					//калибр
+DefaultBulletSpeed = 660.0		//дефолтная начальная скорость при стрельбе из комплексной (авиационной) пушки неопределенной модели
+BulletSpeed = "F-34", 660.0	//начальная скорость при стрельбе из комплексной (авиационной) пушки
+BulletSpeed = "ZIS-5", 660.0	//начальная скорость при стрельбе из комплексной (авиационной) пушки
+
+shellType = 2
+//        SHELL_TYPE_CV = 1,// Бронебойный - CV - Armour Piercing with Cavity Bursting Charge
+//        SHELL_TYPE_AP = 2,// Бронебойный сплошной - AP - Armour Piercing Solid
+//        SHELL_TYPE_HV = 3,// Подкалиберный - HV - Armour Piercing Composite Rigid (High Velocity)
+//        SHELL_TYPE_HT = 4,// Кумулятивный - HT - Hight Explosive Anti Tank (HEAT)
+//        SHELL_TYPE_SH = 5,// Шрапнельный - SH - Shrapnel
+//        SHELL_TYPE_HE = 6,// Осколочный - HE - High Explosive and Fragmental
+//        SHELL_TYPE_SpHV = 7,// Подкалиберный катушечный - SpHV - Armour Piercing Spool-Shaped (Spool High Velocity)

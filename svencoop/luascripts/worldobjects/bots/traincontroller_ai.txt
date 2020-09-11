@@ -1,0 +1,8 @@
+Class_name = "CTrainAI"
+object_name = "Train Controller AI"
+
+//////	Controller specific
+Artificial=true;
+
+ControlledType="GOT_VEHICLE";
+

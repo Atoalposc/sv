@@ -1,0 +1,41 @@
+Class_name = "CBatchExplosion"
+object_name = "HE_013mm_39g_2g_ground"
+
+// БЧ 12.7мм совецкого снаряда пулемета УБ, расчитнано из ТНТ=2г, массы пули 39г, калибра 12.7мм
+
+////// PhysicsBody properties
+VisualImage=0,"graphics\effects\Arm\hit_shell_he_2-10g_ground.epl"
+visualradius=4
+//ImageAttr=17		//IA_NOCLIP | IA_NOMINPIXELS
+
+SoundScript="LuaScripts\Sound\explosions\AP\Ground_Large.cfg"
+
+ExplosionPower=0.5			// Сила звука взрыа, переменная для FMOD
+Animation=1					// Номер хука взрыва
+LiveTime=1.5				// Время жизни взрыва
+AnimationTime=1.5			// Время анимации взрыва
+Ranges=1,0.01,0.99,0		// (кол-во вариантов, начало 1го диапазона, конец 1-го диапазона, дельта прибавляемая к границам для следующего диапазона)
+//"RangesCnt, Range0Start, fRange0End, fRangeStep"; ARG=m_fRange0Start+(m_fRange0End-m_fRange0Start)*t+m_fRangeStep*data->m_RangeIdx
+//Ranges=1,0.01,0.99,0
+//Ranges=2,0.01,0.49,0.5
+//Ranges=3,0.01,0.32,0.33
+//Ranges=4,0.01,0.24,0.25
+//Ranges=5,0.01,0.19,0.2
+
+// Параметры Sphere Hit, внешний взрыв
+
+Radius=2.0	// Радиус сферы воздействия взрыва, определяющий выборку объектов
+TNT_equ=0.002	// Тротилловый эквивалент для моделирования атмосферной ударной волны
+
+// Фугасное воздействие: дальность, (-1 не использ.), пары (броня, дамаг за броней)
+ArmorFoug=0.0,-1,	0,453
+ArmorFoug=0.5,-1,	0,140
+ArmorFoug=0.7,-1,	0,83
+ArmorFoug=0.9,-1,	0,50
+
+// Осколочное воздействие
+ShrapnelQuantity=5
+FragmentMass=0.0030
+// Единичный осколок: дальность, скорость, пары (броня, дамаг за броней)
+ArmorShr=0.0,535,	2,42,	1,106,	0,169
+ArmorShr=2.0,509,	2,38,	1,96,	0,153

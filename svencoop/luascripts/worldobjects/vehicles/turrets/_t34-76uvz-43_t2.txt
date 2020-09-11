@@ -1,0 +1,53 @@
+Class_name = "CEjectionPlace"
+object_name = "_T34-76UVZ-43_T3"
+
+TransparentCockpit=false	// If false - Attached bot will be not rendered if cockpit hatch is closed (default =true)
+
+[attach=0]
+	object = "LuaScripts/WorldObjects/Bots/BotTankT34UVZ43_Loader.txt"
+	position = 0,0,0
+	convex="bot_pos",false	//false: Attach object relative to "bot_pos" convex (not absolute)
+[end]
+
+CollisionBody="graphics\Vehicles\_T34-76UVZ-43\_T34-76UVZ-43-C3.col"
+
+CopyPosAttachID=1	//Copy orientation from other parent's object, on AttachID==1
+
+SphereHitProtection=51	//Броневая защита стрелка от осколков при закрытой кабине
+
+[SphereProtectionBoxOpen]	// Если данный блок есть, то броня пилота от осколков задана по сторонам, если блока нет, то используется общий параметр SphereHitProtection=
+	FovH=140				// Полный угол горизонтального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+	FovV=150				// Полный угол вертикального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+							// Остальные 5 раструбов определяются автоматически по центральной симметрии относительно переднего
+	ArmorFront=20
+	ArmorBack=0
+	ArmorTop=0
+	ArmorBottom=20
+	ArmorRight=0
+	ArmorLeft=0
+[end]
+
+[SphereProtectionBoxClose]	// Если данный блок есть, то броня пилота от осколков задана по сторонам, если блока нет, то используется общий параметр SphereHitProtection=
+	FovH=90					// Полный угол горизонтального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+	FovV=150				// Полный угол вертикального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+							// Остальные 5 раструбов определяются автоматически по центральной симметрии относительно переднего
+	ArmorFront=55
+	ArmorBack=51
+	ArmorTop=20
+	ArmorBottom=20
+	ArmorRight=51
+	ArmorLeft=51
+[end]
+
+[Entrance]
+	EntrancePos= 0.0, -0.70104, 4.0
+	EntranceRot= 0,90,0
+	JumpDir= 0,0,0
+[end]
+
+IsLoader=1	// Флаг, определяющий, что на данном месте сидит заряжающий (при его гибели время перезарядки пушек, требующих заряжающих, увеличится (параметры в конфиге пушки)
+
+CanopyOpenByDefault=false
+
+DropsArg=100
+HumidityArg=101

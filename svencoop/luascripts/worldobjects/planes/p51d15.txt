@@ -1,0 +1,2326 @@
+class_name = "CPlane"
+object_name = "P-51D-15"
+detail_type = "DET_PLANE" //list of types is in \inc\SimulationSystem\DetailTypes.inc
+
+[COCKPIT_LIMITS]
+x= -0.13, 0.33
+y= -0.15, 0.04
+z= -0.20, 0.20
+[END]
+
+[OPEN_COCKPIT_LIMITS]
+x= -0.15, 0.35
+y= -0.2, 0.25
+z= -0.5, 0.5
+[END]
+
+//////	PhysicsBody properties
+//VisualImage = <int TYPE>,<string File_PathName>,<bool cast_shadows>
+
+VisualImage=0,"graphics/planes/P51D15/P51D15.mgm",true,true
+VisualImage=1,"graphics/planes/P51D15/P51D15-C.mgm",false
+DistantLOD="LuaScripts/WorldObjects/Planes/DistantLODs/P51D15_Distant.txt"
+DLODArgs=50380,57200
+Fragment="LuaScripts/WorldObjects/Planes/Fragments/P51D15_Fragment.txt"
+
+//VisualImage=ID,model_or_effect,cast_shadows[,debris_effects]
+//ID:					INT:	0 - visible everywhere, 1 - visible inside, 2 - visible outside
+//model_or_effect:		STRING:	path to model file (mgm) of effect file (epl)
+//cast_shadows: 		BOOL:	cast shadows from object or not
+//[,debris_effects]:	BOOL:	optional parameter, show effects on object debris or not
+
+ImageAttr=345	//IA_NOCLIP | IA_CLOSEVIEWARG | IA_NOMINPIXELS | IA_NOMINZ | IA_SCALEARG
+//	IA_DEFAULT=0,
+//	IA_NOCLIP=1,
+//	IA_NOCLIP_ANIM=2,
+//	IA_NOROTINTERPOLATION=4,
+//	IA_NOMINZ=8,
+//	IA_NOMINPIXELS=16,
+//	IA_NOPOSINTERPOLATION=32,
+//	IA_CLOSEVIEWARG=64,
+//	IA_ALWAYSVISIBLE=128,
+//	IA_SCALEARG=256,
+//	ImageAttr=Attr1+Attr2+...+AttrN
+
+CollisionBody="graphics/planes/P51D15/P51D15_Phys.col"
+HitBody="graphics/planes/P51D15/P51D15.col"
+
+SoundScript="LuaScripts/Sound/Planes/P51D15.cfg"
+HidePeriodAfterExplosion = 3.0
+
+// Скрипт замены пилота и параметры для него
+Script="LuaScripts\ObjectScripts\AlternateBot.sc"
+[AlterBot]
+	AlterBotConfig = 102, -1, -1, "", "LuaScripts/WorldObjects/Bots/BotPilot_P47_RAF43.txt"
+[end]
+
+[attach=0]
+	position= -0.650, -0.030, 0
+	object = "LuaScripts/WorldObjects/Bots/BotPilot_P47_USA44.txt"
+[end]
+
+[attach=1]
+	position= 1.224, 0.636, 0.502
+	rotation= 45, 0, 0
+	object = "LuaScripts/WorldObjects/FlareGun.txt"
+[end]
+
+[attach=2]
+	position= 0.0, 0.0, 0.0
+	object = "LuaScripts/WorldObjects/Spotter.txt"
+[end]
+
+AttachedCameras = "LuaScripts\WorldObjects\fixcameras\Planes\P51D15.txt"
+
+BannerAttachID=-1
+CustomPhotoArg=55
+
+EnterPoint= 0.905, 0.250, 0
+
+SendRate=5,50	//normal, attached state
+
+CommandMonitor="LuaScripts/WorldObjects/FokkerMonitor.txt"
+
+//////	Controled body specific
+CockpitFocus=0.6,-1.0,0,65,0.8
+
+RSE_Data_File="LuaScripts/RSE/RSE_FokkerDr7.txt"
+Plane_Class="CAeroplane_P_51D_15"
+
+InitialSpeedInAir = 320.0   //Скорость, с которой самолёт рождается в воздухе, 200...700 км/ч
+
+Gun_Coord0= 2.200, 0.410, -0.259
+Gun_Coord1= 3.125, 0.082, 0.0
+Deviation0= 3, 2, 0.9, 0.02, 0.1
+Deviation1= 3, 2, 0.9, 0.02, 0.1
+ParallaxDistance = 600.0
+
+MinCartridgeCaseTime = 0.05 // минимальный период между выбросами гильз с самолета
+
+FTCoord=0.17,0.055,0
+PPCoord=-0.112,0.083,0
+
+FlarePos= 1.224, 0.636, 0.502
+FlareDir= 0, 1, 1
+FlarePath="LuaScripts/WorldObjects/Ballistics/Flare.txt"
+FlareDisabled=true	// ИИ самолёты выдущих не отстреливают ракетницы дублируя команды
+
+DropsArg=100
+HumidityArg=101
+
+SetCockpitArgs=false	// true - автоматическое выставление значений анимаций в систему сетевых команд с указанным флагом сетевой передачи, false - в самолётах это делается в коде или в случае работы объекта только на приём
+
+//CockpitArg= FetchType, CmdID, SubcmdID, ArgNum, ArgValDefault, SmoothingType, SmoothingPower, NetworkFlag
+//FetchType=-1: аргумент в объекте не забирается для анимирования
+//FetchType=-2: аргумент в объекте забирается для анимирования из самого объекта
+//FetchType=-3: аргумент в объекте забирается для анимирования по сетевым командам parent-объекта
+//FetchType>=0: аргумент в объекте забирается для анимирования по сетевым командам child-объекта с укзанным Attach ID
+//CmdID=[0..999]: ID сетевой команды низкого качества, используемой для передачи значения.
+//CmdID=[1000..1999]: ID сетевой команды среднего качества, используемой для передачи значения.
+//SubcmdID=[0..3]: ID сетевой подкоманды команды низкого качества.
+//SubcmdID=[0..1]: ID сетевой подкоманды команды среднего качества.
+//ArgNum: номер аргумента анимации устанавливаемого в/из команды.
+//ArgValDefault: дефолтное значение аргумента анимации в случае, если команда не приходила.
+//SmoothingType: smooth_clamp - сглаживаение не-круговых анимаций
+//SmoothingType: smooth_wrap - сглаживаение круговых анимаций
+//SmoothingPower: постоянная времени сглаживания
+//NetworkFlag="": отправки команды в сеть нет и нет выставления команды в случае, если SetCockpitArgs=false
+//NetworkFlag="low_freq": отправка в сеть целиком команды, содержащей указанный аргумент в случае его изменения, не чаще низкой частоты
+//NetworkFlag="med_freq": отправка в сеть целиком команды, содержащей указанный аргумент в случае его изменения, не чаще средней частоты
+//NetworkFlag="high_freq": отправка в сеть целиком команды, содержащей указанный аргумент в случае его изменения, не чаще высокой частоты
+//NetworkFlag="granted_single": отправка в сеть целиком команды, содержащей указанный аргумент в случае его изменения, с применением гарантированного пакета состояния
+
+CockpitArg = -2, 0000, 0, 00402, 0.5, "smooth_clamp", 0.0, "" // Педали - управление по рысканию
+CockpitArg = -2, 1000, 0, 00406, 0.5, "smooth_clamp", 0.0, "" // РУС - управление по тангажу
+CockpitArg = -2, 1000, 1, 00407, 0.5, "smooth_clamp", 0.0, "" // РУС - управление по крену
+CockpitArg = -2, 0000, 1, 00436, 0.5, "smooth_clamp", 0.2, "" // Штурвал триммера РВ
+CockpitArg = -2, 0000, 2, 00435, 0.5, "smooth_clamp", 0.1, "" // Штурвал триммера элеронов
+CockpitArg = -2, 0000, 3, 00437, 0.5, "smooth_clamp", 0.2, "" // Штурвал триммера РН
+CockpitArg = -2, 0010, 0, 00423, 0.5, "smooth_clamp", 0.2, "" // Рычаг выпуска/уборки шасси
+CockpitArg = -2, 0011, 1, 00430, 0.5, "smooth_clamp", 0.2, "" // Рычаг выпуска/уборки закрылков
+CockpitArg = -2, 0012, 1, 00403, 0.0, "smooth_clamp", 0.1, "" // Левая тормозная педаль
+CockpitArg = -2, 0012, 2, 00404, 0.0, "smooth_clamp", 0.1, "" // Правая тормозная педаль
+CockpitArg = -2, 0014, 0, 00121, 0.0, "smooth_clamp", 0.1, "" // Рукоятка стояночного тормоза
+
+CockpitArg = -2, 0021, 3, 00700, 0.0, "", 0.0, "" // Кнопка отключения сирены шасси
+CockpitArg = -2, 0020, 0, 00701, 0.0, "", 0.0, "" // Красная лампа "L.G.WARNING"
+CockpitArg = -2, 0020, 1, 00702, 0.0, "", 0.0, "" // Зелёная лампа "L.G.WARNING"
+
+CockpitArg = -2, 0100, 0, 01100, 0.0, "smooth_clamp", 0.1, "" // РУД (нормальный газ)
+CockpitArg = -2, 0100, 1, 01111, 0.0, "smooth_clamp", 0.1, "" // Рычаг управления составом топливовоздушной смеси (высотный корректор)
+CockpitArg = -2, 0100, 3, 01110, 0.0, "smooth_clamp", 0.1, "" // Тумблер переключения нагнетателя 1-го двигателя
+CockpitArg = -2, 0101, 0, 01106, 0.0, "smooth_clamp", 0.1, "" // Рычаг шага винта
+
+CockpitArg = -2, 0102, 2, 01130, 0.0, "smooth_clamp", 0.2, "" // Тумблер управления маслорадиатором - открыть/закрыть
+CockpitArg = -2, 0102, 3, 01182, 0.0, "smooth_clamp", 0.2, "" // Тумблер управления водорадиатором - открыть/закрыть
+CockpitArg = -2, 0106, 0, 01187, 0.0, "smooth_clamp", 0.1, "" // Тумблер управления водорадиатором - ручное/автомат - аргумент перепутан
+CockpitArg = -2, 0109, 0, 01188, 0.0, "smooth_clamp", 0.2, "" // Тумблер управления маслорадиатором - ручное/автомат - аргумент перепутан
+
+CockpitArg = -2, 0103, 0, 01152, 0.0, "smooth_clamp", 0.1, "" // Переключатель зажигания (магнето)
+
+CockpitArg = -2, 0103, 2, 01160, 0.0, "smooth_clamp", 0.1, "" // Тумблер электроинерционного стартера
+CockpitArg = -2, 0104, 2, 01116, 0.0, "smooth_clamp", 0.2, "" // Плунжер впрыска пускового топлива / заливной топливный насос 1-го двигателя
+CockpitArg = -2, 0104, 3, 01117, 0.0, "smooth_clamp", 0.1, "" // Впрыск пускового топлива в 1-ый двигатель
+
+CockpitArg = -2, 1403, 0, 08201, 0.0, "smooth_clamp", 0.1, "" // Указатель приборной (индикаторной) скорости
+CockpitArg = -2, 1402, 0, 08252, 0.0, "smooth_wrap", 0.1, "" // Указатель барометрической высоты - длинная стрелка (футы)
+CockpitArg = -2, 1403, 1, 08255, 0.0, "smooth_wrap", 0.1, "" // Указатель барометрической высоты - средняя стрелка (тысячи футов)
+CockpitArg = -2, 0402, 1, 08251, 0.0, "smooth_wrap", 0.2, "" // Указатель барометрической высоты - короткая стрелка (десятки тысяч футов)
+CockpitArg = -2, 0402, 0, 08253, 0.5, "smooth_clamp", 0.2, "" // Указатель барометрической высоты - шкала задатчика давления
+CockpitArg = -2, 0402, 3, 08257, 0.0, "smooth_wrap", 0.2, "" // Указатель барометрической высоты - внешний подвижный индекс высоты аэродрома (футы)
+CockpitArg = -2, 0402, 2, 08256, 0.0, "smooth_wrap", 0.2, "" // Указатель барометрической высоты - внутренний подвижный индекс высоты аэродрома (тысячи футов)
+CockpitArg = -2, 1402, 1, 08232, 0.5, "smooth_clamp", 0.1, "" // Вариометр
+CockpitArg = -2, 1400, 1, 08561, 0.0, "smooth_wrap",  0.1, "" // Курс по магнитному компасу
+
+CockpitArg = -2, 1200, 0, 03102, 0.0, "smooth_wrap",  0.1, "" // RPM двигателя (стрелка RPM)
+CockpitArg = -2, 1201, 0, 03109, 0.0, "smooth_clamp", 0.1, "" // Указатель наддува
+CockpitArg = -2, 0200, 0, 03122, 0.0, "smooth_clamp", 0.2, "" // Указатель давления топлива
+CockpitArg = -2, 0200, 1, 03142, 0.0, "smooth_clamp", 0.2, "" // Указатель давления масла
+CockpitArg = -2, 0201, 3, 03152, 0.0, "smooth_clamp", 0.2, "" // Указатель температуры масла
+CockpitArg = -2, 0202, 1, 03172, 0.0, "smooth_clamp", 0.5, "" // Температура воды
+CockpitArg = -2, 0203, 1, 03114, 0.0, "smooth_clamp", 0.5, "" // Температура воздушной смеси
+CockpitArg = -2, 0206, 0, 03120, 0.0, "smooth_clamp", 0.0, "" // Лампа включения второй скорости ПЦН
+
+CockpitArg = -2, 0403, 0, 05720, 0.0, "smooth_clamp", 0.2, "" // Указатель Suction (вакуум для работы гироскопов)
+CockpitArg = -2, 0401, 0, 08002, 0.5, "smooth_clamp", 0.2, "" // Указатель поворота
+CockpitArg = -2, 1405, 1, 08571, 0.0, "smooth_wrap",  0.1, "" // Курс по гирополукомпасу
+CockpitArg = -2, 0403, 1, 08572, 0.0, "smooth_wrap",  0.1, "" // Арретир гирокомпаса
+CockpitArg = -2, 1401, 0, 08011, 0.5, "smooth_clamp", 0.1, "" // Индикация угла тангажа (авиагоризонт)
+CockpitArg = -2, 1401, 1, 08012, 0.5, "smooth_wrap", 0.1, "" // Индикация угла крена (авиагоризонт)
+CockpitArg = -2, 0403, 2, 08573, 0.0, "smooth_wrap",  0.1, "" // Арретир авиагоризонта
+
+CockpitArg = -2, 0350, 0, 02501, 0.0, "smooth_clamp", 0.5, "" // Топливомер левого бака
+CockpitArg = -2, 0350, 1, 02511, 0.0, "smooth_clamp", 0.5, "" // Топливомер заднего бака
+CockpitArg = -2, 0350, 2, 02521, 0.0, "smooth_clamp", 0.5, "" // Топливомер правого бака
+CockpitArg = -2, 0104, 1, 01113, 0.0, "smooth_clamp", 0.2, "" // Пожарный кран двигателя 
+CockpitArg = -2, 0353, 1, 02301, 0.0, "smooth_clamp", 0.1, "" // Бензокран
+
+CockpitArg = -2, 0400, 0, 08511, 0.0, "smooth_wrap", 0.2, "" // Часы - часовая стрелка
+CockpitArg = -2, 0400, 1, 08512, 0.0, "smooth_wrap", 0.2, "" // Часы - минутная стрелка
+CockpitArg = -2, 1400, 0, 08513, 0.0, "smooth_wrap", 0.1, "" // Часы - секундная стрелка
+
+CockpitArg = -2, 0401, 1, 08171, 0.5, "smooth_clamp", 0.1, "" // Указатель скольжения 
+CockpitArg = -2, 0401, 2, 00206, 0.5, "smooth_clamp", 0.2, "" // Тангаж картушки компаса
+CockpitArg = -2, 0401, 3, 00205, 0.5, "smooth_clamp", 0.2, "" // Крен картушки компаса
+
+CockpitArg = -2, 0430, 0, 04500, 0.0, "smooth_clamp", 0.1, "" // Подсветка приборов + флюоресцирование шкал приборов под действием УФ-лампы
+CockpitArg = -2, 0430, 1, 60210, 0.0, "smooth_clamp", 0.1, "" // Заливка кабины светом
+CockpitArg = -2, 0430, 2, 04510, 0.0, "smooth_clamp", 0.2, "" // Фосфорицирование шкал приборов
+CockpitArg = -2, 0430, 3, 60212, 0.0, "smooth_clamp", 0.1, "" // Заливка кабины ультрафиолетовым светом (флюоресцирующая УФ-лампа)
+CockpitArg = -2, 0431, 0, 04324, 0.5, "smooth_clamp", 0.1, "" // Переключатель подсветки приборов
+CockpitArg = -2, 0431, 1, 04323, 0.0, "smooth_clamp", 0.1, "" // Выключатель заливки кабины светом
+CockpitArg = -2, 0431, 2, 04320, 0.5, "smooth_clamp", 0.1, "" // Переключатель бортовых аэронавигационных огней (БАНО)
+CockpitArg = -2, 0431, 3, 04321, 0.5, "smooth_clamp", 0.1, "" // Переключатель посадочной фары
+CockpitArg = -2, 0432, 0, 04325, 0.0, "smooth_clamp", 0.1, "" // Выключатель флюоресцирующей (ультрафиолетовой) лампы
+CockpitArg = -2, 0433, 0, 04328, 0.5, "smooth_clamp", 0.1, "" // Регулятор яркости подсветки приборов
+
+CockpitArg = -2, 0435, 0, 04350, 0.0, "smooth_clamp", 0.1, "" // Положение переключателя первого строевого огня
+CockpitArg = -2, 0435, 1, 04351, 0.0, "smooth_clamp", 0.1, "" // Положение переключателя второго строевого огня
+CockpitArg = -2, 0435, 2, 04352, 0.0, "smooth_clamp", 0.1, "" // Положение переключателя третьего строевого огня
+
+CockpitArg = -2, 0463, 0, 05710, 0.0, "smooth_clamp", 0.1, "" // Давление в гидросистеме
+
+CockpitArg = -2, 0434, 0, 06009, 0.0, "smooth_clamp", 0.2, "" // Индикатор кислородного потока ("Бленкер")
+CockpitArg = -2, 0434, 1, 06010, 0.0, "smooth_clamp", 0.2, "" // Манометр кислородного прибора
+CockpitArg = -2, 0434, 3, 06012, 0.0, "smooth_clamp", 0.2, "" // Кран подачи кислорода
+
+CockpitArg = -2, 0530, 1, 06006, 0.0, "smooth_clamp", 0.1, "" // Управление фонарём
+
+CockpitArg = -2, 0600, 1, 09101, 0.5, "smooth_clamp", 0.1, "" // Реостат "GUN SIGHT"
+CockpitArg = -2, 0601, 0, 09102, 0.0, "smooth_clamp", 0.1, "" // Светофильтр прицела
+CockpitArg = -2, 0601, 1, 09103, 0.0, "smooth_clamp", 0.1, "" // Сетка прицела
+CockpitArg = -2, 0602, 0, 09104, 0.0, "smooth_clamp", 0.1, "" // Сетка коллиматорного прицела - размер прицельной марки
+CockpitArg = -2, 0602, 1, 09105, 0.0, "smooth_clamp", 0.1, "" // Сетка коллиматорного прицела - поворот прицельной марки
+CockpitArg = -2, 0602, 2, 09106, 0.0, "smooth_clamp", 0.1, "" // Управление вводом дальности в прицел
+CockpitArg = -2, 0602, 3, 09107, 0.0, "smooth_clamp", 0.1, "" // Управление вводом базы цели в прицел
+CockpitArg = -2, 1603, 0, 09110, 0.0, "smooth_clamp", 0.1, "" // Сетка коллиматорного прицела - перемещение по горизонтали
+CockpitArg = -2, 1603, 1, 09111, 0.0, "smooth_clamp", 0.1, "" // Сетка коллиматорного прицела - перемещение по вертикали
+CockpitArg = -2, 0603, 0, 09112, 0.0, "smooth_clamp", 0.1, "" // Переключатель режима работы коллиматорного прицела
+CockpitArg = -2, 0603, 1, 09122, 0.0, "smooth_clamp", 0.1, "" // Ручка маскирования прицельной марки
+
+CockpitArg = -2, 0641, 0, 04318, 0.0, "smooth_clamp", 0.1, "" // АЗС "GUNS SIGHT & CAMERA"
+
+CockpitArg = -2, 0453, 3, 09042, 0.0, "smooth_clamp", 0.2, "" // Тумблеры управления взрывателями
+CockpitArg = -2, 0454, 2, 09001, 0.0, "smooth_wrap",  0.2, "" // Кнопка сброса бомб //реально аргумент 9001
+CockpitArg = -2, 0454, 3, 09041, 0.0, "smooth_clamp", 0.2, "" // Рукоятки взвода бомб
+CockpitArg = -2, 0455, 0, 09171, 0.0, "smooth_clamp", 0.1, "" // Рукоятка сброса левой бомбы
+CockpitArg = -2, 0455, 1, 09172, 0.0, "smooth_clamp", 0.1, "" // Рукоятка сброса правой бомбы
+CockpitArg = -2, 0460, 2, 09057, 0.0, "smooth_clamp", 0.2, "" // Тумблер сброса ракетных контейнеров 
+
+CockpitArg = -2, 0460, 0, 09055, 0.5, "smooth_clamp", 0.2, "" // Селектор выбора режима запуска ракет
+CockpitArg = -2, 0460, 1, 09056, 0.0, "smooth_clamp", 0.2, "" // Селектор выбора количества ракет к запуску
+
+CockpitArg = -2, 0650, 1, 09000, 0.0, "smooth_clamp", 0.1, "" // Гашетка пулемётного огня (на РУС)
+
+CockpitArg = -2, 0850, 0, 07000, 0.5, "smooth_clamp", 0.1, "" // Выключатель (1-го диапазона) ресивера радиостанции
+CockpitArg = -2, 0850, 2, 07002, 0.0, "smooth_clamp", 0.2, "" // Настройка частоты ресивера радиостанции
+CockpitArg = -2, 0850, 3, 07003, 0.0, "smooth_clamp", 0.2, "" // Селектор диапазонов ресивера радиостанции
+CockpitArg = -2, 0860, 0, 07050, 0.0, "smooth_clamp", 0.1, "" // Выключатель передатчика радиостанции
+CockpitArg = -2, 0404, 0, 08100, 0.5, "smooth_clamp", 0.2, "" // АРК - индикатор направления на радиомаяк
+
+CockpitArg = -2, 0450, 0, 04301, 0.0, "smooth_clamp", 0.2, "" // АЗС электробензонасоса 
+CockpitArg = -2, 0450, 2, 04310, 0.0, "smooth_clamp", 0.2, "" // АЗС аккумулятора 
+CockpitArg = -2, 0551, 0, 04311, 0.0, "smooth_clamp", 0.1, "" // Выключатель генератора
+
+CockpitArg = -2, 0466, 0, 04305, 0.0, "smooth_clamp", 0.2, "" // Положение АЗС обогрева пулемётов
+CockpitArg = -2, 0466, 1, 04306, 0.0, "smooth_clamp", 0.2, "" // Положение АЗС обогрева ПВД
+CockpitArg = -2, 0106, 1, 01132, 0.0, "smooth_clamp", 0.2, "" // Положение АЗС подогрева масла
+
+CockpitArg = -2, 0452, 0, 04314, 0.0, "smooth_clamp", 0.2, "" // Амперметр
+
+
+GunsightPosition = -0.466, 0.723, 0.000
+
+// Варианты модификации вооружения
+
+[WeaponMode=0]
+	WMname="default"
+	WMgroup="default"
+	PlaneModArg=-1
+	TurretID=-1
+	TurretDefault=""
+	TurretMod=""
+
+	[AdditionalElement] // Масло - всё
+		AttachToPart = "EngCowl_Ctl_0"
+		Position = 0.626, -0.107, 0.000
+		Mass = 73.823
+	[end]  
+	
+	[AdditionalElement] // Вода - вся
+		AttachToPart = "EngCowl_Ctl_0"
+		Position = 0.891, -0.184, -0.018
+		Mass = 66.238
+	[end]  
+
+	[Gun=0]
+		GunType = "LuaScripts/WorldObjects/Weapons/MG_USA_M2-50.txt"
+		WeaponGroup1 = true // Пулемётное вооружение
+		AttachToPart = "WingL_Mid_0"
+		DamageConvex = "~gun03"
+		ProbabilityOfHit = 0.05
+		CarriagePosition = -0.070, -0.528, -2.018 // Координаты ц.м. левого внутреннего пулемёта Кольт-Браунинг М-2 с установкой в ССК самолёта P-51D-15
+		CarriageYawPitchRoll = 0.0, 0.0, 0.0
+		CarriageMass = 30.371 // Масса пулемёта Кольт-Браунинг М-2 с установкой на самолёте P-51D-15
+		CarriageMassPosition_inCarriageAxis = 0.0, 0.0, 0.0
+		CarriageMOI_inCarriageAxis = 0.032, 2.619, 2.636, 0.019, 0.000, 0.000 // Тензор инерции пулемёта Кольт-Браунинг М-2 с установкой, относительно осей ССК пулемёта (лафета)
+		//CarriageCxaS = 0.0045 // Произведение коэффициента лобового сопротивления на площадь миделевого сечения ствола пулемёта Кольт-Браунинг М-2
+		CarriageDragPosition = 0.743, -0.524, -2.018 // Координаты центра площади миделевого сечения ствола левого внутреннего пулемёта Кольт-Браунинг М-2 в ССК самолёта P-51D-15
+		DefaultGunPosition = 0.743, -0.524, -2.018 // Координаты дульного среза левого внутреннего пулемёта Кольт-Браунинг М-2 в ССК самолёта P-51D-15
+		BarrelTemperatureDecreaseCorrectionData = 1.0, 4.0, 300.0
+		CarriageAdditionalBulletDispertionAngle = 0.019100955, 0.03820191	// Реф от Browning M2.50 очередями на P-40: диаметр полного круга рассеивания 8фт на Д=2000фт (КВО=0.667т.д.). Разброс при нулевом разогреве в градусах, принят равным половине от стрельбы очередями.
+		AmmunitionAttachToPart = "WingL_Mid_0" // Боекомплект левого внутреннего пулемёта Кольт-Браунинг М-2 установлен в средней части левой консоли крыла самолёта P-51D-15
+		AmmunitionPosition = -0.217, -0.439, -2.994 // Координаты ц.м. боекомплекта левого внутреннего пулемёта Кольт-Браунинг М-2 в ССК самолёта P-51D-15
+		CartridgeCasesEjection = true
+		CartridgeCasesEjectionPosition = -0.271, -0.640, -2.003
+		CartridgeCasesEjectionSpeed = 0, -2, 0
+		AfterServiceOperationDelay = 0.3
+		ReArmTime = 60 // Внутренняя установка
+		FireButtonArgIdx = 9000
+		FlashAnimationArgIdx = 9213
+		FlashAnimationGroup = 1 // Light Arg 60230
+		GunSoundsIdx = 1
+		ShotSoundType = 0
+        isElectroTrigger = true
+        IsOnlyMechanicalManualCocking = false
+        IsTwoManualCockingMethods = true        
+	[end]
+
+	[Gun=1]
+		GunType = "LuaScripts/WorldObjects/Weapons/MG_USA_M2-50.txt"
+		WeaponGroup1 = true // Пулемётное вооружение
+		AttachToPart = "WingR_Mid_0"
+		DamageConvex = "~gun04"
+		ProbabilityOfHit = 0.05
+		CarriagePosition = -0.070, -0.528, 2.018 // Координаты ц.м. правого внутреннего пулемёта Кольт-Браунинг М-2 с установкой в ССК самолёта P-51D-15
+		CarriageYawPitchRoll = 0.0, 0.0, 0.0
+		CarriageMass = 30.371 // Масса пулемёта Кольт-Браунинг М-2 с установкой на самолёте P-51D-15
+		CarriageMassPosition_inCarriageAxis = 0.0, 0.0, 0.0
+		CarriageMOI_inCarriageAxis = 0.032, 2.619, 2.636, 0.019, 0.000, 0.000 // Тензор инерции пулемёта Кольт-Браунинг М-2 с установкой, относительно осей ССК пулемёта (лафета)
+		//CarriageCxaS = 0.0045 // Произведение коэффициента лобового сопротивления на площадь миделевого сечения ствола пулемёта Кольт-Браунинг М-2
+		CarriageDragPosition = 0.743, -0.524,  2.018 // Координаты центра площади миделевого сечения ствола правого внутреннего пулемёта Кольт-Браунинг М-2 в ССК самолёта P-51D-15
+		DefaultGunPosition = 0.743, -0.524,  2.018 // Координаты дульного среза правого внутреннего пулемёта Кольт-Браунинг М-2 в ССК самолёта P-51D-15
+		BarrelTemperatureDecreaseCorrectionData = 1.0, 4.0, 300.0
+		CarriageAdditionalBulletDispertionAngle = 0.019100955, 0.03820191	// Реф от Browning M2.50 очередями на P-40: диаметр полного круга рассеивания 8фт на Д=2000фт (КВО=0.667т.д.). Разброс при нулевом разогреве в градусах, принят равным половине от стрельбы очередями.
+		AmmunitionAttachToPart = "WingR_Mid_0" // Боекомплект правого внутреннего пулемёта Кольт-Браунинг М-2 установлен в концевой части правой консоли крыла самолёта P-51D-15
+		AmmunitionPosition = -0.217, -0.439, 2.994 // Координаты ц.м. боекомплекта правого внутреннего пулемёта Кольт-Браунинг М-2 в ССК самолёта P-51D-15
+		CartridgeCasesEjection = true
+		CartridgeCasesEjectionPosition = -0.271, -0.640, 2.003
+		CartridgeCasesEjectionSpeed = 0, -2, 0
+		AfterServiceOperationDelay = 0.3
+		ReArmTime = 60 // Внутренняя установка
+		FlashAnimationArgIdx = 9313
+		FlashAnimationGroup = 2 // Light Arg 60240
+		GunSoundsIdx = 2
+		ShotSoundType = 0
+        isElectroTrigger = true 
+        IsOnlyMechanicalManualCocking = false
+        IsTwoManualCockingMethods = true
+	[end]
+
+	[Gun=2]
+		GunType = "LuaScripts/WorldObjects/Weapons/MG_USA_M2-50.txt"
+		WeaponGroup1 = true // Пулемётное вооружение
+		AttachToPart = "WingL_Mid_0"
+		DamageConvex = "~gun01"
+		ProbabilityOfHit = 0.05
+		CarriagePosition = -0.070, -0.496, -2.410 // Координаты ц.м. левого внешнего пулемёта Кольт-Браунинг М-2 с установкой в ССК самолёта P-51D-15
+		CarriageYawPitchRoll = 0.0, 0.0, 0.0
+		CarriageMass = 30.371 // Масса пулемёта Кольт-Браунинг М-2 с установкой на самолёте P-51D-15
+		CarriageMassPosition_inCarriageAxis = 0.0, 0.0, 0.0
+		CarriageMOI_inCarriageAxis = 0.032, 2.619, 2.636, 0.019, 0.000, 0.000 // Тензор инерции пулемёта Кольт-Браунинг М-2 с установкой, относительно осей ССК пулемёта (лафета)
+		//CarriageCxaS = 0.0045 // Произведение коэффициента лобового сопротивления на площадь миделевого сечения ствола пулемёта Кольт-Браунинг М-2
+		CarriageDragPosition = 0.740, -0.490, -2.409 // Координаты центра площади миделевого сечения ствола левого внешнего пулемёта Кольт-Браунинг М-2 в ССК самолёта P-51D-15
+		DefaultGunPosition = 0.740, -0.490, -2.409 // Координаты дульного среза левого внешнего пулемёта Кольт-Браунинг М-2 в ССК самолёта P-51D-15
+		BarrelTemperatureDecreaseCorrectionData = 1.0, 4.0, 300.0
+		CarriageAdditionalBulletDispertionAngle = 0.019100955, 0.03820191	// Реф от Browning M2.50 очередями на P-40: диаметр полного круга рассеивания 8фт на Д=2000фт (КВО=0.667т.д.). Разброс при нулевом разогреве в градусах, принят равным половине от стрельбы очередями.
+		AmmunitionAttachToPart = "WingL_Mid_0" // Боекомплект левого среднего  пулемёта Кольт-Браунинг М-2 установлен в концевой части левой консоли крыла самолёта P-51D-15
+		AmmunitionPosition = -0.078, -0.470, -2.787 // Координаты ц.м. боекомплекта левого внешнего внутреннего пулемёта Кольт-Браунинг М-2 в ССК самолёта P-51D-15
+		CartridgeCasesEjection = true
+		CartridgeCasesEjectionPosition = -0.288, -0.592, -2.404
+		CartridgeCasesEjectionSpeed = 0, -2, 0
+		AfterServiceOperationDelay = 0.3
+		ReArmTime = 60 // Внутренняя установка
+		FlashAnimationArgIdx = 9013
+		FlashAnimationGroup = 1 // Light Arg 60230
+		GunSoundsIdx = 1
+		ShotSoundType = 0
+        isElectroTrigger = true 
+        IsOnlyMechanicalManualCocking = false
+        IsTwoManualCockingMethods = true
+	[end]
+
+	[Gun=3]
+		GunType = "LuaScripts/WorldObjects/Weapons/MG_USA_M2-50.txt"
+		WeaponGroup1 = true // Пулемётное вооружение
+		AttachToPart = "WingR_Mid_0"
+		DamageConvex = "~gun06"
+		ProbabilityOfHit = 0.05
+		CarriagePosition = -0.070, -0.496, 2.410 // Координаты ц.м. правого внешнего пулемёта Кольт-Браунинг М-2 с установкой в ССК самолёта P-51D-15
+		CarriageYawPitchRoll = 0.0, 0.0, 0.0
+		CarriageMass = 30.371 // Масса пулемёта Кольт-Браунинг М-2 с установкой на самолёте P-51D-15
+		CarriageMassPosition_inCarriageAxis = 0.0, 0.0, 0.0
+		CarriageMOI_inCarriageAxis = 0.032, 2.619, 2.636, 0.019, 0.000, 0.000 // Тензор инерции пулемёта Кольт-Браунинг М-2 с установкой, относительно осей ССК пулемёта (лафета)
+		//CarriageCxaS = 0.0045 // Произведение коэффициента лобового сопротивления на площадь миделевого сечения ствола пулемёта Кольт-Браунинг М-2
+		CarriageDragPosition = 0.740, -0.490, 2.409 // Координаты центра площади миделевого сечения ствола правого внешнего пулемёта Кольт-Браунинг М-2 в ССК самолёта P-51D-15
+		DefaultGunPosition = 0.740, -0.490, 2.409 // Координаты дульного среза правого внешнего пулемёта Кольт-Браунинг М-2 в ССК самолёта P-51D-15
+		BarrelTemperatureDecreaseCorrectionData = 1.0, 4.0, 300.0
+		CarriageAdditionalBulletDispertionAngle = 0.019100955, 0.03820191	// Реф от Browning M2.50 очередями на P-40: диаметр полного круга рассеивания 8фт на Д=2000фт (КВО=0.667т.д.). Разброс при нулевом разогреве в градусах, принят равным половине от стрельбы очередями.
+		AmmunitionAttachToPart = "WingR_Mid_0" // Боекомплект левого внутреннего пулемёта Кольт-Браунинг М-2 установлен в концевой части левой консоли крыла самолёта P-51D-15
+		AmmunitionPosition = -0.078, -0.470, 2.787 // Координаты ц.м. боекомплекта правого внешнего внутреннего пулемёта Кольт-Браунинг М-2 в ССК самолёта P-51D-15
+		CartridgeCasesEjection = true
+		CartridgeCasesEjectionPosition = -0.288, -0.592, 2.404
+		CartridgeCasesEjectionSpeed = 0, -2, 0
+		AfterServiceOperationDelay = 0.3
+		ReArmTime = 60 // Внутренняя установка
+		FlashAnimationArgIdx = 9513
+		FlashAnimationGroup = 2 // Light Arg 60240
+		GunSoundsIdx = 2
+		ShotSoundType = 0
+        isElectroTrigger = true
+        IsOnlyMechanicalManualCocking = false
+        IsTwoManualCockingMethods = true        
+	[end]
+	
+	[Gun=4]
+		GunType = "LuaScripts/WorldObjects/Weapons/MG_USA_M2-50.txt"
+		WeaponGroup1 = true // Пулемётное вооружение
+		AttachToPart = "WingL_Mid_0"
+		DamageConvex = "~gun02"
+		ProbabilityOfHit = 0.05
+		CarriagePosition = -0.070, -0.513, -2.214 // Координаты ц.м. левого среднего  пулемёта Кольт-Браунинг М-2 с установкой в ССК самолёта P-51D-15
+		CarriageYawPitchRoll = 0.0, 0.0, 0.0
+		CarriageMass = 30.371 // Масса пулемёта Кольт-Браунинг М-2 с установкой на самолёте P-51D-15
+		CarriageMassPosition_inCarriageAxis = 0.0, 0.0, 0.0
+		CarriageMOI_inCarriageAxis = 0.032, 2.619, 2.636, 0.019, 0.000, 0.000 // Тензор инерции пулемёта Кольт-Браунинг М-2 с установкой, относительно осей ССК пулемёта (лафета)
+		//CarriageCxaS = 0.0045 // Произведение коэффициента лобового сопротивления на площадь миделевого сечения ствола пулемёта Кольт-Браунинг М-2
+		CarriageDragPosition = 0.745, -0.507, -2.213 // Координаты центра площади миделевого сечения ствола левого среднего  пулемёта Кольт-Браунинг М-2 в ССК самолёта P-51D-15
+		DefaultGunPosition = 0.745, -0.507, -2.213 // Координаты дульного среза левого среднего  пулемёта Кольт-Браунинг М-2 в ССК самолёта P-51D-15
+		BarrelTemperatureDecreaseCorrectionData = 1.0, 4.0, 300.0
+		CarriageAdditionalBulletDispertionAngle = 0.019100955, 0.03820191	// Реф от Browning M2.50 очередями на P-40: диаметр полного круга рассеивания 8фт на Д=2000фт (КВО=0.667т.д.). Разброс при нулевом разогреве в градусах, принят равным половине от стрельбы очередями.
+		AmmunitionAttachToPart = "WingL_Mid_0" // Боекомплект левого среднего  пулемёта Кольт-Браунинг М-2 установлен в концевой части левой консоли крыла самолёта P-51D-15
+		AmmunitionPosition = -0.078, -0.410, -3.158 // Координаты ц.м. боекомплекта левого среднего  пулемёта Кольт-Браунинг М-2 в ССК самолёта P-51D-15
+		CartridgeCasesEjection = true
+		CartridgeCasesEjectionPosition = -0.279, -0.617, -2.205
+		CartridgeCasesEjectionSpeed = 0, -2, 0
+		AfterServiceOperationDelay = 0.3
+		ReArmTime = 60 // Внутренняя установка
+		FlashAnimationArgIdx = 9113
+		FlashAnimationGroup = 1 // Light Arg 60230
+		GunSoundsIdx = 1
+		ShotSoundType = 0
+        isElectroTrigger = true
+        IsOnlyMechanicalManualCocking = false
+        IsTwoManualCockingMethods = true        
+	[end]
+
+	[Gun=5]
+		GunType = "LuaScripts/WorldObjects/Weapons/MG_USA_M2-50.txt"
+		WeaponGroup1 = true // Пулемётное вооружение
+		AttachToPart = "WingR_Mid_0"
+		DamageConvex = "~gun05"
+		ProbabilityOfHit = 0.05
+		CarriagePosition = -0.070, -0.513, 2.214 // Координаты ц.м. правого среднего  пулемёта Кольт-Браунинг М-2 с установкой в ССК самолёта P-51D-15
+		CarriageYawPitchRoll = 0.0, 0.0, 0.0
+		CarriageMass = 30.371 // Масса пулемёта Кольт-Браунинг М-2 с установкой на самолёте P-51D-15
+		CarriageMassPosition_inCarriageAxis = 0.0, 0.0, 0.0
+		CarriageMOI_inCarriageAxis = 0.032, 2.619, 2.636, 0.019, 0.000, 0.000 // Тензор инерции пулемёта Кольт-Браунинг М-2 с установкой, относительно осей ССК пулемёта (лафета)
+		//CarriageCxaS = 0.0045 // Произведение коэффициента лобового сопротивления на площадь миделевого сечения ствола пулемёта Кольт-Браунинг М-2
+		CarriageDragPosition = 0.745, -0.507,  2.213 // Координаты центра площади миделевого сечения ствола правого среднего  пулемёта Кольт-Браунинг М-2 в ССК самолёта P-51D-15
+		DefaultGunPosition = 0.745, -0.507,  2.213 // Координаты дульного среза правого среднего  пулемёта Кольт-Браунинг М-2 в ССК самолёта P-51D-15
+		BarrelTemperatureDecreaseCorrectionData = 1.0, 4.0, 300.0
+		CarriageAdditionalBulletDispertionAngle = 0.019100955, 0.03820191	// Реф от Browning M2.50 очередями на P-40: диаметр полного круга рассеивания 8фт на Д=2000фт (КВО=0.667т.д.). Разброс при нулевом разогреве в градусах, принят равным половине от стрельбы очередями.
+		AmmunitionAttachToPart = "WingR_Mid_0" // Боекомплект правого среднего  пулемёта Кольт-Браунинг М-2 установлен в концевой части левой консоли крыла самолёта P-51D-15
+		AmmunitionPosition = -0.078, -0.410, 3.158 // Координаты ц.м. боекомплекта правого среднего  пулемёта Кольт-Браунинг М-2 в ССК самолёта P-51D-15
+		CartridgeCasesEjection = true
+		CartridgeCasesEjectionPosition = -0.279, -0.617, 2.205
+		CartridgeCasesEjectionSpeed = 0, -2, 0
+		AfterServiceOperationDelay = 0.3
+		ReArmTime = 60 // Внутренняя установка
+		FlashAnimationArgIdx = 9413
+		FlashAnimationGroup = 2 // Light Arg 60240
+		GunSoundsIdx = 2
+		ShotSoundType = 0
+        isElectroTrigger = true 
+        IsOnlyMechanicalManualCocking = false
+        IsTwoManualCockingMethods = true
+	[end]	
+[end]
+
+[WeaponMode=1]
+	WMname="P51D15_M250x4"
+	WMgroup="1"
+	PlaneModArg=19001
+	TurretID=-1
+	TurretDefault=""
+	TurretMod=""
+
+	[Gun=4]
+		GunType = "Reserved"
+	[end]
+
+	[Gun=5]
+		GunType = "Reserved"
+	[end]
+[end]
+
+[WeaponMode=2]
+	WMname="P51D15_AddAmmo"
+	WMgroup="2"
+	PlaneModArg=-1
+	TurretID=-1
+	TurretDefault=""
+	TurretMod=""
+[end]
+
+[WeaponMode=3]
+	WMname="P51D15_M64x2"
+	WMgroup="3"
+	PlaneModArg=-1
+	TurretID=-1
+	TurretDefault=""
+	TurretMod=""
+
+ 	[AdditionalElement] // Бомбодержатель левый
+		AttachToPart = "WingL_Mid_0"
+		Position = 2.000, -0.448, -3.348
+		Mass = 11.0
+		CxaS = 0.007
+	[end]
+
+    [AdditionalElement] // Бомбодержатель правый
+		AttachToPart = "WingR_Mid_0"
+		Position = 2.000, -0.448, 3.348
+		Mass = 11.0
+		CxaS = 0.007
+	[end]
+[end]
+
+[WeaponMode=4]
+	WMname="P51D15_M65x2"
+	WMgroup="3"
+	PlaneModArg=-1
+	TurretID=-1
+	TurretDefault=""
+	TurretMod=""
+
+ 	[AdditionalElement] // Бомбодержатель левый
+		AttachToPart = "WingL_Mid_0"
+		Position = 2.000, -0.448, -3.348
+		Mass = 11.0
+		CxaS = 0.008
+	[end]
+
+    [AdditionalElement] // Бомбодержатель правый
+		AttachToPart = "WingR_Mid_0"
+		Position = 2.000, -0.448, 3.348
+		Mass = 11.0
+		CxaS = 0.008
+	[end]
+[end]
+
+[WeaponMode=5]
+	WMname="P51D15_Rockets"
+	WMgroup="4"
+	PlaneModArg=-1
+	TurretID=-1
+	TurretDefault=""
+	TurretMod=""
+
+ 	[AdditionalElement] // Бомбодержатель левый
+		AttachToPart = "WingL_Mid_0"
+		Position = 2.000, -0.448, -3.348
+		Mass = 11.0
+		CxaS = 0.005
+	[end]
+
+    [AdditionalElement] // Бомбодержатель правый
+		AttachToPart = "WingR_Mid_0"
+		Position = 2.000, -0.448, 3.348
+		Mass = 11.0
+		CxaS = 0.005
+	[end]
+[end]
+
+[WeaponMode=6]
+	WMname="P51D15_Gunsight"
+	WMgroup="5"
+	PlaneModArg=19005
+	TurretID=-1
+	TurretDefault=""
+	TurretMod=""
+    
+    [AdditionalElement] // Прицел
+		AttachToPart = "EngCowl_Ctl_0"
+		Position = 1.421, 0.874, 0.000
+		Mass = 1.0      
+	[end]       
+[end]
+
+[WeaponMode=7]
+	WMname="P51D15_150gradeFuel"
+	WMgroup="6"
+	PlaneModArg=19004
+	TurretID=-1
+	TurretDefault=""
+	TurretMod=""
+[end]
+
+[WeaponMode=8]
+	WMname="P51D15_MN28"
+	WMgroup="7"
+	PlaneModArg=19003
+	TurretID=-1
+	TurretDefault=""
+	TurretMod=""
+    
+    [AdditionalElement] // Радио
+		AttachToPart = "EngCowl_Ctl_0"
+		Position = -1.327, 0.828, 0.000
+		Mass = 17.5    
+		CxaS = 0.005        
+	[end]      
+[end]
+
+[WeaponMode=9]
+	WMname="P51D15_Mirror"
+	WMgroup="8"
+	PlaneModArg=19002
+	TurretID=-1
+	TurretDefault=""
+	TurretMod=""
+
+	[AdditionalElement]	// зеркало
+		AttachToPart = "EngCowl_Ctl_0"
+		Position = -0.8, 0.1, -0.12
+		Mass = 1.0
+		CxaS = 0.008
+	[end]
+[end]
+
+// Варианты подвески вооружения
+
+AmmunitionArg=12900
+
+[Ammunition=0]
+	WeaponModes=-1,-2,-3,-4,-5
+	AnimationVal=0.0
+	name="0,1,2,3,4,5-M250-AP-1880"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=1
+	GunAmmunition3=1
+	GunAmmunition4=1
+	GunAmmunition5=1
+	Bomb0=-1
+	PrimaryAimingGun=0
+[end]
+
+[Ammunition=1]
+	WeaponModes=1,-2,-3,-4,-5
+	AnimationVal=0.0
+	name="0,1,2,3-M250-AP-1800"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=2
+	GunAmmunition3=2
+	Bomb0=-1
+	PrimaryAimingGun=0
+[end]
+
+[Ammunition=2]
+	WeaponModes=2,-1,-3,-4,-5
+	AnimationVal=0.0
+	name="0,1,2,3,4,5-M250-AP-2060"
+	GunAmmunition0=3
+	GunAmmunition1=3
+	GunAmmunition2=1
+	GunAmmunition3=1
+	GunAmmunition4=1
+	GunAmmunition5=1
+	Bomb0=-1
+	PrimaryAimingGun=0
+[end]
+
+[Ammunition=3]
+	WeaponModes=12,-3,-4,-5
+	AnimationVal=0.0
+	name="0,1,2,3-M250-AP-1980"
+	GunAmmunition0=3
+	GunAmmunition1=3
+	GunAmmunition2=2
+	GunAmmunition3=2
+	Bomb0=-1
+	PrimaryAimingGun=0
+[end]
+
+// + 2*500lb M64 (подкрыльевые пилоны)
+
+[Ammunition=4]
+	WeaponModes=3,-1,-2,-4,-5
+	AnimationVal=0.4
+	name="0,1,2,3,4,5-M250-AP-1880 + M64-2"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=1
+	GunAmmunition3=1
+	GunAmmunition4=1
+	GunAmmunition5=1
+	Bomb0=0, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_USA_M64.txt"
+	Bomb1=1, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_USA_M64.txt"  
+	PrimaryAimingGun=0
+[end]
+
+[Ammunition=5]
+	WeaponModes=13,-2,-4,-5
+	AnimationVal=0.4
+	name="0,1,2,3-M250-AP-1800 + M64-2"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=2
+	GunAmmunition3=2
+	Bomb0=0, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_USA_M64.txt"
+	Bomb1=1, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_USA_M64.txt"  
+	PrimaryAimingGun=0
+[end]
+
+[Ammunition=6]
+	WeaponModes=23,-1,-4,-5
+	AnimationVal=0.4
+	name="0,1,2,3,4,5-M250-AP-2060 + M64-2"
+	GunAmmunition0=3
+	GunAmmunition1=3
+	GunAmmunition2=1
+	GunAmmunition3=1
+	GunAmmunition4=1
+	GunAmmunition5=1
+	Bomb0=0, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_USA_M64.txt"
+	Bomb1=1, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_USA_M64.txt"   
+	PrimaryAimingGun=0
+[end]
+
+[Ammunition=7]
+	WeaponModes=123,-4,-5
+	AnimationVal=0.4
+	name="0,1,2,3-M250-AP-1980 + M64-2"
+	GunAmmunition0=3
+	GunAmmunition1=3
+	GunAmmunition2=2
+	GunAmmunition3=2
+	Bomb0=0, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_USA_M64.txt"
+	Bomb1=1, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_USA_M64.txt"   	
+	PrimaryAimingGun=0
+[end]
+
+// + 2*1000lb M65 (подкрыльевые пилоны)
+
+[Ammunition=8]
+	WeaponModes=4,-1,-2,-3,-5
+	AnimationVal=0.4
+	name="0,1,2,3,4,5-M250-AP-1880 + M65-2"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=1
+	GunAmmunition3=1
+	GunAmmunition4=1
+	GunAmmunition5=1
+	Bomb0=2, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_USA_M65.txt"
+	Bomb1=3, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_USA_M65.txt"  
+	PrimaryAimingGun=0
+[end]
+
+[Ammunition=9]
+	WeaponModes=14,-2,-3,-5
+	AnimationVal=0.4
+	name="0,1,2,3-M250-AP-1800 + M65-2"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=2
+	GunAmmunition3=2
+	Bomb0=2, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_USA_M65.txt"
+	Bomb1=3, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_USA_M65.txt" 
+	PrimaryAimingGun=0
+[end]
+
+[Ammunition=10]
+	WeaponModes=24,-1,-3,-5
+	AnimationVal=0.4
+	name="0,1,2,3,4,5-M250-AP-2060 + M65-2"
+	GunAmmunition0=3
+	GunAmmunition1=3
+	GunAmmunition2=1
+	GunAmmunition3=1
+	GunAmmunition4=1
+	GunAmmunition5=1
+	Bomb0=2, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_USA_M65.txt"
+	Bomb1=3, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_USA_M65.txt" 
+	PrimaryAimingGun=0
+[end]
+
+[Ammunition=11]
+	WeaponModes=124,-3,-5
+	AnimationVal=0.4
+	name="0,1,2,3-M250-AP-1980 + M65-2"
+	GunAmmunition0=3
+	GunAmmunition1=3
+	GunAmmunition2=2
+	GunAmmunition3=2
+	Bomb0=2, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_USA_M65.txt"
+	Bomb1=3, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_USA_M65.txt" 
+	PrimaryAimingGun=0
+[end]
+
+// + 6*M8 в контейнерах М10
+
+[Ammunition=12]
+	WeaponModes=5,-1,-2,-3,-4
+	AnimationVal=1.0
+	name="0,1,2,3,4,5-M250-AP-1880 + M8-6"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=1
+	GunAmmunition3=1
+	GunAmmunition4=1
+	GunAmmunition5=1
+	Bomb0=4, "LuaScripts/WorldObjects/Ballistics/Containers/Container_M8_P47.txt"
+	Bomb1=5, "LuaScripts/WorldObjects/Ballistics/Containers/Container_M8_P47.txt"
+ 	Bomb2=6, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_USA_M8.txt"
+	Bomb3=7, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_USA_M8.txt"
+	Bomb4=8, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_USA_M8.txt"
+	Bomb5=9, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_USA_M8.txt"
+	Bomb6=10, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_USA_M8.txt"
+	Bomb7=11, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_USA_M8.txt" 
+	PrimaryAimingGun=0
+[end]
+
+[Ammunition=13]
+	WeaponModes=15,-2,-3,-4
+	AnimationVal=1.0
+	name="0,1,2,3-M250-AP-1800 + M8-6"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=2
+	GunAmmunition3=2
+	Bomb0=4, "LuaScripts/WorldObjects/Ballistics/Containers/Container_M8_P47.txt"
+	Bomb1=5, "LuaScripts/WorldObjects/Ballistics/Containers/Container_M8_P47.txt"
+ 	Bomb2=6, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_USA_M8.txt"
+	Bomb3=7, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_USA_M8.txt"
+	Bomb4=8, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_USA_M8.txt"
+	Bomb5=9, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_USA_M8.txt"
+	Bomb6=10, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_USA_M8.txt"
+	Bomb7=11, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_USA_M8.txt" 
+	PrimaryAimingGun=0
+[end]
+
+[Ammunition=14]
+	WeaponModes=25,-1,-3,-4
+	AnimationVal=1.0
+	name="0,1,2,3,4,5-M250-AP-2060 + M8-6"
+	GunAmmunition0=3
+	GunAmmunition1=3
+	GunAmmunition2=1
+	GunAmmunition3=1
+	GunAmmunition4=1
+	GunAmmunition5=1
+	Bomb0=4, "LuaScripts/WorldObjects/Ballistics/Containers/Container_M8_P47.txt"
+	Bomb1=5, "LuaScripts/WorldObjects/Ballistics/Containers/Container_M8_P47.txt"
+ 	Bomb2=6, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_USA_M8.txt"
+	Bomb3=7, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_USA_M8.txt"
+	Bomb4=8, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_USA_M8.txt"
+	Bomb5=9, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_USA_M8.txt"
+	Bomb6=10, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_USA_M8.txt"
+	Bomb7=11, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_USA_M8.txt" 
+	PrimaryAimingGun=0
+[end]
+
+[Ammunition=15]
+	WeaponModes=125,-3,-4
+	AnimationVal=1.0
+	name="0,1,2,3-M250-AP-1980 + M8-6"
+	GunAmmunition0=3
+	GunAmmunition1=3
+	GunAmmunition2=2
+	GunAmmunition3=2
+	Bomb0=4, "LuaScripts/WorldObjects/Ballistics/Containers/Container_M8_P47.txt"
+	Bomb1=5, "LuaScripts/WorldObjects/Ballistics/Containers/Container_M8_P47.txt"
+ 	Bomb2=6, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_USA_M8.txt"
+	Bomb3=7, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_USA_M8.txt"
+	Bomb4=8, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_USA_M8.txt"
+	Bomb5=9, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_USA_M8.txt"
+	Bomb6=10, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_USA_M8.txt"
+	Bomb7=11, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_USA_M8.txt"  
+	PrimaryAimingGun=0
+[end]
+
+// + 2*500lb M64 (подкрыльевые пилоны) + 6*M8 в контейнерах М10
+
+[Ammunition=16]
+	WeaponModes=35-1,-2,-4
+	AnimationVal=0.7
+	name="0,1,2,3,4,5-M250-AP-1880 + M64-2 + M8-6"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=1
+	GunAmmunition3=1
+	GunAmmunition4=1
+	GunAmmunition5=1
+	Bomb0=0, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_USA_M64.txt"
+	Bomb1=1, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_USA_M64.txt"	
+	Bomb2=4, "LuaScripts/WorldObjects/Ballistics/Containers/Container_M8_P47.txt"
+	Bomb3=5, "LuaScripts/WorldObjects/Ballistics/Containers/Container_M8_P47.txt"
+ 	Bomb4=6, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_USA_M8.txt"
+	Bomb5=7, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_USA_M8.txt"
+	Bomb6=8, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_USA_M8.txt"
+	Bomb7=9, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_USA_M8.txt"
+	Bomb8=10, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_USA_M8.txt"
+	Bomb9=11, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_USA_M8.txt" 
+	PrimaryAimingGun=0
+[end]
+
+[Ammunition=17]
+	WeaponModes=135,-2,-4
+	AnimationVal=0.7
+	name="0,1,2,3-M250-AP-1800 + M64-2 + M8-6"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=2
+	GunAmmunition3=2
+	Bomb0=0, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_USA_M64.txt"
+	Bomb1=1, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_USA_M64.txt"	
+	Bomb2=4, "LuaScripts/WorldObjects/Ballistics/Containers/Container_M8_P47.txt"
+	Bomb3=5, "LuaScripts/WorldObjects/Ballistics/Containers/Container_M8_P47.txt"
+ 	Bomb4=6, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_USA_M8.txt"
+	Bomb5=7, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_USA_M8.txt"
+	Bomb6=8, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_USA_M8.txt"
+	Bomb7=9, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_USA_M8.txt"
+	Bomb8=10, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_USA_M8.txt"
+	Bomb9=11, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_USA_M8.txt" 
+	PrimaryAimingGun=0
+[end]
+
+[Ammunition=18]
+	WeaponModes=235,-1,-4
+	AnimationVal=0.7
+	name="0,1,2,3,4,5-M250-AP-2060 + M64-2 + M8-6"
+	GunAmmunition0=3
+	GunAmmunition1=3
+	GunAmmunition2=1
+	GunAmmunition3=1
+	GunAmmunition4=1
+	GunAmmunition5=1
+	Bomb0=0, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_USA_M64.txt"
+	Bomb1=1, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_USA_M64.txt"	
+	Bomb2=4, "LuaScripts/WorldObjects/Ballistics/Containers/Container_M8_P47.txt"
+	Bomb3=5, "LuaScripts/WorldObjects/Ballistics/Containers/Container_M8_P47.txt"
+ 	Bomb4=6, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_USA_M8.txt"
+	Bomb5=7, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_USA_M8.txt"
+	Bomb6=8, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_USA_M8.txt"
+	Bomb7=9, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_USA_M8.txt"
+	Bomb8=10, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_USA_M8.txt"
+	Bomb9=11, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_USA_M8.txt" 
+	PrimaryAimingGun=0
+[end]
+
+[Ammunition=19]
+	WeaponModes=1235,-4
+	AnimationVal=0.7
+	name="0,1,2,3-M250-AP-1980 + M64-2 + M8-6"
+	GunAmmunition0=3
+	GunAmmunition1=3
+	GunAmmunition2=2
+	GunAmmunition3=2
+	Bomb0=0, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_USA_M64.txt"
+	Bomb1=1, "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_USA_M64.txt"	
+	Bomb2=4, "LuaScripts/WorldObjects/Ballistics/Containers/Container_M8_P47.txt"
+	Bomb3=5, "LuaScripts/WorldObjects/Ballistics/Containers/Container_M8_P47.txt"
+ 	Bomb4=6, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_USA_M8.txt"
+	Bomb5=7, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_USA_M8.txt"
+	Bomb6=8, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_USA_M8.txt"
+	Bomb7=9, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_USA_M8.txt"
+	Bomb8=10, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_USA_M8.txt"
+	Bomb9=11, "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_USA_M8.txt" 
+	PrimaryAimingGun=0
+[end]
+
+// + пилоны но без бомб - с M64 //TODOP51
+
+[Ammunition=20]
+	WeaponModes=3,-1,-2,-4,-5
+	AnimationVal=0.4
+	name="0,1,2,3,4,5-M250-AP-1880"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=1
+	GunAmmunition3=1
+	GunAmmunition4=1
+	GunAmmunition5=1
+	Bomb0=-1 
+	PrimaryAimingGun=0
+[end]
+
+[Ammunition=21]
+	WeaponModes=13,-2,-4,-5
+	AnimationVal=0.4
+	name="0,1,2,3-M250-AP-1800"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=2
+	GunAmmunition3=2
+	Bomb0=-1 
+	PrimaryAimingGun=0
+[end]
+
+[Ammunition=22]
+	WeaponModes=23,-1,-4,-5
+	AnimationVal=0.4
+	name="0,1,2,3,4,5-M250-AP-2060"
+	GunAmmunition0=3
+	GunAmmunition1=3
+	GunAmmunition2=1
+	GunAmmunition3=1
+	GunAmmunition4=1
+	GunAmmunition5=1
+	Bomb0=-1   
+	PrimaryAimingGun=0
+[end]
+
+[Ammunition=23]
+	WeaponModes=123,-4,-5
+	AnimationVal=0.4
+	name="0,1,2,3-M250-AP-1980"
+	GunAmmunition0=3
+	GunAmmunition1=3
+	GunAmmunition2=2
+	GunAmmunition3=2
+	Bomb0=-1  	
+	PrimaryAimingGun=0
+[end]
+
+// + пилоны но без бомб - с M65 //TODOP51
+
+[Ammunition=24]
+	WeaponModes=4,-1,-2,-3,-5
+	AnimationVal=0.4
+	name="0,1,2,3,4,5-M250-AP-1880"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=1
+	GunAmmunition3=1
+	GunAmmunition4=1
+	GunAmmunition5=1
+	Bomb0=-1 
+	PrimaryAimingGun=0
+[end]
+
+[Ammunition=25]
+	WeaponModes=14,-2,-3,-5
+	AnimationVal=0.4
+	name="0,1,2,3-M250-AP-1800"
+	GunAmmunition0=0
+	GunAmmunition1=0
+	GunAmmunition2=2
+	GunAmmunition3=2
+	Bomb0=-1
+	PrimaryAimingGun=0
+[end]
+
+[Ammunition=26]
+	WeaponModes=24,-1,-3,-5
+	AnimationVal=0.4
+	name="0,1,2,3,4,5-M250-AP-2060"
+	GunAmmunition0=3
+	GunAmmunition1=3
+	GunAmmunition2=1
+	GunAmmunition3=1
+	GunAmmunition4=1
+	GunAmmunition5=1
+	Bomb0=-1
+	PrimaryAimingGun=0
+[end]
+
+[Ammunition=27]
+	WeaponModes=124,-3,-5
+	AnimationVal=0.4
+	name="0,1,2,3-M250-AP-1980"
+	GunAmmunition0=3
+	GunAmmunition1=3
+	GunAmmunition2=2
+	GunAmmunition3=2
+	Bomb0=-1 
+	PrimaryAimingGun=0
+[end]
+
+// Пустой
+
+[Ammunition=28]
+	WeaponModes=-1,-2,-3,-4,-5
+	AnimationVal=0.0
+	name="Empty"
+	GunAmmunition0=-1
+	GunAmmunition1=-1
+	GunAmmunition2=-1
+	GunAmmunition3=-1
+	GunAmmunition4=-1
+	GunAmmunition5=-1
+	Bomb0=-1 
+	PrimaryAimingGun=0
+[end]
+
+[Ammunition=29]
+	WeaponModes=1,-2,-3,-4,-5
+	AnimationVal=0.0
+	name="Empty"
+	GunAmmunition0=-1
+	GunAmmunition1=-1
+	GunAmmunition2=-1
+	GunAmmunition3=-1
+	Bomb0=-1
+	PrimaryAimingGun=0
+[end]
+
+// Дымогенераторы
+
+[Ammunition=30]
+	WeaponModes=-3,-4,-5
+	AnimationVal=0.0
+	name="SmokeGenWhiteOne-1"
+	GunAmmunition0=-1
+	GunAmmunition1=-1
+	GunAmmunition2=-1
+	GunAmmunition3=-1
+	GunAmmunition4=-1
+	GunAmmunition5=-1
+	Bomb0=12, "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	PrimaryAimingGun=2
+[end]
+[Ammunition=31]
+	WeaponModes=-3,-4,-5
+	AnimationVal=0.0
+	name="SmokeGenWhiteTwo-2"
+	GunAmmunition0=-1
+	GunAmmunition1=-1
+	GunAmmunition2=-1
+	GunAmmunition3=-1
+	GunAmmunition4=-1
+	GunAmmunition5=-1
+	Bomb0=13, "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	Bomb1=14, "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	PrimaryAimingGun=2
+[end]
+[Ammunition=32]
+	WeaponModes=-3,-4,-5
+	AnimationVal=0.0
+	name="SmokeGenBlueOne-1"
+	GunAmmunition0=-1
+	GunAmmunition1=-1
+	GunAmmunition2=-1
+	GunAmmunition3=-1
+	GunAmmunition4=-1
+	GunAmmunition5=-1
+	Bomb0=15, "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	PrimaryAimingGun=2
+[end]
+[Ammunition=33]
+	WeaponModes=-3,-4,-5
+	AnimationVal=0.0
+	name="SmokeGenBlueTwo-2"
+	GunAmmunition0=-1
+	GunAmmunition1=-1
+	GunAmmunition2=-1
+	GunAmmunition3=-1
+	GunAmmunition4=-1
+	GunAmmunition5=-1
+	Bomb0=16, "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	Bomb1=17, "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	PrimaryAimingGun=2
+[end]
+[Ammunition=34]
+	WeaponModes=-3,-4,-5
+	AnimationVal=0.0
+	name="SmokeGenRedOne-1"
+	GunAmmunition0=-1
+	GunAmmunition1=-1
+	GunAmmunition2=-1
+	GunAmmunition3=-1
+	GunAmmunition4=-1
+	GunAmmunition5=-1
+	Bomb0=18, "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	PrimaryAimingGun=2
+[end]
+[Ammunition=35]
+	WeaponModes=-3,-4,-5
+	AnimationVal=0.0
+	name="SmokeGenRedTwo-2"
+	GunAmmunition0=-1
+	GunAmmunition1=-1
+	GunAmmunition2=-1
+	GunAmmunition3=-1
+	GunAmmunition4=-1
+	GunAmmunition5=-1
+	Bomb0=19, "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	Bomb1=20, "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	PrimaryAimingGun=2
+[end]
+[Ammunition=36]
+	WeaponModes=-3,-4,-5
+	AnimationVal=0.0
+	name="SmokeGenGreenOne-1"
+	GunAmmunition0=-1
+	GunAmmunition1=-1
+	GunAmmunition2=-1
+	GunAmmunition3=-1
+	GunAmmunition4=-1
+	GunAmmunition5=-1
+	Bomb0=21, "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	PrimaryAimingGun=2
+[end]
+[Ammunition=37]
+	WeaponModes=-3,-4,-5
+	AnimationVal=0.0
+	name="SmokeGenGreenTwo-2"
+	GunAmmunition0=-1
+	GunAmmunition1=-1
+	GunAmmunition2=-1
+	GunAmmunition3=-1
+	GunAmmunition4=-1
+	GunAmmunition5=-1
+	Bomb0=22, "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	Bomb1=23, "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	PrimaryAimingGun=2
+[end]
+[Ammunition=38]
+	WeaponModes=-3,-4,-5
+	AnimationVal=0.0
+	name="SmokeGenYellowOne-1"
+	GunAmmunition0=-1
+	GunAmmunition1=-1
+	GunAmmunition2=-1
+	GunAmmunition3=-1
+	GunAmmunition4=-1
+	GunAmmunition5=-1
+	Bomb0=24, "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	PrimaryAimingGun=2
+[end]
+[Ammunition=39]
+	WeaponModes=-3,-4,-5
+	AnimationVal=0.0
+	name="SmokeGenYellowTwo-2"
+	GunAmmunition0=-1
+	GunAmmunition1=-1
+	GunAmmunition2=-1
+	GunAmmunition3=-1
+	GunAmmunition4=-1
+	GunAmmunition5=-1
+	Bomb0=25, "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	Bomb1=26, "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	PrimaryAimingGun=2
+[end]
+[Ammunition=40]
+	WeaponModes=-3,-4,-5
+	AnimationVal=0.0
+	name="SmokeGenBlackOne-1"
+	GunAmmunition0=-1
+	GunAmmunition1=-1
+	GunAmmunition2=-1
+	GunAmmunition3=-1
+	GunAmmunition4=-1
+	GunAmmunition5=-1
+	Bomb0=27, "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	PrimaryAimingGun=2
+[end]
+[Ammunition=41]
+	WeaponModes=-3,-4,-5
+	AnimationVal=0.0
+	name="SmokeGenBlackTwo-2"
+	GunAmmunition0=-1
+	GunAmmunition1=-1
+	GunAmmunition2=-1
+	GunAmmunition3=-1
+	GunAmmunition4=-1
+	GunAmmunition5=-1
+	Bomb0=28, "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	Bomb1=29, "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	PrimaryAimingGun=2
+[end]
+
+DefaultAmmunition=0
+
+// Зарядка пулеметов
+
+[GunAmmunition=0]	// 400 бронебойных пуль 12.7х99 (стандартный (поздний) запас для внутренних пулемётов M2.50)
+	ExpendableMass = 49.676
+	ResidualMass = 0
+	MaxMisFiresInMagazine=0
+	MaxRoundsInMagazine=400
+	RoundsInMagazine=400
+	ReservedMagazines=0
+	AmountRoundsWithOneTracer=4	// каждая 8-я пуля с трассером
+	object0="LuaScripts/WorldObjects/Ballistics/Projectiles/BULLET_USA_12-7x99_AP.txt"
+	target0="LuaScripts/WorldObjects/Ballistics/Projectiles/BULLET_USA_12-7x99_AP.bin"
+	BushConfig = "LuaScripts/WorldObjects/Trash/Batch_case12-20mm.txt"
+[end]
+
+[GunAmmunition=1]	// 270 бронебойных пуль 12.7х99 (стандартный запас для средних и внешних пулемётов M2.50)
+	ExpendableMass = 33.531
+	ResidualMass = 0
+	MaxMisFiresInMagazine=0
+	MaxRoundsInMagazine=270
+	RoundsInMagazine=270
+	ReservedMagazines=0
+	AmountRoundsWithOneTracer=4	// каждая 8-я пуля с трассером
+	object0="LuaScripts/WorldObjects/Ballistics/Projectiles/BULLET_USA_12-7x99_AP.txt"
+	target0="LuaScripts/WorldObjects/Ballistics/Projectiles/BULLET_USA_12-7x99_AP.bin"
+	BushConfig = "LuaScripts/WorldObjects/Trash/Batch_case12-20mm.txt"
+[end]
+
+[GunAmmunition=2]	// 500 бронебойных пуль 12.7х99 (увеличенный запас к внешним пулемётам M2.50 при снятых средних)
+	ExpendableMass = 62.095
+	ResidualMass = 0
+	MaxMisFiresInMagazine=0
+	MaxRoundsInMagazine=500
+	RoundsInMagazine=500
+	ReservedMagazines=0
+	AmountRoundsWithOneTracer=4	// каждая 8-я пуля с трассером
+	object0="LuaScripts/WorldObjects/Ballistics/Projectiles/BULLET_USA_12-7x99_AP.txt"
+	target0="LuaScripts/WorldObjects/Ballistics/Projectiles/BULLET_USA_12-7x99_AP.bin"
+	BushConfig = "LuaScripts/WorldObjects/Trash/Batch_case12-20mm.txt"
+[end]
+
+[GunAmmunition=3]	// 490 бронебойных пуль 12.7х99 (увеличенный (ранний) запас для внутренних пулемётов M2.50)
+	ExpendableMass = 60.853
+	ResidualMass = 0
+	MaxMisFiresInMagazine=0
+	MaxRoundsInMagazine=490
+	RoundsInMagazine=490
+	ReservedMagazines=0
+	AmountRoundsWithOneTracer=4	// каждая 8-я пуля с трассером
+	object0="LuaScripts/WorldObjects/Ballistics/Projectiles/BULLET_USA_12-7x99_AP.txt"
+	target0="LuaScripts/WorldObjects/Ballistics/Projectiles/BULLET_USA_12-7x99_AP.bin"
+	BushConfig = "LuaScripts/WorldObjects/Trash/Batch_case12-20mm.txt"
+[end]
+
+// Точки подвески двух 500-фунтовых бомб
+
+[attach=20]
+	position= 0.1308, -0.9421, -2.3262
+	convex = "WingL_Mid_0"
+[end]
+
+[attach=21]
+	position= 0.1308, -0.9421, 2.3262
+	convex = "WingR_Mid_0"
+[end]
+
+// Точки подвески двух 1000-фунтовых бомб
+
+[attach=22]
+	position= 0.1308, -1.0024, -2.3262
+	convex = "WingL_Mid_0"
+[end]
+
+[attach=23]
+	position= 0.1308, -1.0024, 2.3262
+	convex = "WingR_Mid_0"
+[end]
+
+// Точки подвески двух контейнеров M10 для 6 ракет M8
+
+[attach=24]
+	position= 0.1629, -0.952, -2.7765
+	convex = "WingL_Mid_0"
+	rotation= 0, 0, 2
+[end]
+[attach=25]
+	position= 0.1629, -0.952, 2.7765
+	convex = "WingR_Mid_0"
+	rotation= 0, 0, 2
+[end]
+
+// Точки подвески 6 ракет M8 в двух контейнерах M10
+
+[attach=26]
+	position= -0.9423, -0.9176, -2.7765
+	convex = "WingL_Mid_0"
+	rotation= 0, 0, 2.0
+[end]
+[attach=27]
+	position= -0.9423, -0.9176, 2.7765
+	convex = "WingR_Mid_0"
+	rotation= 0, 0, 2.0
+[end]
+[attach=28]
+	position= -0.9385, -1.0274, -2.84
+	convex = "WingL_Mid_0"
+	rotation= 0, 0, 2.0
+[end]
+[attach=29]
+	position= -0.9385, -1.0274, 2.84
+	convex = "WingR_Mid_0"
+	rotation= 0, 0, 2.0
+[end]
+[attach=30]
+	position= -0.9385, -1.0274, -2.7131
+	convex = "WingL_Mid_0"
+	rotation= 0, 0, 2.0
+[end]
+[attach=31]
+	position= -0.9385, -1.0274, 2.7131
+	convex = "WingR_Mid_0"
+	rotation= 0, 0, 2.0
+[end]
+
+// Точки подвески дымогенераторов
+
+[attach=32]
+	position= -5.31, -0.215, 0.0
+	convex = "Fuse_Ctl_9"
+	rotation= 0.0, 0, -10
+[end]
+[attach=33]
+	position= -0.069, -0.295, -5.365
+	convex = "WingL_Out_0"
+	rotation= -8.0, 0, 0
+[end]
+[attach=34]
+	position= -0.069, -0.295, 5.365
+	convex = "WingR_Out_0"
+	rotation= 8.0, 0, 0
+[end]
+
+// Описания двух 500-фунтовых бомб
+
+[BombHolder=0]
+	AttachIdx = 20
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_USA_M64.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 0.0, -0.02, 0.0
+	Rotation = 0
+	AttachPos = 0.1308, -0.9421, -2.3262
+	Convex = "WingL_Mid_0"
+	BombHolderMass = 0.0
+	BombHolderCxaS = 0.0
+	AttachedBombCxaS = 0.018
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	ThrowSoundType = 2
+[end]
+
+[BombHolder=1]
+	AttachIdx = 21
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_USA_M64.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 0.0, -0.02, 0.0
+	Rotation = 0
+	AttachPos = 0.1308, -0.9421, 2.3262
+	Convex = "WingR_Mid_0"
+	BombHolderMass = 0.0
+	BombHolderCxaS = 0.0
+	AttachedBombCxaS = 0.018
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	ThrowSoundType = 2
+[end]
+
+// Описания двух 1000-фунтовых бомб
+
+[BombHolder=2]
+	AttachIdx = 22
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_USA_M65.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 0.0, -0.02, 0.0
+	Rotation = 0
+	AttachPos = 0.1308, -1.0024, -2.3262
+	Convex = "WingL_Mid_0"
+	BombHolderMass = 0.0
+	BombHolderCxaS = 0.0
+	AttachedBombCxaS = 0.043
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	ThrowSoundType = 2
+[end]
+
+[BombHolder=3]
+	AttachIdx = 23
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/BOMB_USA_M65.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 0.0, -0.02, 0.0
+	Rotation = 0
+	AttachPos = 0.1308, -1.0024, 2.3262
+	Convex = "WingR_Mid_0"
+	BombHolderMass = 0.0
+	BombHolderCxaS = 0.0
+	AttachedBombCxaS = 0.043
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	ThrowSoundType = 2
+[end]
+
+// Точки подвески двух контейнеров M10 для 6 ракет M8
+
+[BombHolder=4]
+	AttachIdx = 24
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Containers/Container_M8_P47"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 0.0, -0.02, 0.0
+	Rotation = 0
+	AttachPos= 0.1629, -0.952, -2.7765
+	Convex = "WingL_Mid_0"
+	BombHolderMass = 5.0
+	BombHolderCxaS = 0.0
+	AttachedBombCxaS = 0.025
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+    ThrowSoundType = 2
+[end]
+[BombHolder=5]
+	AttachIdx = 25
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Containers/Container_M8_P47"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 0.0, -0.02, 0.0
+	Rotation = 0
+	AttachPos= 0.1629, -0.952, 2.7765
+	Convex = "WingR_Mid_0"
+	BombHolderMass = 5.0
+	BombHolderCxaS = 0.0
+	AttachedBombCxaS = 0.025
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+    ThrowSoundType = 3
+[end]
+
+// Точки подвески 6 ракет M8 в двух контейнерах M10
+
+[BombHolder=6]
+	AttachIdx = 26
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_USA_M8.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 0.710, 0.0, 0.0
+	Rotation = 0
+	AttachPos = -0.9423, -0.9176, -2.7765
+	Convex = "WingL_Mid_0"
+	BombHolderMass = 0.0
+	BombHolderCxaS = 0.000
+	AttachedBombCxaS = 0.004
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	ThrowSoundType = 4
+[end]
+[BombHolder=7]
+	AttachIdx = 27
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_USA_M8.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 0.710, 0.0, 0.0
+	Rotation = 0
+	AttachPos = -0.9423, -0.9176, 2.7765
+	Convex = "WingR_Mid_0"
+	BombHolderMass = 0.0
+	BombHolderCxaS = 0.000
+	AttachedBombCxaS = 0.004
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	ThrowSoundType = 5
+[end]
+[BombHolder=8]
+	AttachIdx = 28
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_USA_M8.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 0.710, 0.0, 0.0
+	Rotation = 0
+	AttachPos = -0.9385, -1.0274, -2.84
+	Convex = "WingL_Mid_0"
+	BombHolderMass = 0.0
+	BombHolderCxaS = 0.000
+	AttachedBombCxaS = 0.004
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	ThrowSoundType = 4
+[end]
+[BombHolder=9]
+	AttachIdx = 29
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_USA_M8.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 0.710, 0.0, 0.0
+	Rotation = 0
+	AttachPos = -0.9385, -1.0274, 2.84
+	Convex = "WingR_Mid_0"
+	BombHolderMass = 0.0
+	BombHolderCxaS = 0.000
+	AttachedBombCxaS = 0.004
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	ThrowSoundType = 5
+[end]
+[BombHolder=10]
+	AttachIdx = 30
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_USA_M8.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 0.710, 0.0, 0.0
+	Rotation = 0
+	AttachPos = -0.9385, -1.0274, -2.7131
+	Convex = "WingL_Mid_0"
+	BombHolderMass = 0.0
+	BombHolderCxaS = 0.000
+	AttachedBombCxaS = 0.004
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	ThrowSoundType = 4
+[end]
+[BombHolder=11]
+	AttachIdx = 31
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/RKT_USA_M8.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 0.710, 0.0, 0.0
+	Rotation = 0
+	AttachPos = -0.9385, -1.0274, 2.7131
+	Convex = "WingR_Mid_0"
+	BombHolderMass = 0.0
+	BombHolderCxaS = 0.000
+	AttachedBombCxaS = 0.004
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	ThrowSoundType = 5
+[end]
+
+// Дымогенераторы белые
+[BombHolder=12]
+	AttachIdx = 32
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 0.0, -0.02, 0.0
+	Rotation = 0
+	AttachPos = -5.31, -0.215, 0.0
+	Convex = "Fuse_Ctl_9"
+	BombHolderMass = 0.0
+	BombHolderCxaS = 0.0
+	AttachedBombCxaS = 0.009
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	IsSmokeGenerator = 1 // 1 белый, 2 синий, 3 красный
+	smokePositionShiftX = 0.0
+	smokePositionShiftY = 0.0
+[end]
+[BombHolder=13]
+	AttachIdx = 33
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 0.0, -0.02, 0.0
+	Rotation = 0
+	AttachPos = -0.069, -0.295, -5.365
+	Convex = "WingL_Out_0"
+	BombHolderMass = 0.0
+	BombHolderCxaS = 0.0
+	AttachedBombCxaS = 0.009
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	IsSmokeGenerator = 1 // 1 белый, 2 синий, 3 красный
+	smokePositionShiftX = 0.0
+	smokePositionShiftY = 0.0
+[end]
+[BombHolder=14]
+	AttachIdx = 34
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 0.0, -0.02, 0.0
+	Rotation = 0
+	AttachPos = -0.069, -0.295, 5.365
+	Convex = "WingR_Out_0"
+	BombHolderMass = 0.0
+	BombHolderCxaS = 0.0
+	AttachedBombCxaS = 0.009
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	IsSmokeGenerator = 1 // 1 белый, 2 синий, 3 красный
+	smokePositionShiftX = 0.0
+	smokePositionShiftY = 0.0
+[end]
+
+// Дымогенераторы синие
+[BombHolder=15]
+	AttachIdx = 32
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 0.0, -0.02, 0.0
+	Rotation = 0
+	AttachPos = -5.31, -0.215, 0.0
+	Convex = "Fuse_Ctl_9"
+	BombHolderMass = 0.0
+	BombHolderCxaS = 0.0
+	AttachedBombCxaS = 0.009
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	IsSmokeGenerator = 2 // 1 белый, 2 синий, 3 красный
+	smokePositionShiftX = 0.0
+	smokePositionShiftY = 0.0
+[end]
+[BombHolder=16]
+	AttachIdx = 33
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 0.0, -0.02, 0.0
+	Rotation = 0
+	AttachPos = -0.069, -0.295, -5.365
+	Convex = "WingL_Out_0"
+	BombHolderMass = 0.0
+	BombHolderCxaS = 0.0
+	AttachedBombCxaS = 0.009
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	IsSmokeGenerator = 2 // 1 белый, 2 синий, 3 красный
+	smokePositionShiftX = 0.0
+	smokePositionShiftY = 0.0
+[end]
+[BombHolder=17]
+	AttachIdx = 34
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 0.0, -0.02, 0.0
+	Rotation = 0
+	AttachPos = -0.069, -0.295, 5.365
+	Convex = "WingR_Out_0"
+	BombHolderMass = 0.0
+	BombHolderCxaS = 0.0
+	AttachedBombCxaS = 0.009
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	IsSmokeGenerator = 2 // 1 белый, 2 синий, 3 красный
+	smokePositionShiftX = 0.0
+	smokePositionShiftY = 0.0
+[end]
+
+// Дымогенераторы красные
+[BombHolder=18]
+	AttachIdx = 32
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 0.0, -0.02, 0.0
+	Rotation = 0
+	AttachPos = -5.31, -0.215, 0.0
+	Convex = "Fuse_Ctl_9"
+	BombHolderMass = 0.0
+	BombHolderCxaS = 0.0
+	AttachedBombCxaS = 0.009
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	IsSmokeGenerator = 3 // 1 белый, 2 синий, 3 красный
+	smokePositionShiftX = 0.0
+	smokePositionShiftY = 0.0
+[end]
+[BombHolder=19]
+	AttachIdx = 33
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 0.0, -0.02, 0.0
+	Rotation = 0
+	AttachPos = -0.069, -0.295, -5.365
+	Convex = "WingL_Out_0"
+	BombHolderMass = 0.0
+	BombHolderCxaS = 0.0
+	AttachedBombCxaS = 0.009
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	IsSmokeGenerator = 3 // 1 белый, 2 синий, 3 красный
+	smokePositionShiftX = 0.0
+	smokePositionShiftY = 0.0
+[end]
+[BombHolder=20]
+	AttachIdx = 34
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 0.0, -0.02, 0.0
+	Rotation = 0
+	AttachPos = -0.069, -0.295, 5.365
+	Convex = "WingR_Out_0"
+	BombHolderMass = 0.0
+	BombHolderCxaS = 0.0
+	AttachedBombCxaS = 0.009
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	IsSmokeGenerator = 3 // 1 белый, 2 синий, 3 красный
+	smokePositionShiftX = 0.0
+	smokePositionShiftY = 0.0
+[end]
+
+// Дымогенераторы зеленые
+[BombHolder=21]
+	AttachIdx = 32
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 0.0, -0.02, 0.0
+	Rotation = 0
+	AttachPos = -5.31, -0.215, 0.0
+	Convex = "Fuse_Ctl_9"
+	BombHolderMass = 0.0
+	BombHolderCxaS = 0.0
+	AttachedBombCxaS = 0.009
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	IsSmokeGenerator = 4 // 1 белый, 2 синий, 3 красный
+	smokePositionShiftX = 0.0
+	smokePositionShiftY = 0.0
+[end]
+[BombHolder=22]
+	AttachIdx = 33
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 0.0, -0.02, 0.0
+	Rotation = 0
+	AttachPos = -0.069, -0.295, -5.365
+	Convex = "WingL_Out_0"
+	BombHolderMass = 0.0
+	BombHolderCxaS = 0.0
+	AttachedBombCxaS = 0.009
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	IsSmokeGenerator = 4 // 1 белый, 2 синий, 3 красный
+	smokePositionShiftX = 0.0
+	smokePositionShiftY = 0.0
+[end]
+[BombHolder=23]
+	AttachIdx = 34
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 0.0, -0.02, 0.0
+	Rotation = 0
+	AttachPos = -0.069, -0.295, 5.365
+	Convex = "WingR_Out_0"
+	BombHolderMass = 0.0
+	BombHolderCxaS = 0.0
+	AttachedBombCxaS = 0.009
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	IsSmokeGenerator = 4 // 1 белый, 2 синий, 3 красный
+	smokePositionShiftX = 0.0
+	smokePositionShiftY = 0.0
+[end]
+
+// Дымогенераторы желтые
+[BombHolder=24]
+	AttachIdx = 32
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 0.0, -0.02, 0.0
+	Rotation = 0
+	AttachPos = -5.31, -0.215, 0.0
+	Convex = "Fuse_Ctl_9"
+	BombHolderMass = 0.0
+	BombHolderCxaS = 0.0
+	AttachedBombCxaS = 0.009
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	IsSmokeGenerator = 5 // 1 белый, 2 синий, 3 красный
+	smokePositionShiftX = 0.0
+	smokePositionShiftY = 0.0
+[end]
+[BombHolder=25]
+	AttachIdx = 33
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 0.0, -0.02, 0.0
+	Rotation = 0
+	AttachPos = -0.069, -0.295, -5.365
+	Convex = "WingL_Out_0"
+	BombHolderMass = 0.0
+	BombHolderCxaS = 0.0
+	AttachedBombCxaS = 0.009
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	IsSmokeGenerator = 5 // 1 белый, 2 синий, 3 красный
+	smokePositionShiftX = 0.0
+	smokePositionShiftY = 0.0
+[end]
+[BombHolder=26]
+	AttachIdx = 34
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 0.0, -0.02, 0.0
+	Rotation = 0
+	AttachPos = -0.069, -0.295, 5.365
+	Convex = "WingR_Out_0"
+	BombHolderMass = 0.0
+	BombHolderCxaS = 0.0
+	AttachedBombCxaS = 0.009
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	IsSmokeGenerator = 5 // 1 белый, 2 синий, 3 красный
+	smokePositionShiftX = 0.0
+	smokePositionShiftY = 0.0
+[end]
+
+// Дымогенераторы черные
+[BombHolder=27]
+	AttachIdx = 32
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 0.0, -0.02, 0.0
+	Rotation = 0
+	AttachPos = -5.31, -0.215, 0.0
+	Convex = "Fuse_Ctl_9"
+	BombHolderMass = 0.0
+	BombHolderCxaS = 0.0
+	AttachedBombCxaS = 0.009
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	IsSmokeGenerator = 6 // 1 белый, 2 синий, 3 красный
+	smokePositionShiftX = 0.0
+	smokePositionShiftY = 0.0
+[end]
+[BombHolder=28]
+	AttachIdx = 33
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 0.0, -0.02, 0.0
+	Rotation = 0
+	AttachPos = -0.069, -0.295, -5.365
+	Convex = "WingL_Out_0"
+	BombHolderMass = 0.0
+	BombHolderCxaS = 0.0
+	AttachedBombCxaS = 0.009
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	IsSmokeGenerator = 6 // 1 белый, 2 синий, 3 красный
+	smokePositionShiftX = 0.0
+	smokePositionShiftY = 0.0
+[end]
+[BombHolder=29]
+	AttachIdx = 34
+	ReloadTime = 3
+	object = "LuaScripts/WorldObjects/Ballistics/Bombs/SMOKEGEN.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 0.0, -0.02, 0.0
+	Rotation = 0
+	AttachPos = -0.069, -0.295, 5.365
+	Convex = "WingR_Out_0"
+	BombHolderMass = 0.0
+	BombHolderCxaS = 0.0
+	AttachedBombCxaS = 0.009
+	DamagedPushProp = 0.005// Вероятность отцепа при попадании в Convex
+	IsSmokeGenerator = 6 // 1 белый, 2 синий, 3 красный
+	smokePositionShiftX = 0.0
+	smokePositionShiftY = 0.0
+[end]
+
+TrashWood="LuaScripts/WorldObjects/Trash/Trash.txt"
+TrashArmor="LuaScripts/WorldObjects/Trash/Trash.txt"
+logtreshold=0.0001
+
+rec_cockpit_arg=1
+
+SmoothControlFactor=0
+
+//Значение, обозначающее минимальный радиус сферы, в которую может быть вписана модель объекта, относительно центра модели
+ObjectRadius=6.6 //TODOP51
+
+[Entrance]
+	EntrancePos= -0.650, -0.09, 0.03
+	EntranceRot= 0,0,0
+	JumpDir=0,0,-4
+[end]
+[Entrance]
+	EntrancePos= -0.650, -0.030, 0
+	EntranceRot= 0,0,0
+	JumpDir=2,6,1
+	SelectorDir=0,2,0	// Альтернативный метод покидания при отрицательной перегрузке более 2м/с
+[end]
+
+// ограничения сектора обзора
+SectorLimits = -180.0, -170.0, -3.0, +90.0
+SectorLimits = -170.0, -150.0, -15.0, +90.0
+SectorLimits = -150.0, -110.0, -32.0, +90.0
+SectorLimits = -110.0, -95.0, -20.0, +90.0
+SectorLimits = -95.0, -75.0, -9.0, +90.0
+SectorLimits = -75.0, -55.0, -17.0, +90.0
+SectorLimits = -55.0, -15.0, -28.0, +90.0
+SectorLimits = -15.0,  -3.0, -10.0, +90.0
+SectorLimits =  -3.0,  +3.0, -4.0, +90.0
+SectorLimits =  +3.0, +15.0, -10.0, +90.0
+SectorLimits = +15.0, +55.0, -28.0, +90.0
+SectorLimits = +55.0, +75.0, -17.0, +90.0
+SectorLimits = +75.0, +95.0, -9.0, +90.0
+SectorLimits = +95.0, +110.0, -20.0, +90.0
+SectorLimits = +110.0, +150.0, -32.0, +90.0
+SectorLimits = +150.0, +170.0, -15.0, +90.0
+SectorLimits = +170.0, +180.0, -3.0, +90.0
+
+//AIRPLANE DAMAGE
+
+[PlanePartProtection]
+	PartName = "~eng01"
+	DirectHitArmor = 1.0
+	SphereHitProtection = 1.0
+	
+	[SphereHitProtectionBox]	// +1mm for all sides since the engine-box is metallic
+		AngleBackFrontAxis = 30.0
+
+		BackArmor = 7.35
+		FrontArmor = 7.35
+		BottomArmor = 1.0
+		TopArmor = 1.0
+		LeftArmor = 1.0
+		RightArmor = 1.0
+	[end]
+[end]
+
+[PlanePartProtection]
+	PartName = "Instr_C"
+	SphereHitProtection = 6.35
+	
+	[SphereHitProtectionBox]
+		AngleBackFrontAxis = 65.0
+		AngleBottomTopAxis = 0.0
+		AngleSideAxis = 0.0
+
+		BackArmor = 6.0
+		FrontArmor = 6.0
+		BottomArmor = 0.0
+		TopArmor = 0.0
+		LeftArmor = 0.0
+		RightArmor = 0.0
+	[end]
+[end]
+
+[PlanePartProtection]
+	PartName = "~wtank01"
+	SphereHitProtection = 6.35
+	
+	[SphereHitProtectionBox]
+		AngleBackFrontAxis = 60.0
+		AngleBottomTopAxis = 0.0
+		AngleSideAxis = 0.0
+
+		BackArmor = 3.0
+		FrontArmor = 6.35
+		BottomArmor = 0.0
+		TopArmor = 0.0
+		LeftArmor = 0.0
+		RightArmor = 0.0
+	[end]
+[end]
+
+[PlanePartProtection]
+	PartName = "~wtank02"
+	SphereHitProtection = 6.35
+	
+	[SphereHitProtectionBox]
+		AngleBackFrontAxis = 60.0
+		AngleBottomTopAxis = 0.0
+		AngleSideAxis = 0.0
+
+		BackArmor = 3.0
+		FrontArmor = 6.35
+		BottomArmor = 0.0
+		TopArmor = 0.0
+		LeftArmor = 0.0
+		RightArmor = 0.0
+	[end]
+[end]
+
+[PlanePartProtection]
+	PartName = "~wtank03"
+	SphereHitProtection = 6.35
+	
+	[SphereHitProtectionBox]
+		AngleBackFrontAxis = 60.0
+		AngleBottomTopAxis = 0.0
+		AngleSideAxis = 0.0
+
+		BackArmor = 3.0
+		FrontArmor = 6.35
+		BottomArmor = 0.0
+		TopArmor = 0.0
+		LeftArmor = 0.0
+		RightArmor = 0.0
+	[end]
+[end]
+
+[PlanePartProtection]
+	PartName = "~wtank04"
+	SphereHitProtection = 6.35
+	
+	[SphereHitProtectionBox]
+		AngleBackFrontAxis = 60.0
+		AngleBottomTopAxis = 0.0
+		AngleSideAxis = 0.0
+
+		BackArmor = 3.0
+		FrontArmor = 6.35
+		BottomArmor = 0.0
+		TopArmor = 0.0
+		LeftArmor = 0.0
+		RightArmor = 0.0
+	[end]
+[end]
+
+[PlanePartProtection]
+	PartName = "~wtank05"
+	SphereHitProtection = 6.35
+	
+	[SphereHitProtectionBox]
+		AngleBackFrontAxis = 60.0
+		AngleBottomTopAxis = 0.0
+		AngleSideAxis = 0.0
+
+		BackArmor = 3.0
+		FrontArmor = 6.35
+		BottomArmor = 0.0
+		TopArmor = 0.0
+		LeftArmor = 0.0
+		RightArmor = 0.0
+	[end]
+[end]
+
+[PlanePartProtection]
+	PartName = "~wtank06"
+	SphereHitProtection = 6.35
+	
+	[SphereHitProtectionBox]
+		AngleBackFrontAxis = 60.0
+		AngleBottomTopAxis = 0.0
+		AngleSideAxis = 0.0
+
+		BackArmor = 3.0
+		FrontArmor = 6.35
+		BottomArmor = 0.0
+		TopArmor = 0.0
+		LeftArmor = 0.0
+		RightArmor = 0.0
+	[end]
+[end]
+
+[PlanePartProtection]
+	PartName = "~otank01"
+	SphereHitProtection = 6.35
+	
+	[SphereHitProtectionBox]
+		AngleBackFrontAxis = 65.0
+		AngleBottomTopAxis = 0.0
+		AngleSideAxis = 0.0
+
+		BackArmor = 6.35
+		FrontArmor = 3.0
+		BottomArmor = 0.0
+		TopArmor = 0.0
+		LeftArmor = 0.0
+		RightArmor = 0.0
+	[end]
+[end]
+
+[PlanePartProtection]
+	PartName = "~ftank01"
+	SphereHitProtection = 6.35
+	
+	[SphereHitProtectionBox]
+		AngleBackFrontAxis = 60.0
+		AngleBottomTopAxis = 0.0
+		AngleSideAxis = 0.0
+
+		BackArmor = 0.0
+		FrontArmor = 7.94
+		BottomArmor = 0.0
+		TopArmor = 0.0
+		LeftArmor = 0.0
+		RightArmor = 0.0
+	[end]
+[end]
+
+[PlanePartProtection]
+	PartName = "~wcooler01"
+	SphereHitProtection = 6.35
+	
+	[SphereHitProtectionBox]
+		AngleBackFrontAxis = 0.0
+		AngleBottomTopAxis = 20.0
+		AngleSideAxis = 0.0
+
+		BackArmor = 0.0
+		FrontArmor = 0.0
+		BottomArmor = 0.0
+		TopArmor = 5.0
+		LeftArmor = 0.0
+		RightArmor = 0.0
+	[end]
+[end]
+
+[PlanePartProtection]
+	PartName = "~ocooler01"
+	SphereHitProtection = 6.35
+	
+	[SphereHitProtectionBox]
+		AngleBackFrontAxis = 0.0
+		AngleBottomTopAxis = 40.0
+		AngleSideAxis = 0.0
+
+		BackArmor = 0.0
+		FrontArmor = 0.0
+		BottomArmor = 0.0
+		TopArmor = 5.0
+		LeftArmor = 0.0
+		RightArmor = 0.0
+	[end]
+[end]
+
+SphereHitProtection=0	//Броневая защита стрелка/пилота от осколков при закрытой кабине
+
+[SphereProtectionBoxOpen]	// Если данный блок есть, то броня пилота от осколков задана по сторонам, если блока нет, то используется общий параметр SphereHitProtection=
+	FovH=90					// Полный угол горизонтального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+	FovV=90					// Полный угол вертикального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+							// Остальные 5 раструбов определяются автоматически по центральной симметрии относительно переднего
+	ArmorFront=6
+	ArmorBack=7
+	ArmorTop=0
+	ArmorBottom=2
+	ArmorRight=0
+	ArmorLeft=0
+[end]
+
+[SphereProtectionBoxClose]	// Если данный блок есть, то броня пилота от осколков задана по сторонам, если блока нет, то используется общий параметр SphereHitProtection=
+	FovH=90					// Полный угол горизонтального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+	FovV=90					// Полный угол вертикального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+							// Остальные 5 раструбов определяются автоматически по центральной симметрии относительно переднего
+	ArmorFront=6
+	ArmorBack=7
+	ArmorTop=2
+	ArmorBottom=2
+	ArmorRight=2
+	ArmorLeft=2
+[end]
+
+energyloss="",true,0.7,1000 // Потеря энергии пули при попадании, true - проверка на входе и выходе в колижн-бокс, первое эквивалентная броня на входе и выходе, второе джоулей на каждый метр пути внутри колижена
+
+//Engine Goup
+
+energyloss="~eng01",true,5.0,20000 //двигатель 
+
+energyloss="Eng0_Spin0",true,0.7,10000 //кок винта
+energyloss="Eng0_Blade1",true,2.5,1000 //лопасть 1
+energyloss="Eng0_Blade2",true,2.5,1000 //лопасть 2
+energyloss="Eng0_Blade3",true,2.5,1000 //лопасть 3
+energyloss="Eng0_Blade4",true,2.5,1000 //лопасть 3
+
+energyloss="~ftank01",true,0.7,10000 //топливный бак
+energyloss="~ftank02",true,0.7,10000 //топливный бак
+energyloss="~ftank03",true,0.7,10000 //топливный бак 
+
+energyloss="~wtank01",true,0.7,10000 //бак с водой
+energyloss="~wtank02",true,0.7,10000 //бак с водой
+energyloss="~wtank03",true,0.7,10000 //бак с водой
+energyloss="~wtank04",true,0.7,10000 //бак с водой
+energyloss="~wtank05",true,0.7,10000 //бак с водой
+energyloss="~wtank06",true,0.7,10000 //бак с водой
+energyloss="~otank01",true,0.7,20000 //маслобак
+
+energyloss="~ocooler01",true,0.7,10000 //маслорадиатор
+energyloss="~wcooler01",true,0.7,10000 //водорадиатор
+
+//Armor
+
+energyloss="~armor00",false,6.35,1  //Бронирование расширительно бачка (за коком винта) ... 1/4" in (6.35 мм)
+energyloss="~armor01",false,6.35,1  //Бронирование расширительно бачка (за коком винта) ... 1/4" in (6.35 мм)
+energyloss="~armor02",false,6.35,1  //Бронирование расширительно бачка (за коком винта) ... 1/4" in (6.35 мм)
+energyloss="~armor03",false,6.35,1  //Бронирование расширительно бачка (за коком винта) ... 1/4" in (6.35 мм)
+energyloss="~armor04",false,6.35,1  //Бронирование расширительно бачка (за коком винта) ... 1/4" in (6.35 мм)
+energyloss="~armor05",false,6.35,1  //Бронирование расширительно бачка (за коком винта) ... 1/4" in (6.35 мм)
+energyloss="~armor06",false,6.35,1  //Бронированная пожарная перегородка .................. 1/4" in (6.35 мм) 
+energyloss="~armor07",false,5.00,1  //Бронестекло ...................................... 1 1/2" in (38.10 мм) (аналог 4-5 мм брони)
+energyloss="~armor08",false,7.94,1  //Броня за спинкой ................................... 5/16" in (7.94 мм) 
+energyloss="~armor09",false,11.11,1 //Броня за заголовником ............................. 7/16" in (11.11 мм) 
+energyloss="~armor10",false,6.35,1  //Бронекозырёк (над приборной доской) ................. 1/4" in (6.35 мм) 
+
+//Undercarriage Group
+
+energyloss="WheelL_0",true,4.0,1 //левое колесо
+energyloss="GearL_1",true,4.0,1 //шток левой стойки
+energyloss="GearL_0",true,4.0,1 //левая стойка
+
+energyloss="WheelR_0",true,4.0,1 //колесо правое
+energyloss="GearR_1",true,4.0,1 //шток правой стойки
+energyloss="GearR_0",true,4.0,1 //правая стойка
+
+energyloss="WheelC_0",true,4.0,1 //колесо хвостовое
+energyloss="GearC_0",true,4.0,1 //стойка хвостового колеса
+energyloss="GearC_1",true,4.0,1 //стойка хвостового колеса 
+energyloss="GearC_2",true,4.0,1 //стойка хвостового колеса 
+
+//Armament Group
+
+energyloss="~gun01_ammo",true,0.7,20000 //Боекомплект
+energyloss="~gun02_ammo",true,0.7,20000 //Боекомплект
+energyloss="~gun03_ammo",true,0.7,20000 //Боекомплект
+energyloss="~gun04_ammo",true,0.7,20000 //Боекомплект
+energyloss="~gun05_ammo",true,0.7,20000 //Боекомплект
+energyloss="~gun06_ammo",true,0.7,20000 //Боекомплект
+energyloss="~gun01",true,4.0,1 //орудие
+energyloss="~gun02",true,4.0,1 //орудие
+energyloss="~gun03",true,4.0,1 //орудие
+energyloss="~gun04",true,4.0,1 //орудие
+energyloss="~gun05",true,4.0,1 //орудие
+energyloss="~gun06",true,4.0,1 //орудие
+
+
+SeekMaintenance = true
+ReFuelFlow = 6 // liters per second
+BombHolderReArmTime = 30 // seconds
+RepairTime = 300 // seconds
+
+
+///// Подсказки в техночате
+
+min_CAS=200
+max_CAS=800
+
+DangerAoA = 17.0                            // Максимально-допустимый безопасный угол атаки
+CriticalAoA = 19.0							// Критический угол атаки
+Maxny = 8.0									// Предельно-допустимая перегрузка
+DangerV = 810.0								// Максимальная безопасная приборная скорость
+DangerMach = 0.73							// Предельно-допустимое число Маха
+MaxGearV = 280.0							// Максимально-допустимая приборная скорость с выпущенными шасси 
+MaxFlapV = 270.0							// Максимально-допустимая приборная скорость с выпущенными закрылками
+TakeOffV = 180.0							// Рекомендованная взлётная скорость
+ClimbV = 165.0								// Рекомендованная приборная скорость набора высоты (миль/час)
+DescendV = 130.0							// Рекомендованная скорость на глиссаде (миль/час)
+minV = 180.0								// Минимально-безопасная приборная скорость
+minVDeltaFlaps = 15.0						// Уменьшение безопасной приборной скорости, обусловленное выпуском закрылок
+IsTakeOffFlaps = false						// Флаг наличия взлётного положения механизации
+IsLeftPedal = false							// Необходимая на разбеге педаль (true - левая, false - правая)
+OilMaxTemperature = 95.0					// Максимально-допустимая по РЛЭ температура масла
+WaterMaxTemperature = 118.0					// Максимально-допустимая по РЛЭ температура воды
+//CylinderHeadMaxTemperature = 260.0		    // Максимально-допустимая по РЛЭ температура головок цилиндров

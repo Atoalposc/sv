@@ -1,0 +1,73 @@
+Class_name = "CVehicleTorpedoTurret"
+object_name = "VehicleTorpedoTurret"
+// Torpedo tube
+SoundScript="LuaScripts/Sound/Vehicles/Cannon_Fire.cfg"
+
+[attach=0]
+	position= 0.0, 2.0, 0
+	object = "LuaScripts\WorldObjects\Bots\BotGunnerTorpedoTurret_no_rotate.txt"
+[end]
+
+// Точки подвески торпеды
+[attach=1]
+	position= 0.0, 0.0, 0.0
+	convex = "collision_1"
+[end]
+
+CoverArgNum = 80
+CoverTime = 4
+
+torpedoLeaveSpeed = 17.0     // Скорость выстрела торпеды
+torpedoApproxTurnRadius = 200 // Оценочный радиус разворота торпеды при выстреле, используется для наведения при пуске в сторону от цели
+
+ReservedMagazinesArgNum = 70
+ReloadMagazineTime = 60.0
+MaxReservedMagazines = 1
+ReservedMagazines = 1
+
+//MaxVehicleSpeedToAttack = 0
+//StopVehicleWhenPointing = true
+
+// Описание торпеды
+TorpedoConfig = "LuaScripts/WorldObjects/Ballistics/AmmunitionForNPC/NPC_TORPEDO_G7a-53.txt"
+[TorpedoHolder=0]
+	AttachIdx = 1
+	ReloadTime = 10
+	object = "LuaScripts/WorldObjects/Ballistics/AmmunitionForNPC/NPC_TORPEDO_G7a-53.txt"
+	Direction = 1.0, 0.0, 0.0
+	PushRange = 10.0, 0.0, 0.0
+	Rotation = 0
+	AttachPos = 0.0, 0.0, 0.0
+	Convex = "collision_1"
+	ThrowSoundType = 2
+	HideAttachedAmmo = false
+	FireArgumentNum  = -1
+[end]
+
+
+PitchPoint = 0.0, 0.0, 0.0
+
+AngleYawMin      = -120.0
+AngleYawMax      = 120.0
+AnglePitchMin    = 0.0
+AnglePitchMax    = 0.0
+AnglePitchDef    = 0.0
+
+YawAngularSpeed    = 0.0
+PitchAngularSpeed  = 0.0
+
+AttackAnimationArgNum = 61
+
+FireAnimationTime    = 0.5
+AttackAnimationTime  = 0.4
+
+
+MuzzleDisplacement = 5.5, 0, 0
+AttackDistance   = 5000.0
+minAttackDistance = 500.0
+
+NumBulletsInQueue = 1
+QueueRechargeTime   = 7.5
+BulletRechargeTime  = 0.1
+
+NeedFuse = false

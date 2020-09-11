@@ -1,0 +1,70 @@
+Class_name = "CRocket"
+object_name = "RKT_RUS_ROFS132"
+
+//////	PhysicsBody properties
+VisualImage=0,"graphics/Ammo/Rocket_ROS132.mgm",false
+SoundScript="LuaScripts/Sound/Vehicles/Rocket_280.cfg"
+
+//CollisionBody="graphics/ammo/ammo.col"
+
+visualradius=5
+
+ImageAttr=1
+VisArg=100
+
+NoDirecion=false
+CalcWind=true
+ProcessNetwork=true
+
+Armor=0,800,		37,64063,	30,160157,	0,256252
+Armor=500,550,		22,30314,	17,75785,	0,121257
+Armor=2000,350,		11,12301,	9,30754,	0,49206
+Armor=5000,200,		5,3994,		4,9985,		0,15976
+Armor=15000,100,	2,998,		1,2496,		0,3994
+
+DefaultStartSpeed=0		//дефолтная начальная скорость, нужно устанавливать в максимальную траекторную +200м/с при "простреле" ракеты утилитой баллистического калькулятора, для этой ракеты 340м/с + 200м/с = 540м/с
+MaxDistance=15000		//предельная дальность, дальше которой объект удалится
+Mass=19.32				//масса ракеты
+Mkr=0.97				//значение числа Маха, после которого начинается повышение Cx до момента M=1, зависит от формы тела но не от размера
+Mmax=1.05				//значение числа Маха, до которого завершается понижение Cx, начавшееся при M=1, зависит от формы тела но не от размера
+Cx_0=0.125				//значение к-та сопротивления при (M <= Mkr), зависит от формы тела но не от размера
+Cx_max=0.2				//значение к-та сопротивления при (M = 1), зависит от формы тела но не от размера
+Cx_1=0.425				//значение к-та сопротивления при (M >= Mmax), зависит от формы тела но не от размера
+R=0.066					//радиус ракеты
+KPhi=0.01				//параметр скорости уменьшения угла атаки
+KPhiAcc=0				//параметр ускорения уменьшения угла атаки
+KJ=7					//параметр общей калибровки уменьшения угла атаки
+LiveTime=45				//время жизни объекта (большее из двух: время полета на MaxDistance или время горения трассера + TimeToDestroy)
+ExplodeTime=0			//время самоподрыва (=0 - самоподрыва нет)
+
+FuseArmDelay=-1			//Задержка до взведения взрывателя. Если <=0 то работает стандартный механизм вертушки (таск BOS-744). Если нет - фиксированное значение.
+TimeToDestroy=0		//время жизни объекта после попадания в скрытом состоянии, что бы трейл трассера не пропадал пока не расствориться
+
+ThrustArg=50211
+FlameArg=101
+EngineEffectStopTime=1.2
+
+Spin=-30,30				//Rocket rotation angular speed random limits
+Deviation=0.15			//Deviation of the thrust 
+EngineThrust=24000		//Engine power
+EngineDuration=0.37,0.39	//Engine work time random limits
+
+ReferenceSpin=0				//Ideal rocket rotation angular speed random limits for aiming
+ReferenceEngineDuration=0.33	//Ideal rocket engine work time for aiming (можно подгонять дальность вдали)
+ReferenceEngineThrust=28000			//Тяга двигателя референсной ракеты для Aiming Help (можно подгонять дальность вблизи и вдали)
+ReferenceDistance=5000			//Aiming range limit
+
+HitDefaultDelay=0		//Задержка до взрыва после попадания бомбы
+
+debug=false
+
+//	взрывы от детонации бомбы
+
+HitDummy="LuaScripts/WorldObjects/Explosions/Shells/HE_132mm_9kg_2kg_object.txt"
+HitMisc="LuaScripts/WorldObjects/Explosions/Shells/HE_132mm_9kg_2kg_object.txt"
+HitWater="LuaScripts/WorldObjects/Explosions/Shells/HE_132mm_9kg_2kg_water.txt"
+HitGround="LuaScripts/WorldObjects/Explosions/Shells/HE_132mm_9kg_2kg_ground.txt"
+HitArmor="LuaScripts/WorldObjects/Explosions/Shells/HE_132mm_9kg_2kg_object.txt"
+HitBuilding="LuaScripts/WorldObjects/Explosions/Shells/HE_132mm_9kg_2kg_building.txt"
+HitMetal="LuaScripts/WorldObjects/Explosions/Shells/HE_132mm_9kg_2kg_object.txt"
+HitForest="LuaScripts/WorldObjects/Explosions/Shells/HE_132mm_9kg_2kg_object.txt"

@@ -1,0 +1,8 @@
+class_name = "CBatchFreeEffect"
+
+VisualImage=0,"graphics\effects\Air\InversionTrail.mgm",false
+ImageAttr=17		//IA_NOCLIP | IA_NOMINPIXELS
+visualradius=20
+SoundScript=""
+
+InitDestroyDelay=80	//Задержка на удаление после пропадания родительского объекта

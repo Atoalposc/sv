@@ -1,0 +1,102 @@
+Class_name = "CBotCharacter"
+object_name = "BotTankSU152_Driver"
+detail_type = "DET_INFANTRY" //list of types is in \inc\SimulationSystem\DetailTypes.inc
+
+Controller="LuaScripts/WorldObjects/Bots/PhysPlatform_AI.txt"
+Controller="LuaScripts/WorldObjects/Bots/PhysPlatform_NI.txt"
+Controller="LuaScripts/WorldObjects/Bots/BotFieldTankmanController_AI.txt"
+
+VisualImage=2,"graphics/characters/TankMan/TankManRus.MGM",true
+CollisionBody="graphics/characters/TankMan/TankManRus.col"
+Animator="graphics/characters/Keyframes/TankMan_SU152/SU152Mechvod.chr","GOT_PHYS_PLATFORM"
+Animator="graphics/characters/TankMan/TankManOnField.chr","GOT_NONE"
+
+SoundScript="LuaScripts/Sound/Vehicles/BotSound.cfg"
+
+[attach=0]
+	position= 0, 0.7, 0
+	object = "LuaScripts/WorldObjects/Bots/BotHead.txt"
+[end]
+
+NeckAngleConstrX=-100,100;
+NeckAngleConstrY=-175.0,175.0;
+NeckAngleConstrZ=-120,120;
+
+NeckSlideConstrX=-0.40,0.40;
+NeckSlideConstrY=-0.45,0.45;
+NeckSlideConstrZ=-0.45,0.45;
+
+replicatedarg=13,0.0,false	// номер аргумента анимация которого должна реплицироваться из парент-объекта, дефолтное значение если парента нет, 3-й параметр включает репликацию если бот вылез из люка (default=true)
+replicatedarg=14,0.0,false
+
+energyloss="",true,0.1,10000 // Потеря энергии пули при попадании, true - проверка на входе и выходе в колижн-бокс, первое эквивалентная броня на входе и выходе, второе джоулей на каждый метр пути внутри колижена
+
+// Damage model
+Armor=0 // толщина брони
+LifeRate=500 // Масштаб пулевых и фугасных повреждений
+LifeRateFrag=1500 // Масштаб осколочных повреждений
+HeadConvexPrefix="Head" // Префикс имени конвекса колижена головы
+HeadArmor=0 // толщина брони головы
+HeadLifeRate=200 // Масштаб пулевых и фугасных повреждений головы
+HeadLifeRateFrag=600 // Масштаб осколочных повреждений головы
+Firing=1 // Минимальное значение поджигания у средства поражения для зажигания объекта
+BurnLifeReduce=0.02	// Скорость сгорания (долей жизни в секунду)
+DestroyDelay=15 // задержка на удаление объекта после смерти
+MinEjectAlt=-1 // ограничение на минимальную высоту выпрыгивания
+PainLOC = false // false - отключение потери сознания от болевого шока при попаданиях
+Sickness = false // false - отключение укачивания от знакопеременных перегрузок
+
+RepairSpeed=0.003333	// Скорость исцеления, долей жизни в секунду (полное излечение за 5 минут)
+RepairSource=1	// Тип мастерской, необходимой для исправления
+//	VMRI_REPAIR=0
+//	VMRI_REHEAL=1
+//	VMRI_REARM=2
+//	VMRI_REFUEL=3
+//	VMRI_SERVICEREPAIR=4
+
+IsCritical=false	//true - обнуление лайфа модуля обнулит лайф всего объекта
+LifeK=200			//весовой коэфициент влияния лайфа модуля на лайф всего объекта (все к-ты нормируются автоматически)
+
+antiShakePosK=0.4
+antiShakeRotK=0.1,0.02,0.02 // yaw, pitch, roll
+antiShakePosLimit = -0.09,0.08, -0.3,0.3, -0.07,0.07 // xmin,xmax, ymin,ymax, zmin,zmax
+
+CanLookout=false		//Персонаж использует анимацию выглядывания из открытого окна idle_lookout
+EjectWithoutCanopy=true	//Персонажу не требуется открытая кабина для покидания, дефолт false
+EjectDelay=0, 0.001	//	Delay from Eject button press to detaching from plane (sec), power of bot moving function to eject pos (0.001 - instantly)
+
+FootLength=0.75			//Высота центра модели при ходьбе
+WalkSpeed=1.1,-0.7		//Скорость шагом вперед, назад
+WalkAccel=0.08,0.1		//Ускорение шагом вперед, назад
+RunSpeed=3,-0.7			//Скорость бегом вперед, назад
+RunAccel=0.1,0.1		//Ускорение бегом вперед, назад
+CrawlSpeed=0.5,0.5		//Скорость ползком вперед, назад
+CrawlAccel=0.1,0.1		//Ускорение ползком вперед, назад
+
+FaceArg=35
+FacePhase=0.79
+
+//логирование повреждений
+logtreshold=0.0001
+
+GunVisArg=30
+GunInClosedCockpit=false
+
+ImpulseToDestroy = 1000		// Определяет силу удара обеъкта об танк, нужную для его уничтожения. Подвижные объекты на 6 категорий по размерам. Автомобили, малые грузовики, большие грузовики, малые танки, средние танки, большие танки.
+ImpulseMinimumLevel = 200		// Определяет минимальную силу удара об танк, нужную для его повреждения. Для пушек снижено что бы их можно было давить.
+
+GUIHealthMessage=1		// Параметр, определяющий то, какое техночат-сообщение будет для данного бота
+//  1 - Vehicle Driver
+//  4 - Vehicle Commander
+//  7 - Vehicle Gunner
+// 10 - Vehicle Machinegunner
+// 13 - Vehicle Radioman
+// 16 - Vehicle Loader
+// 19 - Vehicle Plugman
+// 22 - Airplane Pilot
+// 25 - Airplane Commander
+// 28 - Airplane Co-Pilot
+// 31 - Airplane Navigator
+// 34 - Airplane Radioman
+// 37 - Airplane Gunner
+// 40 - Airplane Waist Gunner

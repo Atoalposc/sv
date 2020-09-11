@@ -1,0 +1,11 @@
+Class_name = "CBatchTrashAnimated"
+object_name = "ExplosionSkyPP"
+
+//////	PhysicsBody properties
+VisualImage=0,"graphics\effects\water\sinkBarge.mgm",false
+visualradius=3
+SoundScript=""
+
+Animation=63225
+LiveTime=8
+AnimationTime=1

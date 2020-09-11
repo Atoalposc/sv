@@ -1,0 +1,78 @@
+Class_name = "CBotCharacter"
+object_name = "ParatrooperGER"
+detail_type = "DET_INFANTRY" //list of types is in \inc\SimulationSystem\DetailTypes.inc
+
+SubType="ParaTrooper"
+
+//////	PhysicsBody properties
+VisualImage=2,"graphics/characters/ParatrooperGER/ParatrooperGER_%s.mgm",true
+CollisionBody="graphics/characters/ParatrooperGER/ParatrooperGER.col"
+
+//VisualImage=2,"graphics/test.mgm",true
+
+SoundScript="LuaScripts/Sound/Vehicles/BotSound.cfg"
+
+Controller="LuaScripts/WorldObjects/Bots/BotController_AI.txt"
+Controller="LuaScripts/WorldObjects/Bots/EjectorParatrooper_AI.txt"
+
+[attach=0]
+	position= 0, 0.72, 0
+	object = "LuaScripts/WorldObjects/Bots/BotHead.txt"
+[end]
+
+NeckAngleConstrX=-100,100;
+NeckAngleConstrY=-175.0,175.0;
+NeckAngleConstrZ=-120,120;
+
+NeckSlideConstrX=-0.40,0.40;
+NeckSlideConstrY=-0.45,0.45;
+NeckSlideConstrZ=-0.45,0.45;
+
+energyloss="",true,0.1,10000 // Потеря энергии пули при попадании, true - проверка на входе и выходе в колижн-бокс, первое эквивалентная броня на входе и выходе, второе джоулей на каждый метр пути внутри колижена
+
+// Damage model
+Armor=0 // толщина брони
+LifeRate=500 // Масштаб пулевых и фугасных повреждений
+LifeRateFrag=1500 // Масштаб осколочных повреждений
+HeadConvexPrefix="Head" // Префикс имени конвекса колижена головы
+HeadArmor=0 // толщина брони головы
+HeadLifeRate=200 // Масштаб пулевых и фугасных повреждений головы
+HeadLifeRateFrag=600 // Масштаб осколочных повреждений головы
+Firing=1 // Минимальное значение поджигания у средства поражения для зажигания объекта
+DestroyDelay=15 // задержка на удаление объекта после смерти
+MinEjectAlt=10 // ограничение на минимальную высоту выпрыгивания
+
+Animator="graphics/characters/ParatrooperGER/ParatrooperGER.chr"
+
+//логирование повреждений
+logtreshold=0.0001
+
+//// Eject properties ////
+
+EjectDelay=1.0, 0.001	//	Delay from Eject button press to detaching from plane (sec), power of bot moving function to eject pos (0.001 - instantly)
+ParachuteDelay=0.8	//	Opening parachute delay while free fall (sec)
+MaxParachuteSpeed=300	//	m/s
+JupmRandomK=2.0
+
+SplashConfig="LuaScripts\WorldObjects\Emitters\WaterSpray5_1.txt"
+
+[Parachute]
+	MaxOpeningTension=40.0f	//	Slings tension while opening parachute (kg)
+
+	MinRad=0.5f
+	MaxRad=4.0f
+	MaxSlings=8.4f
+
+	//MaxRad=2.9f
+	//MaxSlings=6.0f
+
+	SlingsDuration=2.5f
+	PDuration=1
+
+	VisibleParachute="LuaScripts/WorldObjects/Bots/Parachute02.txt"
+
+	SlingsAttach=0.07f,0.5f,0.0f
+[end]
+
+ImpulseToDestroy = 500		// Определяет силу удара обеъкта об танк, нужную для его уничтожения. Подвижные объекты на 6 категорий по размерам. Автомобили, малые грузовики, большие грузовики, малые танки, средние танки, большие танки.
+ImpulseMinimumLevel = 100		// Определяет минимальную силу удара об танк, нужную для его повреждения. Для пушек снижено что бы их можно было давить.

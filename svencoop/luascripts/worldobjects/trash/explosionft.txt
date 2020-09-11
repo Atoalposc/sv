@@ -1,0 +1,12 @@
+Class_name = "CBatchTrashAnimated"
+object_name = "ExplosionFT"
+
+//////	PhysicsBody properties
+VisualImage=0,"graphics\effects\air\explPetrolTank.epl",false
+visualradius=16
+ImageAttr=17		//IA_NOCLIP | IA_NOMINPIXELS
+SoundScript=""
+
+LiveTime=10.25
+AnimationTime=10.25
+Ranges=1,0.01,0.99,0

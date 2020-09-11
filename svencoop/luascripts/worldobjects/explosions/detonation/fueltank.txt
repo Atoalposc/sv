@@ -1,0 +1,33 @@
+Class_name = "CBatchExplosion"
+object_name = "Explosion"
+
+// Расчитнано из ТНТ=50кг, массы пули 110кг, калибра 250мм
+
+//////	PhysicsBody properties
+VisualImage=0,"",false
+VisualRadius=5
+ImageAttr=17		//IA_NOCLIP | IA_NOMINPIXELS
+
+SoundScript="LuaScripts/Sound/explosions/Plane/fueltank.cfg"
+ExplosionPower=1.0
+LiveTime=4
+
+// Параметры Sphere Hit, внешний взрыв
+
+Radius=3.0	// Радиус сферы воздействия взрыва, определяющий выборку объектов	// Уменшьен с 47.7 до 3м принудительно для локализации воздействия на часть самолета, где взорвалось
+TNT_equ=50	// Тротилловый эквивалент для моделирования атмосферной ударной волны
+
+// Фугасное воздействие: дальность, (-1 не использ.), пары (броня, дамаг за броней)
+ArmorFoug=0.0,-1,	165,82719,	0,165439
+ArmorFoug=3.1,-1,	4,1825,		0,3649
+ArmorFoug=13.4,-1,				0,193
+ArmorFoug=26.4,-1,				0,50
+
+// Осколочное воздействие
+ShrapnelQuantity=4301
+FragmentMass=0.0009
+// Единичный осколок: дальность, скорость, пары (броня, дамаг за броней)
+ArmorShr=0.0,1457,	93,99,	75,247,	0,395
+ArmorShr=5.0,1244,	54,72,	43,180,	0,288
+ArmorShr=25.4,609,			4,17,	0,69
+ArmorShr=50.9,274,					0,14

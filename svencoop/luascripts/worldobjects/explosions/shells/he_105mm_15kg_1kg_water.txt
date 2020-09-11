@@ -1,0 +1,43 @@
+Class_name = "CBatchExplosion"
+object_name = "HE_105mm_15kg_1kg_water"
+
+// БЧ 105мм немецкого снаряда пушки leFH 18, расчитнано из ТНТ=1.38кг, массы пули 14.81кг, калибра 105мм
+
+////// PhysicsBody properties
+VisualImage=0,"graphics\effects\Arm\hit_shell_he_200-1000g_water.epl",false
+visualradius=12
+//ImageAttr=17		//IA_NOCLIP | IA_NOMINPIXELS
+
+SoundScript="LuaScripts\Sound\explosions\HE\Water_Large.cfg"
+
+ExplosionPower=0.5			// Сила звука взрыа, переменная для FMOD
+Animation=1					// Номер хука взрыва
+LiveTime=4.66					// Время жизни взрыва
+AnimationTime=2.66				// Время анимации взрыва
+Ranges=1,0.01,0.99,0		// (кол-во вариантов, начало 1го диапазона, конец 1-го диапазона, дельта прибавляемая к границам для следующего диапазона)
+//"RangesCnt, Range0Start, fRange0End, fRangeStep"; ARG=m_fRange0Start+(m_fRange0End-m_fRange0Start)*t+m_fRangeStep*data->m_RangeIdx
+//Ranges=1,0.01,0.99,0
+//Ranges=2,0.01,0.49,0.5
+//Ranges=3,0.01,0.32,0.33
+//Ranges=4,0.01,0.24,0.25
+//Ranges=5,0.01,0.19,0.2
+
+// Параметры Sphere Hit, внешний взрыв
+
+Radius=39.1	// Радиус сферы воздействия взрыва, определяющий выборку объектов
+TNT_equ=1.38	// Тротилловый эквивалент для моделирования атмосферной ударной волны
+
+// Фугасное воздействие: дальность, (-1 не использ.), пары (броня, дамаг за броней)
+ArmorFoug=0.0,-1,	20,9929,	0,19858
+ArmorFoug=1.2,-1,	2,1022,		0,2043
+ArmorFoug=4.2,-1,				0,177
+ArmorFoug=8.0,-1,				0,50
+
+// Осколочное воздействие
+ShrapnelQuantity=1923
+FragmentMass=0.0028
+// Единичный осколок: дальность, скорость, пары (броня, дамаг за броней)
+ArmorShr=0.0,726,	29,74,	23,184,	0,295
+ArmorShr=3.8,659,	21,61,	17,152,	0,242
+ArmorShr=19.5,451,	5,28,	4,71,	0,114
+ArmorShr=39.1,299,			1,13,	0,50

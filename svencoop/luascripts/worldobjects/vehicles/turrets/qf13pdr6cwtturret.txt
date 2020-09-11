@@ -1,0 +1,58 @@
+Class_name = "CVehicleTurret"
+object_name = "VehicleTurret"
+// Зенитная пушка QF 13 pounder 6 cwt
+//SoundScript="LuaScripts\Sound\Vehicles\CannonAA_Shot_Med.cfg"
+
+[attach=0]
+	position= 0.0, 0.0, 0
+	object = "LuaScripts/WorldObjects/Bots/BotGunnerAntiAirFlak.txt"
+[end]
+
+PitchPoint = -0.272, 0.648, 0
+
+AngleYawMin      = -180.0
+AngleYawMax      = 180.0
+AnglePitchMin    = -10.0
+AnglePitchMax    = 75.0
+AnglePitchDef    = 45
+YawArgNum        = 221
+PitchArgNum      = 241
+YawArgMin        = 0.0
+YawArgMax        = 1.0
+PitchArgMin      = 0.0
+PitchArgMax      = 1.0
+
+YawAngularSpeed    = 9.0
+PitchAngularSpeed  = 9.0
+
+FireArgumentNum  = 64100
+AttackAnimationArgNum = 61
+
+FireAnimationTime    = 0.6
+AttackAnimationTime  = 0.6
+
+MuzzleDisplacement = 1.5, 0, 0
+
+AttackDistance   = 5700.0		//AI max aim distance versus ground point (test by 45° shot)
+AttackDistanceTrgGnd = 2000.0		//AI max aim distance versus ground target
+AttackDistanceTrgAir = 5400.0		//AI max aim distance versus air target (test by 45° shot - range for 10° elevation aim)
+
+[bullet=1]
+	BulletScript    = "LuaScripts/WorldObjects/Ballistics/AmmunitionForNPC/NPC_SHELL_ENG_76_HE.txt"
+	TargetingScript = "LuaScripts/WorldObjects/Ballistics/AmmunitionForNPC/NPC_SHELL_ENG_76_HE.bin"
+	ExplosionScript = ""
+	BulletsCount = 50
+	StartBulletSpeed = 488.0
+	RealPhysicBullet = true
+	PriorityArmorMin = 0.0
+	PriorityArmorMax = 20.0
+[end]
+
+VisibleTraceNum = 1
+
+NumBulletsInQueue = 20
+QueueRechargeTime   = 10.0
+BulletRechargeTime  = 2.4
+
+NeedFuse = true
+minInputFuse = 1.3

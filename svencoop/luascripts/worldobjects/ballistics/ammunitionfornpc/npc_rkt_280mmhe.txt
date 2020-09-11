@@ -1,0 +1,22 @@
+class_name = "CBatchRocketFireworks"
+
+VisualImage=0,"graphics/ammo/rocket_280mmHE.mgm",false
+VisualRadius=10
+
+Lifetime=5
+Mass=82.0
+Radius=0.14
+
+ImageAttr=4;
+smokeArg=50210
+
+Armor=-1,0,	0,0
+
+HitDummy="LuaScripts/WorldObjects/Explosions/Bombs/HE_280mm_82kg_50kg_object.txt"
+HitMisc="LuaScripts/WorldObjects/Explosions/Bombs/HE_280mm_82kg_50kg_object.txt"
+HitWater="LuaScripts/WorldObjects/Explosions/Bombs/HE_280mm_82kg_50kg_water.txt"
+HitGround="LuaScripts/WorldObjects/Explosions/Bombs/HE_280mm_82kg_50kg_ground.txt"
+HitArmor="LuaScripts/WorldObjects/Explosions/Bombs/HE_280mm_82kg_50kg_object.txt"
+HitBuilding="LuaScripts/WorldObjects/Explosions/Bombs/HE_280mm_82kg_50kg_building.txt"
+HitMetal="LuaScripts/WorldObjects/Explosions/Bombs/HE_280mm_82kg_50kg_object.txt"
+HitForest="LuaScripts/WorldObjects/Explosions/Bombs/HE_280mm_82kg_50kg_object.txt"

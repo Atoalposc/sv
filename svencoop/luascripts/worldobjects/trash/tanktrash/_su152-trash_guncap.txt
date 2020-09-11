@@ -1,0 +1,15 @@
+Class_name = "CSolidTrash"
+
+VisualImage=0,"graphics\Vehicles\_SU152\_SU152-trash_guncap.MGM",true
+CollisionBody="graphics\Vehicles\_SU152\_SU152-trash_guncap.col"
+
+Friction=0.8
+Mass=10
+//MaxDeep=0.1
+TLimit=0
+Ik=3.0
+DynamicCOG=true
+
+//Spin=false
+ImageArg=1006
+ImagePhase=0.85

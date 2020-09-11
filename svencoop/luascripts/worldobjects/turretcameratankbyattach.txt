@@ -1,0 +1,7 @@
+Class_name = "CTurretCamera"
+
+MinimumFOVGrad=20.0
+MaximumFOVGrad=60.0
+
+CamRotationEnabled=true
+FollowTurretSight=false	// If false - turret camera will not be linked to turret joints, but will be located by attachment (default =true)

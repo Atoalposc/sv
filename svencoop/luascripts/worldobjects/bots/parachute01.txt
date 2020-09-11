@@ -1,0 +1,24 @@
+Class_name = "CParachute"
+
+
+//////	PhysicsBody properties
+VisualImage=0,"graphics/Characters/Parashute/parashute01.MGM",true
+CollisionBody="graphics/Characters/Parashute/parashute01.col"
+
+Animator="graphics/Characters/Parashute/parashute01.chr"
+
+VisualRadius=10
+
+/////////////////////
+// Animation names //
+/////////////////////
+// open
+// close
+// damage
+// damage_close
+/////////////////////
+
+energyloss="",true,0.1,0.1 // Потеря энергии пули при попадании, true - проверка на входе и выходе в колижн-бокс, первое эквивалентная броня на входе и выходе, второе джоулей на каждый метр пути внутри колижена
+
+
+MaxCloseTime=2

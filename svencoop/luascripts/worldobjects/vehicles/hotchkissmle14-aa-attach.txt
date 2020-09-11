@@ -1,0 +1,67 @@
+class_name = "CAttachedVehicle"
+object_name = "Hotchkiss Mle 14 AA turret"
+
+
+//////	PhysicsBody properties
+//VisualImage = <int TYPE>,<string File_PathName>,<bool cast_shadows>
+
+VisualImage=0,"graphics/Artillery/HotchkissMle14/HotchkissMle14-aa.mgm",true
+
+CollisionBody="graphics/Artillery/HotchkissMle14/HotchkissMle14-aa.col"
+
+SoundScript="LuaScripts\Sound\Vehicles\HotchkissMle14-AA.cfg"
+
+[attach=0]
+	position= 0, 1.443, 0
+	object = "LuaScripts/WorldObjects/Vehicles/Turrets/HotchkissMle14-aaTurret.txt"
+[end]
+
+TargetHeight = 1.0			// Дельта по высоте к центру модели используемая при прицеливании и оценке видимости
+
+//////	Controled body specific
+
+Mass = 23.6				// Полная масса, в CStaticVehicle используется default=0
+
+energyloss="",true,0.5,300		// Потеря энергии пули при попадании, true - проверка на входе и выходе в колижн-бокс, первое эквивалентная броня на входе и выходе, второе джоулей на каждый метр пути внутри колижена
+
+RegenerationMax = 1.0		// До какого Life само-чиниться танк
+RegenerationMin = 0.5		// Минимальное значение Life, ниже которого починки не будет
+RegenerationPercent = 0.0	// Скорость восстановления, долей Life в секунду
+
+Firing=0.0				// Скорость сгорания боекомплекта от пожара, долей Life в секунду
+SmokeStartHealth = 0.0		// Лайф двигателя, при котором начнется дым из двигателя
+MinFiringHealth = 0.0		// Лайф боекомплекта, при котором начнется пожар
+MinMovementHealth = 0.0		// Лайф двигателя, при котором перестанет ездить
+MinAttackHealth = 0.0		// Лайф объекта, при котором перестанет стрелять
+
+FireEffectTime = 0.0		// Сколько будет гореть по времени после взрыва
+DestructArg = 281
+SmokeArgBase    = 60000
+SmokeArgTotalNum = 1
+FiringArg = 60100
+
+ExplosionScript = "LuaScripts/WorldObjects/explosions/Detonation/VehicleNoFire.txt"
+
+CriticalWaterLevel = 1.5		// Гулбже начнет умирать
+CriticalHeigthLevel = 3.0		// При падении с большей высоты умрет
+DivingSpeed = 0.8				// Скорость погружения в воду
+ImpulseToDestroy = 50			// Определяет силу удара обеъкта о пушку, нужную для ее уничтожения. Пушки разделены на 4 категории по размерам. Плюс приведение по массе каждой пушки.
+ImpulseMinimumLevel = 5			// Определяет минимальную силу удара об танк, нужную для его повреждения. Для пушек снижено что бы их можно было давить.
+ColDamageDelay=0.2				// Интервалы проверки дамага от колижена (важно для случая, когда один объект вошел в другой, определяет скорость умирания от этого)
+
+//логирование повреждений
+logtreshold=0.0001
+
+Armor=0					// Толщина брони, общий параметр, нужен для других ИИ для определения типа снаряда
+
+// Модель повреждения. Исходный убалансированный лайф объекта до введения простой модели 500.
+
+[DmgElement = ammo]
+	damageablePart="collision"
+	LifeRate=500
+	LifeRateFrag=500
+	Armor=0
+	CollisioDamageSens=1
+[End]
+
+DebugInfo = false				// Позволяет выводить скорость танка и значение оси газа для настройки двигателя

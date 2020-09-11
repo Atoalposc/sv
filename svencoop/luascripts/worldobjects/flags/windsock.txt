@@ -1,0 +1,19 @@
+class_name = "CWindsock"
+object_name = "Windsock"
+detail_type = "DET_BUILDING" //list of types is in \inc\SimulationSystem\DetailTypes.inc
+
+//////	PhysicsBody properties
+VisualImage=0,"graphics/Flag/windsock.mgm",true
+CollisionBody="graphics/Flag/windsock.col"
+
+network=true
+
+////// Flag properties
+argNaturalOsc = 0
+argTexture = 1
+argRotation = 2
+argHeight = 3
+argElevation = 4
+argRollOsc = 5
+
+podHeight = 15.0

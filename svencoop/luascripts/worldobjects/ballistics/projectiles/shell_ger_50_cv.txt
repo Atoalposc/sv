@@ -1,0 +1,81 @@
+Class_name = "CBatchBallistics"
+object_name = "SHELL_GER_50_CV"
+
+//50мм "5 cm Pzgr.39" к пушке KwK 39 бронебойный каморный.
+
+////PhysicsBody properties
+VisualImage=0,"graphics/ammo/ammoYac.mgm",false
+visualradius = 3
+ImageAttr=4	//IA_NOROTINTERPOLATION
+
+//CollisionBody="graphics/ammo/ammo.col"
+
+NoDirecion=true
+NoCollision=true
+
+// дальность, скорость на этой дальности (на 0м - указать на 5км/ч меньше расчетной), пары броня-урон за броней. Броню больше, чем в первой паре, не пробьет
+// за базовый взят урон на дальности 100м при нулевой броне, на макс. броне урон равне 0.25 от базового, на 0.8 макс. брони урон равен 0.5 от базового
+// урон при нулевой броне уменьшается с дальностью по соотношению квадрата скоростей
+// скорости по дальностям взяты из лога утилиты расчета .bin файлов пули (расчет таблиц наведения), на 10км/ч меньше ресчетной
+// т.к. если скорость окажется больше расчетной на данной дальности, то дамага не будет
+// базовый урон расчитан по соотношению кинетических энергий на дальности 100м между данной пулей и референсной пулей SHELL_GER_20x82_AP (=1000)
+
+Armor=0,835,	87,7446,	70,18615,	0,29785
+Armor=500,702,	68,5262,	54,13154,	0,21047 // посчитано по референсной точке по бронепробиваемости для данной пули 500м-68мм (59мм под 30°)
+Armor=1000,587,	53,3683,	42,9208,	0,14732
+Armor=3000,276,	18,814,		14,2035,	0,3255
+Armor=5000,155,	8,256,		6,641,		0,1026
+
+// аэродинамические коэфициенты подобраны исходя из совпадения графика бронепробиваемости по дальности для эталонной пули
+
+DefaultStartSpeed=835	//дефолтная начальная скорость при стрельбе из простых пушек (наземка), из пушки L24 685 м/с
+MaxDistance=5000		//предельная дальность, дальше которой объект удалится
+Mass=2.06				//масса пули
+Mkr=0.8					//значение числа Маха, после которого начинается повышение Cx до момента M=1, зависит от формы тела но не от размера
+Mmax=2.0				//значение числа Маха, до которого завершается понижение Cx, начавшееся при M=1, зависит от формы тела но не от размера
+Cx_0=0.4				//значение к-та сопротивления при (M <= Mkr), зависит от формы тела но не от размера
+Cx_max=0.75				//значение к-та сопротивления при (M = 1), зависит от формы тела но не от размера
+Cx_1=0.59				//значение к-та сопротивления при (M >= Mmax), зависит от формы тела но не от размера
+R=0.025					//радиус пули
+LiveTime=16				//время жизни объекта
+TimeToDestroy=0			//время жизни объекта после попадания в скрытом состоянии (0 т.к. нет дымного трассера)
+TracertShowtime = 10	//время горения трассера
+MaxRedirections = 3		//максимальное кол-во рикошетов
+//InjectionDepth=1.0	//расстояние от момента входа в объект до удаления пули и рождение внутреннего взрыва (для кумулятивной струи)
+CavityDelay=0.0014		//то же, что и InjectionDepth, но определяемое задаваемым временем и скоростью при попадании (для каморного снаряда; рассчитываем 1м на 500м дистанции)
+MinInjectionDepth=0.2	//минимальное расстояние, которое должен пройти снаряд в колижене, что бы сработал внутренний взрыв. Иначе - на вылет и не взорвется (что бы заборы проходил насквозь).
+
+debug=false
+
+HitDummy="LuaScripts/WorldObjects/Explosions/CavityShells/HE_050mm_2kg_17g_internal.txt"	//Усиленный взрыв на случай подрыва внутри бронированного объема
+HitMisc="LuaScripts/WorldObjects/Explosions/CavityShells/HE_050mm_2kg_17g_object.txt"
+HitWater="LuaScripts/WorldObjects/Explosions/CavityShells/HE_050mm_2kg_17g_water.txt"
+HitGround="LuaScripts/WorldObjects/Explosions/CavityShells/HE_050mm_2kg_17g_ground.txt"
+HitArmor="LuaScripts/WorldObjects/Explosions/CavityShells/HE_050mm_2kg_17g_object.txt"
+HitBuilding="LuaScripts/WorldObjects/Explosions/CavityShells/HE_050mm_2kg_17g_building.txt"
+HitMetal="LuaScripts/WorldObjects/Explosions/CavityShells/HE_050mm_2kg_17g_object.txt"
+HitForest="LuaScripts/WorldObjects/Explosions/CavityShells/HE_050mm_2kg_17g_object.txt"
+
+HitDummyEffect=""
+HitMiscEffect="LuaScripts/WorldObjects/Explosions/CavityShells/hit_cv_misc.txt"
+HitWaterEffect="LuaScripts/WorldObjects/Explosions/CavityShells/hit_cv_water.txt"
+HitGroundEffect="LuaScripts/WorldObjects/Explosions/CavityShells/hit_cv_ground.txt"
+HitArmorEffect="LuaScripts/WorldObjects/Explosions/CavityShells/hit_cv_armour.txt"
+HitBuildingEffect="LuaScripts/WorldObjects/Explosions/CavityShells/hit_cv_building.txt"
+HitMetalEffect="LuaScripts/WorldObjects/Explosions/CavityShells/hit_cv_armour.txt"
+HitForestEffect="LuaScripts/WorldObjects/Explosions/CavityShells/hit_cv_building.txt"
+
+// блок для совместимости с турелью PC танка
+
+Gage=50					//калибр
+DefaultBulletSpeed = 835.0		//дефолтная начальная скорость при стрельбе из комплексной (авиационной) пушки неопределенной модели
+BulletSpeed = "KwK-39", 835.0	//начальная скорость при стрельбе из комплексной (авиационной) пушки
+
+shellType = 1
+//        SHELL_TYPE_CV = 1,// Бронебойный - CV - Armour Piercing with Cavity Bursting Charge
+//        SHELL_TYPE_AP = 2,// Бронебойный сплошной - AP - Armour Piercing Solid
+//        SHELL_TYPE_HV = 3,// Подкалиберный - HV - Armour Piercing Composite Rigid (High Velocity)
+//        SHELL_TYPE_HT = 4,// Кумулятивный - HT - Hight Explosive Anti Tank (HEAT)
+//        SHELL_TYPE_SH = 5,// Шрапнельный - SH - Shrapnel
+//        SHELL_TYPE_HE = 6,// Осколочный - HE - High Explosive and Fragmental
+//        SHELL_TYPE_SpHV = 7,// Подкалиберный катушечный - SpHV - Armour Piercing Spool-Shaped (Spool High Velocity)

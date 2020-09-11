@@ -1,0 +1,70 @@
+Class_name = "CBatchBallistics"
+object_name = "SHELL_GER_50_HE"
+
+//50мм "5 cm Sprgr. 38" к пушке KwK 39 L/60 осколочно-фугасный
+
+//////	PhysicsBody properties
+VisualImage=0,"graphics/ammo/ammoShellTypeA.mgm",false
+VisualRadius=5
+SizeArg=10
+SizeArgVal=0.050
+
+//CollisionBody="graphics/ammo/ammo.col"
+
+NoDirecion=true
+NoCollision=true
+
+// дальность, скорость на этой дальности (на 0м - указать на 5км/ч меньше расчетной), пары броня-урон за броней. Броню больше, чем в первой паре, не пробьет
+// за базовый взят урон на дальности 100м при нулевой броне, на макс. броне урон равне 0.25 от базового, на 0.8 макс. брони урон равен 0.5 от базового
+// урон при нулевой броне уменьшается с дальностью по соотношению квадрата скоростей
+// скорости по дальностям взяты из лога утилиты расчета .bin файлов пули (расчет таблиц наведения), на 10км/ч меньше ресчетной
+// т.к. если скорость окажется больше расчетной на данной дальности, то дамага не будет
+// базовый урон расчитан по соотношению кинетических энергий на дальности 100м между данной пулей и референсной пулей SHELL_GER_20x82_AP (=1000)
+
+Armor=0,550,	12,2839,	10,7096,	0,11354
+Armor=500,444,	9,1851,		7,4627,		0,7404 // опорная бронепробиваемость пересчитана по формуле де Марра из референсной бронепробиваемости SHELL_RUS_37x198_HE на близкой скорости
+Armor=1000,368,	7,1272,		6,3180,		0,5087
+Armor=3000,243,	4,553,		3,1384,		0,2214
+Armor=8000,111,	2,116,		1,289,		0,462
+
+// аэродинамические коэфициенты подобраны исходя из совпадения графика скорости по дальности для эталонной пули (37мм немецкий снаряд, немецкое описание боеприпасов 1936-1945)
+
+DefaultStartSpeed=550	//дефолтная начальная скорость при стрельбе из простых пушек (наземка), из пушки L24 451 м/с
+MaxDistance=8100		//предельная дальность, дальше которой объект удалится
+Mass=1.81				//масса пули
+Mkr=0.8					//значение числа Маха, после которого начинается повышение Cx до момента M=1, зависит от формы тела но не от размера
+Mmax=1.3				//значение числа Маха, до которого завершается понижение Cx, начавшееся при M=1, зависит от формы тела но не от размера
+Cx_0=0.28				//значение к-та сопротивления при (M <= Mkr), зависит от формы тела но не от размера
+Cx_max=0.44				//значение к-та сопротивления при (M = 1), зависит от формы тела но не от размера
+Cx_1=0.64				//значение к-та сопротивления при (M >= Mmax), зависит от формы тела но не от размера
+R=0.025					//радиус пули
+LiveTime=60				//время жизни объекта
+TimeToDestroy=0			//время жизни объекта после попадания в скрытом состоянии (0 т.к. нет дымного трассера)
+TracertShowtime = 60	//время горения трассера
+MaxRedirections = 0		//максимальное кол-во рикошетов
+
+debug=false
+
+HitDummy="LuaScripts/WorldObjects/Explosions/Shells/HE_050mm_2kg_175g_object.txt"
+HitMisc="LuaScripts/WorldObjects/Explosions/Shells/HE_050mm_2kg_175g_object.txt"
+HitWater="LuaScripts/WorldObjects/Explosions/Shells/HE_050mm_2kg_175g_water.txt"
+HitGround="LuaScripts/WorldObjects/Explosions/Shells/HE_050mm_2kg_175g_ground.txt"
+HitArmor="LuaScripts/WorldObjects/Explosions/Shells/HE_050mm_2kg_175g_object.txt"
+HitBuilding="LuaScripts/WorldObjects/Explosions/Shells/HE_050mm_2kg_175g_building.txt"
+HitMetal="LuaScripts/WorldObjects/Explosions/Shells/HE_050mm_2kg_175g_object.txt"
+HitForest="LuaScripts/WorldObjects/Explosions/Shells/HE_050mm_2kg_175g_object.txt"
+
+// блок для совместимости с турелью PC танка
+
+Gage=50					//калибр
+DefaultBulletSpeed = 550.0		//дефолтная начальная скорость при стрельбе из комплексной (авиационной) пушки неопределенной модели
+BulletSpeed = "KwK-39", 550.0	//начальная скорость при стрельбе из комплексной (авиационной) пушки
+
+shellType = 6
+//        SHELL_TYPE_CV = 1,// Бронебойный - CV - Armour Piercing with Cavity Bursting Charge
+//        SHELL_TYPE_AP = 2,// Бронебойный сплошной - AP - Armour Piercing Solid
+//        SHELL_TYPE_HV = 3,// Подкалиберный - HV - Armour Piercing Composite Rigid (High Velocity)
+//        SHELL_TYPE_HT = 4,// Кумулятивный - HT - Hight Explosive Anti Tank (HEAT)
+//        SHELL_TYPE_SH = 5,// Шрапнельный - SH - Shrapnel
+//        SHELL_TYPE_HE = 6,// Осколочный - HE - High Explosive and Fragmental
+//        SHELL_TYPE_SpHV = 7,// Подкалиберный катушечный - SpHV - Armour Piercing Spool-Shaped (Spool High Velocity)

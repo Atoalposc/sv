@@ -1,0 +1,61 @@
+Class_name = "CVehicleTurret"
+object_name = "VehicleTurret"
+// Џулемет Spandau MG 08
+//SoundScript="LuaScripts\Sound\Vehicles\MG-34_AA.cfg"
+
+[attach=0]
+	position= 0.0, 0.0, 0
+	object = "LuaScripts/WorldObjects/Bots/BotGunnerMachineGun.txt"
+[end]
+
+PitchPoint = 0.028, -0.04, 0
+
+AngleYawMin      = -180.0
+AngleYawMax      = 180.0
+AnglePitchMin    = -10.0
+AnglePitchMax    = 55.0
+AnglePitchDef    = 0.1
+YawArgNum        = 221
+PitchArgNum      = 241
+YawArgMin        = 0.0
+YawArgMax        = 1.0
+PitchArgMin      = 0.0
+PitchArgMax      = 1.0
+
+YawAngularSpeed    = 35.0
+PitchAngularSpeed  = 30.0
+
+FireArgumentNum  = 64200
+AttackAnimationArgNum = 61
+NumOfAnimations = 4
+
+FireAnimationTime    = 0.1
+AttackAnimationTime  = 0.1
+
+MuzzleDisplacement = 0.8, 0, 0
+
+AttackDistance = 1500.0		//AI max aim distance versus ground point
+AttackDistanceTrgGnd = 700.0		//AI max aim distance versus ground target
+AttackDistanceTrgAir = 1500.0		//AI max aim distance versus air target
+
+[bullet=1]
+	BulletScript    = "LuaScripts/WorldObjects/Ballistics/AmmunitionForNPC/NPC_BULLET_GER_7-92_AP.txt"
+	TargetingScript = "LuaScripts/WorldObjects/Ballistics/AmmunitionForNPC/NPC_BULLET_GER_7-92_AP.bin"
+	ExplosionScript = ""
+	BulletsCount = 4000
+	StartBulletSpeed = 900.0
+	RealPhysicBullet = true
+[end]
+
+VisibleTraceNum = 4
+
+NumBulletsInQueue = 40
+QueueRechargeTime   = 1.0
+BulletRechargeTime  = 0.12
+FireDispAngle = 0.2 //градусы
+FireDispSpeed = 15.1 // м/с
+
+NeedFuse = false
+
+IsSoundLooped = true
+SoundNumber = 5

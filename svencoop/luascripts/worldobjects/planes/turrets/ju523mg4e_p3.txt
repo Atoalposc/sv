@@ -1,0 +1,15 @@
+Class_name = "CEjectionPlace"
+object_name = "Ju523mg4e_P3"
+
+[attach=0]
+	position= 0,0,0
+	object = "LuaScripts/WorldObjects/Bots/BotPilotNPC2_Ju52_GER41.txt"
+[end]
+
+CollisionBody="graphics/planes/Trash/dummy.col"	// палка для того, что бы child персонаж попадал в проверку колижена с пулями
+
+[Entrance]
+	EntrancePos= -5.1, -0.74, -0.8
+	EntranceRot= 0, 270, 0
+	JumpDir=0, 1, -5
+[end]

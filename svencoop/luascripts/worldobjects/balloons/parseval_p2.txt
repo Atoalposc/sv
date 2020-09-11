@@ -1,0 +1,15 @@
+Class_name = "CEjectionPlace"
+object_name = "Parseval_P2"
+
+[attach=0]
+	position= 0.0,0.0,0.0
+	object = "LuaScripts/WorldObjects/Bots/BotPilotBalloonNPC_RAF17.txt"
+[end]
+
+CollisionBody="graphics/planes/Trash/dummy.col"	// палка для того, что бы child персонаж попадал в проверку колижена с пулями
+
+[Entrance]
+	EntrancePos= 0.0,0.0,0.0
+	EntranceRot= 0, 0, 0
+	JumpDir=4, 1, 0
+[end]

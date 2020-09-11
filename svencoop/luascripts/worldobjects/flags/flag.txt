@@ -1,0 +1,19 @@
+class_name = "CFlag"
+object_name = "Flag"
+detail_type = "DET_BUILDING" //list of types is in \inc\SimulationSystem\DetailTypes.inc
+
+//////	PhysicsBody properties
+VisualImage=0,"graphics/Flag/flag.mgm",1
+CollisionBody="graphics/Flag/flag.col"
+
+network=true
+
+////// Flag properties
+argNaturalOsc = 0
+argTexture = 1
+argRotation = 2
+argHeight = 3
+argElevation = 4
+argRollOsc = 5
+podHeight = 5.8
+flagStaffHeight = 20.7

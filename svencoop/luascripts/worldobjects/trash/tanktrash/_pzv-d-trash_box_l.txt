@@ -1,0 +1,15 @@
+Class_name = "CSolidTrash"
+
+VisualImage=0,"graphics\Vehicles\_PzV-D\_PzV-D-trash_box_L.MGM",true
+CollisionBody="graphics\Vehicles\_PzV-D\_PzV-D-trash_box_L.col"
+
+Friction=0.8
+Mass=10
+//MaxDeep=0.1
+TLimit=0
+Ik=3.0
+DynamicCOG=true
+
+//Spin=false
+ImageArg=1029
+ImagePhase=0.85

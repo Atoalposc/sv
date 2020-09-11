@@ -1,0 +1,11 @@
+Class_name = "CBot"
+object_name = "BotGunner"
+
+SoundScript=""
+
+Controller="LuaScripts/WorldObjects/Bots/VehicleTorpedoTurretAI.txt"
+
+//логирование повреждений
+logtreshold=0.0001
+
+SendRate=999999999,999999999	//normal, attached state

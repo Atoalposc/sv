@@ -1,0 +1,131 @@
+class_name = "CTrainWagon"
+object_name = "Wagon_Pass"
+detail_type = "DET_WAGON" //list of types is in \inc\SimulationSystem\DetailTypes.inc
+
+
+//////	PhysicsBody properties
+//VisualImage = <int TYPE>,<string File_PathName>,<bool cast_shadows>
+
+VisualImage=0,"graphics/trains/Wagons/Pass.mgm",true
+
+CollisionBody="graphics/trains/Wagons/Pass.col"
+
+SoundScript="LuaScripts/Sound/Vehicles/Car_Tan.cfg"
+
+TargetHeight = 2.8			// Дельта по высоте к центру модели используемая при прицеливании и оценке видимости
+
+AttachedCameras = "LuaScripts\WorldObjects\fixcameras\TrainCarriageCameras.txt"
+
+CommandMonitor="LuaScripts/WorldObjects/LandObjectMonitor.txt"
+
+//////	Controled body specific
+
+sendrate = 7						// Делитель базовой частоты 50Гц отправки позиции в сеть (=7 значит что частота 7.1Гц)
+
+Cdrag = 20.0						// Коэфициент сопротивления воздушной среды, пропорциональный квадрату скорости движения
+Crr = 500.0							// Коэфициент сопротивления движению, пропорционального скорости движения
+Csf = 0.17							// Коэфициент сухого трения об поверхность, пропорционален массе, поидее зависит только от типа ходовой части (колеса или гусеницы)
+Cang = 30.0							// Коэфициент демфирования угловых скоростей
+CrrExt = 7000.0						// Коэфициент сопротивления воздушной среды, пропорциональный скорости движения
+CBraking = 4000.0					// Коэфициент эффективности тормозов
+Mass = 15000.0						// Полная масса вагона
+WheelRadius = 0.5					// Радиус колеса
+LengthBetweenCenterAndBack  = 2.75	// Растояние от центра модели до оси задних колес
+LengthBetweenCenterAndFront = 2.75	// Растояние от центра модели до оси задних колес
+LengthBetweenWheels = 1.49			// Колея (габарит по внешним сторонам колес)
+OrientSmoothParam = 0.01			// Сглаживание угловых вращений на резких вертикальных перегибах/обрывах
+
+LengthBack = 5.31					// Растояние от центра модели до места задней сцепки
+LengthFront = 5.31					// Растояние от центра модели до места передней сцепки
+
+// Damage model
+
+energyloss="",true,1.0,1000		// Потеря энергии пули при попадании, true - проверка на входе и выходе в колижн-бокс, первое эквивалентная броня на входе и выходе, второе джоулей на каждый метр пути внутри колижена
+
+RegenerationMax = 1.0		// До какого Life само-чиниться танк
+RegenerationMin = 0.5		// Минимальное значение Life, ниже которого починки не будет
+RegenerationPercent = 0.0	// Скорость восстановления, долей Life в секунду
+
+Firing=0.002				// Скорость сгорания боекомплекта от пожара, долей Life в секунду
+SmokeStartHealth = 0.5		// Лайф двигателя, при котором начнется дым из двигателя
+MinFiringHealth = 0.5		// Лайф боекомплекта, при котором начнется пожар
+MinMovementHealth = 0.25	// Лайф двигателя, при котором перестанет ездить
+MinAttackHealth = 0.10		// Лайф объекта, при котором перестанет стрелять
+
+FireEffectTime = 100.0		// Сколько будет гореть по времени после взрыва
+DestructArg = 281			// Аргумент дамага
+SmokeArgBase = 60000		// Аргумент малого пожара
+SmokeArgTotalNum = 1		// Кол-во вариантов пожара, 1-й вариант будет по хуку 60000, второй по 60001, третий по 60002 и т.д.
+FiringArg = 60100			// Аргумент большого пожара
+
+
+ExplosionScript = "LuaScripts/WorldObjects/explosions/Detonation/VehicleNoDmg.txt"	// Эффект при полном взрыве
+OnDropLandScript = "LuaScripts/WorldObjects/Emitters/DustBlow5_3.txt"			// Эффект при падении на землю
+OnDropWaterScript = "LuaScripts/WorldObjects/Emitters/WaterSpray5_3.txt"		// Эффект при падении на воду
+
+CriticalWaterLevel = 1.0		// Гулбже начнет умирать
+CriticalHeigthLevel = 4.0		// При падении с большей высоты умрет
+DivingSpeed = 0.3				// Скорость погружения в воду
+ImpulseToDestroy = 200000		// Определяет силу удара обеъкта об танк, нужную для его уничтожения
+ImpulseMinimumLevel = 40000		// Определяет минимальную силу удара об танк, нужную для его повреждения (видимо)
+
+logtreshold=0.0001				// Минимальный шаг дамага, записываемый в лог миссии
+
+[moveDeviator]
+  HiFreqAmp = 0.1f
+  MaxDeviation = 1.0f
+  Periods = 2.1, 0.4;
+[end]
+accelDirK = 0.3
+accelDirSmooth = 0.15
+accelSideK = 0.3
+accelSideSmooth = 0.15
+
+[CrewEscape]
+	EscapeHealth=0.75f
+	EscapeAtLeast=5
+	DistanceToRun=50.0f
+	EscapePos=4,0,2
+
+	EscapeVisArg=1000
+	UseCountry=true
+	Bot="LuaScripts\WorldObjects\Bots\BotField_SoldierRUhat.txt",101
+	Bot="LuaScripts\WorldObjects\Bots\BotField_SoldierRUhat.txt",101
+	Bot="LuaScripts\WorldObjects\Bots\BotField_SoldierRU.txt",101
+	Bot="LuaScripts\WorldObjects\Bots\BotField_SoldierRU.txt",101
+	Bot="LuaScripts\WorldObjects\Bots\BotField_SoldierRU.txt",101
+	Bot="LuaScripts\WorldObjects\Bots\BotField_SoldierRUhat.txt",101
+	Bot="LuaScripts\WorldObjects\Bots\BotField_SoldierRU.txt",101
+	Bot="LuaScripts\WorldObjects\Bots\BotField_SoldierRUhat.txt",101
+	
+	Bot="LuaScripts\WorldObjects\Bots\BotField_SoldierGERhat.txt",201
+	Bot="LuaScripts\WorldObjects\Bots\BotField_SoldierGERhat.txt",201
+	Bot="LuaScripts\WorldObjects\Bots\BotField_SoldierGER.txt",201
+	Bot="LuaScripts\WorldObjects\Bots\BotField_SoldierGER.txt",201
+	Bot="LuaScripts\WorldObjects\Bots\BotField_SoldierGER.txt",201
+	Bot="LuaScripts\WorldObjects\Bots\BotField_SoldierGERhat.txt",201
+	Bot="LuaScripts\WorldObjects\Bots\BotField_SoldierGER.txt",201
+	Bot="LuaScripts\WorldObjects\Bots\BotField_SoldierGERhat.txt",201
+[end]
+
+Armor=0					// Толщина брони, общий параметр, нужен для других ИИ для определения типа снаряда
+
+// Модель повреждения. Исходный убалансированный лайф объекта до введения простой модели 30000.
+
+[DmgElement = ammo]
+	damageablePart="cargo"
+	LifeRate=20000
+	LifeRateFrag=20000
+	Armor=0
+	CollisioDamageSens=1
+[End]
+
+[DmgElement = engine]
+	damageablePart="body"
+	LifeRate=40000
+	LifeRateFrag=40000
+	Armor=0
+	CollisioDamageSens=1
+[End]
+
+DebugInfo = false				// Позволяет выводить скорость танка и значение оси газа для настройки двигателя

@@ -1,0 +1,5 @@
+Class_name = "CAerostatMonitor"
+object_name = ""
+
+
+

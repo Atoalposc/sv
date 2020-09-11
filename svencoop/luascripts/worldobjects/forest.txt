@@ -1,0 +1,12 @@
+Class_name = "CForestBody"
+object_name = "Forest"
+
+CollisionBody="graphics/LANDSCAPE/tree.col"
+
+energyloss="",true,0.1,3000		// Потеря энергии пули при попадании, первое эквивалентная броня на входе и выходе, второе джоулей на каждый метр пути внутри колижена. Снайперская 7.62 пуля пробивает 36 25мм досок со 100м.
+GradientPower=0.15
+
+BatchTrash="LuaScripts\WorldObjects\Trash\ForestTrash.txt"
+SoundBatchTrash="LuaScripts\WorldObjects\Trash\ForestTrashSound.txt"
+
+SoundBatchBreak="LuaScripts\WorldObjects\Trash\ForestBreakSound.txt"

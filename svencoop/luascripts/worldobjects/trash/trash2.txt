@@ -1,0 +1,10 @@
+Class_name = "CTrashAnimated"
+object_name = "trash"
+
+//////	PhysicsBody properties
+VisualImage=0,"graphics\effects\Arm\bulletPlane.mgm",false
+
+Animation=63760
+LiveTime=1
+AnimationTime=0.5
+Ranges=1,0.01,0.9

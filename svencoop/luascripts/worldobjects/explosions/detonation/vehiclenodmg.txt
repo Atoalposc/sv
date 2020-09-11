@@ -1,0 +1,17 @@
+Class_name = "CBatchExplosion"
+object_name = "Explosion"
+
+//////	PhysicsBody properties
+VisualImage=0,"graphics\effects\Surf\explSurfTech.epl",false
+VisualRadius=24
+ImageAttr=24		//IA_NOCLIP | IA_NOMINPIXELS
+
+SoundScript="LuaScripts\Sound\explosions\Bomb\Ground_Med.cfg"
+
+ExplosionPower=0.4
+Animation=1
+LiveTime=12.08
+AnimationTime=12.08
+Ranges=1, 0.01, 1.0, 0.0
+
+//NoExplosionDamageOccured

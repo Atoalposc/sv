@@ -1,0 +1,9 @@
+Class_name = "CPlaneAI"
+object_name = "Plane controller AI"
+
+
+//////	Controller specific
+Artificial=true;
+
+ControlledType="GOT_PLANE";
+

@@ -1,0 +1,12 @@
+Class_name = "CBlocksArray"
+
+object="OT_GROUND"
+
+//StaticEmitter=5,"luascripts\worldobjects\emitters\BridgeDust5.txt"
+//StaticEmitter=10,"luascripts\worldobjects\emitters\BridgeDust10.txt"
+//StaticEmitter=20,"luascripts\worldobjects\emitters\BridgeDust20.txt"
+//StaticEmitter=40,"luascripts\worldobjects\emitters\BridgeDust40.txt"
+//CrashDelay=1.5
+//Shield=20
+energyloss="",true,20,300		// Потеря энергии пули при попадании, первое эквивалентная броня на входе и выходе, второе джоулей на каждый метр пути внутри колижена
+energyloss="#",true,1,1000		// Потеря энергии пули при попадании в блок с низкой прочностью (колижн помечен символом #)

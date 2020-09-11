@@ -1,0 +1,58 @@
+Class_name = "CVehicleTurret"
+object_name = "HowitzerTurret"
+// Гаубица пушка sFH13
+//SoundScript="LuaScripts\Sound\Vehicles\CannonAA_Shot_Large.cfg"
+
+[attach=0]
+	position= 0.0, 0.0, 0
+	object = "LuaScripts\WorldObjects\Bots\BotGunnerHowitzPhys.txt"
+[end]
+
+PitchPoint = 0.006, 1.079, 0.0
+
+AngleYawMin      = -180.0
+AngleYawMax      = 180.0
+AnglePitchMin    = -5.0
+AnglePitchMax    = 29.5
+AnglePitchDef    = 30
+YawArgNum        = 221
+PitchArgNum      = 241
+YawArgMin        = 0.0
+YawArgMax        = 1.0
+PitchArgMin      = 0.0
+PitchArgMax      = 0.8
+
+YawAngularSpeed    = 3.0
+PitchAngularSpeed  = 15.0
+
+FireArgumentNum  = 64100
+AttackAnimationArgNum = 61
+
+FireAnimationTime    = 0.6
+AttackAnimationTime  = 0.6
+
+MuzzleDisplacement = 2.1, 0, 0
+
+AttackDistance   = 8500.0
+AttackDistanceTrgGnd = 1500.0
+AttackDistanceTrgAir = 1.0
+
+[bullet=1]
+	BulletScript    = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_GER_150_HE.txt"
+	TargetingScript = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_GER_150_HE.bin"
+	ExplosionScript = ""
+	BulletsCount = 60
+	StartBulletSpeed = 377.0
+	RealPhysicBullet = true
+	PriorityArmorMin = 0.0
+	PriorityArmorMax = 1000.0
+[end]
+
+NumBulletsInQueue = 1
+QueueRechargeTime   = 15.0
+BulletRechargeTime  = 0.1
+
+NeedFuse = false
+
+IsSoundLooped = false
+SoundNumber = 1

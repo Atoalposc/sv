@@ -1,0 +1,5 @@
+Class_name = "CSpotter"
+object_name = "Spotter"
+
+UpdatePeriod = 1.0  	// период апдейта споттера(cек)
+Range = 25000.0		// рабочий диапазон(радиус, м)

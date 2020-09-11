@@ -1,0 +1,57 @@
+Class_name = "CVehicleTurret"
+object_name = "VehicleTurret"
+// Зенитная пушка 34-К
+//SoundScript="LuaScripts\Sound\Vehicles\CannonAA_Shot_Med.cfg"
+
+[attach=0]
+	position= 0.0, 0.0, 0
+	object = "LuaScripts/WorldObjects/Bots/BotGunnerAntiAirFlak.txt"
+[end]
+
+PitchPoint = -0.06, 1.646, 0.0
+
+AngleYawMin      = -160.0
+AngleYawMax      = 160.0
+AnglePitchMin    = -5.0
+AnglePitchMax    = 80.0
+AnglePitchDef    = 60
+YawArgNum        = 221
+PitchArgNum      = 241
+YawArgMin        = 0.055556
+YawArgMax        = 0.944444
+PitchArgMin      = 0.0
+PitchArgMax      = 1.0
+
+YawAngularSpeed    = 25.0
+PitchAngularSpeed  = 4.2
+
+FireArgumentNum  = 64100
+AttackAnimationArgNum = 61
+
+FireAnimationTime    = 0.6
+AttackAnimationTime  = 0.6
+
+MuzzleDisplacement = 3.3, 0, 0
+AttackDistance   = 8200.0
+AttackDistanceTrgGnd = 5000.0
+AttackDistanceTrgAir = 7800.0
+
+[bullet=1]
+	BulletScript    = "LuaScripts/WorldObjects/Ballistics/AmmunitionForNPC/NPC_SHELL_RUS_76_naval_HE.txt"
+	TargetingScript = "LuaScripts/WorldObjects/Ballistics/AmmunitionForNPC/NPC_SHELL_RUS_76_naval_HE.bin"
+	ExplosionScript = ""
+	BulletsCount = 500
+	StartBulletSpeed = 813.0
+	RealPhysicBullet = true
+	PriorityArmorMin = 0.0
+	PriorityArmorMax = 1000.0
+[end]
+
+VisibleTraceNum = 1
+
+NumBulletsInQueue = 20
+QueueRechargeTime   = 10.0
+BulletRechargeTime  = 3.0
+
+NeedFuse = true
+minInputFuse = 1.3

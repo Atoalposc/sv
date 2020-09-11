@@ -1,0 +1,16 @@
+Class_name = "CBotHead"
+object_name = "Common Bot's head"
+
+//////	PhysicsBody properties
+VisualImage=1,"graphics/characters/PilotCircus/handCircusGer.MGM",false
+
+SendRate=10,10000	//normal, attached state
+
+// VisualRadius = 1.0
+
+Animator="graphics/characters/PilotCircus/handCircusGer.chr"
+GunVisArg=30
+GunZAxisArg=20
+GunYAxisArg=21
+
+debug=false

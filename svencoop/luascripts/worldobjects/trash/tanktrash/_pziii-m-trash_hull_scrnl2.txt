@@ -1,0 +1,15 @@
+Class_name = "CSolidTrash"
+
+VisualImage=0,"graphics\Vehicles\_PzIII-M\_PzIII-M-trash_hull_scrnL2.MGM",true
+CollisionBody="graphics\Vehicles\_PzIII-M\_PzIII-M-trash_hull_scrnL2.col"
+
+Friction=0.8
+Mass=50
+//MaxDeep=0.1
+TLimit=0
+Ik=3.0
+DynamicCOG=true
+
+//Spin=false
+ImageArg=1012
+ImagePhase=0.85

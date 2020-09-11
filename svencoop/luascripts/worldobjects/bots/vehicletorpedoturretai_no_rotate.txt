@@ -1,0 +1,46 @@
+Class_name = "CVehicleTorpedoTurretAI"
+object_name = "VehicleTorpedoTurret"
+
+//////	Controller specific
+Artificial=true;
+
+ControlledType="GOT_VEHICLE_TURRET";
+
+AirPriority   = 0.0
+LandPriority  = 1.0
+MaxSearchTime = 60.0
+GroundAttackTime = 120.0
+RealPhysicBulletWeapon = false
+HasFuse = false
+
+DefaultMediumPriorityCriteria = 0.5
+DefaultLowPriorityCriteria = 0.85
+DangerDistance = 6000
+
+StopVehicleWhenPointing = false
+PointingWhenRecharge = true
+CanFreeSearchTargets = true
+SubmergedAiming=true
+
+ArtilleryFire = false
+
+MaxVehicleSpeedToAttack = 0.4
+
+//Priority for Targeting
+//                     HI MEDIUM LOW
+
+AirTargetMaxError =   2.0f, 8.0f, 32.0f
+MaxAirTargetDisp  =   1.25f
+
+LandTargetMaxError =   2.0f, 4.0f, 8.0f
+MaxLandTargetDisp  =   1.25f
+
+targetingDistance = 5000.0f
+targetingError = 120.0f
+
+SearchErrorTime = 12.0f
+
+minTaretMass = 200000
+
+// Max Error - max error distance in metres
+// on distance 1000

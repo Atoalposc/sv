@@ -1,0 +1,68 @@
+Class_name = "CVehicleTurret"
+object_name = "VehicleTurret"
+// Зенитная пушка M16
+//SoundScript="LuaScripts/Sound/Vehicles/CannonAA_Flak38X4.cfg"
+
+[attach=0]
+	position= 0.0, 0.0, 0
+	object = "LuaScripts/WorldObjects/Bots/BotGunnerMachineGun.txt"
+[end]
+
+PitchPoint = -0.004, 1.46, 0
+
+AngleYawMin      = -180.0
+AngleYawMax      = 180.0
+AnglePitchMin    = -9.3
+AnglePitchMax    = 90.7
+AnglePitchDef    = 30
+YawArgNum        = 221
+PitchArgNum      = 241
+YawArgMin        = 0.0
+YawArgMax        = 1.0
+PitchArgMin      = 0.0
+PitchArgMax      = 1.0
+
+YawAngularSpeed    = 18.0
+PitchAngularSpeed  = 18.0
+
+SiegeArgNum = 101
+SiegeTime = 5
+MaxVehicleSpeedToAttack = 0.3
+StopVehicleWhenPointing = true
+
+FireArgumentNum  = 64200
+AttackAnimationArgNum = 61
+NumOfAnimations = 4
+
+FireAnimationTime    = 0.1091
+AttackAnimationTime  = 0.1091
+
+MuzzleDisplacement = 2.358, 0.129, 0.479	//Смещено вперед на 1.0м
+MuzzleDisplacement = 2.036, -0.145, 0.602
+MuzzleDisplacement = 2.036, -0.145, -0.602
+MuzzleDisplacement = 2.358, 0.129, -0.477
+
+AttackDistance = 1500.0		//AI max aim distance versus ground point
+AttackDistanceTrgGnd = 900.0		//AI max aim distance versus ground target
+AttackDistanceTrgAir = 1500.0		//AI max aim distance versus air target
+
+[bullet=1]
+	BulletScript    = "LuaScripts/WorldObjects/Ballistics/Projectiles/BULLET_USA_12-7x99_AP.txt"
+	TargetingScript = "LuaScripts/WorldObjects/Ballistics/Projectiles/BULLET_USA_12-7x99_AP_895ms.bin"
+	ExplosionScript = ""
+	BulletsCount = 16000
+	StartBulletSpeed = 895.0
+	RealPhysicBullet = true
+[end]
+
+VisibleTraceNum = 5
+
+NumBulletsInQueue = 40
+QueueRechargeTime   = 1.0
+BulletRechargeTime  = 0.027275
+FireDispAngle = 0.2 //градусы
+FireDispSpeed = 15.1 // м/с
+
+NeedFuse = false
+
+IsSoundLooped = true

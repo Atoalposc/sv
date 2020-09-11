@@ -1,0 +1,65 @@
+Class_name = "CBatchBallistics"
+object_name = "CLUSTER_RUS_PTAB2515_HIT"
+
+//Попадание кумулятивной струи авиабомбы ПТАБ-2.5/1.5
+
+//////	PhysicsBody properties
+//VisualImage=0,"graphics/ammo/ammoYmgSmk.mgm",false
+//visualradius=4
+SoundScript=""
+//ImageAttr=21	//IA_NOMINPIXELS | IA_NOINTERPOLATION
+
+//CollisionBody="graphics/ammo/ammo.col"
+
+NoDirecion=true
+NoCollision=true
+
+// дальность, скорость на этой дальности (на 0м - указать на 5км/ч меньше расчетной), пары броня-урон за броней. Броню больше, чем в первой паре, не пробьет
+// за базовый взят урон на дальности 100м при нулевой броне, на макс. броне урон равне 0.25 от базового, на 0.8 макс. брони урон равен 0.5 от базового
+// урон при нулевой броне уменьшается с дальностью по соотношению квадрата скоростей
+// скорости по дальностям взяты из лога утилиты расчета .bin файлов пули (расчет таблиц наведения), на 10км/ч меньше ресчетной
+// т.к. если скорость окажется больше расчетной на данной дальности, то дамага не будет
+// базовый урон расчитан по соотношению кинетических энергий на дальности 100м между данной пулей и референсной пулей SHELL_GER_20x82_AP (=1000)
+
+Armor=0,0,		60,10000,	48,25000,	0,40000
+
+// аэродинамические коэфициенты подобраны исходя из совпадения графика скорости по дальности для эталонной пули (15мм немецкий снаряд, немецкое описание боеприпасов 1936-1945)
+
+Gage=25					//калибр
+DefaultStartSpeed=2000	//дефолтная начальная скорость при стрельбе из простых пушек (наземка)
+MaxDistance=200			//предельная дальность, дальше которой объект удалится
+Mass=1.5				//масса пули
+Mkr=0.97				//значение числа Маха, после которого начинается повышение Cx до момента M=1, зависит от формы тела но не от размера
+Mmax=1.5				//значение числа Маха, до которого завершается понижение Cx, начавшееся при M=1, зависит от формы тела но не от размера
+Cx_0=0.01				//значение к-та сопротивления при (M <= Mkr), зависит от формы тела но не от размера
+Cx_max=0.01				//значение к-та сопротивления при (M = 1), зависит от формы тела но не от размера
+Cx_1=0.01				//значение к-та сопротивления при (M >= Mmax), зависит от формы тела но не от размера
+R=0.066					//радиус пули
+LiveTime=0.5			//время жизни объекта
+TimeToDestroy=0			//время жизни объекта после попадания в скрытом состоянии, что бы трейл трассера не пропадал пока не расствориться
+TracertShowtime = 0.01	//время горения трассера
+MaxRedirections = 0		//максимальное кол-во рикошетов
+InjectionDepth=1.2		//расстояние от момента входа в объект до удаления пули и рождение внутреннего взрыва (для кумулятивной струи)
+//CavityDelay=0.0013	//то же, что и InjectionDepth, но определяемое задаваемым временем и скоростью при попадании (для каморного снаряда; рассчитываем 1м на 500м дистанции, для Тигра, Фердинанд - как получится)
+MinInjectionDepth=0.0	//минимальное расстояние, которое должен пройти снаряд в колижене, что бы сработал внутренний взрыв. Иначе - на вылет и не взорвется (что бы заборы проходил насквозь).
+
+debug=false
+
+HitDummy="LuaScripts/WorldObjects/Explosions/HEATShells/HE_066mm_1kg_620g_object.txt"	//Взрыв внутри без отличий от взрыва снаружи
+HitMisc="LuaScripts/WorldObjects/Explosions/HEATShells/HE_066mm_1kg_620g_object.txt"
+HitWater="LuaScripts/WorldObjects/Explosions/HEATShells/HE_066mm_1kg_620g_water.txt"
+HitGround="LuaScripts/WorldObjects/Explosions/HEATShells/HE_066mm_1kg_620g_ground.txt"
+HitArmor="LuaScripts/WorldObjects/Explosions/HEATShells/HE_066mm_1kg_620g_object.txt"
+HitBuilding="LuaScripts/WorldObjects/Explosions/HEATShells/HE_066mm_1kg_620g_building.txt"
+HitMetal="LuaScripts/WorldObjects/Explosions/HEATShells/HE_066mm_1kg_620g_object.txt"
+HitForest="LuaScripts/WorldObjects/Explosions/HEATShells/HE_066mm_1kg_620g_object.txt"
+HitMetalEffect="LuaScripts/WorldObjects/Explosions/Effects/hit_ap_37-50mm_wood.txt"
+
+HitDummyEffect=""
+HitMiscEffect="LuaScripts/WorldObjects/Explosions/CavityShells/hit_cv_misc.txt"
+HitWaterEffect="LuaScripts/WorldObjects/Explosions/CavityShells/hit_cv_water.txt"
+HitGroundEffect="LuaScripts/WorldObjects/Explosions/CavityShells/hit_cv_ground.txt"
+HitArmorEffect="LuaScripts/WorldObjects/Explosions/CavityShells/hit_cv_armour.txt"
+HitBuildingEffect="LuaScripts/WorldObjects/Explosions/CavityShells/hit_cv_building.txt"
+HitMetalEffect="LuaScripts/WorldObjects/Explosions/CavityShells/hit_cv_armour.txt"
+HitForestEffect="LuaScripts/WorldObjects/Explosions/CavityShells/hit_cv_building.txt"

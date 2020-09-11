@@ -1,0 +1,72 @@
+
+Name = "M4"
+
+Gage = 37 // [мм]
+
+Mass = 0.001 // [кг]
+MassPosition_inGunAxis = -2.386, 0.0, 0.0 // рассчитанная по фото длина пушки составляет 3767мм
+MOI_inGunAxis = 0.025, 0.985, 0.995, 0.050, 0.000, 0.000 // [кг*кв.м]
+
+SnappingTime = 0.01
+AutoCockingTime = 0.39
+
+ShotAnimationPeriod = 0.4 // SnappingTime + AutoCockingTime
+
+// паспортная скорострельность: RapidityOfFire = 60 / (SnappingTime + AutoCockingTime) = 150 выстрелов в минуту
+
+MainManuallyCockingTime = 2.0
+ReserveManuallyCockingTime = 1.5
+
+ShotRate = 0 // количество выстрелов в одной очереди не ограничено
+
+FireUnLockedSafetyLockPosition = 0.0
+FireLockedSafetyLockPosition = 1.0
+
+FireLockedMaxTriggerPosition = 0.0
+FireTriggerPosition = 0.5
+
+FiringPinPositionKeysDuringMainManuallyCocking = 0.0, 1.0
+FiringPinPositionKeysDuringReserveManuallyCocking = 0.0, 1.0
+FiringPinPositionKeysDuringAutoCocking = 0.0, 1.0
+
+AmmunitionMovingKeysDuringMainManuallyCocking = 0.75, 0.85
+AmmunitionMovingKeysDuringReserveManuallyCocking = 0.75, 0.85
+AmmunitionMovingKeysDuringAutoCocking = 0.0, 1.0
+
+CartridgeCaseReleaseDuringMainManuallyCocking = 0.8
+CartridgeCaseReleaseDuringReserveManuallyCocking = 0.8
+cartridgeCaseReleaseDuringAutoCocking = 0.8
+
+BarrelTemperatureIncreasePerShot = 26.4
+BarrelTemperatureDecreaseCoefficient = 0.045
+
+BulletDispertionAngleData = 0.0, 0.6, 700.0, 3.5 //разброс зафиксированной пушки при 0К нулевой, разброс перегретой 0.6°
+BulletSpeedReducingData = 0.01, 700.0, 0.25, 0.05, 3.5
+BulletMisfireData= 0.0, 0.02, 700.0, 6.0
+
+CartridgeCasesEjectionPosition = -3.05, -0.115, 0.0
+CartridgeCasesEjectionSpeed = 0.0, -2.0, 0.0
+
+[DrawAnimation=0] // поворот рычага ручного взведения
+	SmoothAsPeriodic = true
+	[GunMode=MainManuallyCocking]
+		Point = 0.0, 0.0
+		Point = 0.25, 0.25
+		Point = 0.45, 0.25
+		Point = 0.5, 0.5
+		Point = 0.75, 0.75
+		Point = 0.95, 0.75
+		Point = 0.999, 1.0
+		Point = 1.0, 0.0
+	[end]
+[end]
+
+[DrawAnimation=1] // анимация отката ствола
+
+	[GunMode=AutoCocking]
+		Point = 0.0, 0.0
+		Point = 0.2, 1.0
+		Point = 0.3, 1.0
+		Point = 1.0, 0.0
+	[end]
+[end]

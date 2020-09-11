@@ -1,0 +1,65 @@
+class_name = "CAerostat"
+object_name = "Caquot"
+
+//////	PhysicsBody properties
+VisualImage=0,"graphics/Balloons/Caquot/Caquot.mgm",1
+
+CollisionBody="graphics/Balloons/Caquot/Caquot.col"
+
+CommandMonitor="LuaScripts/WorldObjects/AerostatMonitor.txt"
+
+Explosion="LuaScripts/WorldObjects/Explosions/Detonation/BalloonInAir.txt"
+
+[attach=0]
+	position= -5.979, 2.382, -0.268
+	rotation= 0, 180, 0
+	object = "LuaScripts/WorldObjects/Bots/BotPilotBalloon_RAF17.txt"
+[end]
+
+[attach=1]
+	position= -5.117, 2.387, -0.182
+	rotation= 0, 0, 0
+	object = "LuaScripts/WorldObjects/Balloons/Caquot_P2.txt"
+[end]
+
+[attach=2]
+	position= -5.451, 3.241, 1.273
+	rotation= 60, 0, 0
+	object = "LuaScripts/WorldObjects/FlareGun.txt"
+[end]
+
+CanopyOpenByDefault=true
+
+// Центр приложения архимедовой силы (взято от Drachen)
+ForceCenter=-4.625,  11.962,  0.000
+WireCenter= -0.132,   7.000,  0.000
+// Геометрический центр (также туда целится бот)
+GeometryCenter=-6.528,  8.140,  0.000 // Известная координата
+BalloonWidth=8
+BalloonLength=25
+Volume=850
+DecreaseLifeSpeed=0.2
+DeadLife=0.7
+Basket=-4.848, -0.3, 0
+AerostatHeight=17 // Для определения времени складывания
+
+CordMinLength=5.0
+CordSpeed=20.0 // скорость сматывания/разматывания тросса 
+
+// Damage model
+Armor=5 // толщина брони
+LifeRate=9000 // жизненный тонус
+EpFg=1000
+LifeRateFrag=5000 // LifeRate для расчета осколочного действия
+Firing=0.005 // Минимальное значение поджигания у средства поражения для зажигания объекта
+
+//логирование повреждений
+logtreshold=0.005 
+
+SendRate=20,50	//normal, attached state
+
+[Entrance]
+	EntrancePos= -5.979, 2.382, -0.268
+	EntranceRot= 0,180,0
+	JumpDir= -4, 1, 0
+[end]

@@ -1,0 +1,42 @@
+Class_name = "CVehicleTurretAI"
+object_name = "VehicleTurretTankCannon"
+
+//////	Controller specific
+Artificial=true;
+
+ControlledType="GOT_VEHICLE_TURRET";
+
+AirPriority   = 0.0
+LandPriority  = 1.0
+MaxSearchTime = 11.0
+GroundAttackTime = 33.0
+RealPhysicBulletWeapon = true
+HasFuse = false
+
+DefaultMediumPriorityCriteria = 0.5
+DefaultLowPriorityCriteria = 0.85
+DangerDistance = 1000
+
+StopVehicleWhenPointing = true
+PointingWhenRecharge = false
+CanFreeSearchTargets = true
+
+ArtilleryFire = false
+
+MaxVehicleSpeedToAttack = 1
+
+//Priority for Targeting
+//                     HI MEDIUM LOW
+
+AirTargetMaxError =   2.0f, 8.0f, 32.0f
+MaxAirTargetDisp  =   1.25f
+
+LandTargetMaxError =   2.0f, 4.0f, 8.0f
+MaxLandTargetDisp  =   1.25f
+
+targetingDistance = 1000.0f
+
+SearchErrorTime = 12.0f
+
+// Max Error - max error distance in metres
+// on distance 1000

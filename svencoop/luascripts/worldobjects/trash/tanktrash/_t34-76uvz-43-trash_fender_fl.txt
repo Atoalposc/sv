@@ -1,0 +1,15 @@
+Class_name = "CSolidTrash"
+
+VisualImage=0,"graphics\Vehicles\_T34-76UVZ-43\_T34-76UVZ-43-trash_fender_FL.MGM",true
+CollisionBody="graphics\Vehicles\_T34-76UVZ-43\_T34-76UVZ-43-trash_fender_FL.col"
+
+Friction=0.8
+Mass=20
+//MaxDeep=0.1
+TLimit=0
+Ik=3.0
+DynamicCOG=true
+
+//Spin=false
+ImageArg=1013
+ImagePhase=0.85

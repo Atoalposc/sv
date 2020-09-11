@@ -1,0 +1,43 @@
+Class_name = "CVehicleRangefinderTurret"
+object_name = "VehicleRangefinderTurret"
+// Дальномерный пост
+
+[attach=0]
+	position= 0.0, 0.0, 0
+	object = "LuaScripts/WorldObjects/Bots/BotRangefinder.txt"
+[end]
+
+PitchPoint = -0.06, 1.646, 0.0
+
+AngleYawMin      = -160.0
+AngleYawMax      = 160.0
+AnglePitchMin    = -5.0
+AnglePitchMax    = 80.0
+AnglePitchDef    = 60
+YawArgNum        = 221
+PitchArgNum      = 241
+YawArgMin        = 0.055556
+YawArgMax        = 0.944444
+PitchArgMin      = 0.0
+PitchArgMax      = 1.0
+
+YawAngularSpeed    = 6.0
+PitchAngularSpeed  = 1.8
+
+FireArgumentNum  = 64100
+AttackAnimationArgNum = 61
+
+FireAnimationTime    = 0.6
+AttackAnimationTime  = 0.6
+
+MuzzleDisplacement = 3.3, 0, 0
+AttackDistance   = 10000.0
+
+VisibleTraceNum = 0
+
+NumBulletsInQueue = 20
+QueueRechargeTime   = 10.0
+BulletRechargeTime  = 3.0
+
+NeedFuse = false
+minInputFuse = 1.3

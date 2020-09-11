@@ -1,0 +1,15 @@
+Class_name = "CStaticEmitter"
+object_name = "trash"
+
+//////	PhysicsBody properties
+VisualImage=0,"graphics\effects\surf\smkhous.epl",false
+visualradius=3.5
+
+//duration=60.0
+//range=0.1,0.9
+//loop=true
+duration=15.0
+range=0.0,0.9
+loop=false
+
+destroy_pause=1

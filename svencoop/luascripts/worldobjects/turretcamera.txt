@@ -1,0 +1,6 @@
+Class_name = "CTurretCamera"
+
+MinimumFOVGrad=20.0
+MaximumFOVGrad=100.0
+
+CamRotationEnabled=true

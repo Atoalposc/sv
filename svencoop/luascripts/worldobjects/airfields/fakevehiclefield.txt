@@ -1,0 +1,28 @@
+class_name = "CAirfield"
+object_name = "fakefield"
+detail_type = "DET_BUILDING" //list of types is in \inc\SimulationSystem\DetailTypes.inc
+
+SoundScript=""
+
+SpawnObjectsType = 2 // spawn tanks
+SpawnObjectsRadius = 3.0
+
+CollisionBody="graphics/airfields/fakevehiclefield.col"
+
+[attach=0]
+	position= 0.0, 0.0, 0.0
+	rotation= 10, 90, 0
+	object = "LuaScripts/WorldObjects/FlareGun.txt"
+[end]
+
+logtreshold=0.005
+
+takeoffDx = 0
+takeoffDz = 0 
+takeoffDoy = 0
+
+CrashDelay=1.5
+
+Shield=10
+
+AcceptingObjectTypes="GOT_VEHICLE","GOT_TANK"

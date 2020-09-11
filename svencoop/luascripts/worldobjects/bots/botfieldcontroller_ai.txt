@@ -1,0 +1,18 @@
+Class_name = "CBotFieldController"
+object_name = "BotFieldController0"
+
+//////	Controller specific
+Artificial=true;
+
+ControlledType="GOT_NONE";
+
+///////// Animation flags ////////////
+//		AV_NET_GRANTED_SINGLE=2,	//These flags are mutual exclusive...
+//		AV_NET_LOW_FREQ=4,
+//		AV_NET_MED_FREQ=8,
+//		AV_NET_HIGH_FREQ=16,
+//		AV_NET_IDLE_FREQ=32,
+
+
+//CHR requested default animation
+DefArg=-1,	0.5f,	2	//Arg, Val, [Animation  flags]

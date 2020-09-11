@@ -1,0 +1,43 @@
+Class_name = "CBatchExplosion"
+object_name = "HE_082mm_7kg_480g_ground"
+
+// БЧ 82мм советской каморной бронебойной ракеты РБС-82, расчитнано из ТНТ=480г, массы пули 7.24кг, калибра 82мм.
+
+////// PhysicsBody properties
+VisualImage=0,"graphics\effects\Arm\hit_shell_he_200-1000g_ground.epl"
+visualradius=14
+//ImageAttr=17		//IA_NOCLIP | IA_NOMINPIXELS
+
+SoundScript="LuaScripts\Sound\explosions\HE\Ground_Med.cfg"
+
+ExplosionPower=0.5			// Сила звука взрыа, переменная для FMOD
+Animation=1					// Номер хука взрыва
+LiveTime=3.5				// Время жизни взрыва
+AnimationTime=3.5			// Время анимации взрыва
+Ranges=1,0.01,0.99,0		// (кол-во вариантов, начало 1го диапазона, конец 1-го диапазона, дельта прибавляемая к границам для следующего диапазона)
+//"RangesCnt, Range0Start, fRange0End, fRangeStep"; ARG=m_fRange0Start+(m_fRange0End-m_fRange0Start)*t+m_fRangeStep*data->m_RangeIdx
+//Ranges=1,0.01,0.99,0
+//Ranges=2,0.01,0.49,0.5
+//Ranges=3,0.01,0.32,0.33
+//Ranges=4,0.01,0.24,0.25
+//Ranges=5,0.01,0.19,0.2
+
+// Параметры Sphere Hit, внешний взрыв
+
+Radius=25.7	// Радиус сферы воздействия взрыва, определяющий выборку объектов
+TNT_equ=0.48	// Тротилловый эквивалент для моделирования атмосферной ударной волны
+
+// Фугасное воздействие: дальность, (-1 не использ.), пары (броня, дамаг за броней)
+ArmorFoug=0.0,-1,	11,5470,	0,10940
+ArmorFoug=1.0,-1,	2,770,		0,1539
+ArmorFoug=3.1,-1,				0,169
+ArmorFoug=5.6,-1,				0,50
+
+// Осколочное воздействие
+ShrapnelQuantity=825
+FragmentMass=0.0033
+// Единичный осколок: дальность, скорость, пары (броня, дамаг за броней)
+ArmorShr=0.0,610,	18,61,	14,152,	0,244
+ArmorShr=2.5,575,	15,54,	12,136,	0,217
+ArmorShr=12.8,456,	6,34,	5,85,	0,136
+ArmorShr=25.7,350,	3,20,	2,50,	0,80

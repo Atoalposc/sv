@@ -1,0 +1,340 @@
+class_name = "CShip"
+object_name = "Gun Boat 1124 MRLS"
+detail_type = "DET_SHIP" //list of types is in \inc\SimulationSystem\DetailTypes.inc
+
+//////	PhysicsBody properties
+//VisualImage = <int TYPE>,<string File_PathName>,<bool cast_shadows>
+
+VisualImage=0,"graphics/ships/1124/1124.mgm",true
+DistantLOD="LuaScripts/WorldObjects/Ships/DistantLODs/1124_Distant.txt"
+DLODArgs=63221,63222
+
+ImageAttr=27	// IA_NOCLIP | IA_NOCLIP_ANIM | IA_NOMINZ | IA_NOMINPIXELS
+//	IA_DEFAULT=0,
+//	IA_NOCLIP=1,
+//	IA_NOCLIP_ANIM=2,
+//	IA_NOROTINTERPOLATION=4,
+//	IA_NOMINZ=8,
+//	IA_NOMINPIXELS=16,
+//	IA_NOPOSINTERPOLATION=32,
+//	IA_CLOSEVIEWARG=64,
+//	IA_ALWAYSVISIBLE=128,
+//	IA_SCALEARG=256,
+//	ImageAttr=Attr1+Attr2+...+AttrN
+
+CollisionBody="graphics/ships/1124/1124.col"
+
+SoundScript="LuaScripts/Sound/Vehicles/1124.cfg"
+
+[attach=0]
+	position= 4.913, 1.465, 0
+	object = "LuaScripts/WorldObjects/Ships/Turrets/1124-Gun.txt"
+[end]
+
+[attach=1]
+	position= 0.949, 2.894, 0
+	object = "LuaScripts/WorldObjects/Ships/Turrets/1124-MG.txt"
+[end]
+
+[attach=2]
+	position= -4.248, 1.349, 0
+	rotation= 0, 180, 0
+	object = "LuaScripts/WorldObjects/Ships/Turrets/1124-MRLS.txt"
+[end]
+
+[attach=3]
+	position= 0.0, 0.0, 0
+	object = "LuaScripts/WorldObjects/Bots/BotShipper.txt"
+[end]
+
+[attach=4]
+	position= 2.0, 2.3, -1.5
+	rotation= 30, 0, 0
+	object = "LuaScripts/WorldObjects/FlareGun.txt"
+[end]
+
+AttachedCameras = "LuaScripts\WorldObjects\fixcameras\Vehicles\1124bm13.txt"
+
+CommandMonitor="LuaScripts/WorldObjects/VehicleMonitor.txt"
+
+
+//логирование повреждений
+logtreshold=0.0001
+MaxDeleteTime = 600
+
+length = 25.4
+height = 0.7
+width  = 3.6
+
+TotalPoints = 6
+
+point0 = 10, 0, -1.0, 16, 0.3, 0.2
+point1 = 10, 0, 1.0, 16, 0.3, 0.1
+point2 = 0, 0, -1.5, 16, 0.3, 0.2
+point3 = 0, 0, 1.5, 16, 0.3, 0.1
+point4 = -10, 0, -1.2, 16, 0.3, 0.1
+point5 = -10, 0, 1.2, 16, 0.3, 0.2
+
+// имитация волн. Для реки, когда нет 3D волнения.
+MaxWaveTime = 7		// период
+WavePointSize = 1	// амплитуда
+MaxWave = 7000		// максимальное усилие
+
+Cx = 4000.0					// Демпфирующее сопротивление сфер. Устаканивает движение вдоль оси Y
+Cw = 200.0					// общий параметр вязкого трения воды
+
+sendrate = 10				// Делитель базовой частоты 50Гц отправки позиции в сеть (=20 значит что частота 2.5Гц)
+
+mass = 50000.0
+MaxEngineForce = 16300.0
+MinEngineForce = 100
+Csf=1.5
+PrioritySpeed=11.5
+MaxPropRotationRPM=120.0	// скорость вращения (оборотов/минуту) винта на максимальном газу
+PropRotationSmoothK=0.01	// коэффициент сглаживания изменения скорости вращения
+TurnShift=0.5				// скорость перекладки руля в долях хода в секунду
+RudderAngle=60				// предельный угол отклонения руля
+Cwx=15						// поэлементный параметр вязкого трения воды, продольный, равен Cw если не задан
+Cwz=800						// поэлементный параметр вязкого трения воды, поперечный, равен Cwx*20 если не задан
+Cang=1.0					// демфирование поворота
+RudderPos=-10.8,-0.3,0		// позиция приложения силы тяги (ставими на винты)
+FrictionPos=0,-1.7,0		// позиция приложения силы сопротивления воды
+GlidingK = 5.0				// коэффициент соотношения между сопротивлением вдоль оси X и подъемной силой (глиссирование). По умолчанию - 0
+GlidingPosK = 0.8			// коэффициент смещения глиссирующей силы. 1 - в носу, 0 - в центре.
+
+// Damage model
+
+energyloss="",true,7.0,1000		// Потеря энергии пули при попадании, true - проверка на входе и выходе в колижн-бокс, первое эквивалентная броня на входе и выходе, второе джоулей на каждый метр пути внутри колижена
+
+Armor=7			// Толщина брони, общий параметр
+
+[ArmorBox]			// Если данный блок есть, то броня задана по сторонам, если блока нет, то используется общий параметр Armor=
+	FovH=90			// Полный угол горизонтального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+	FovV=160		// Полный угол вертикального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+					// Остальные 5 раструбов определяются автоматически по центральной симметрии относительно переднего
+	ArmorFront=7
+	ArmorBack=7
+	ArmorTop=4
+	ArmorBottom=7
+	ArmorRight=7
+	ArmorLeft=7
+[end]
+
+LifeRate=60000
+LifeRateFrag=60000
+
+EngineExhaustArg = 63200
+BackTrailArg = 63222
+FrontTrailArg = 63221
+PropSprayArg=63231
+
+[splash]
+	pos = 11.225, 0.0, 0
+	splashArg = 63229
+	SplashTotalTime = 1.0
+	SplashAttackTime = 0.1
+	SplashKoeff = 30
+	startArgValue = 0.5
+	
+	splashDiffHeight = 0.8
+	// time = splashStackCount * splashstacktime
+	splashStackCount = 50
+	splashstacktime = 0.1
+[end]
+
+floathook=11.225, 0.3, 0,	100,false	//x,y,z, Arg, 3D water, аргумент перемещения хука следа от форштевня
+floathook=-12.818, 0.3, 0,	101,false	// аргумент перемещения хука кильватерного следа
+floathook=11.225, 0.3, 0,	102,true	// аргумент перемещения хука всплесков форштевня
+floathook=-12.818, 0.3, 0,	103,true	// аргумент перемещения хука буруна от винтов
+
+OneSectionMode = true
+SectionsHealthPercent = 1.0f
+
+CommandSectionId = 3
+
+MinMovementHealth = 0.3
+
+SinkEffectScript = "LuaScripts/WorldObjects/Trash/SinkBarge.txt"
+
+[section=0]
+	Armor=7			// Толщина брони, общий параметр
+	[ArmorBox]			// Если данный блок есть, то броня задана по сторонам, если блока нет, то используется общий параметр Armor=
+		FovH=90			// Полный угол горизонтального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+		FovV=160		// Полный угол вертикального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+						// Остальные 5 раструбов определяются автоматически по центральной симметрии относительно переднего
+		ArmorFront=7
+		ArmorBack=7
+		ArmorTop=4
+		ArmorBottom=7
+		ArmorRight=7
+		ArmorLeft=7
+	[end]
+
+	LifeRate=60000
+	LifeRateFrag=60000
+
+	ConvexName = "collision_1"
+
+	// effect
+	EffectCoord = 6.9, 1.2, 0.1
+	ExplosionScript = "LuaScripts/WorldObjects/explosions/Detonation/Vehicle.txt"
+
+	DestructArg = 761
+	FiringArg = 63210
+	SmokeArgBase = 63210
+	SmokeArgTotalNum = 1
+	SmokeStartHealth = 0.5			// Лайф, при котором начинается пожар
+	FireEffectTime = 100.0			// Время пожара при полном уничтожении
+
+	RegenerationMax = 0.49			// До какого Life само-чиниться
+	RegenerationMin = 0.2			// Минимальное значение Life, ниже которого починки не будет
+	RegenerationPercent = 0			// Скорость восстановления, долей Life в секунду
+	Firing=0.0008					// Скорость сгорания от большого пожара, долей Life в секунду
+
+	MinMovementHealth = 0.25			// Лайф, при котором перестанет ездить
+	MinAttackHealth = 0.1			// Лайф, при котором перестанет стрелять
+
+	CollisionLifeRate = 100000		// Определяет силу стороной, где секция корабля, нужную для ее уничтожения. Приведение по массе к \Ships\1124.txt. Надстройки в 5 раз меньше.
+	CollisionMinImpulse = 2000		// Определяет минимальную нужную для повреждения (0.02 of CollisionLifeRate).
+	AlwaysColDamage=false			// True - повреждается от столкновения с любого направления
+
+	pointsTotal= 1
+	point0 = 0
+[end]
+
+[section=1]
+	Armor=7			// Толщина брони, общий параметр
+	[ArmorBox]			// Если данный блок есть, то броня задана по сторонам, если блока нет, то используется общий параметр Armor=
+		FovH=90			// Полный угол горизонтального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+		FovV=160		// Полный угол вертикального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+						// Остальные 5 раструбов определяются автоматически по центральной симметрии относительно переднего
+		ArmorFront=7
+		ArmorBack=7
+		ArmorTop=4
+		ArmorBottom=7
+		ArmorRight=7
+		ArmorLeft=7
+	[end]
+
+	LifeRate=60000
+	LifeRateFrag=60000
+
+	ConvexName = "collision_3"
+
+	// effect
+	EffectCoord = 0.3, 0.5, -1.8
+	ExplosionScript = "LuaScripts/WorldObjects/explosions/Detonation/Vehicle.txt"
+
+	DestructArg = 771
+	FiringArg = 63211
+	SmokeArgBase = 63211
+	SmokeArgTotalNum = 1
+	SmokeStartHealth = 0.5			// Лайф, при котором начинается пожар
+	FireEffectTime = 100.0			// Время пожара при полном уничтожении
+
+	RegenerationMax = 0.49			// До какого Life само-чиниться
+	RegenerationMin = 0.2			// Минимальное значение Life, ниже которого починки не будет
+	RegenerationPercent = 0			// Скорость восстановления, долей Life в секунду
+	Firing=0.0008					// Скорость сгорания от большого пожара, долей Life в секунду
+
+	MinMovementHealth = 0.25			// Лайф, при котором перестанет ездить
+	MinAttackHealth = 0.1			// Лайф, при котором перестанет стрелять
+
+	CollisionLifeRate = 100000		// Определяет силу стороной, где секция корабля, нужную для ее уничтожения. Приведение по массе к \Ships\1124.txt. Надстройки в 5 раз меньше.
+	CollisionMinImpulse = 2000		// Определяет минимальную нужную для повреждения (0.02 of CollisionLifeRate).
+	AlwaysColDamage=false			// True - повреждается от столкновения с любого направления
+
+	pointsTotal= 1
+	point0 = 2
+[end]
+
+[section=2]
+	Armor=7			// Толщина брони, общий параметр
+	[ArmorBox]			// Если данный блок есть, то броня задана по сторонам, если блока нет, то используется общий параметр Armor=
+		FovH=90			// Полный угол горизонтального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+		FovV=160		// Полный угол вертикального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+						// Остальные 5 раструбов определяются автоматически по центральной симметрии относительно переднего
+		ArmorFront=7
+		ArmorBack=7
+		ArmorTop=4
+		ArmorBottom=7
+		ArmorRight=7
+		ArmorLeft=7
+	[end]
+
+	LifeRate=60000
+	LifeRateFrag=60000
+
+	ConvexName = "collision_2"
+
+	// effect
+	EffectCoord = -7.8, 1.0, 0.9
+	ExplosionScript = "LuaScripts/WorldObjects/explosions/Detonation/Vehicle.txt"
+
+	DestructArg = 781
+	FiringArg = 63212
+	SmokeArgBase = 63212
+	SmokeArgTotalNum = 1
+	SmokeStartHealth = 0.5			// Лайф, при котором начинается пожар
+	FireEffectTime = 100.0			// Время пожара при полном уничтожении
+
+	RegenerationMax = 0.49			// До какого Life само-чиниться
+	RegenerationMin = 0.2			// Минимальное значение Life, ниже которого починки не будет
+	RegenerationPercent = 0			// Скорость восстановления, долей Life в секунду
+	Firing=0.0008					// Скорость сгорания от большого пожара, долей Life в секунду
+
+	MinMovementHealth = 0.25			// Лайф, при котором перестанет ездить
+	MinAttackHealth = 0.1			// Лайф, при котором перестанет стрелять
+
+	CollisionLifeRate = 100000		// Определяет силу стороной, где секция корабля, нужную для ее уничтожения. Приведение по массе к \Ships\1124.txt. Надстройки в 5 раз меньше.
+	CollisionMinImpulse = 2000		// Определяет минимальную нужную для повреждения (0.02 of CollisionLifeRate).
+	AlwaysColDamage=false			// True - повреждается от столкновения с любого направления
+
+	pointsTotal= 1
+	point0 = 5
+
+[end]
+
+[section=3]
+	Armor=7			// Толщина брони, общий параметр
+	[ArmorBox]			// Если данный блок есть, то броня задана по сторонам, если блока нет, то используется общий параметр Armor=
+		FovH=90			// Полный угол горизонтального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+		FovV=160		// Полный угол вертикального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+						// Остальные 5 раструбов определяются автоматически по центральной симметрии относительно переднего
+		ArmorFront=7
+		ArmorBack=7
+		ArmorTop=4
+		ArmorBottom=7
+		ArmorRight=7
+		ArmorLeft=7
+	[end]
+
+	LifeRate=30000
+	LifeRateFrag=30000
+
+	InfluenceOnTotalHealth = false
+
+	ConvexName = "collision_4"
+
+	// effect
+	EffectCoord = 1.9, 2.2, -0.4
+	ExplosionScript = "LuaScripts/WorldObjects/explosions/Detonation/VehicleNoDmg.txt"
+
+	DestructArg = 901
+	FiringArg = 63213
+	SmokeArgBase = 63213
+	SmokeArgTotalNum = 1
+	SmokeStartHealth = 0.5			// Лайф, при котором начинается пожар
+	FireEffectTime = 100.0			// Время пожара при полном уничтожении
+
+	RegenerationMax = 0.49			// До какого Life само-чиниться
+	RegenerationMin = 0.2			// Минимальное значение Life, ниже которого починки не будет
+	RegenerationPercent = 0			// Скорость восстановления, долей Life в секунду
+	Firing=0.0008					// Скорость сгорания от большого пожара, долей Life в секунду
+
+	CollisionLifeRate = 20000		// Определяет силу стороной, где секция корабля, нужную для ее уничтожения. Приведение по массе к \Ships\1124.txt. Надстройки в 5 раз меньше.
+	CollisionMinImpulse = 400		// Определяет минимальную нужную для повреждения (0.02 of CollisionLifeRate).
+	AlwaysColDamage=false			// True - повреждается от столкновения с любого направления
+[end]
+
+DebugInfo = false

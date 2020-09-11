@@ -1,0 +1,570 @@
+Class_name = "CTurret"
+object_name = "_KV1S_T1"
+
+AimingRay=true
+
+[COCKPIT_LIMITS]
+x= -0.09, 0.09
+y= -0.2, 0.24
+z= -0.09, 0.09
+[END]
+
+[OPEN_COCKPIT_LIMITS]
+x= -0.5, 0.5
+y= -0.07, 0.24
+z= -0.2, 0.5
+[END]
+
+VisualImage=0,"graphics\Vehicles\_KV1S\_kv1s-C2-low.mgm",true
+VisualImage=1,"graphics\Vehicles\_KV1S\_kv1s-C2.mgm",8
+CollisionBody="graphics\Vehicles\_KV1S\_kv1s-C2.col"
+HitBody="graphics\Vehicles\_KV1S\_KV1S-C2_DetColl.col"
+KeepNetworkImages=true	//high-poly cockpit will be visible from other workstations of the object
+
+//VisualImage=ID,model_or_effect,cast_shadows[,debris_effects]
+//ID:					INT:	0 - visible everywhere, 1 - visible inside, 2 - visible outside
+//model_or_effect:		STRING:	path to model file (mgm) of effect file (epl)
+//cast_shadows: 		BOOL/INT:	cast shadows from object or not (cast_shadows=Attr1+Attr2+...+AttrN)
+//						VIF_CASTSHADOWS=1,
+//						VIF_BLENDMASKLAST=2,
+//						VIF_ALWAYSONTOP=4,
+//						VIF_FLATAMBIENT=8,
+//[,debris_effects]:	BOOL:	optional parameter, show effects on object debris or not
+
+ImageAttr=1	//IA_NOCLIP
+//	IA_DEFAULT=0,
+//	IA_NOCLIP=1,
+//	IA_NOCLIP_ANIM=2,
+//	IA_NOROTINTERPOLATION=4,
+//	IA_NOMINZ=8,
+//	IA_NOMINPIXELS=16,
+//	IA_NOPOSINTERPOLATION=32,
+//	IA_CLOSEVIEWARG=64,
+//	IA_ALWAYSVISIBLE=128,
+//	IA_SCALEARG=256,
+//	ImageAttr=Attr1+Attr2+...+AttrN
+
+TransparentCockpit=false	// If false - Attached bot will be not rendered if cockpit hatch is closed (default =true)
+
+//LocalPosRot=true
+//ConvexAnimThreshold=0.000001	// Дискретность анимаций
+
+VisualRadius=5.0
+
+mp_site=true
+
+CopyPosAttachID=1	//Copy orientation from other parent's object, on AttachID==1
+
+TurretType = 12	//Параметр надо задавать турелям танка, где есть оружие (пулеметы, пушки)
+//11 - основное орудие
+//12 - командир пулемётчик
+//13 - радист пулемётчик
+
+[attach=0]
+	object = "LuaScripts/WorldObjects/Bots/BotTankKV1_Commander.txt"
+	position = 0,0,0
+	convex="bot_pos",false	//false: Attach object relative to "bot_pos" convex (not absolute)
+[end]
+
+[attach=1]
+	position = 0.0, 0.0, 0.0
+	object = "LuaScripts/WorldObjects/TurretRiffle.txt"
+[end]
+
+[attach=2]
+	position = 0.0, 0.0, 0.0
+	object = "LuaScripts/WorldObjects/TurretCameraTank.txt"
+[end]
+
+[attach=3]
+	position = 0.0, 0.0, 0.0
+	rotation = 0,0,8
+	object = "LuaScripts/WorldObjects/TurretCameraTankByAttach.txt"
+	convex="gunsight0",false	//false: Attach object relative to "gunsight0" convex (not absolute)
+[end]
+
+[attach=4]
+	position = 0.0, 0.0, 0.0
+	rotation = 0,0,8
+	object = "LuaScripts/WorldObjects/TurretCameraTankByAttach.txt"
+	convex="gunsight1",false	//false: Attach object relative to "gunsight0" convex (not absolute)
+[end]
+
+TargetingScript = "LuaScripts/WorldObjects/Ballistics/Projectiles/BULLET_RUS_7-62x54_AP.bin"
+
+SoundScript="LuaScripts/Sound/Vehicles/KV1_FP_Turret_T1.cfg"
+
+Script="LuaScripts\ObjectScripts\Vehicles\_KV1S_T1.sc"
+
+//FetchArgVal= cockpit_arg_num, transfer_number, default_cockpit_arg_val, interpolation_type (clamp - shortest on line scale, wrap - shortest on cyclic scale)
+
+FlarePos= -0.85, 0.84, 0.03
+FlareDir= -0.5, 1.0, 0.5
+FlarePath= "LuaScripts/WorldObjects/Ballistics/Flare.txt"
+
+AimAngleLimit=10
+
+[TurretsPos=0]
+	position = -1.2154,0.4732,-0.3503
+	PosMoveArg = 21000
+
+	ReloadDelay = 0.3
+	BotRotaionValueZ = 0.0	//-2.0
+	LegsParameter = 0.0
+	BotMinFirstAngle  = -90
+	BotMaxFirstAngle  = 90
+	BotMinSecondAngle = -90
+	BotMaxSecondAngle = 90
+	FirstToSecondInterp = 0.0
+
+	LockTurretCamera=true
+
+	// Joints in orientation order!!!
+
+	[Joint=0]
+		SectorAngleMin = 179.999
+		SectorAngleMax = -179.999
+
+		AngularSpeed   = 60.0
+
+		AnimationArgMin = 0.5
+		AnimationArgMax = 0.5
+
+		AnimationArgNum = 21001
+
+		Point = 0,0,0
+		Axis  = 0.0,1.0,0.0
+	[end]
+
+	[Joint=1]
+		SectorAngleMin = -15.0
+		SectorAngleMax = 15.0
+
+		AngularSpeed   = 60.0
+		PrecisionAngle = 1
+
+		AnimationArgMin = 0.416667
+		AnimationArgMax = 0.583333
+
+		AnimationArgNum = 21006
+
+		Point = 0,0,0
+		Axis = 0.0,1.0,0.0
+
+		SoundNumber = 2
+	[end]
+
+	[Joint=2]
+		SectorAngleMin = -12.0
+		SectorAngleMax = 12.0
+		
+		AngularSpeed   = 60.0
+		PrecisionAngle = 1
+
+		AnimationArgMin = 0.433333
+		AnimationArgMax = 0.566667
+
+		AnimationArgNum = 21002
+
+		Point = 0,0,0
+		Axis  = 0.0, 0.0, 1.0
+
+		SoundNumber = 1
+
+		NoMoveFar=true	// Block rotation when the target is in the rear henisphere
+	[end]
+
+	[GunAnimation=0]
+		FireArg = 60320
+	[end]
+
+//	FireLightArg=60220
+
+	relativeBotStand = 0.0, 0.0, 0.0 // not used for tank
+	relativeBotSit = 0.0, 0.0, 0.0 // not used for tank
+	relativeBotDead = 0.0, 0.0, 0.0 // not used for tank
+	TransitionStandPower = 1 // not used for tank
+	TransitionDeadPower = 1 // not used for tank
+
+	BotAttachJointId = 0
+	BotFirstAnimJointId = 1
+	BotSecondAnimJointId  = 2
+
+	SightPosition = 0.0, 1, 0.0
+
+	defaultDirection = -1.0, 0.0, 0.0
+	AimSector=165, 195, -12, 12	//AI aim limits: left, right, down, up
+
+	CamDisplacement = -0.53,0.0636,0
+[end]
+
+[TurretsGun=0]
+	LinkedTurretPos = 0
+	//Convex = "#mg_02_col"
+	DGroup="MachineGun"
+	DamageProp = 0.001
+
+	Displacement = 0.350, -0.0202, 0.0017
+	GunsightPosition =  0.0, -0.0202, 0.0017
+	GunType = "LuaScripts/WorldObjects/Weapons/_DT.txt"
+	ParallaxDistance = 1000000.0
+
+	ReLoadingStagesTime = 1.0, 3.0, 1.0, 0.3
+
+	TriggerPositionArgIdx = 9001
+	FiringPinPositionArgIdx = 9002
+//	DrawAnimationArgIdx = 0, 9003	// затвор
+//	AmmunitionMovingArgIdx = 9005
+	AzimuthDeviationArgIdx = 9006
+	ElevationDeviationArgIdx = 9007
+	ReservedMagazinesArgIdx = 9008
+	RoundsInMagazineArgIdx = 9009
+//	HideAmmunitionArgIdx = 9010
+	ReLoadingArgIdx = 9011
+//	FlashAnimationArgIdx = 60320
+
+	Deviation = 0.67, 2.1, 0.0, 0.01, 0.03, 0.06  //0.8333 тысячной дальности холодный, 3.3333 тысячной дальности горячий, исходя из холодной нач. скорости 840м/с
+	//Настройка раброса/перегрева:
+	//- возможная боковая скорость при минимальном нагреве, м/с
+	//- возможная боковая скорость при максимальном нагреве, м/с
+	//- понижение дульной скорости при максимальном нагреве (0.9 - значит останется только 0.1 от исходной, указаной в пуле)
+	//- нагрев от одного выстрела
+	//- скорость остывания при нулевой скорости
+	//- скорость остывания при скорости носителя 100м/с
+
+	NumOfAnimations = 4
+
+//	BushCoord = -0.114461, 0.0436303, -0.0287316
+//	BushSpeed = 0.944, -0.096, -0.316
+
+//	BushConfig = "LuaScripts/WorldObjects/Trash/Batch_case07-08mm.txt"
+
+	SoundNumber = 3
+[end]
+
+[Ammunition0]
+	GunAmmunition0=0
+[end]
+[GunAmmunition0]
+	MaxRoundsInMagazine = 63
+	RoundsInMagazine = 63
+	MaxReservedMagazines = 5
+	ReservedMagazines = 5
+	MaxMisFiresInMagazine = 0
+	AmountRoundsWithOneTracer = 2
+	ParallaxConfig="LuaScripts/WorldObjects/Ballistics/Projectiles/BULLET_RUS_7-62x54_AP.bin"
+	BulletConfig = "LuaScripts/WorldObjects/Ballistics/Projectiles/BULLET_RUS_7-62x54_AP.txt"
+[end]
+
+SightPos = 0.0, 1.3, 0.0
+PositionChangeTime = 0.5
+StandDuration = 1.0
+SitDuration = 1.0
+PreEjectDuration = 1.0
+FreezeOnReload = false
+AutoRecharge = false
+
+GunSightDistanceArg = 9544
+GunSightYawArg = 9546
+GunSightTypeArg = 9545
+
+// ограничения сектора обстрела, что бы ИИ не пытался наводится в указанные убласти
+//SectorLimits =  -45.0,  +45.0,  25.0, 90.0
+//SectorLimits =	-180.0, -140.0, -15.0, 90.0
+//SectorLimits =	 140.0,  180.0, -15.0, 90.0
+
+// Damage
+
+//BeamHitZeroArmor=true //при попадании бронебойного снаряда игнорировать параметры m_fArmor и m_fArmorSides (для случая, когда бронебойная броня сделана бронеплитами в колижене)
+//LifeRate=5000
+//LifeRateFrag=5000 
+//Firing=0.005
+//Armor=66
+//[ArmorBox]			// Если данный блок есть, то броня задана по сторонам, если блока нет, то используется общий параметр Armor=
+//	FovH=90			// Полный угол горизонтального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+//	FovV=90			// Полный угол вертикального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+//					// Остальные 5 раструбов определяются автоматически по центральной симметрии относительно переднего
+//	ArmorFront=86
+//	ArmorBack=66
+//	ArmorTop=30
+//	ArmorBottom=30
+//	ArmorRight=66
+//	ArmorLeft=66
+//[end]
+
+//maxDamageArgValue=0.98
+//DamageArg=5000
+damageablePart=""
+
+IsCritical=false	//true - обнуление лайфа модуля обнулит лайф всего объекта
+LifeK=200			//весовой коэфициент влияния лайфа модуля на лайф всего объекта (все к-ты нормируются автоматически)
+
+KillChildObjectsOnParentDeath = true
+
+SphereHitProtection=72	//Броневая защита стрелка от осколков при закрытой кабине
+
+[SphereProtectionBoxOpen]	// Если данный блок есть, то броня пилота от осколков задана по сторонам, если блока нет, то используется общий параметр SphereHitProtection=
+	FovH=120				// Полный угол горизонтального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+	FovV=150				// Полный угол вертикального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+							// Остальные 5 раструбов определяются автоматически по центральной симметрии относительно переднего
+	ArmorFront=0			// Для ОФ угол наклона цилиндрических частей берется 30°
+	ArmorBack=0
+	ArmorTop=0
+	ArmorBottom=30
+	ArmorRight=0
+	ArmorLeft=30
+[end]
+
+[SphereProtectionBoxClose]	// Если данный блок есть, то броня пилота от осколков задана по сторонам, если блока нет, то используется общий параметр SphereHitProtection=
+	FovH=90					// Полный угол горизонтального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+	FovV=90					// Полный угол вертикального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+							// Остальные 5 раструбов определяются автоматически по центральной симметрии относительно переднего
+	ArmorFront=81
+	ArmorBack=81
+	ArmorTop=30
+	ArmorBottom=30
+	ArmorRight=72
+	ArmorLeft=72
+[end]
+
+////	Energy loss for bullet travel through HitBody convices	////
+
+energyloss="",true,1,200	// Потеря энергии пули при попадании, true - проверка на входе и выходе в колижн-бокс, первое эквивалентная броня на входе и выходе, второе джоулей на каждый метр пути внутри колижена
+energyloss="#mg_02_col",true,30,20000
+energyloss="hatch",true,30,1				//Radist hatch armour plate, 30mm, K=1.0
+
+//Damageable parts
+energyloss="sight3_1052",false,1,1			//Driver left visor glass
+energyloss="sight4_1053",false,1,1			//Driver right visor glass
+energyloss="sight5_1054",false,1,1			//Driver right visor glass
+energyloss="sight6_1055",false,1,1			//Driver right visor glass
+energyloss="sight7_1056",false,1,1			//Driver right visor glass
+
+/////Functional Damage Groups
+
+[DGroup=MachineGun]
+	IsCritical=false
+	LifeK=20
+	convex="#mg_02_col",5,10000,"MT_ARMOR"
+	[SphereHitArmorBox]
+		FovH=170
+		FovV=90
+		ArmorFront=100
+		ArmorBack=5
+		ArmorTop=5
+		ArmorBottom=30
+		ArmorRight=5
+		ArmorLeft=5
+	[end]
+	LifeRateFrag=5000
+	RepairSpeed=0.002083	// (8 минут)
+	RepairSource=0
+	InstantRepair=true
+	GuiParam=19, false,true,true
+[end]
+[DGroup=Body]		// Смотри конфиг _KV1s.txt для пояснений к параметрам DGroup
+	IsCritical=true
+	LifeK=20
+	DamageArg=5000
+	MinValidLife=0.02
+[end]
+
+//End of Functional Damage Groups
+//Graphical Damage Groups:
+
+[DGroup=Visor1]
+	IsCritical=false
+	LifeK=2
+	convex="sight3_1052",1,500,"MT_ARMOR"
+	[SphereHitArmorBox]
+		FovH=60
+		FovV=20
+		ArmorFront=1
+		ArmorBack=42
+		ArmorTop=30
+		ArmorBottom=30
+		ArmorRight=42
+		ArmorLeft=42
+	[end]
+	LifeRateFrag=5000
+	DamageArg=1052
+	RepairSpeed=0.033333	// (0.5 минуты)
+	RepairSource=0
+	InstantRepair=true
+	GuiParam=11, true,true,true
+[end]
+[DGroup=Visor2]
+	IsCritical=false
+	LifeK=2
+	convex="sight4_1053",1,500,"MT_ARMOR"
+	[SphereHitArmorBox]
+		FovH=120
+		FovV=20
+		ArmorFront=42
+		ArmorBack=42
+		ArmorTop=30
+		ArmorBottom=30
+		ArmorRight=42
+		ArmorLeft=1
+	[end]
+	LifeRateFrag=5000
+	DamageArg=1053
+	RepairSpeed=0.033333	// (0.5 минуты)
+	RepairSource=0
+	InstantRepair=true
+	RepairDependsOn="Visor1", 0.95
+	GuiParam=11, true,true,true
+[end]
+[DGroup=Visor3]
+	IsCritical=false
+	LifeK=2
+	convex="sight5_1054",1,500,"MT_ARMOR"
+	[SphereHitArmorBox]
+		FovH=90
+		FovV=20
+		ArmorFront=42
+		ArmorBack=1
+		ArmorTop=30
+		ArmorBottom=30
+		ArmorRight=42
+		ArmorLeft=1
+	[end]
+	LifeRateFrag=5000
+	DamageArg=1054
+	RepairSpeed=0.033333	// (0.5 минуты)
+	RepairSource=0
+	InstantRepair=true
+	RepairDependsOn="Visor2", 0.95
+	GuiParam=11, true,true,true
+[end]
+[DGroup=Visor4]
+	IsCritical=false
+	LifeK=2
+	convex="sight6_1055",1,500,"MT_ARMOR"
+	[SphereHitArmorBox]
+		FovH=90
+		FovV=20
+		ArmorFront=42
+		ArmorBack=1
+		ArmorTop=30
+		ArmorBottom=30
+		ArmorRight=1
+		ArmorLeft=42
+	[end]
+	LifeRateFrag=5000
+	DamageArg=1055
+	RepairSpeed=0.033333	// (0.5 минуты)
+	RepairSource=0
+	InstantRepair=true
+	RepairDependsOn="Visor3", 0.95
+	GuiParam=11, true,true,true
+[end]
+[DGroup=Visor5]
+	IsCritical=false
+	LifeK=2
+	convex="sight7_1056",1,500,"MT_ARMOR"
+	SphereHitProtection=42
+	[SphereHitArmorBox]
+		FovH=120
+		FovV=20
+		ArmorFront=42
+		ArmorBack=42
+		ArmorTop=30
+		ArmorBottom=30
+		ArmorRight=1
+		ArmorLeft=42
+	[end]
+	LifeRateFrag=5000
+	DamageArg=1056
+	RepairSpeed=0.033333	// (0.5 минуты)
+	RepairSource=0
+	InstantRepair=true
+	RepairDependsOn="Visor4", 0.95
+	GuiParam=11, true,true,true
+[end]
+
+//End of Graphical Damage Groups
+
+[Entrance]
+	EntrancePos= 0.0, -0.753, 4.5
+	EntranceRot= 0,90,0
+	JumpDir= 0,0,0
+[end]
+
+ColimatorHideArg=9547
+
+//DefaultGun=0	//default=-1, all of the guns are active, switching belts in gun 0. >=0 sets default gun and switshing will be between guns
+
+ClosedHatch=false				// True - люк будет всегда закрытым
+ClosedWindow=false				// True - форточка будет всегда закрытой
+CanopyOpenByDefault=false
+WindowOpenByDefault=true
+NoAimingWhenOpened=true			// True - турель не работает при открытом люке
+NoAimingWhenClosed=false		// True - турель не работает при закрытом люке
+DenyDisabledTurretCamera=true	// True - запрет на использование вида с прицела при заблокированной турели
+canopytime=5.9375	//Время анинации от Arg=0 до Arg=0.95. Требуемое время анимации от Arg=0.1 до Arg=0.9 определено временем анимации персонажа (5 сек), откуда значение параметра 0.95/0.8*5=5.9375.
+windowtime=1.5
+
+OpenCockpitArg=31
+AutoCanopy=false
+CockpitLightArg=30000,0.35,0.351,0.6
+canopyLockSoundMask=2 	// 0 bit - canopy unlock, start
+						// 1 bit - canopy unlock, end
+						// 2 bit - canopy lock, start
+						// 3 bit - canopy lock, end
+
+OpenWindowArg=33
+AutoWindow=false
+WindowLightArg=30010,0.3,0.45,0.6
+
+FlareHatchArg=32
+FlareHatchTime=1.0
+
+TechChatCrewRole=5	//Роль для техночата люков (Driver: 1, Gunner: 3, Commander: 5, Machinegunner: 7, Radioman: 9)
+
+SetCockpitArgs=true	// true - автоматическое выставление значений анимаций в систему сетевых команд с указанным флагом сетевой передачи, false - в самолётах это делается в коде или в случае работы объекта только на приём
+
+//CockpitArg= FetchType, CmdID, SubcmdID, ArgNum, ArgValDefault, SmoothingType, SmoothingPower, NetworkFlag
+//FetchType=-1: аргумент в объекте не забирается для анимирования
+//FetchType=-2: аргумент в объекте забирается для анимирования из самого объекта
+//FetchType=-3: аргумент в объекте забирается для анимирования по сетевым командам parent-объекта
+//FetchType>=0: аргумент в объекте забирается для анимирования по сетевым командам child-объекта с укзанным Attach ID
+//CmdID=[0..999]: ID сетевой команды низкого качества, используемой для передачи значения.
+//CmdID=[1000..1999]: ID сетевой команды среднего качества, используемой для передачи значения.
+//SubcmdID=[0..3]: ID сетевой подкоманды команды низкого качества.
+//SubcmdID=[0..1]: ID сетевой подкоманды команды среднего качества.
+//ArgNum: номер аргумента анимации устанавливаемого в/из команды.
+//ArgValDefault: дефолтное значение аргумента анимации в случае, если команда не приходила.
+//SmoothingType: smooth_clamp - сглаживаение не-круговых анимаций
+//SmoothingType: smooth_wrap - сглаживаение круговых анимаций
+//SmoothingPower: постоянная времени сглаживания
+//NetworkFlag="": отправки команды в сеть нет и нет выставления команды в случае, если SetCockpitArgs=false
+//NetworkFlag="low_freq": отправка в сеть целиком команды, содержащей указанный аргумент в случае его изменения, не чаще низкой частоты
+//NetworkFlag="med_freq": отправка в сеть целиком команды, содержащей указанный аргумент в случае его изменения, не чаще средней частоты
+//NetworkFlag="high_freq": отправка в сеть целиком команды, содержащей указанный аргумент в случае его изменения, не чаще высокой частоты
+//NetworkFlag="granted_single": отправка в сеть целиком команды, содержащей указанный аргумент в случае его изменения, с применением гарантированного пакета состояния
+
+CockpitArg = -3, 0000, 0, 60210, 0.0, "smooth_clamp", 0.0, ""			// Electric point lights
+CockpitArg = -3, 0000, 1, 60310, 0.0, "smooth_clamp", 0.0, ""			// Electric flood light
+
+CockpitArg = -2, 0100, 0, 9008, 0.0, "", 0.0, "granted_single"			// Магазины командирского пулемёта
+
+CockpitArg = -2, 0150, 0, 9001, 0.0, "smooth_clamp", 0.1, "med_freq"	// TriggerPositionArgIdx, gun1
+CockpitArg = -2, 0150, 1, 9009, 0.0, "smooth_wrap", 0.1, "med_freq"		// RoundsInMagazineArgIdx, gun1
+CockpitArg = -2, 0150, 2, 9011, 0.0, "smooth_wrap", 0.1, "med_freq"		// ReLoadingArgIdx, gun1
+
+[moveBotDeviator]
+  HiFreqAmp = 0.2f
+  MaxDeviation = 0.3f
+  Periods = 2.1, 0.4;
+[end]
+accelBotDirK = 0.3
+accelBotDirSmooth = 0.05
+accelBotSideK = 0.3
+accelBotSideSmooth = 0.05
+
+GunsmokeHatchStart=0.5	//Used by object script
+
+AttackDistance   = 500.0		//AI max aim distance versus ground point
+AttackDistanceTrgGnd = 500.0	//AI max aim distance versus ground target
+AttackDistanceTrgAir = 1.0		//AI max aim distance versus air target

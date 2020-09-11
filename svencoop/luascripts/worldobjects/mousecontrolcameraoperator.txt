@@ -1,0 +1,30 @@
+class_name = "CMouseControlCameraOperator"
+object_name = "MouseControlCameraOperator"
+
+//////	PhysicsBody properties
+//SoundScript="LuaScripts/Fokker_DR1.cfg"
+//VisualImage=0,"graphics/sound_c.mgm",1
+ImageAttr=128
+
+shiftBackMax=20.0
+shiftBackMin=0.5
+
+cameraFovMax=100.0
+cameraFovMin=30.0
+	
+shiftTop=3
+cameraWidth=0.8
+
+poismooth=0.09
+positionSmooth=0.118
+correctionSmooth=0.05
+
+[POSDeviation]
+	MaxDeviation=1.0f;
+	Periods=20,12;
+[end]
+
+[POIDeviation]
+	MaxDeviation=0.03f;
+	Periods=0.2,0.13;
+[end]

@@ -1,0 +1,23 @@
+Class_name = "CVehicleAI"
+object_name = "Vehicle Truck Controller AI"
+
+//////	Controller specific
+Artificial=true;
+
+ControlledType="GOT_VEHICLE";
+
+
+IgnoreRoads = true
+
+ForceP	= 1.3
+ForceI	= 0.3
+ForceD	= 0.0
+
+TurnP	= 0.4
+TurnI	= 0.1
+TurnD	= 0.12
+
+SearchDist	= 15.0
+TargetSpeed	= 7.0
+Coeff		= 2.0
+

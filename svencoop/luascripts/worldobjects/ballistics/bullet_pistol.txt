@@ -1,0 +1,36 @@
+Class_name = "CBatchBallistics"
+object_name = "BULLET_PISTOL"
+
+//////	PhysicsBody properties
+//VisualImage=0,"graphics/ammo/ammo.mgm",0
+//visualradius=4
+SoundScript=""
+ImageAttr=21	//IA_NOMINPIXELS | IA_NOINTERPOLATION
+
+//CollisionBody="graphics/ammo/ammo.col"
+
+NoDirecion=true
+NoCollision=true
+
+Armor=1,450,		2,80,	0,160
+Armor=200,100,		1,50,	0,100
+
+DefaultStartSpeed=250
+MaxDistance=2000
+Mass=0.015
+Mkr=0.73
+Mmax=1.7
+Cx_0=0.194
+Cx_max=0.375
+Cx_1=0.313
+R=0.0058
+TimeToDestroy=0
+
+HitDummyEffect=""
+HitMiscEffect="LuaScripts/WorldObjects/Explosions/Effects/hit_ap_7mm_wood.txt"
+HitWaterEffect="LuaScripts/WorldObjects/Explosions/Effects/hit_ap_7mm_water.txt"
+HitGroundEffect="LuaScripts/WorldObjects/Explosions/Effects/hit_ap_7mm_ground.txt"
+HitArmorEffect="LuaScripts/WorldObjects/Explosions/Effects/hit_ap_7mm_armour.txt"
+HitBuildingEffect="LuaScripts/WorldObjects/Explosions/Effects/hit_ap_7mm_building.txt"
+HitMetalEffect="LuaScripts/WorldObjects/Explosions/Effects/hit_ap_7mm_armour.txt"
+HitForestEffect="LuaScripts/WorldObjects/Explosions/Effects/hit_ap_7mm_wood.txt"

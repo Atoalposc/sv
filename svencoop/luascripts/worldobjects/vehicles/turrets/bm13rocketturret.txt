@@ -1,0 +1,70 @@
+Class_name = "CVehicleRocketTurret"
+object_name = "VehicleTurret"
+
+SoundScript="main/main/Weapon/Rocket_M13_Start"
+
+[attach=0]
+	position= 0.0, 0.389, 0
+	object = "LuaScripts/WorldObjects/Bots/BotGunnerRocketTurret.txt"
+[end]
+
+Debug = false
+
+SiegeArgNum = 101
+SiegeTime = 5
+MaxVehicleSpeedToAttack = 0.3
+StopVehicleWhenPointing = true
+
+FireworksArgNum = 500
+
+
+PitchPoint = 0.0, 0.389, 0.0
+
+AngleYawMin      = -180.0
+AngleYawMax      = 180.0
+AnglePitchMin    = 7.0
+AnglePitchMax    = 45.0
+AnglePitchDef    = 7.0
+YawArgNum        = 221
+PitchArgNum      = 241
+YawArgMin        = 0.0
+YawArgMax        = 1.0
+PitchArgMin      = 0.0
+PitchArgMax      = 1.0
+
+YawAngularSpeed    = 6.0
+PitchAngularSpeed  = 3.0
+
+FireArgumentNum  = 64100
+AttackAnimationArgNum = 61
+FireAnimationTime    = 0.4
+AttackAnimationTime  = 0.4
+MuzzleDisplacement = 4.8, 0, 0
+AttackDistance   = 8500.0
+
+ArtDispX = 0.0118
+ArtDispZ = 0.0095
+
+[bullet=1]
+	BulletScript = "LuaScripts/WorldObjects/Ballistics/AmmunitionForNPC/NPC_RKT_M13.txt"
+	ExplosionScript = "LuaScripts/WorldObjects/Explosions/Artillery/Ground.txt"
+	BulletsCount = 1
+[end]
+
+
+BatchRocketConfig = "LuaScripts/WorldObjects/Ballistics/AmmunitionForNPC/NPC_RKT_M13.txt"
+BatchRocketSpeed = 300.0
+BatchRocketLoads = 10
+
+NumBulletsInQueue = 1
+QueueRechargeTime   = 60.0
+BulletRechargeTime  = 0.5
+
+
+NeedFuse = false
+FireAnimationTime    = 0.4
+AttackAnimationTime  = 0.4
+VisibleTraceNum = 1
+IsSoundLooped = false
+SoundNumber = 1
+

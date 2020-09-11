@@ -1,0 +1,7 @@
+Class_name = "CTrash"
+object_name = "trash"
+
+//////	PhysicsBody properties
+//VisualImage=0,"graphics/ammo/alarmRocketRed.mgm",false
+VisualImage=0,"graphics/ammo/Shell.mgm",false
+

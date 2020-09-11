@@ -1,0 +1,15 @@
+Class_name = "CStaticEmitter"
+object_name = "trash"
+
+//////	PhysicsBody properties
+VisualImage=0,"graphics\effects\Air\splashDrop.epl",false
+
+SoundScript="LuaScripts/Sound/explosions/Splash/water.cfg"
+SoundStrength=0.8
+SoundTime=2
+
+duration=0.5
+range=0.8,0.9
+loop=false
+
+destroy_pause=5.5

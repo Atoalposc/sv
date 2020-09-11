@@ -1,0 +1,9 @@
+Class_name = "CBotHead"
+object_name = "Common Bot's head"
+
+//////	PhysicsBody properties
+//VisualImage=0,"graphics/__.mgm",0
+
+SendRate=10,10000	//normal, attached state
+
+debug=false

@@ -1,0 +1,75 @@
+Class_name = "CBatchBallistics"
+object_name = "SHELL_GER_105_HT"
+
+//105мм патрон F.H.Gr. к пушке leFH 18 бронебойный кумулятивный
+
+//////	PhysicsBody properties
+VisualImage=0,"graphics/ammo/ammoRac.mgm",false
+visualradius=4
+ImageAttr=21	//IA_NOMINPIXELS | IA_NOINTERPOLATION
+
+//CollisionBody="graphics/ammo/ammo.col"
+
+NoDirecion=true
+NoCollision=true
+
+// дальность, скорость на этой дальности (на 0м - указать на 5км/ч меньше расчетной), пары броня-урон за броней. Броню больше, чем в первой паре, не пробьет
+// за базовый взят урон на дальности 100м при нулевой броне, на макс. броне урон равне 0.25 от базового, на 0.8 макс. брони урон равен 0.5 от базового
+// урон при нулевой броне уменьшается с дальностью по соотношению квадрата скоростей
+// скорости по дальностям взяты из лога утилиты расчета .bin файлов пули (расчет таблиц наведения), на 10км/ч меньше ресчетной
+// т.к. если скорость окажется больше расчетной на данной дальности, то дамага не будет
+// базовый урон расчитан по соотношению кинетических энергий на дальности 100м между данной пулей и референсной пулей SHELL_GER_20x82_AP (=1000)
+
+Armor=0,0,	100,30000,	80,75000,	0,120000 // референсные данные 100мм под под 0°, дамаг в 1.5 раза больше, чем у 88мм (по площади заряда)
+
+// аэродинамические коэфициенты подобраны исходя из совпадения графика скорости по дальности для эталонной пули
+
+Gage=105				//калибр
+DefaultStartSpeed=495	//дефолтная начальная скорость при стрельбе из простых пушек (наземка)
+MaxDistance=4000		//предельная дальность, дальше которой объект удалится
+Mass=12.35				//масса пули
+Mkr=0.75				//значение числа Маха, после которого начинается повышение Cx до момента M=1, зависит от формы тела но не от размера
+Mmax=1.3				//значение числа Маха, до которого завершается понижение Cx, начавшееся при M=1, зависит от формы тела но не от размера
+Cx_0=0.067				//значение к-та сопротивления при (M <= Mkr), зависит от формы тела но не от размера
+Cx_max=0.45				//значение к-та сопротивления при (M = 1), зависит от формы тела но не от размера
+Cx_1=0.43				//значение к-та сопротивления при (M >= Mmax), зависит от формы тела но не от размера
+R=0.0525				//радиус пули
+LiveTime=12				//время жизни объекта (большее из двух: время полета на MaxDistance или время горения трассера + 3.5с)
+TimeToDestroy=0			//время жизни объекта после попадания в скрытом состоянии, что бы трейл трассера не пропадал пока не расствориться
+TracertShowtime = 4.5	//время горения трассера
+MaxRedirections = 0		//максимальное кол-во рикошетов
+InjectionDepth=1.2		//расстояние от момента входа в объект до удаления пули и рождение внутреннего взрыва (для кумулятивной струи)
+//CavityDelay=0.0013	//то же, что и InjectionDepth, но определяемое задаваемым временем и скоростью при попадании (для каморного снаряда; рассчитываем 1м на 500м дистанции, для Тигра, Фердинанд - как получится)
+MinInjectionDepth=0.0	//минимальное расстояние, которое должен пройти снаряд в колижене, что бы сработал внутренний взрыв. Иначе - на вылет и не взорвется (что бы заборы проходил насквозь).
+
+debug=false
+
+HitDummy="LuaScripts/WorldObjects/Explosions/HEATShells/HE_105mm_12kg_1kg_object.txt"	//Взрыв внутри без отличий от взрыва снаружи
+HitMisc="LuaScripts/WorldObjects/Explosions/HEATShells/HE_105mm_12kg_1kg_object.txt"
+HitWater="LuaScripts/WorldObjects/Explosions/HEATShells/HE_105mm_12kg_1kg_water.txt"
+HitGround="LuaScripts/WorldObjects/Explosions/HEATShells/HE_105mm_12kg_1kg_ground.txt"
+HitArmor="LuaScripts/WorldObjects/Explosions/HEATShells/HE_105mm_12kg_1kg_object.txt"
+HitBuilding="LuaScripts/WorldObjects/Explosions/HEATShells/HE_105mm_12kg_1kg_building.txt"
+HitMetal="LuaScripts/WorldObjects/Explosions/HEATShells/HE_105mm_12kg_1kg_object.txt"
+HitForest="LuaScripts/WorldObjects/Explosions/HEATShells/HE_105mm_12kg_1kg_object.txt"
+
+HitDummyEffect=""
+HitMiscEffect="LuaScripts/WorldObjects/Explosions/CavityShells/hit_cv_misc.txt"
+HitWaterEffect="LuaScripts/WorldObjects/Explosions/CavityShells/hit_cv_water.txt"
+HitGroundEffect="LuaScripts/WorldObjects/Explosions/CavityShells/hit_cv_ground.txt"
+HitArmorEffect="LuaScripts/WorldObjects/Explosions/CavityShells/hit_cv_armour.txt"
+HitBuildingEffect="LuaScripts/WorldObjects/Explosions/CavityShells/hit_cv_building.txt"
+HitMetalEffect="LuaScripts/WorldObjects/Explosions/CavityShells/hit_cv_armour.txt"
+HitForestEffect="LuaScripts/WorldObjects/Explosions/CavityShells/hit_cv_building.txt"
+
+DefaultBulletSpeed = 335.0		//дефолтная начальная скорость при стрельбе из комплексной (авиационной) пушки неопределенной модели
+BulletSpeed = "M-30S", 335.0
+
+shellType = 4
+//        SHELL_TYPE_CV = 1,// Бронебойный - CV - Armour Piercing with Cavity Bursting Charge
+//        SHELL_TYPE_AP = 2,// Бронебойный сплошной - AP - Armour Piercing Solid
+//        SHELL_TYPE_HV = 3,// Подкалиберный - HV - Armour Piercing Composite Rigid (High Velocity)
+//        SHELL_TYPE_HT = 4,// Кумулятивный - HT - Hight Explosive Anti Tank (HEAT)
+//        SHELL_TYPE_SH = 5,// Шрапнельный - SH - Shrapnel
+//        SHELL_TYPE_HE = 6,// Осколочный - HE - High Explosive and Fragmental
+//        SHELL_TYPE_SpHV = 7,// Подкалиберный катушечный - SpHV - Armour Piercing Spool-Shaped (Spool High Velocity)

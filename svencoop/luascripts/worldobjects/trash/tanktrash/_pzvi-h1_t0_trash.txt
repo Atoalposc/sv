@@ -1,0 +1,27 @@
+Class_name = "CSolidTrash"
+
+
+VisualImage=0,"graphics\Vehicles\_PzVI-H1\_PzVI-H1-C1-low.mgm",true
+CollisionBody="graphics\Vehicles\_PzVI-H1\_PzVI-H1-C1.col"
+
+
+Friction=0.8
+Mass=6000
+//MaxDeep=0.1
+TLimit=0
+Ik=3.0
+DynamicCOG=true
+
+
+
+
+
+
+
+
+//Spin=false
+ImageArg=5000
+ImagePhase=1
+
+NetworkClone=true
+

@@ -1,0 +1,86 @@
+
+Name = "M2.50"
+
+Gage = 12.7 // [мм]
+
+Mass = 0.001 // [кг] чтобы не плодить пушки из-за разных расстояний от среза ствола до выхода из фюзеляжа, масса и момент инерции перенесены в лафет
+MassPosition_inGunAxis = -0.830, 0.027, 0.0
+MOI_inGunAxis = 0.001, 0.001, 0.001, 0.0, 0.0, 0.0 // [кг*кв.м]
+
+SnappingTime = 0.01
+AutoCockingTime = 0.061
+
+ShotAnimationPeriod = 0.071 // SnappingTime + AutoCockingTime
+
+// паспортная скорострельность: RapidityOfFire = 60 / (SnappingTime + AutoCockingTime) = 850 выстрелов в минуту
+
+MainManuallyCockingTime = 0.7
+ReserveManuallyCockingTime = 0.7
+
+ShotRate = 0 // количество выстрелов в одной очереди не ограничено
+
+FireUnLockedSafetyLockPosition = 0.0
+FireLockedSafetyLockPosition = 1.0
+
+FireLockedMaxTriggerPosition = 0.0
+FireTriggerPosition = 0.5
+
+FiringPinPositionKeysDuringMainManuallyCocking = 0.0, 1.0
+FiringPinPositionKeysDuringReserveManuallyCocking = 0.0, 1.0
+FiringPinPositionKeysDuringAutoCocking = 0.0, 1.0
+
+AmmunitionMovingKeysDuringMainManuallyCocking = 0.75, 0.85
+AmmunitionMovingKeysDuringReserveManuallyCocking = 0.75, 0.85
+AmmunitionMovingKeysDuringAutoCocking = 0.0, 1.0
+
+CartridgeCaseReleaseDuringMainManuallyCocking = 0.8
+CartridgeCaseReleaseDuringReserveManuallyCocking = 0.8
+cartridgeCaseReleaseDuringAutoCocking = 0.8
+
+BarrelTemperatureIncreasePerShot = 4.659
+BarrelTemperatureDecreaseCoefficient = 0.045
+
+BulletDispertionAngleData = 0.0, 0.6, 700.0, 3.5 //базовое К‚Ћ 0.1 тысячной дальности холодный, 1 тысячная горячий, корректируется в вепонмодах
+BulletSpeedReducingData = 0.01, 700.0, 0.25, 0.05, 3.5
+BulletMisfireData= 0.0, 0.02, 700.0, 6.0
+
+CartridgeCasesEjectionPosition = -1.150, 0.025, 0.0
+CartridgeCasesEjectionSpeed = 0.0, -2.0, 0.0
+
+[DrawAnimation=0] // Поворот дополнительного рычага ручного взведения
+
+	[GunMode=MainManuallyCocking]
+		Point = 0.0, 0.0
+		Point = 0.5, 1.0
+		Point = 0.9, 1.0
+		Point = 1.0, 0.0
+	[end]
+[end]
+
+[DrawAnimation=1] // Поворот дополнительного рычага ручного взведения
+
+	[GunMode=ReserveManuallyCocking]
+		Point = 0.0, 0.0
+		Point = 0.5, 1.0
+		Point = 0.9, 1.0
+		Point = 1.0, 0.0
+	[end]   
+[end]
+
+[DrawAnimation=2] // Ђнимация хода затвора
+	RePlayIfCocked = true
+
+	[GunMode=AutoCocking] // Режим самовзведения автоматического оружия после выстрела
+		Point = 0.0, 0.0
+		Point = 0.4, 1.0
+		Point = 0.6, 1.0
+		Point = 1.0, 0.0
+	[end]
+
+	[GunMode=MainManuallyCocking] // Режим ручного взведения стрелкового оружия
+		Point = 0.0, 0.0
+		Point = 0.5, 1.0
+		Point = 0.9, 1.0
+		Point = 1.0, 0.0
+	[end]
+[end]

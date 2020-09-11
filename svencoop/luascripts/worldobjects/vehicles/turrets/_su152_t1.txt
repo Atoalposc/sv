@@ -1,0 +1,340 @@
+Class_name = "CTurret"
+object_name = "_SU152_T2"
+
+AimingRay=true
+
+[COCKPIT_LIMITS]
+x= -0.2, 0.12
+y= -0.05, 0.25
+z= -0.1, 0.2
+[END]
+
+[OPEN_COCKPIT_LIMITS]
+x= -0.2, 0.2
+y= -0.2, 0.2
+z= -0.3, 0.3
+[END]
+
+VisualImage=0,"graphics\Vehicles\_SU152\_SU152-C2-low.mgm",true
+VisualImage=1,"graphics\Vehicles\_SU152\_SU152-C2.mgm",8
+CollisionBody="graphics\Vehicles\_SU152\_SU152-C2.col"
+HitBody="graphics\Vehicles\_SU152\_SU152-C2_DetColl.col"
+KeepNetworkImages=true	//high-poly cockpit will be visible from other workstations of the object
+
+//VisualImage=ID,model_or_effect,cast_shadows[,debris_effects]
+//ID:					INT:	0 - visible everywhere, 1 - visible inside, 2 - visible outside
+//model_or_effect:		STRING:	path to model file (mgm) of effect file (epl)
+//cast_shadows: 		BOOL/INT:	cast shadows from object or not (cast_shadows=Attr1+Attr2+...+AttrN)
+//						VIF_CASTSHADOWS=1,
+//						VIF_BLENDMASKLAST=2,
+//						VIF_ALWAYSONTOP=4,
+//						VIF_FLATAMBIENT=8,
+//[,debris_effects]:	BOOL:	optional parameter, show effects on object debris or not
+
+ImageAttr=1	//IA_NOCLIP
+//	IA_DEFAULT=0,
+//	IA_NOCLIP=1,
+//	IA_NOCLIP_ANIM=2,
+//	IA_NOROTINTERPOLATION=4,
+//	IA_NOMINZ=8,
+//	IA_NOMINPIXELS=16,
+//	IA_NOPOSINTERPOLATION=32,
+//	IA_CLOSEVIEWARG=64,
+//	IA_ALWAYSVISIBLE=128,
+//	IA_SCALEARG=256,
+//	ImageAttr=Attr1+Attr2+...+AttrN
+
+TransparentCockpit=false	// If false - Attached bot will be not rendered if cockpit hatch is closed (default =true)
+
+//LocalPosRot=true
+ConvexAnimThreshold=0.000001	// Дискретность анимаций
+
+VisualRadius=5.0
+
+mp_site=true
+
+[attach=0]
+	object = "LuaScripts/WorldObjects/Bots/BotTankSU152_Commander.txt"
+	position = 0,0,0
+	convex="bot_pos",false	//false: Attach object relative to "bot_pos" convex (not absolute)
+[end]
+
+[attach=1]
+	position = 0.0, 0.0, 0.0
+	object = "LuaScripts/WorldObjects/TurretRiffle.txt"
+[end]
+
+[attach=2]
+	position = 0.0, 0.0, 0.0
+	rotation = 0,0,180
+	object = "LuaScripts/WorldObjects/TurretCameraTankByAttach.txt"
+	convex="gunsight0",false	//false: Attach object relative to "gunsight0" convex (not absolute)
+[end]
+
+[attach=4]
+	position = 0.0, 0.0, 0.0
+	rotation = 0,0,180
+	object = "LuaScripts/WorldObjects/Vehicles/Sights/_SU122_T1_sight1.txt"
+	convex="gunsight0",false	//false: Attach object relative to "gunsight0" convex (not absolute)
+[end]
+
+TargetingScript = "LuaScripts/WorldObjects/Ballistics/Projectiles/BULLET_RUS_7-62x54_AP.bin"
+
+SoundScript="LuaScripts/Sound/Vehicles/SU152_FP_Turret_T2.cfg"
+
+Script="LuaScripts\ObjectScripts\Vehicles\_SU152_T1.sc"
+
+//FetchArgVal= cockpit_arg_num, transfer_number, default_cockpit_arg_val, interpolation_type (clamp - shortest on line scale, wrap - shortest on cyclic scale)
+
+FlarePos= 1.433,2.583,0.591
+FlareDir= -0.5, 1.0, 0.5
+FlarePath= "LuaScripts/WorldObjects/Ballistics/Flare.txt"
+
+[TurretsPos=0]
+	position = 0,0,0
+	PosMoveArg = 21000
+
+	HMDSingleEye = true
+	LockTurretCamera=true
+
+	// Joints in orientation order!!!
+
+	[Joint=0]
+		SectorAngleMin = -0.0001
+		SectorAngleMax = 0.0001
+
+		AngularSpeed   = 0.1
+		PrecisionAngle = 1
+
+		AnimationArgMin = 0.499999
+		AnimationArgMax = 0.500001
+
+		Point = 0,0,0
+		Axis = 0.0,1.0,0.0
+	[end]
+
+	relativeBotStand = 0.0, 0.0, 0.0 // not used for tank
+	relativeBotSit = 0.0, 0.0, 0.0 // not used for tank
+	relativeBotDead = 0.0, 0.0, 0.0 // not used for tank
+	TransitionStandPower = 1 // not used for tank
+	TransitionDeadPower = 1 // not used for tank
+	BotAttachJointId = 0
+	BotFirstAnimJointId = 2
+	BotSecondAnimJointId  = 1
+
+	SightPosition = 0.0, 1, 0.0
+
+	defaultDirection = 1, 0, 0
+
+	CamDisplacement = 0,0,0
+[end]
+
+SightPos = 0.0, 1.3, 0.0
+PositionChangeTime = 0.5
+StandDuration = 1.0
+SitDuration = 1.0
+PreEjectDuration = 1.0
+FreezeOnReload = false
+AutoRecharge = false
+
+GunSightDistanceArg = 9544
+GunSightYawArg = 9546
+GunSightTypeArg = 9545
+
+// ограничения сектора обстрела, что бы ИИ не пытался наводится в указанные убласти
+//SectorLimits =  -45.0,  +45.0,  25.0, 90.0
+//SectorLimits =	-180.0, -140.0, -15.0, 90.0
+//SectorLimits =	 140.0,  180.0, -15.0, 90.0
+
+// Damage
+
+//BeamHitZeroArmor=true //при попадании бронебойного снаряда игнорировать параметры m_fArmor и m_fArmorSides (для случая, когда бронебойная броня сделана бронеплитами в колижене)
+//LifeRate=5000
+//LifeRateFrag=5000 
+//Firing=0.005
+//Armor=60
+//[ArmorBox]			// Если данный блок есть, то броня задана по сторонам, если блока нет, то используется общий параметр Armor=
+//	FovH=90			// Полный угол горизонтального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+//	FovV=90			// Полный угол вертикального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+//					// Остальные 5 раструбов определяются автоматически по центральной симметрии относительно переднего
+//	ArmorFront=75
+//	ArmorBack=60
+//	ArmorTop=30
+//	ArmorBottom=30
+//	ArmorRight=60
+//	ArmorLeft=60
+//[end]
+
+//maxDamageArgValue=0.98
+//DamageArg=5000
+damageablePart=""
+
+IsCritical=false	//true - обнуление лайфа модуля обнулит лайф всего объекта
+LifeK=100			//весовой коэфициент влияния лайфа модуля на лайф всего объекта (все к-ты нормируются автоматически)
+
+KillChildObjectsOnParentDeath = true
+
+SphereHitProtection=60	//Броневая защита стрелка от осколков при закрытой кабине
+
+[SphereProtectionBoxOpen]	// Если данный блок есть, то броня пилота от осколков задана по сторонам, если блока нет, то используется общий параметр SphereHitProtection=
+	FovH=90					// Полный угол горизонтального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+	FovV=150				// Полный угол вертикального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+							// Остальные 5 раструбов определяются автоматически по центральной симметрии относительно переднего
+	ArmorFront=0
+	ArmorBack=0
+	ArmorTop=0
+	ArmorBottom=30
+	ArmorRight=0
+	ArmorLeft=0
+[end]
+
+[SphereProtectionBoxClose]	// Если данный блок есть, то броня пилота от осколков задана по сторонам, если блока нет, то используется общий параметр SphereHitProtection=
+	FovH=90					// Полный угол горизонтального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+	FovV=150				// Полный угол вертикального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+							// Остальные 5 раструбов определяются автоматически по центральной симметрии относительно переднего
+	ArmorFront=75
+	ArmorBack=60
+	ArmorTop=24
+	ArmorBottom=30
+	ArmorRight=60
+	ArmorLeft=60
+[end]
+
+////	Energy loss for bullet travel through HitBody convices	////
+
+energyloss="",true,1,200				// Потеря энергии пули при попадании, true - проверка на входе и выходе в колижн-бокс, первое эквивалентная броня на входе и выходе, второе джоулей на каждый метр пути внутри колижена
+energyloss="sight6_1056",false,1,1		// Commander panorama visor
+energyloss="pthead",true,32,1			// Turret reserve sight cover, 40mm, K=0.85
+energyloss="top_hatch_02",false,20,1	// Commander's hatch, 20mm, K=1.0
+
+[ReflectArmorBox]	// Для расчета рикошета там, где внешний колижн energyloss=0,1. Если данный блок есть, то броня задана по сторонам, если блока нет, то используется общий параметр Armor=
+	FovH=90			// Полный угол горизонтального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+	FovV=120		// Полный угол вертикального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+					// Остальные 5 раструбов определяются автоматически по центральной симметрии относительно переднего
+	ArmorFront=32
+	ArmorBack=32
+	ArmorTop=20
+	ArmorBottom=30
+	ArmorRight=32
+	ArmorLeft=32
+[end]
+
+//Graphical Damage Groups:
+
+[DGroup=Sight1]
+	IsCritical=false
+	LifeK=100
+	convex="sight6_1056",1,500,"MT_ARMOR"
+	convex="pthead",32,500,"MT_ARMOR"
+	[SphereHitArmorBox]
+		FovH=120
+		FovV=20
+		ArmorFront=32
+		ArmorBack=32
+		ArmorTop=32
+		ArmorBottom=30
+		ArmorRight=32
+		ArmorLeft=32
+	[end]
+	LifeRateFrag=5000
+	DamageArg=1056
+	RepairSpeed=0.033333	// (0.5 минуты)
+	RepairSource=0
+	InstantRepair=true
+	GuiParam=16, true,true,true
+[end]
+[DGroup=Body]
+	IsCritical=true
+	LifeK=20
+	DamageArg=5000
+	MinValidLife=0.02
+[end]
+
+//End of Functional Damage Groups
+
+[Entrance]
+	EntrancePos= 1.3, 1.0, 2.2
+	EntranceRot= 0,45,0
+	JumpDir= 0,0,0
+[end]
+
+ColimatorHideArg=9547
+
+//DefaultGun=0	//default=-1, all of the guns are active, switching belts in gun 0. >=0 sets default gun and switshing will be between guns
+
+ClosedHatch=false				// True - люк будет всегда закрытым
+ClosedWindow=true				// True - форточка будет всегда закрытой
+NoAimingWhenOpened=true			// True - турель не работает при открытом люке
+CanopyOpenByDefault=false
+WindowOpenByDefault=false
+canopytime=3.5625	//Время анинации от Arg=0 до Arg=0.95. Требуемое время анимации от Arg=0.1 до Arg=0.9 определено временем анимации персонажа (3 сек), откуда значение параметра 0.95/0.8*5=3.5625.
+windowtime=2
+
+OpenCockpitArg=31
+AutoCanopy=false
+CockpitLightArg=30000,0.25,0.251,0.6
+canopyLockSoundMask=2 	// 0 bit - canopy unlock, start
+						// 1 bit - canopy unlock, end
+						// 2 bit - canopy lock, start
+						// 3 bit - canopy lock, end
+
+//OpenWindowArg=33
+AutoWindow=false
+WindowLightArg=30010,0.45,0.55,0.6
+
+FlareHatchArg=32
+FlareHatchTime=1.0
+
+TechChatCrewRole=5	//Роль для техночата люков (Driver: 1, Gunner: 3, Commander: 5, Machinegunner: 7, Radioman: 9)
+IsRadioman=true	//Данное место оборудовано рацией. При смерти бота рация перестанет работать.
+
+SetCockpitArgs=true	// true - автоматическое выставление значений анимаций в систему сетевых команд с указанным флагом сетевой передачи, false - в самолётах это делается в коде или в случае работы объекта только на приём
+
+//CockpitArg= FetchType, CmdID, SubcmdID, ArgNum, ArgValDefault, SmoothingType, SmoothingPower, NetworkFlag
+//FetchType=-1: аргумент в объекте не забирается для анимирования
+//FetchType=-2: аргумент в объекте забирается для анимирования из самого объекта
+//FetchType=-3: аргумент в объекте забирается для анимирования по сетевым командам parent-объекта
+//FetchType>=0: аргумент в объекте забирается для анимирования по сетевым командам child-объекта с укзанным Attach ID
+//CmdID=[0..999]: ID сетевой команды низкого качества, используемой для передачи значения.
+//CmdID=[1000..1999]: ID сетевой команды среднего качества, используемой для передачи значения.
+//SubcmdID=[0..3]: ID сетевой подкоманды команды низкого качества.
+//SubcmdID=[0..1]: ID сетевой подкоманды команды среднего качества.
+//ArgNum: номер аргумента анимации устанавливаемого в/из команды.
+//ArgValDefault: дефолтное значение аргумента анимации в случае, если команда не приходила.
+//SmoothingType: smooth_clamp - сглаживаение не-круговых анимаций
+//SmoothingType: smooth_wrap - сглаживаение круговых анимаций
+//SmoothingPower: постоянная времени сглаживания
+//NetworkFlag="": отправки команды в сеть нет и нет выставления команды в случае, если SetCockpitArgs=false
+//NetworkFlag="low_freq": отправка в сеть целиком команды, содержащей указанный аргумент в случае его изменения, не чаще низкой частоты
+//NetworkFlag="med_freq": отправка в сеть целиком команды, содержащей указанный аргумент в случае его изменения, не чаще средней частоты
+//NetworkFlag="high_freq": отправка в сеть целиком команды, содержащей указанный аргумент в случае его изменения, не чаще высокой частоты
+//NetworkFlag="granted_single": отправка в сеть целиком команды, содержащей указанный аргумент в случае его изменения, с применением гарантированного пакета состояния
+
+VisorYawMin=-180
+VisorYawArgMin=0.0
+VisorYawMax=+180
+VisorYawArgMax=1.0
+VisorYawArg=40
+VisorYawDefault=0
+VisorYawSpeed=0.5
+VisorPitchMin=-30
+VisorPitchArgMin=0.333333
+VisorPitchMax=+15
+VisorPitchArgMax=0.583333
+VisorPitchDefault=0
+VisorPitchArg=35
+VisorPitchSpeed=0.25
+VisorResetWhileAim=false
+VisorResetIfOpened=false
+PrecisionAngle=2	//Rotation stop smoothing
+
+CockpitArg = -3, 0000, 0, 60210, 0.0, "smooth_clamp", 0.0, ""			// Electric point lights
+CockpitArg = -3, 0000, 1, 60310, 0.0, "smooth_clamp", 0.0, ""			// Electric flood light
+
+CockpitArg = -2, 0100, 0, 9008, 0.0, "", 0.0, "granted_single"			// Магазины курсового пулемёта
+
+CockpitArg = -2, 0150, 0, 9001, 0.0, "smooth_clamp", 0.1, "med_freq"	// TriggerPositionArgIdx, gun1
+CockpitArg = -2, 0150, 1, 9009, 0.0, "smooth_wrap", 0.1, "med_freq"		// RoundsInMagazineArgIdx, gun1
+CockpitArg = -2, 0150, 2, 9011, 0.0, "smooth_wrap", 0.1, "med_freq"		// ReLoadingArgIdx, gun1
+
+GunsmokeHatchStart=0.5	//Used by object script

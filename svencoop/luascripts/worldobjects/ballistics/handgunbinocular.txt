@@ -1,0 +1,26 @@
+VisAnimVal=0.16
+
+LockTime=0.75	//Delay between shoots in seconds
+
+SelfShoot=true
+
+ContentName="defaultHandgun",5
+
+Deviation=1.0
+
+BotAimingState=1
+
+Anim_Aim="aiming_binocular"
+Anim_AimEmpty="aiming_binocular"
+
+[clip]
+	ReloadDelay=3
+	Capacity=0
+	Ammo=0
+	StartSpeed=251
+	FName="LuaScripts/WorldObjects/Ballistics/BULLET_PISTOL.txt"
+	FireSound=0,1
+	ReloadSound=2
+[end]
+
+NarrowFOV=true

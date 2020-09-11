@@ -1,0 +1,71 @@
+Class_name = "CVehicleTurret"
+object_name = "HowitzerTurret"
+// Гаубица пушка МЛ-20
+//SoundScript="LuaScripts\Sound\Vehicles\CannonAA_Shot_Large.cfg"
+
+[attach=0]
+	position= 0.0, 0.0, 0
+	object = "LuaScripts\WorldObjects\Bots\BotGunnerHowitzPhys.txt"
+[end]
+
+PitchPoint = -0.275, 1.303, 0.0
+
+AngleYawMin      = -180.0
+AngleYawMax      = 180.0
+AnglePitchMin    = -5.0
+AnglePitchMax    = 55.0
+AnglePitchDef    = 30
+YawArgNum        = 221
+PitchArgNum      = 241
+YawArgMin        = 0.0
+YawArgMax        = 1.0
+PitchArgMin      = 0.0
+PitchArgMax      = 0.8
+
+YawAngularSpeed    = 3.0
+PitchAngularSpeed  = 15.0
+
+FireArgumentNum  = 64100
+AttackAnimationArgNum = 61
+
+FireAnimationTime    = 0.6
+AttackAnimationTime  = 0.6
+
+MuzzleDisplacement = 4.7, 0, 0
+
+AttackDistance   = 16500.0
+AttackDistanceTrgGnd = 2000.0
+AttackDistanceTrgAir = 1.0
+
+[bullet=1]
+	BulletScript    = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_152_HE.txt"
+	TargetingScript = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_152_HE.bin"
+	ExplosionScript = ""
+	BulletsCount = 55
+	StartBulletSpeed = 655.0
+	RealPhysicBullet = true
+	PriorityArmorMin = 0.0
+	PriorityArmorMax = 35.0
+[end]
+
+[bullet=2]
+	BulletScript    = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_152_CV.txt"
+	TargetingScript = "LuaScripts/WorldObjects/Ballistics/Projectiles/SHELL_RUS_152_CV.bin"
+	ExplosionScript = ""
+	BulletsCount = 5
+	StartBulletSpeed = 600.0
+	RealPhysicBullet = true
+	PriorityArmorMin = 35.0
+	PriorityArmorMax = 1000.0
+[end]
+
+VisibleTraceNum = 1
+
+NumBulletsInQueue = 1
+QueueRechargeTime   = 15.0
+BulletRechargeTime  = 0.1
+
+NeedFuse = false
+
+IsSoundLooped = false
+SoundNumber = 1

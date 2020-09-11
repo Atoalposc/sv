@@ -1,0 +1,1844 @@
+class_name = "CPlatformTank"
+object_name = "Pz.Kpfw.V Ausf.D"
+detail_type = "DET_TANK" //list of types is in \inc\SimulationSystem\DetailTypes.inc
+
+[COCKPIT_LIMITS]
+x= -0.15, 0.1
+y= -0.2, 0.1
+z= -0.25, 0.27
+[END]
+
+[OPEN_COCKPIT_LIMITS]
+x= -0.1, 0.1
+y= -0.1, 0.2
+z= -0.25, 0.25
+[END]
+
+DEBUG=false
+
+//////	PhysicsBody properties
+VisualImage=0,"graphics\Vehicles\_PzV-D\_PzV-D.mgm",true
+VisualImage=1,"graphics\Vehicles\_PzV-D\_PzV-D-C.mgm",false
+KeepNetworkImages=true	//high-poly cockpit will be visible from other workstations of the object
+
+ImageAttr=24	// IA_NOMINPIXELS | IA_NOMINPIXELS
+//	IA_DEFAULT=0,
+//	IA_NOCLIP=1,
+//	IA_NOCLIP_ANIM=2,
+//	IA_NOROTINTERPOLATION=4,
+//	IA_NOMINZ=8,
+//	IA_NOMINPIXELS=16,
+//	IA_NOPOSINTERPOLATION=32,
+//	IA_CLOSEVIEWARG=64,
+//	IA_ALWAYSVISIBLE=128,
+//	IA_SCALEARG=256,
+//	ImageAttr=Attr1+Attr2+...+AttrN
+
+TransparentCockpit=false	// If false - Attached bot will be not rendered if cockpit hatch is closed (default =true)
+
+CollisionBody="graphics\Vehicles\_PzV-D\_PzV-D.col"
+HitBody="graphics\Vehicles\_PzV-D\_PzV-D_DetColl.col"
+
+SoundScript="LuaScripts/Sound/Vehicles/PzV-D_FP.cfg"
+
+Script="LuaScripts/ObjectScripts/Vehicles/_PzV-D.sc"
+
+CollideChildren=true
+
+[attach=0]
+	object = "LuaScripts/WorldObjects/Bots/BotTankPz5D_Driver.txt"
+	position = 0,0,0
+	convex="bot_pos",false	//false: Attach object relative to "bot_pos" convex (not absolute)
+[end]
+
+[attach=1]
+	position= -0.59671, 2.07341, -0.0006
+	rotation= 0, 0, 0
+	object = "LuaScripts/WorldObjects/Vehicles/Turrets/_PzV-D_T0.txt"
+[end]
+
+[attach=2]
+	position= -0.59671, 2.07341, -0.0006
+	rotation= 0, 0, 0
+	object = "LuaScripts/WorldObjects/Vehicles/Turrets/_PzV-D_T1.txt"
+[end]
+
+[attach=3]
+	position= 0, 0, 0
+	rotation= 0, 0, 0
+	object = "LuaScripts/WorldObjects/Vehicles/Turrets/_PzV-D_T2.txt"
+[end]
+
+[attach=4]
+	position= -0.59671, 2.07341, -0.0006
+	rotation= 0, 0, 0
+	object = "LuaScripts/WorldObjects/Vehicles/Turrets/_PzV-D_T3.txt"
+[end]
+
+[attach=5]
+	position= 0.0, 2.0, 0.0
+	object = "LuaScripts/WorldObjects/Spotter.txt"
+[end]
+
+AttachedCameras = "LuaScripts\WorldObjects\fixcameras\Vehicles\_PzV-D.txt"
+
+CustomPhotoArg=55
+
+TargetHeight = 1.5			// Дельта по высоте к центру модели используемая при прицеливании и оценке видимости
+
+IsCritical=true	//true - обнуление лайфа модуля обнулит лайф всего объекта
+
+DetachPart=1,"LuaScripts/WorldObjects/Trash/TankTrash/_PzV-D_T0_Trash.txt"
+DetachPart=2,""
+DetachPart=3,""
+DetachPart=4,""
+//IK=2
+
+COG=-0.36,1.675,-0.01		// Re-calculation from Pz.IV by hull height
+//MaxDeep=0.1
+
+SendRate=5,50	//normal, attached state
+SendRateArg=5,10,25,10
+
+CommandMonitor="LuaScripts/WorldObjects/TankPlatformMonitor.txt"
+
+[WeaponMode=6]
+	WMname="PzVD_ArmorRem"
+	WMgroup="6"
+	PlaneModArg=19001
+	TurretID=-1
+	TurretDefault=""
+	TurretMod=""
+[end]
+
+Mass=45500									//Tank full mass
+
+Rebound=0.0f								//Tank hull collision adjustment
+Friction=0.5f								//Tank hull collision adjustment
+
+SpringAnim=1.545,-0.004,-1.537, 200,0.326	//LocalX,LocalY,LocalZ, SpringAnim arg, TraveRange (meters)
+SpringAnim=0.987,-0.004,-1.537, 201,0.326
+SpringAnim=0.430,-0.004,-1.537, 202,0.326
+SpringAnim=-0.127,-0.004,-1.537, 203,0.326
+SpringAnim=-0.685,-0.004,-1.537, 204,0.326
+SpringAnim=-1.241,-0.004,-1.537, 205,0.326
+SpringAnim=-1.799,-0.004,-1.537, 206,0.326
+SpringAnim=-2.358,-0.004,-1.537, 207,0.326
+
+SpringAnim=1.640,-0.004,1.525, 300,0.326	//LocalX,LocalY,LocalZ, SpringAnim arg, TraveRange (meters)
+SpringAnim=1.084,-0.004,1.525, 301,0.326
+SpringAnim=0.523,-0.004,1.525, 302,0.326
+SpringAnim=-0.038,-0.004,1.525, 303,0.326
+SpringAnim=-0.597,-0.004,1.525, 304,0.326
+SpringAnim=-1.158,-0.004,1.525, 305,0.326
+SpringAnim=-1.717,-0.004,1.525, 306,0.326
+SpringAnim=-2.278,-0.004,1.525, 307,0.326
+
+ExhaustArg=64000
+DustArg=61000
+FireExCount=2,2
+FireExTimeout=2,5
+FireExDuration=3,6
+FireExArg=61350
+FireArg=61300
+
+[device=CHubAuto]
+	Name="Main_Hub"
+
+	DGroup="Steering"
+
+	ThrottleMapRow0=1,	1,	1		//Amount of throttle per XY position
+	ThrottleMapRow1=1,	0,	1
+	ThrottleMapRow2=-1,	-1,	-1
+
+//	ParkingGear=2
+	GearShiftDelayUp=2,4		//first - direct UP switch, second - after DOWN switch
+	GearShiftDelayDown=1.0,2	// - direct DOWN switch, b - after UP switch
+
+	ShiftSpinRatio=0.95,0.4	//ShiftUp threshold,ShiftDown threshold
+
+	AutoBalance=false
+	BalanceMapRow0=	0.35,	0,	-0.35		//Amount of balance per XY position
+	BalanceMapRow1=	1,	0,	-1
+	BalanceMapRow2=	0.75,	0,	-0.75
+
+	BalanceBrakes=2.0		// Усилитель торможения внутренней гусеницы при торможении (дефолт =2.0), подбирается как базовый уровень, что бы угловые значения BalanceMapRow не слишком отличались от 0.5
+
+	StallProtectionRPM=600	//Lowest engine RPM to push clutch to prevent stalling
+	ShiftGearRPM=1500
+	GearsSwitchDuration=0.12,0.12	//Seconds. 1st number at 0° ground slope. 2nd number at 20° ground slope.
+	
+	ParkOffThrottle=0.6	//[0..1] Relative RPM to start moving when parking state
+	ParkOffRPM=2000
+
+	ClutchReleaseSpeedK=0.2,0.2	//[0..1] smooth K for clutch releasing (lower => slower). 1st number at 0° ground slope. 2nd number at 20° ground slope.
+[end]
+
+
+[device=CEngineCommonSystems]	//Engine with differential and brakes output
+	Name="Main"
+
+	MaxTorque=1900		//	Newton/meters
+
+	IdleRPM=800
+	CutoffRPM=400
+	SpinSmoothK=0.075		//Do not use this variable (tank chassis to engine feedback smoothing)
+
+//	GearsRatio=28.5
+
+	GearsForward=114.98, 57.49, 36.59, 22.36, 16.10, 11.50, 8.75	//Gearbox forward ratios
+
+	GearsRear=118.36
+	Inertia=1
+	Frictions_off_on=5.0, 0.1	//Engine internal friction coefficient, running and idle
+	ColdFrictionK=15			//Engine friction multiplifier if Toil<=0°C. Interpolates to =1 on Toil=50°C.
+
+	GearboxFriction=30				//Newtons per 1 RPM inside gearbox. Can be set as =x1,x2,x3... where x1 for 1st gear, x2 for 2nd, x3 for 3rd and further
+//	FrictionAfterGearboxMin=60		//Newtons per 1 RPM after gearbox
+//	FrictionAfterGearboxMax=650		//Newtons per 1 RPM after gearbox
+
+	ControlHub="Main_Hub"
+
+	MaxRPM=3000					//RPM max allowed
+	MaxHPRPM=3000				//RPM where engine power (N) is max
+	MaxHP=650
+	CurveDistortion=1.8			//Correction of engine power curve shape (moving max left-right)
+	DGroup="Engine"
+	DGFuelTank="FuelTank"
+	DGOilTank="OilTank"
+	DGWaterTank="WaterTank"
+	DGGearbox="Gearbox"
+
+	FireTanksPK=0.5			//Leaked fuel/oil firing probability factor. Probability=[Fuel/OilTankLifeDecrease]*[LeakPower]*FireTanksPK. 0.5 for Petrol.
+	FireRootPK=8			//Leaked fuel/oil firing probability factor. Probability=[VehicleLifeDecrease]*[LeakPower]*FireRootPK. =0.25(Petrol) * [Vehecle+Turret summ]LifeK / [FuelTank]LifeK
+	SecOilDamagePerRPM=0.01	//Повреждение двигателя в секунду при отсутствии масла
+	MaxEngineT=250			//Предельная температура головки блока цилиндров, выше которой начинается повреждение
+	TempDamageP=0.1			//Вероятность повреждения при перегреве, проверяется раз в секунду. Величина зависит от степени перегрева (при MaxEngineT+50° 100% дамаг)
+	ReserveStarts=0			//Кол-во попыток запуска двигателя от резервной системы (когда DGWiring убита)
+
+//Engine temperature balancing by warmth_simulation.ods table
+	CylindersMass=300		// Engine motor block mass (approx 25% of complete engine mass)
+	CombustionHeat=42700000	// Fuel calorific value Joule per kg (42700000 for Diesel, 44000000 for Petrol)
+	CylinderOilCond=0.5		// Adjusting factor of heat conductance between motor block and oil
+	CylinderWaterCond=13	// Adjusting factor of heat conductance between motor block and coolant
+	WaterOilCond=10			// Adjusting factor of heat conductance between oil and coolant
+	PassiveAirCond=0.25		// Adjusting factor of heat conductance between motor block and ambient
+	WaterAmbCond=1.0, 24.0	// Adjusting factor of heat conductance between coolant and ambient (closed thermostat, opened thermostat)
+	CoolantValveT=85, 100	// Thermostat regulation thresholds
+
+//Fuel system parameters
+	FuelTankCapacity=720			//liters
+	FuelTankMaxLeak=1				//lters per second
+	HourFuelReducePerRPM=0.0644		//FuelReducePerRPM in a hour. Calculated for 350 liters per 100 km on road at 46 kmh (2500RPM). FuelCapacity*Speed/Range/RPM.
+	RefuelSpeed=5					//refueling speed, liters per second
+
+//Oil system parameters
+	OilTankCapacity=42					//liters
+	OilTankMaxLeak=0.06					//lters per second
+	HourOilReducePerRPM=0.00127451		// Liters. Calculated for source data 5g per h.p. per hour, oil density approx 850g/liter.
+	OperatingOilP=2.0,4.0				// Oil pressure operational limits, bar
+	OilRefuelSpeed=2					// Refilling speed, liters per second
+
+//Coolant system parameters
+	WaterTankCapacity=120	//liters
+	WaterTankMaxLeak=0.24	//lters per second
+	WaterBoiloutK=1			// Engine coolant boiling speed correction
+	AntifreezeBoilT=109,115	// Summer, Winter coolant boiling temperature. 40% glysantine, 60% glysantine.
+	WaterRefuelSpeed=2		// Refilling speed, liters per second
+	indicator="CEI_COOLANT_BOIL",61650, 0,1,0.5		//Name,Arg,ScaleMin,ScaleMax [,SmoothK, [ArgFlags]]
+
+//CPhysIndicators
+	indicator="CEI_RPM",5020, 0,3500	//Name,Arg,ScaleMin,ScaleMax [,SmoothK, [ArgFlags]]
+	indicator="CEI_RPMPULSE",22, 0,3500	//Name,Arg,ScaleMin,ScaleMax [,SmoothK, [ArgFlags]]
+//	indicator="CEI_OIL_T",23, 0,125		//Name,Arg,ScaleMin,ScaleMax [,SmoothK, [ArgFlags]]
+	indicator="CEI_OIL_P",25, 0,17,0.05	//Name,Arg,ScaleMin,ScaleMax [,SmoothK, [ArgFlags]]
+	indicator="CEI_COOLANT_T",6005, 0,120		//Name,Arg,ScaleMin,ScaleMax [,SmoothK, [ArgFlags]]
+	indicator="CEI_SPEED",21, -27.8, 27.8	//Name,Arg,ScaleMin,ScaleMax [,SmoothK, [ArgFlags]]
+	SpeedMul=0.414;						//Gearbox output to CEI_SPEED coefficient, =WheelRad
+
+	indicator="CEI_CLUTCH",10, 1,0,0.2	//Name,Arg,ScaleMin,ScaleMax [,SmoothK, [ArgFlags]]
+	indicator="CEI_BRAKE",110, 0,1,0.2	//Name,Arg,ScaleMin,ScaleMax [,SmoothK, [ArgFlags]]
+	indicator="CEI_THROTTLE",12, 0,1	//Name,Arg,ScaleMin,ScaleMax [,SmoothK, [ArgFlags]]
+	indicator="CEI_IGNITION",6126, 0,1	//Name,Arg,ScaleMin,ScaleMax [,SmoothK, [ArgFlags]]
+
+	StartingDuration=8
+	StoppingDuration=2
+
+[end]
+
+
+[device=CWheelTrack]
+	Name="left"
+
+	AttachToConvex=""
+	DGroup="TrackL"
+
+	LocalOrigin=-2.358,0.030,-1.537	// Rear limit of contact area pattern
+	LocalDir=3.903f,0,0				// Axial axis of contact area pattern
+	Subdiv=5						// Number of physical model's contact points
+
+	Mass=5000	//5 whells per 100 kg, NOT added to overall mass!
+	InertiaMul=20	//To compensate complex track inertia
+
+	SpringsK=30.0f			// Suspension springs strenght
+	SpringsD=9.0f			// Suspension springs dumping
+	MaxSpringDeep=0.326		// Suspension spring range
+
+	Friction=1.5			// Factor of sliding friction between wheel/caterpillar and terrain. Increase it in case if you want to reduce stopped wheel/caterpillar sliping along terrain.
+	FrictionAnisotropyDir=0,0,0.25f	// This parameter allows to reduce wheel/caterpillar friction with terrain in along or across direction
+
+	StatifFrictionMul=1.5	// Factor of static (rolling) friction between wheel/caterpillar and terrain.
+							// Got to be be adjusted to limit of computational instability on 10° ramp (along and across the slope) with FrictionAnisotropyDir=0,0,1
+
+	WheelRad=0.427			// Driving wheel radius
+//	WheelArg=100			// Driving wheel argument, except case when it's caterpillar driving wheel
+	WheelRevolutions=1		// Driving wheel number of revolutions in one argument cycle
+	DustArgs=60409,60403
+
+	FreeWheelRad=0.430		// Caterpillar base wheel radius
+	FreeWheelArg=100		// Caterpillar base wheel argument
+	FreeWheelRevolutions=7	// Caterpillar base wheel number of revolutions in one argument cycle
+
+	TrackArg=650
+	TrackTileSize=0.600
+	
+	[device=CEngineCommonAxle]	//Spindle with brakes
+		Name="left"
+		CommonEngine="Main"	//Connection to differential engine
+
+		BrakeFriction=0.11	// Driving wheel sliding braking factor. Increase it if you want to increase brakes strenght. Adjust: 40 kmh to 0 by 4.5s; point turn with one track blocked possible, can brake 20° downhill.
+
+		StatifFrictionMul=2.0	//The less value - more sliding while static friction
+					//The higher value - less computational stable & less sliding
+
+		FrictionAfterGearboxMin=220		//Newtons per 1 RPM after gearbox
+		FrictionAfterGearboxMax=4200		//Newtons per 1 RPM after gearbox
+
+		ControlHub="Main_Hub"
+	[end]
+
+	FlexTensionArg=290										//Forward/backward chain tension arg
+	FlexTension=-150.0f,-600.0f								//Min,Max tension of flexpoints in Newtons
+	FlexMateTravelRange=0.0,0.675							//Travel range of SpringAnim args [0..1] inside of FlexPoints args range [0..1]
+	FlexPoint=2.446,0.945,-1.537,		0,	0,	0.524,1.0	//Fake flex point to model driving tension of  upper-forward part of caterpillar
+	FlexPoint=1.978,0.945,-1.537,		251,0,	0.524,0.84	//LocalX,LocalY,LocalZ, FlexPointArg,mate SpringAnim arg, FlexPoint TravelRange (meters), support roller limitation (arg value when track is on it)
+	FlexPoint=1.545,0.945,-1.537,		252,200,0.524,0.52
+	FlexPoint=0.987,0.945,-1.537,		253,201,0.524,0.15
+	FlexPoint=0.430,0.945,-1.537,		254,202,0.524,0
+	FlexPoint=-0.127,0.945,-1.537,		255,203,0.524,0
+	FlexPoint=-0.685,0.945,-1.537,		256,204,0.524,0
+	FlexPoint=-1.241,0.945,-1.537,		257,205,0.524,0
+	FlexPoint=-1.799,0.945,-1.537,		258,206,0.524,0
+	FlexPoint=-2.358,0.945,-1.537,		259,207,0.524,0.2
+	FlexPoint=-2.794,0.945,-1.537,		0,	0,	0.287,1.0	//Fake flex point to model driving tension of upper-rear part of caterpillar
+
+	PullGearArg=102,4,17	//Arg, n,m - n/m Gear Track/Teeth ratio
+[end]
+
+[device=CWheelTrack]
+	Name="right"
+
+	AttachToConvex=""
+	DGroup="TrackR"
+
+	LocalOrigin=-2.278,0.030,1.525	// Rear limit of contact area pattern
+	LocalDir=3.918f,0,0				// Axial axis of contact area pattern
+	Subdiv=5						// Number of physical model's contact points
+
+	Mass=5000				// Rolling mass (wheels, tracks)
+	InertiaMul=20			// Moment of inertia multiplifier (depends on radius)
+
+	SpringsK=30.0f			// Suspension springs strenght
+	SpringsD=9.0f			// Suspension springs dumping
+	MaxSpringDeep=0.326		// Suspension spring range
+
+	Friction=1.5			// Factor of sliding friction between wheel/caterpillar and terrain. Increase it in case if you want to reduce stopped wheel/caterpillar sliping along terrain.
+	FrictionAnisotropyDir=0,0,0.25f	// This parameter allows to reduce wheel/caterpillar friction with terrain in along or across direction
+
+	StatifFrictionMul=1.5	// Factor of static (rolling) friction between wheel/caterpillar and terrain.
+							// Got to be be adjusted to limit of computational instability on 10° ramp (along and across the slope) with FrictionAnisotropyDir=0,0,1
+
+	WheelRad=0.427			// Driving wheel radius, affects on common reduction ratio from engine to terrain. Should be calculated from caterpillar tread step and number of teeths. Can be used to slight adjust max speed.
+//	WheelArg=101			// Driving wheel argument, except case when it's caterpillar driving wheel
+	WheelRevolutions=1		// Driving wheel number of revolutions in one argument cycle
+	DustArgs=60410,60404
+
+	FreeWheelRad=0.430		// Caterpillar base wheel radius
+	FreeWheelArg=101		// Caterpillar base wheel argument
+	FreeWheelRevolutions=7	// Caterpillar base wheel number of revolutions in one argument cycle
+
+	TrackArg=651			// Caterpillar moving arg
+	TrackTileSize=0.600		// Caterpillar moving range during one agrument cycle
+
+	[device=CEngineCommonAxle]	// Spindle with brakes
+		Name="right"
+		CommonEngine="Main"	// Connection to differential engine
+
+		BrakeFriction=0.11	// Driving wheel sliding braking factor. Increase it if you want to increase brakes strenght. Adjust: 40 kmh to 0 by 4.5s; point turn with one track blocked possible, can brake 20° downhill.
+
+		StatifFrictionMul=2.0	//Driving wheel static braking factor. Got to be be adjusted to limit of computational instability on 20° ramp (along the slope when stopped)
+					//The higher value - less computational stable & less sliding
+
+		FrictionAfterGearboxMin=220		//Newtons per 1 RPM after gearbox
+		FrictionAfterGearboxMax=4200		//Newtons per 1 RPM after gearbox
+
+		ControlHub="Main_Hub"
+	[end]
+
+	FlexTensionArg=390										//Forward/backward caterpillar tension arg
+	FlexTension=-150.0f,-600.0f								//Tension force of upper flexpoints (in Newtons) of Caterpillar in weakened position and in tensioned position
+	FlexMateTravelRange=0.0,0.675							//Travel range of SpringAnim args [0..1] inside of FlexPoints args range [0..1]
+	FlexPoint=2.446,0.945,1.525,		0,	0,	0.524,1.0	//Fake flex point to model driving tension of  upper-forward part of caterpillar
+	FlexPoint=1.978,0.945,1.525,		351,0,	0.524,0.77	//LocalX,LocalY,LocalZ, FlexPointArg,mate SpringAnim arg, FlexPoint TravelRange (meters), support roller limitation (arg value when track is on it)
+	FlexPoint=1.640,0.945,1.525,		352,300,0.524,0.5
+	FlexPoint=1.084,0.945,1.525,		353,301,0.524,0.18
+	FlexPoint=0.523,0.945,1.525,		354,302,0.524,0
+	FlexPoint=-0.038,0.945,1.525,		355,303,0.524,0
+	FlexPoint=-0.597,0.945,1.525,		356,304,0.524,0
+	FlexPoint=-1.158,0.945,1.525,		357,305,0.524,0
+	FlexPoint=-1.717,0.945,1.525,		358,306,0.524,0
+	FlexPoint=-2.278,0.945,1.525,		359,307,0.524,0.17
+	FlexPoint=-2.794,0.945,1.525,		0,	0,	0.287,1.0	//Fake flex point to model driving tension of upper-rear part of caterpillar
+
+	PullGearArg=103,4,17	//Arg,N,M. Arg - caterpillar driving wheel arg. N/M = relation of teeths on driving wheel to teeths inside one caterpillar moving cycle, should be integer.
+[end]
+
+DGWiring="Electrics"	//Tank electrics DGroup name
+
+CameraRestrict=0.3f
+
+SphereHitProtection=40	//Броневая защита стрелка/водителя от осколков при закрытой кабине
+
+[SphereProtectionBoxOpen]	// Броня SphereHit по сторонам (если блока нет - используется SphereHitProtection=). Учтен наклон брони.
+	FovH=120		// Полный угол горизонтального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+	FovV=60			// Полный угол вертикального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+					// Остальные 5 раструбов определяются автоматически по центральной симметрии относительно переднего
+	ArmorFront=0
+	ArmorBack=46
+	ArmorTop=0
+	ArmorBottom=16
+	ArmorRight=0
+	ArmorLeft=0
+[end]
+
+[SphereProtectionBoxClose]	// Броня SphereHit по сторонам (если блока нет - используется SphereHitProtection=). Учтен наклон брони.
+	FovH=90			// Полный угол горизонтального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+	FovV=150			// Полный угол вертикального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+					// Остальные 5 раструбов определяются автоматически по центральной симметрии относительно переднего
+	ArmorFront=92
+	ArmorBack=46
+	ArmorTop=16
+	ArmorBottom=16
+	ArmorRight=40
+	ArmorLeft=40
+[end]
+
+////	Energy loss for bullet travel through HitBody convices	////
+energyloss="",true,1,200	// Потеря энергии пули при попадании, true - проверка на входе и выходе в колижн-бокс, первое эквивалентная броня на входе и выходе, второе джоулей на каждый метр пути внутри колижена
+
+//Undercarriage 
+energyloss="#track_L_front",false,28,1		//Front wheel (40mm, K=0.5) + caterpillar
+energyloss="#track_R_front",false,28,1		//Front wheel (40mm, K=0.5) + caterpillar
+energyloss="#track_L_back",false,18,1		//Rear wheel (20mm, K=0.5) + caterpillar
+energyloss="#track_R_back",false,18,1		//Rear wheel (20mm, K=0.5) + caterpillar
+energyloss="#track_L_bot",false,8,1			//Caterpillar, 10mm, K=0.8
+energyloss="#track_R_bot",false,8,1			//Caterpillar, 10mm, K=0.8
+energyloss="#track_L_top",false,8,1			//Caterpillar, 10mm, K=0.8
+energyloss="#track_R_top",false,8,1			//Caterpillar, 10mm, K=0.8
+energyloss="#wheelsL",false,20,1			//Rolling wheels 10mm x 2 with spacings, 20mm, K=1.0
+energyloss="#wheelsR",false,20,1			//Rolling wheels 10mm x 2 with spacings, 20mm, K=1.0
+
+//Damageable parts
+energyloss="ammunition_06",true,2,20000		//Shells pack left in fighting compartment
+energyloss="ammunition_01",true,2,20000		//Shells pack right in fighting compartment
+energyloss="ammunition_04",true,2,20000		//Shells pack left nose in driving compartment
+energyloss="ammunition_02",true,2,20000		//Shells pack right nose in driving compartment
+energyloss="ammunition_08",true,2,20000		//Shells pack left niche in driving compartment
+energyloss="ammunition_05",true,2,20000		//Shells pack left aft in fighting compartment
+energyloss="ammunition_03",true,2,20000		//Shells pack right in fighting compartment
+energyloss="ammunition_07",true,2,20000		//Shells pack bottom
+energyloss="fueltank_1",true,1,10000		//Left top internal fuel tank, 1mm casing
+energyloss="fueltank_4",true,1,10000		//Right top internal fuel tank, 1mm casing
+energyloss="fueltank_2",true,1,10000		//Left bottom internal fuel tank, 1mm casing
+energyloss="fueltank_3",true,1,10000		//Right bottom internal fuel tank, 1mm casing
+energyloss="fueltank_5",true,1,10000		//Rear internal fuel tank, 1mm casing
+energyloss="radio",true,1,15000				//Radio station
+energyloss="transmission_1",true,5,20000	//Gearbox
+energyloss="transmission_2",true,5,20000	//Turn box
+energyloss="transmission_5",true,5,20000	//Left brake
+energyloss="transmission_6",true,5,20000	//Right brake
+energyloss="transmission_3",true,5,20000	//Shaft left
+energyloss="transmission_4",true,5,20000	//Shaft right
+energyloss="radiator_1",true,1,10000		//Left water+oil radiator, 1mm casing
+energyloss="radiator_2",true,1,10000		//Right water+oil radiator, 1mm casing
+energyloss="engine",true,5,20000			//Engine
+energyloss="electric_1",true,1,15000		//Electric generator unit
+energyloss="oiltank",true,1,10000			//Left oil tank, 1mm casing
+energyloss="electric_2",true,1,15000		//Electric battery unit
+energyloss="sight1_1051",false,16,1			//Driver armoured glass, 120mm, K=0.1333
+energyloss="#body1000_coll",false,0,1		//Dummy collision for visual damage, forward-left
+energyloss="#body1000a_coll",false,0,1		//Dummy collision for visual damage, forward-left
+energyloss="#body1001_coll",false,0,1		//Dummy collision for visual damage, forward-right
+energyloss="#body1001a_coll",false,0,1		//Dummy collision for visual damage, forward-right
+energyloss="#body1002_coll",false,0,1		//Dummy collision for visual damage, backward-left
+energyloss="#body1002a_coll",false,0,1		//Dummy collision for visual damage, backward-left
+energyloss="#body1003_coll",false,0,1		//Dummy collision for visual damage, forward-right
+energyloss="#body1003a_coll",false,0,1		//Dummy collision for visual damage, forward-right
+energyloss="#bodyrearBoxL_coll",true,5,1	//Dummy collision for visual damage, backward parts
+energyloss="#bodyrearBoxR_coll",true,5,1	//Dummy collision for visual damage, backward parts
+energyloss="#track_cover_FL_01",false,3,1	//Caterpillar cover, forward-left
+energyloss="#track_cover_FR_01",false,3,1	//Caterpillar cover, forward-right
+energyloss="#side_6_1010",false,8,1			//Reserve tracks on left, 10mm, K=0.8
+energyloss="#side_7_1009",false,8,1			//Reserve tracks on right, 10mm, K=0.8
+
+// Armour plates
+energyloss="bottom",false,16,1			//Hull bottom armour plate, 16mm, K=1.0
+energyloss="Visor",false,68,1			//Hull driver visor hatch plate, 80mm, K=0.85
+energyloss="visor_frame_1",false,20,1	//Driver visor frame, 20mm, K=1.0
+energyloss="visor_frame_2",false,20,1	//Driver visor frame, 20mm, K=1.0
+energyloss="visor_frame_3",false,20,1	//Driver visor frame, 20mm, K=1.0
+energyloss="visor_frame_4",false,20,1	//Driver visor frame, 20mm, K=1.0
+energyloss="front_1",false,80,1			//Hull front armour plate, 80mm, K=1.0
+energyloss="front_1a",false,80,1		//Hull front armour plate, 80mm, K=1.0
+energyloss="front_1b",false,80,1		//Hull front armour plate, 80mm, K=1.0
+energyloss="front_1c",false,80,1		//Hull front armour plate, 80mm, K=1.0
+energyloss="front_1d",false,80,1		//Hull front armour plate, 80mm, K=1.0
+energyloss="front_1e",false,80,1		//Hull front armour plate, 80mm, K=1.0
+energyloss="front_1f",false,80,1		//Hull front armour plate, 80mm, K=1.0
+energyloss="front_1g",false,80,1		//Hull front armour plate, 80mm, K=1.0
+energyloss="front_2",false,60,1			//Hull front armour plate, 60mm, K=1.0
+energyloss="left_1",false,40,1			//Hull left armour plate, 40mm, K=1.0
+energyloss="left_2a",false,40,1			//Hull left armour plate, 40mm, K=1.0
+energyloss="left_2b",false,40,1			//Hull left armour plate, 40mm, K=1.0
+energyloss="left_2c",false,40,1			//Hull left armour plate, 40mm, K=1.0
+energyloss="left_2d",false,40,1			//Hull left armour plate, 40mm, K=1.0
+energyloss="left_2e",false,40,1			//Hull left armour plate, 40mm, K=1.0
+energyloss="left_3",false,40,1			//Hull left armour plate, 40mm, K=1.0
+energyloss="left_5",false,16,1			//Hull left track cover bottom armour plate, 16mm, K=1.0
+energyloss="left_6",false,30,1			//Hull left track cover bottom armour plate, 30mm, K=1.0
+energyloss="left_7",false,16,1			//Hull left track cover bottom armour plate, 16mm, K=1.0
+energyloss="rear_1",false,40,1			//Hull right armour plate, 40mm, K=1.0
+energyloss="rear_2",false,40,1			//Hull right armour plate, 40mm, K=1.0
+energyloss="right_1",false,40,1			//Hull right armour plate, 40mm, K=1.0
+energyloss="right_2a",false,40,1		//Hull right armour plate, 40mm, K=1.0
+energyloss="right_2b",false,40,1		//Hull right armour plate, 40mm, K=1.0
+energyloss="right_2c",false,40,1		//Hull right armour plate, 40mm, K=1.0
+energyloss="right_2d",false,40,1		//Hull right armour plate, 40mm, K=1.0
+energyloss="right_2e",false,40,1		//Hull right armour plate, 40mm, K=1.0
+energyloss="right_3",false,40,1			//Hull right armour plate, 40mm, K=1.0
+energyloss="right_5",false,16,1			//Hull right track cover bottom armour plate, 16mm, K=1.0
+energyloss="right_5",false,30,1			//Hull right track cover bottom armour plate, 30mm, K=1.0
+energyloss="right_7",false,16,1			//Hull right track cover bottom armour plate, 16mm, K=1.0
+energyloss="top_1a",false,16,1			//Hull roof armour plate, 16mm, K=1.0
+energyloss="top_1c",false,16,1			//Hull roof armour plate, 16mm, K=1.0
+energyloss="top_1c",false,16,1			//Hull roof armour plate, 16mm, K=1.0
+energyloss="top_1d",false,16,1			//Hull roof armour plate, 16mm, K=1.0
+energyloss="top_1e",false,16,1			//Hull roof armour plate, 16mm, K=1.0
+energyloss="top_1f",false,16,1			//Hull roof armour plate, 16mm, K=1.0
+energyloss="top_1g",false,16,1			//Hull roof armour plate, 16mm, K=1.0
+energyloss="top_1h",false,16,1			//Hull roof armour plate, 16mm, K=1.0
+energyloss="top_1j",false,16,1			//Hull roof armour plate, 16mm, K=1.0
+energyloss="top_1kq",false,16,1			//Hull roof armour plate, 16mm, K=1.0
+energyloss="top_3",false,16,1			//Hull roof armour plate, 16mm, K=1.0
+energyloss="top_4a",false,16,1			//Hull roof armour plate, 16mm, K=1.0
+energyloss="top_4c",false,16,1			//Hull roof armour plate, 16mm, K=1.0
+energyloss="top_4d",false,16,1			//Hull roof armour plate, 16mm, K=1.0
+energyloss="top_4e",false,16,1			//Hull roof armour plate, 16mm, K=1.0
+energyloss="top_5a",false,20,1			//Hull top engine cover, 24mm, K=0.85
+energyloss="top_5b",false,20,1			//Hull top engine cover, 24mm, K=0.85
+energyloss="top_5c",false,20,1			//Hull top engine cover, 24mm, K=0.85
+energyloss="top_5d",false,20,1			//Hull top engine cover, 24mm, K=0.85
+energyloss="top_5l",false,16,1			//Hull roof armour plate, 16mm, K=1.0
+energyloss="top_6",false,16,1			//Hull roof armour plate, 16mm, K=1.0
+energyloss="top_vent",false,20,1		//Hull top engine cover, 24mm, K=0.85
+energyloss="top_vent2",false,20,1		//Hull top engine cover, 24mm, K=0.85
+energyloss="periscope_L1",true,20,1		//Driver left visor armour cover, 20mm, K=1.0
+energyloss="periscope_L",true,20,1		//Driver right visor armour cover, 20mm, K=1.0
+energyloss="periscope_R1",true,20,1		//Machine Gunner left visor armour cover, 20mm, K=1.0
+energyloss="periscope_R",true,20,1		//Machine Gunner right visor armour cover, 20mm, K=1.0
+energyloss="#HullScreenL_01",false,5,1	//Hull additional side armour plate, 5mm, K=1.0
+energyloss="#HullScreenL_02",false,5,1	//Hull additional side armour plate, 5mm, K=1.0
+energyloss="#HullScreenL_03",false,5,1	//Hull additional side armour plate, 5mm, K=1.0
+energyloss="#HullScreenL_04",false,5,1	//Hull additional side armour plate, 5mm, K=1.0
+energyloss="#HullScreenL_05",false,5,1	//Hull additional side armour plate, 5mm, K=1.0
+energyloss="#HullScreenL_06",false,5,1	//Hull additional side armour plate, 5mm, K=1.0
+energyloss="#HullScreenR_01",false,5,1	//Hull additional side armour plate, 5mm, K=1.0
+energyloss="#HullScreenR_02",false,5,1	//Hull additional side armour plate, 5mm, K=1.0
+energyloss="#HullScreenR_03",false,5,1	//Hull additional side armour plate, 5mm, K=1.0
+energyloss="#HullScreenR_04",false,5,1	//Hull additional side armour plate, 5mm, K=1.0
+energyloss="#HullScreenR_05",false,5,1	//Hull additional side armour plate, 5mm, K=1.0
+energyloss="#HullScreenR_06",false,5,1	//Hull additional side armour plate, 5mm, K=1.0
+
+[ReflectArmorBox]	// Для расчета рикошета там, где внешний колижн energyloss=0,1. Если данный блок есть, то броня задана по сторонам, если блока нет, то используется общий параметр Armor=
+	FovH=90			// Полный угол горизонтального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+	FovV=170		// Полный угол вертикального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+					// Остальные 5 раструбов определяются автоматически по центральной симметрии относительно переднего
+	ArmorFront=92
+	ArmorBack=46
+	ArmorTop=16
+	ArmorBottom=16
+	ArmorRight=40
+	ArmorLeft=40
+[end]
+
+ArmorForAI = 90	// толщина брони используемая для AI вычислений (выбор типа снаряда, определение времени на уничтожение цели). По умолчанию == 0 и если это так,
+				// то AI использует усредненное значение брони по всем группам. Если параметр m_fArmorForAI > 0 , то используется это значение
+
+//Functional Damage Groups:
+//Onfield repair sequence is: FuelTank->Engine->Gearbox->Steering->TrackL->TrackR->Electrics->Radio; Body
+
+[DGroup=Engine]
+	IsCritical=true					// true - обнуление лайфа модуля обнулит лайф всего объекта
+	LifeK=400							// Весовой коэфициент влияния лайфа модуля на лайф всего объекта (все к-ты нормируются автоматически)
+	convex="engine", 5,20000,"MT_ARMOR"	// ConvexName, Armor, LifeRate (for Beam/AP hit), SurfaceType
+	[SphereHitArmorBox]	//+5мм собственной брони		// Броня SphereHit по сторонам (если блока нет - используется SphereHitProtection=). Учтен наклон брони.
+		FovH=90							// Полный угол горизонтального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+		FovV=120						// Полный угол вертикального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+										// Остальные 5 раструбов определяются автоматически по центральной симметрии относительно переднего
+		ArmorFront=97
+		ArmorBack=51
+		ArmorTop=21
+		ArmorBottom=21
+		ArmorRight=45
+		ArmorLeft=45
+	[end]
+	LifeRateFrag=20000				// LifeRate для расчета осколочного действия
+	SmokeArg=60000					// Аргумент эффекта дыма поврежденной группы при получении нового повреждения
+	SmokeDec=0.001					// Затухание значения аргумента дыма долей в секунду
+	MinHealthToSmoke=0.5			// Лайф группы, ниже которого может быть дымление
+	CollisionLifeRate=50000000		// (x1.25 of TrackL). Импульс, потребный для полного уничтожения группы.
+	CollisionMinImpulse=8000000		// (same to CollisionLifeRate TrackL). Нижнее ограничение импульса, приносящего повреждения группе.
+	AlwaysColDamage=true			// Повреждается от столкновения с любого направления
+	BurnLifeReduce=0.02				// Повреждения от пожара пролитого топлива/масла, в секунду
+	RepairSpeed=0.001111			// Скорость исцеления, долей жизни в секунду (полное исправление за 15 минут)
+	RepairSource=0					// Тип мастерской, необходимой для исправления
+	//	VMRI_REPAIR=0
+	//	VMRI_REHEAL=1
+	//	VMRI_REARM=2
+	//	VMRI_REFUEL=3
+	//	VMRI_SERVICEREPAIR=4
+	InstantRepair=true					// True - починка произойдет единоразово при завершении времени починки. Flase - постепенная починка.
+	RepairDependsOn="FuelTank", 0.95	// Установление последовательности починки за счет указания группы, которая должна быть отремонтирована до заданного лайфа, что бы начала чиниться эта
+	GuiParam=1, false,true,true		// Номер value для Tank_DGroup сообщений техночата. True или False отвечает за показ сообщений Tank_DGroup_Damaged,
+Tank_DGroup_Repairing и Tank_DGroup_Repaired соответственно.
+//	MinValidLife=0.02				// При уменьшении лайфа ниже этого значения он автоматически сбросится в 0.0
+//	SphereHitProtection=60			//  защита от осколочно-осколочного воздействия за счет расположения внутри бронекорпуса
+//	Shield=0.5						// Щит, списывается так же, как и Life, но отдельный от Life счетчик. Life списывается если Shield обнулился.
+//	DamageArg=5000					// Номер аргумента визуального повреждения
+//	DamageMaxVal=0.98				// Ограничение значения аргумента визуального повреждения, для аргументов текстурного дамага ставится 0.98
+//	GUIGroup=true					//Включение передачи состояния группы в GUI
+//	ExplosionAnimation="LuaScripts\WorldObjects\Explosions\Detonation\TankExplosion.txt"	//Отбос "мусора" CBatchTrashAnimated при смерти группы
+//	Explosion="LuaScripts\WorldObjects\Explosions\Detonation\TankExplosion.txt"				//Рождение взрыва CBatchExplosion при смерти группы
+[end]
+[DGroup=Gearbox]
+	IsCritical=false
+	LifeK=200
+	convex="transmission_01", 5,20000,"MT_ARMOR"
+	[SphereHitArmorBox]	//+5мм собственной брони
+		FovH=90
+		FovV=120
+		ArmorFront=97
+		ArmorBack=51
+		ArmorTop=21
+		ArmorBottom=21
+		ArmorRight=45
+		ArmorLeft=45
+	[end]
+	LifeRateFrag=20000
+	CollisionLifeRate=50000000		// (x1.25 of TrackL). Импульс, потребный для полного уничтожения группы.
+	CollisionMinImpulse=8000000		// (same to CollisionLifeRate TrackL). Нижнее ограничение импульса, приносящего повреждения группе.
+	AlwaysColDamage=false			// Повреждается от столкновения с любого направления
+	RepairSpeed=0.001667			// (10 минут)
+	RepairSource=0
+	InstantRepair=true
+	RepairDependsOn="Engine", 0.95
+	GuiParam=2, true,true,true
+[end]
+[DGroup=Steering]
+	IsCritical=false
+	LifeK=200
+	convex="transmission_02", 5,20000,"MT_ARMOR"
+	convex="transmission_03", 5,20000,"MT_ARMOR"
+	convex="transmission_04", 5,20000,"MT_ARMOR"
+	convex="transmission_05", 5,20000,"MT_ARMOR"
+	convex="transmission_06", 5,20000,"MT_ARMOR"
+	[SphereHitArmorBox]	//+5мм собственной брони
+		FovH=90
+		FovV=120
+		ArmorFront=97
+		ArmorBack=51
+		ArmorTop=21
+		ArmorBottom=21
+		ArmorRight=45
+		ArmorLeft=45
+	[end]
+	LifeRateFrag=20000
+	CollisionLifeRate=50000000		// (x1.25 of TrackL). Импульс, потребный для полного уничтожения группы.
+	CollisionMinImpulse=8000000		// (same to CollisionLifeRate TrackL). Нижнее ограничение импульса, приносящего повреждения группе.
+	AlwaysColDamage=false			// Повреждается от столкновения с любого направления
+	RepairSpeed=0.001667			// (10 минут)
+	RepairSource=0
+	InstantRepair=true
+	RepairDependsOn="Gearbox", 0.95
+	GuiParam=3, true,true,true
+[end]
+[DGroup=Electrics]
+	IsCritical=false
+	LifeK=100
+	convex="electric_1", 1,10000,"MT_ARMOR"
+	convex="electric_2", 1,10000,"MT_ARMOR"
+	[SphereHitArmorBox]
+		FovH=90
+		FovV=120
+		ArmorFront=92
+		ArmorBack=46
+		ArmorTop=16
+		ArmorBottom=16
+		ArmorRight=40
+		ArmorLeft=40
+	[end]
+	LifeRateFrag=10000
+	DamageArg=5910
+	RepairSpeed=0.003333	// (5 минут)
+	RepairSource=0
+	InstantRepair=true
+	RepairDependsOn="TrackR", 0.95
+	GuiParam=4, false,true,true
+[end]
+[DGroup=Radio]
+	IsCritical=false
+	LifeK=50
+	convex="radio", 1,5000,"MT_ARMOR"
+	[SphereHitArmorBox]
+		FovH=90
+		FovV=120
+		ArmorFront=92
+		ArmorBack=46
+		ArmorTop=16
+		ArmorBottom=16
+		ArmorRight=40
+		ArmorLeft=40
+	[end]
+	LifeRateFrag=5000
+	DamageArg=5912
+	RepairSpeed=0.005556	// (3 минуты)
+	RepairSource=0
+	InstantRepair=true
+	RepairDependsOn="Electrics", 0.95
+	GuiParam=5, true,true,true
+[end]
+[DGroup=FuelTank]
+	IsCritical=false
+	LifeK=100
+	convex="fueltank_1", 1,20000,"MT_ARMOR"
+	convex="fueltank_2", 1,20000,"MT_ARMOR"
+	convex="fueltank_3", 1,20000,"MT_ARMOR"
+	convex="fueltank_4", 1,20000,"MT_ARMOR"
+	convex="fueltank_5", 1,20000,"MT_ARMOR"
+	[SphereHitArmorBox]
+		FovH=90
+		FovV=120
+		ArmorFront=92
+		ArmorBack=46
+		ArmorTop=16
+		ArmorBottom=16
+		ArmorRight=40
+		ArmorLeft=40
+	[end]
+	LifeRateFrag=20000
+	RepairSpeed=0.033333	// (30 секунд)
+	RepairSource=0
+	InstantRepair=false
+	GuiParam=6, false,true,true
+[end]
+[DGroup=OilTank]
+	IsCritical=false
+	LifeK=100
+	convex="oiltank", 1,20000,"MT_ARMOR"
+	[SphereHitArmorBox]
+		FovH=90
+		FovV=120
+		ArmorFront=92
+		ArmorBack=46
+		ArmorTop=16
+		ArmorBottom=16
+		ArmorRight=40
+		ArmorLeft=40
+	[end]
+	LifeRateFrag=20000				// LifeRate для расчета осколочного действия
+	RepairSpeed=0.033333	// (30 секунд)
+	RepairSource=0
+	InstantRepair=false
+	RepairDependsOn="FuelTank", 0.95
+	GuiParam=7, false,true,true
+[end]
+[DGroup=WaterTank]
+	IsCritical=false
+	LifeK=100
+	convex="radiator_1", 1,20000,"MT_ARMOR"
+	convex="radiator_2", 1,20000,"MT_ARMOR"
+	[SphereHitArmorBox]
+		FovH=90
+		FovV=120
+		ArmorFront=92
+		ArmorBack=46
+		ArmorTop=16
+		ArmorBottom=16
+		ArmorRight=40
+		ArmorLeft=40
+	[end]
+	LifeRateFrag=20000
+	DamageArg=5900
+	RepairSpeed=0.033333	// (30 секунд)
+	RepairSource=0
+	InstantRepair=false
+	RepairDependsOn="OilTank", 0.95
+	GuiParam=8, false,true,true
+[end]
+[DGroup=Body]
+	IsCritical=true
+	LifeK=400
+	convex="ammunition_01", 5,20000,"MT_ARMOR"
+	convex="ammunition_02", 5,20000,"MT_ARMOR"
+	convex="ammunition_03", 5,20000,"MT_ARMOR"
+	convex="ammunition_04", 5,20000,"MT_ARMOR"
+	convex="ammunition_05", 5,20000,"MT_ARMOR"
+	convex="ammunition_06", 5,20000,"MT_ARMOR"
+	convex="ammunition_07", 5,20000,"MT_ARMOR"
+	convex="ammunition_08", 5,20000,"MT_ARMOR"
+	[SphereHitArmorBox]	//+5мм собственной брони
+		FovH=90
+		FovV=140
+		ArmorFront=97
+		ArmorBack=51
+		ArmorTop=21
+		ArmorBottom=21
+		ArmorRight=45
+		ArmorLeft=45
+	[end]
+	LifeRateFrag=15000
+	DamageArg=5000
+	SmokeArg=60100
+	SmokeDec=0.02
+	MinHealthToSmoke=0.001
+	CollisionLifeRate=60000000		// (x1.5 of TrackL)
+	CollisionMinImpulse=8000000		// (same to CollisionLifeRate TrackL)
+	MinValidLife=0.02
+	AlwaysColDamage=true
+	BurnLifeReduce=0.03
+	Explosion="LuaScripts\WorldObjects\Explosions\Detonation\TankExplosion.txt"
+	RepairSpeed=0.016667			// (1 минута)
+	RepairSource=0
+	InstantRepair=false
+[end]
+[DGroup=TrackL]
+	IsCritical=false
+	LifeK=200
+	convex="#track_L_front",20,40000,"MT_ARMOR"
+	convex="#track_L_back",20,40000,"MT_ARMOR"
+	convex="#track_L_bot",20,40000,"MT_ARMOR"
+	convex="#track_L_top",20,40000,"MT_ARMOR"
+	[SphereHitArmorBox]
+		FovH=90
+		FovV=140
+		ArmorFront=20
+		ArmorBack=20
+		ArmorTop=116
+		ArmorBottom=20
+		ArmorRight=80
+		ArmorLeft=100
+	[end]
+	LifeRateFrag=60000
+	DamageArg=3000
+	CollisionLifeRate=40000000		// (x40 of AI analog, include mass-normalizing)
+	CollisionMinImpulse=8000000		// (0.2 of CollisionLifeRate)
+	MinValidLife=0.02
+	AlwaysColDamage=false
+	RepairSpeed=0.003333			// (2 минуты)
+	RepairSource=0
+	InstantRepair=true
+	RepairDependsOn="Steering", 0.95
+	GuiParam=9, true,true,true
+[end]
+[DGroup=TrackR]
+	IsCritical=false
+	LifeK=200
+	convex="#track_R_front",20,40000,"MT_ARMOR"
+	convex="#track_R_back",20,40000,"MT_ARMOR"
+	convex="#track_R_bot",20,40000,"MT_ARMOR"
+	convex="#track_R_top",20,40000,"MT_ARMOR"
+	[SphereHitArmorBox]
+		FovH=90
+		FovV=140
+		ArmorFront=20
+		ArmorBack=20
+		ArmorTop=116
+		ArmorBottom=20
+		ArmorRight=20
+		ArmorLeft=100
+	[end]
+	LifeRateFrag=60000
+	DamageArg=4000
+	CollisionLifeRate=40000000		// (x40 of AI analog, include mass-normalizing)
+	CollisionMinImpulse=8000000		// (0.2 of CollisionLifeRate)
+	MinValidLife=0.02
+	AlwaysColDamage=false
+	RepairSpeed=0.003333			// (2 минуты)
+	RepairSource=0
+	InstantRepair=true
+	RepairDependsOn="TrackL", 0.95
+	GuiParam=10, true,true,true
+[end]
+
+//Graphical Damage Groups:
+//Onfield repair sequence is: Visor1->VisorLft1->VisorLft2->VisorRgt1->VisorRgt2
+//Workshop repair sequence is: ExternalArmorL1..L6->ExternalArmorR1..R6->PartsRearL->PartsRearR->FenderFL->FenderFR->PartsLeft->PartsRight->CornerFL->CornerFR->CornerRL->CornerRR
+
+[DGroup=CornerFL]
+	IsCritical=false
+	LifeK=50
+	convex="#body1000_coll",10,40000,"MT_ARMOR"
+	convex="#body1000a_coll",10,40000,"MT_ARMOR"
+	[SphereHitArmorBox]
+		FovH=90
+		FovV=90
+		ArmorFront=10
+		ArmorBack=80
+		ArmorTop=10
+		ArmorBottom=10
+		ArmorRight=80
+		ArmorLeft=10
+	[end]
+	LifeRateFrag=40000
+	DamageArg=1000
+	DamageMaxVal=0.98
+	CollisionLifeRate=19500000		// (x0.375 of TrackL)
+	CollisionMinImpulse=3900000		// (0.2 of CollisionLifeRate)
+	AlwaysColDamage=false
+	RepairSpeed=0.004167	// (4 минуты, при стандартном ускорении "чинилки" =4 это будет 1 минута)
+	RepairSource=4			// Починка только в радиусе "чинилки"
+	InstantRepair=false
+	RepairDependsOn="PartsRight", 0.95
+[end]
+[DGroup=CornerFR]
+	IsCritical=false
+	LifeK=50
+	convex="#body1001_coll",10,40000,"MT_ARMOR"
+	convex="#body1001a_coll",10,40000,"MT_ARMOR"
+	[SphereHitArmorBox]
+		FovH=90
+		FovV=90
+		ArmorFront=10
+		ArmorBack=80
+		ArmorTop=10
+		ArmorBottom=10
+		ArmorRight=10
+		ArmorLeft=80
+	[end]
+	LifeRateFrag=40000
+	DamageArg=1001
+	DamageMaxVal=0.98
+	CollisionLifeRate=15000000		// (x0.375 of TrackL)
+	CollisionMinImpulse=3320000		// (0.2 of CollisionLifeRate)
+	AlwaysColDamage=false
+	RepairSpeed=0.004167	// (4 минуты, при стандартном ускорении "чинилки" =4 это будет 1 минута)
+	RepairSource=4			// Починка только в радиусе "чинилки"
+	InstantRepair=false
+	RepairDependsOn="CornerFL", 0.95
+[end]
+[DGroup=CornerRL]
+	IsCritical=false
+	LifeK=50
+	convex="#body1002_coll",10,40000,"MT_ARMOR"
+	convex="#body1002a_coll",10,40000,"MT_ARMOR"
+	[SphereHitArmorBox]
+		FovH=90
+		FovV=90
+		ArmorFront=80
+		ArmorBack=10
+		ArmorTop=10
+		ArmorBottom=10
+		ArmorRight=80
+		ArmorLeft=10
+	[end]
+	LifeRateFrag=40000
+	DamageArg=1002
+	DamageMaxVal=0.98
+	CollisionLifeRate=15000000		// (x0.375 of TrackL)
+	CollisionMinImpulse=3320000		// (0.2 of CollisionLifeRate)
+	AlwaysColDamage=false
+	RepairSpeed=0.004167	// (4 минуты, при стандартном ускорении "чинилки" =4 это будет 1 минута)
+	RepairSource=4			// Починка только в радиусе "чинилки"
+	InstantRepair=false
+	RepairDependsOn="CornerFR", 0.95
+[end]
+[DGroup=CornerRR]
+	IsCritical=false
+	LifeK=50
+	convex="#body1003_coll",10,40000,"MT_ARMOR"
+	convex="#body1003a_coll",10,40000,"MT_ARMOR"
+	SphereHitProtection=10
+	[SphereHitArmorBox]
+		FovH=90
+		FovV=90
+		ArmorFront=80
+		ArmorBack=10
+		ArmorTop=10
+		ArmorBottom=10
+		ArmorRight=10
+		ArmorLeft=80
+	[end]
+	LifeRateFrag=40000
+	DamageArg=1003
+	DamageMaxVal=0.98
+	CollisionLifeRate=15000000		// (x0.375 of TrackL)
+	CollisionMinImpulse=3320000		// (0.2 of CollisionLifeRate)
+	AlwaysColDamage=false
+	RepairSpeed=0.004167	// (4 минуты, при стандартном ускорении "чинилки" =4 это будет 1 минута)
+	RepairSource=4			// Починка только в радиусе "чинилки"
+	InstantRepair=false
+	RepairDependsOn="CornerRL", 0.95
+[end]
+// Detachable
+[DGroup=ExternalArmorL1]
+	IsCritical=false
+	LifeK=10
+	convex="#HullScreenL_01",5,10000,"MT_ARMOR"
+	[SphereHitArmorBox]
+		FovH=20
+		FovV=160
+		ArmorFront=5
+		ArmorBack=5
+		ArmorTop=5
+		ArmorBottom=5
+		ArmorRight=80
+		ArmorLeft=5
+	[end]
+	LifeRateFrag=10000
+	DamageArg=1011
+	CollisionLifeRate=15000000		// (x0.375 of TrackL)
+	CollisionMinImpulse=3320000		// (0.2 of CollisionLifeRate)
+	AlwaysColDamage=false
+	RepairSpeed=0.008333	// (2 минуты, при стандартном ускорении "чинилки" =4 это будет 0.5 минуты)
+	RepairSource=4			// Починка только в радиусе "чинилки"
+	InstantRepair=true
+[end]
+[DGroup=ExternalArmorL2]
+	IsCritical=false
+	LifeK=10
+	convex="#HullScreenL_02",5,10000,"MT_ARMOR"
+	[SphereHitArmorBox]
+		FovH=20
+		FovV=160
+		ArmorFront=5
+		ArmorBack=5
+		ArmorTop=5
+		ArmorBottom=5
+		ArmorRight=80
+		ArmorLeft=5
+	[end]
+	LifeRateFrag=10000
+	DamageArg=1012
+	CollisionLifeRate=15000000		// (x0.375 of TrackL)
+	CollisionMinImpulse=3320000		// (0.2 of CollisionLifeRate)
+	AlwaysColDamage=false
+	RepairSpeed=0.008333	// (2 минуты, при стандартном ускорении "чинилки" =4 это будет 0.5 минуты)
+	RepairSource=4			// Починка только в радиусе "чинилки"
+	InstantRepair=true
+	RepairDependsOn="ExternalArmorL1", 0.95
+[end]
+[DGroup=ExternalArmorL3]
+	IsCritical=false
+	LifeK=10
+	convex="#HullScreenL_03",5,10000,"MT_ARMOR"
+	[SphereHitArmorBox]
+		FovH=20
+		FovV=160
+		ArmorFront=5
+		ArmorBack=5
+		ArmorTop=5
+		ArmorBottom=5
+		ArmorRight=80
+		ArmorLeft=5
+	[end]
+	LifeRateFrag=10000
+	DamageArg=1013
+	CollisionLifeRate=15000000		// (x0.375 of TrackL)
+	CollisionMinImpulse=3320000		// (0.2 of CollisionLifeRate)
+	AlwaysColDamage=false
+	RepairSpeed=0.008333	// (2 минуты, при стандартном ускорении "чинилки" =4 это будет 0.5 минуты)
+	RepairSource=4			// Починка только в радиусе "чинилки"
+	InstantRepair=true
+	RepairDependsOn="ExternalArmorL2", 0.95
+[end]
+[DGroup=ExternalArmorL4]
+	IsCritical=false
+	LifeK=10
+	convex="#HullScreenL_04",5,10000,"MT_ARMOR"
+	[SphereHitArmorBox]
+		FovH=20
+		FovV=160
+		ArmorFront=5
+		ArmorBack=5
+		ArmorTop=5
+		ArmorBottom=5
+		ArmorRight=80
+		ArmorLeft=5
+	[end]
+	LifeRateFrag=10000
+	DamageArg=1014
+	CollisionLifeRate=15000000		// (x0.375 of TrackL)
+	CollisionMinImpulse=3320000		// (0.2 of CollisionLifeRate)
+	AlwaysColDamage=false
+	RepairSpeed=0.008333	// (2 минуты, при стандартном ускорении "чинилки" =4 это будет 0.5 минуты)
+	RepairSource=4			// Починка только в радиусе "чинилки"
+	InstantRepair=true
+	RepairDependsOn="ExternalArmorL3", 0.95
+[end]
+[DGroup=ExternalArmorL5]
+	IsCritical=false
+	LifeK=10
+	convex="#HullScreenL_05",5,10000,"MT_ARMOR"
+	[SphereHitArmorBox]
+		FovH=20
+		FovV=160
+		ArmorFront=5
+		ArmorBack=5
+		ArmorTop=5
+		ArmorBottom=5
+		ArmorRight=80
+		ArmorLeft=5
+	[end]
+	LifeRateFrag=10000
+	DamageArg=1015
+	CollisionLifeRate=15000000		// (x0.375 of TrackL)
+	CollisionMinImpulse=3320000		// (0.2 of CollisionLifeRate)
+	AlwaysColDamage=false
+	RepairSpeed=0.008333	// (2 минуты, при стандартном ускорении "чинилки" =4 это будет 0.5 минуты)
+	RepairSource=4			// Починка только в радиусе "чинилки"
+	InstantRepair=true
+	RepairDependsOn="ExternalArmorL4", 0.95
+[end]
+[DGroup=ExternalArmorL6]
+	IsCritical=false
+	LifeK=10
+	convex="#HullScreenL_06",5,10000,"MT_ARMOR"
+	[SphereHitArmorBox]
+		FovH=20
+		FovV=160
+		ArmorFront=5
+		ArmorBack=5
+		ArmorTop=5
+		ArmorBottom=5
+		ArmorRight=80
+		ArmorLeft=5
+	[end]
+	LifeRateFrag=10000
+	DamageArg=1016
+	CollisionLifeRate=15000000		// (x0.375 of TrackL)
+	CollisionMinImpulse=3320000		// (0.2 of CollisionLifeRate)
+	AlwaysColDamage=false
+	RepairSpeed=0.008333	// (2 минуты, при стандартном ускорении "чинилки" =4 это будет 0.5 минуты)
+	RepairSource=4			// Починка только в радиусе "чинилки"
+	InstantRepair=true
+	RepairDependsOn="ExternalArmorL5", 0.95
+[end]
+[DGroup=ExternalArmorR1]
+	IsCritical=false
+	LifeK=10
+	convex="#HullScreenR_01",5,10000,"MT_ARMOR"
+	[SphereHitArmorBox]
+		FovH=20
+		FovV=160
+		ArmorFront=5
+		ArmorBack=5
+		ArmorTop=5
+		ArmorBottom=5
+		ArmorRight=80
+		ArmorLeft=5
+	[end]
+	LifeRateFrag=10000
+	DamageArg=1021
+	CollisionLifeRate=15000000		// (x0.375 of TrackL)
+	CollisionMinImpulse=3320000		// (0.2 of CollisionLifeRate)
+	AlwaysColDamage=false
+	RepairSpeed=0.008333	// (2 минуты, при стандартном ускорении "чинилки" =4 это будет 0.5 минуты)
+	RepairSource=4			// Починка только в радиусе "чинилки"
+	InstantRepair=true
+	RepairDependsOn="ExternalArmorL6", 0.95
+[end]
+[DGroup=ExternalArmorR2]
+	IsCritical=false
+	LifeK=10
+	convex="#HullScreenR_02",5,10000,"MT_ARMOR"
+	[SphereHitArmorBox]
+		FovH=20
+		FovV=160
+		ArmorFront=5
+		ArmorBack=5
+		ArmorTop=5
+		ArmorBottom=5
+		ArmorRight=80
+		ArmorLeft=5
+	[end]
+	LifeRateFrag=10000
+	DamageArg=1022
+	CollisionLifeRate=15000000		// (x0.375 of TrackL)
+	CollisionMinImpulse=3320000		// (0.2 of CollisionLifeRate)
+	AlwaysColDamage=false
+	RepairSpeed=0.008333	// (2 минуты, при стандартном ускорении "чинилки" =4 это будет 0.5 минуты)
+	RepairSource=4			// Починка только в радиусе "чинилки"
+	InstantRepair=true
+	RepairDependsOn="ExternalArmorR1", 0.95
+[end]
+[DGroup=ExternalArmorR3]
+	IsCritical=false
+	LifeK=10
+	convex="#HullScreenR_03",5,10000,"MT_ARMOR"
+	[SphereHitArmorBox]
+		FovH=20
+		FovV=160
+		ArmorFront=5
+		ArmorBack=5
+		ArmorTop=5
+		ArmorBottom=5
+		ArmorRight=80
+		ArmorLeft=5
+	[end]
+	LifeRateFrag=10000
+	DamageArg=1023
+	CollisionLifeRate=15000000		// (x0.375 of TrackL)
+	CollisionMinImpulse=3320000		// (0.2 of CollisionLifeRate)
+	AlwaysColDamage=false
+	RepairSpeed=0.008333	// (2 минуты, при стандартном ускорении "чинилки" =4 это будет 0.5 минуты)
+	RepairSource=4			// Починка только в радиусе "чинилки"
+	InstantRepair=true
+	RepairDependsOn="ExternalArmorR2", 0.95
+[end]
+[DGroup=ExternalArmorR4]
+	IsCritical=false
+	LifeK=10
+	convex="#HullScreenR_04",5,10000,"MT_ARMOR"
+	[SphereHitArmorBox]
+		FovH=20
+		FovV=160
+		ArmorFront=5
+		ArmorBack=5
+		ArmorTop=5
+		ArmorBottom=5
+		ArmorRight=80
+		ArmorLeft=5
+	[end]
+	LifeRateFrag=10000
+	DamageArg=1024
+	CollisionLifeRate=15000000		// (x0.375 of TrackL)
+	CollisionMinImpulse=3320000		// (0.2 of CollisionLifeRate)
+	AlwaysColDamage=false
+	RepairSpeed=0.008333	// (2 минуты, при стандартном ускорении "чинилки" =4 это будет 0.5 минуты)
+	RepairSource=4			// Починка только в радиусе "чинилки"
+	InstantRepair=true
+	RepairDependsOn="ExternalArmorR3", 0.95
+[end]
+[DGroup=ExternalArmorR5]
+	IsCritical=false
+	LifeK=10
+	convex="#HullScreenR_05",5,10000,"MT_ARMOR"
+	[SphereHitArmorBox]
+		FovH=20
+		FovV=160
+		ArmorFront=5
+		ArmorBack=5
+		ArmorTop=5
+		ArmorBottom=5
+		ArmorRight=80
+		ArmorLeft=5
+	[end]
+	LifeRateFrag=10000
+	DamageArg=1025
+	CollisionLifeRate=15000000		// (x0.375 of TrackL)
+	CollisionMinImpulse=3320000		// (0.2 of CollisionLifeRate)
+	AlwaysColDamage=false
+	RepairSpeed=0.008333	// (2 минуты, при стандартном ускорении "чинилки" =4 это будет 0.5 минуты)
+	RepairSource=4			// Починка только в радиусе "чинилки"
+	InstantRepair=true
+	RepairDependsOn="ExternalArmorR4", 0.95
+[end]
+[DGroup=ExternalArmorR6]
+	IsCritical=false
+	LifeK=10
+	convex="#HullScreenR_06",5,10000,"MT_ARMOR"
+	[SphereHitArmorBox]
+		FovH=20
+		FovV=160
+		ArmorFront=5
+		ArmorBack=5
+		ArmorTop=5
+		ArmorBottom=5
+		ArmorRight=80
+		ArmorLeft=5
+	[end]
+	LifeRateFrag=10000
+	DamageArg=1026
+	CollisionLifeRate=15000000		// (x0.375 of TrackL)
+	CollisionMinImpulse=3320000		// (0.2 of CollisionLifeRate)
+	AlwaysColDamage=false
+	RepairSpeed=0.008333	// (2 минуты, при стандартном ускорении "чинилки" =4 это будет 0.5 минуты)
+	RepairSource=4			// Починка только в радиусе "чинилки"
+	InstantRepair=true
+	RepairDependsOn="ExternalArmorR5", 0.95
+[end]
+[DGroup=PartsRearL]
+	IsCritical=false
+	LifeK=10
+	convex="#bodyrearBoxL_coll",5,10000,"MT_ARMOR"
+	[SphereHitArmorBox]
+		FovH=120
+		FovV=90
+		ArmorFront=100
+		ArmorBack=5
+		ArmorTop=5
+		ArmorBottom=5
+		ArmorRight=5
+		ArmorLeft=5
+	[end]
+	LifeRateFrag=10000
+	DamageArg=1029
+	DamageMaxVal=1.0
+	CollisionLifeRate=15000000		// (x0.375 of TrackL)
+	CollisionMinImpulse=3320000		// (0.2 of CollisionLifeRate)
+	AlwaysColDamage=false
+	RepairSpeed=0.008333	// (2 минуты, при стандартном ускорении "чинилки" =4 это будет 0.5 минуты)
+	RepairSource=4			// Починка только в радиусе "чинилки"
+	InstantRepair=false
+[end]
+[DGroup=PartsRearR]
+	IsCritical=false
+	LifeK=10
+	convex="#bodyrearBoxR_coll",5,10000,"MT_ARMOR"
+	[SphereHitArmorBox]
+		FovH=120
+		FovV=90
+		ArmorFront=100
+		ArmorBack=5
+		ArmorTop=5
+		ArmorBottom=5
+		ArmorRight=5
+		ArmorLeft=5
+	[end]
+	LifeRateFrag=10000
+	DamageArg=1030
+	DamageMaxVal=1.0
+	CollisionLifeRate=15000000		// (x0.375 of TrackL)
+	CollisionMinImpulse=3320000		// (0.2 of CollisionLifeRate)
+	AlwaysColDamage=false
+	RepairSpeed=0.008333	// (2 минуты, при стандартном ускорении "чинилки" =4 это будет 0.5 минуты)
+	RepairSource=4			// Починка только в радиусе "чинилки"
+	InstantRepair=false
+	RepairDependsOn="PartsRearL", 0.95
+[end]
+[DGroup=FenderFL]
+	IsCritical=false
+	LifeK=10
+	convex="#track_cover_FL_01",3,5000,"MT_ARMOR"
+	[SphereHitArmorBox]
+		FovH=90
+		FovV=90
+		ArmorFront=3
+		ArmorBack=3
+		ArmorTop=3
+		ArmorBottom=3
+		ArmorRight=120
+		ArmorLeft=3
+	[end]
+	LifeRateFrag=5000
+	DamageArg=1027
+	CollisionLifeRate=15000000		// (x0.375 of TrackL)
+	CollisionMinImpulse=3320000		// (0.2 of CollisionLifeRate)
+	AlwaysColDamage=false
+	RepairSpeed=0.008333	// (2 минуты, при стандартном ускорении "чинилки" =4 это будет 0.5 минуты)
+	RepairSource=4			// Починка только в радиусе "чинилки"
+	InstantRepair=true
+	RepairDependsOn="PartsRearR", 0.95
+[end]
+[DGroup=FenderFR]
+	IsCritical=false
+	LifeK=10
+	convex="#track_cover_FR_01",3,5000,"MT_ARMOR"
+	[SphereHitArmorBox]
+		FovH=90
+		FovV=90
+		ArmorFront=3
+		ArmorBack=3
+		ArmorTop=3
+		ArmorBottom=3
+		ArmorRight=120
+		ArmorLeft=3
+	[end]
+	LifeRateFrag=5000
+	DamageArg=1028
+	CollisionLifeRate=15000000		// (x0.375 of TrackL)
+	CollisionMinImpulse=3320000		// (0.2 of CollisionLifeRate)
+	AlwaysColDamage=false
+	RepairSpeed=0.008333	// (2 минуты, при стандартном ускорении "чинилки" =4 это будет 0.5 минуты)
+	RepairSource=4			// Починка только в радиусе "чинилки"
+	InstantRepair=true
+	RepairDependsOn="FenderFL", 0.95
+[end]
+[DGroup=PartsLeft]
+	IsCritical=false
+	LifeK=10
+	convex="#side_6_1010",8,10000,"MT_ARMOR"
+	[SphereHitArmorBox]
+		FovH=120
+		FovV=90
+		ArmorFront=8
+		ArmorBack=8
+		ArmorTop=8
+		ArmorBottom=8
+		ArmorRight=100
+		ArmorLeft=8
+	[end]
+	LifeRateFrag=10000
+	DamageArg=1010
+	DamageMaxVal=1.0
+	CollisionLifeRate=15000000		// (x0.375 of TrackL)
+	CollisionMinImpulse=3320000		// (0.2 of CollisionLifeRate)
+	AlwaysColDamage=false
+	RepairSpeed=0.008333	// (2 минуты, при стандартном ускорении "чинилки" =4 это будет 0.5 минуты)
+	RepairSource=4			// Починка только в радиусе "чинилки"
+	InstantRepair=false
+	RepairDependsOn="FenderFR", 0.95
+[end]
+[DGroup=PartsRight]
+	IsCritical=false
+	LifeK=10
+	convex="#side_7_1009",8,10000,"MT_ARMOR"
+	[SphereHitArmorBox]
+		FovH=120
+		FovV=90
+		ArmorFront=8
+		ArmorBack=8
+		ArmorTop=8
+		ArmorBottom=8
+		ArmorRight=8
+		ArmorLeft=100
+	[end]
+	LifeRateFrag=10000
+	DamageArg=1009
+	DamageMaxVal=1.0
+	CollisionLifeRate=15000000		// (x0.375 of TrackL)
+	CollisionMinImpulse=3320000		// (0.2 of CollisionLifeRate)
+	AlwaysColDamage=false
+	RepairSpeed=0.008333	// (2 минуты, при стандартном ускорении "чинилки" =4 это будет 0.5 минуты)
+	RepairSource=4			// Починка только в радиусе "чинилки"
+	InstantRepair=false
+	RepairDependsOn="PartsLeft", 0.95
+[end]
+
+[DGroup=Visor1]
+	IsCritical=false
+	LifeK=2
+	convex="sight1_1051",5,500,"MT_ARMOR"
+	[SphereHitArmorBox]
+		FovH=60
+		FovV=15
+		ArmorFront=5
+		ArmorBack=46
+		ArmorTop=16
+		ArmorBottom=16
+		ArmorRight=40
+		ArmorLeft=40
+	[end]
+	LifeRateFrag=5000
+	DamageArg=1051
+	RepairSpeed=0.033333	// (0.5 минуты)
+	RepairSource=0
+	InstantRepair=true
+	GuiParam=11, true,true,true
+[end]
+[DGroup=VisorLft1]
+	IsCritical=false
+	LifeK=2
+	convex="sight_1053",1,500,"MT_ARMOR"
+	SphereHitProtection=8
+	[SphereHitArmorBox]
+		FovH=60
+		FovV=20
+		ArmorFront=1
+		ArmorBack=1
+		ArmorTop=20
+		ArmorBottom=16
+		ArmorRight=20
+		ArmorLeft=20
+	[end]
+	LifeRateFrag=5000
+	DamageArg=1053
+	RepairSpeed=0.033333	// (0.5 минуты)
+	RepairSource=0
+	InstantRepair=true
+	RepairDependsOn="Visor1", 0.95
+	GuiParam=11, true,true,true
+[end]
+[DGroup=VisorLft2]
+	IsCritical=false
+	LifeK=2
+	convex="sight_1054",1,500,"MT_ARMOR"
+	SphereHitProtection=8
+	[SphereHitArmorBox]
+		FovH=60
+		FovV=20
+		ArmorFront=1
+		ArmorBack=1
+		ArmorTop=20
+		ArmorBottom=16
+		ArmorRight=20
+		ArmorLeft=20
+	[end]
+	LifeRateFrag=5000
+	DamageArg=1054
+	RepairSpeed=0.033333	// (0.5 минуты)
+	RepairSource=0
+	InstantRepair=true
+	RepairDependsOn="VisorLft1", 0.95
+	GuiParam=11, true,true,true
+[end]
+[DGroup=VisorRgt1]
+	IsCritical=false
+	LifeK=2
+	convex="sight_1055",1,500,"MT_ARMOR"
+	SphereHitProtection=8
+	[SphereHitArmorBox]
+		FovH=60
+		FovV=20
+		ArmorFront=1
+		ArmorBack=1
+		ArmorTop=20
+		ArmorBottom=16
+		ArmorRight=20
+		ArmorLeft=20
+	[end]
+	LifeRateFrag=5000
+	DamageArg=1055
+	RepairSpeed=0.033333	// (0.5 минуты)
+	RepairSource=0
+	InstantRepair=true
+	RepairDependsOn="VisorLft2", 0.95
+	GuiParam=11, true,true,true
+[end]
+[DGroup=VisorRgt2]
+	IsCritical=false
+	LifeK=2
+	convex="sight_1056",1,500,"MT_ARMOR"
+	SphereHitProtection=8
+	[SphereHitArmorBox]
+		FovH=60
+		FovV=20
+		ArmorFront=1
+		ArmorBack=1
+		ArmorTop=20
+		ArmorBottom=16
+		ArmorRight=20
+		ArmorLeft=20
+	[end]
+	LifeRateFrag=5000
+	DamageArg=1056
+	RepairSpeed=0.033333	// (0.5 минуты)
+	RepairSource=0
+	InstantRepair=true
+	RepairDependsOn="VisorRgt1", 0.95
+	GuiParam=11, true,true,true
+[end]
+
+[trashspawner]
+	[spawn]
+		solidtrash="LuaScripts\WorldObjects\Trash\TankTrash\_PzV-D-trash_hull_scrnL1.txt"
+		exp_SpawnIf="ArgVal(1011)>0.998 && ArgVal(5000)<1.0"
+		Position=2.152,1.413,-1.700
+		SpawnDir=0,1,-2
+	[end]
+	[spawn]
+		solidtrash="LuaScripts\WorldObjects\Trash\TankTrash\_PzV-D-trash_hull_scrnL2.txt"
+		exp_SpawnIf="ArgVal(1012)>0.998 && ArgVal(5000)<1.0"
+		Position=1.119,1.413,-1.700
+		SpawnDir=0,1,-2
+	[end]
+	[spawn]
+		solidtrash="LuaScripts\WorldObjects\Trash\TankTrash\_PzV-D-trash_hull_scrnL3.txt"
+		exp_SpawnIf="ArgVal(1013)>0.998 && ArgVal(5000)<1.0"
+		Position=0.134,1.413,-1.700
+		SpawnDir=0,1,-2
+	[end]
+	[spawn]
+		solidtrash="LuaScripts\WorldObjects\Trash\TankTrash\_PzV-D-trash_hull_scrnL4.txt"
+		exp_SpawnIf="ArgVal(1014)>0.998 && ArgVal(5000)<1.0"
+		Position=-0.826,1.413,-1.700
+		SpawnDir=0,1,-2
+	[end]
+	[spawn]
+		solidtrash="LuaScripts\WorldObjects\Trash\TankTrash\_PzV-D-trash_hull_scrnL5.txt"
+		exp_SpawnIf="ArgVal(1015)>0.998 && ArgVal(5000)<1.0"
+		Position=-1.796,1.413,-1.700
+		SpawnDir=0,1,-2
+	[end]
+	[spawn]
+		solidtrash="LuaScripts\WorldObjects\Trash\TankTrash\_PzV-D-trash_hull_scrnL6.txt"
+		exp_SpawnIf="ArgVal(1016)>0.998 && ArgVal(5000)<1.0"
+		Position=-2.726,1.413,-1.700
+		SpawnDir=0,1,-2
+	[end]
+	[spawn]
+		solidtrash="LuaScripts\WorldObjects\Trash\TankTrash\_PzV-D-trash_hull_scrnR1.txt"
+		exp_SpawnIf="ArgVal(1021)>0.998 && ArgVal(5000)<1.0"
+		Position=2.152,1.413,1.700
+		SpawnDir=0,1,2
+	[end]
+	[spawn]
+		solidtrash="LuaScripts\WorldObjects\Trash\TankTrash\_PzV-D-trash_hull_scrnR2.txt"
+		exp_SpawnIf="ArgVal(1022)>0.998 && ArgVal(5000)<1.0"
+		Position=1.119,1.413,1.700
+		SpawnDir=0,1,2
+	[end]
+	[spawn]
+		solidtrash="LuaScripts\WorldObjects\Trash\TankTrash\_PzV-D-trash_hull_scrnR3.txt"
+		exp_SpawnIf="ArgVal(1023)>0.998 && ArgVal(5000)<1.0"
+		Position=0.134,1.413,1.700
+		SpawnDir=0,1,2
+	[end]
+	[spawn]
+		solidtrash="LuaScripts\WorldObjects\Trash\TankTrash\_PzV-D-trash_hull_scrnR4.txt"
+		exp_SpawnIf="ArgVal(1024)>0.998 && ArgVal(5000)<1.0"
+		Position=-0.826,1.413,1.700
+		SpawnDir=0,1,2
+	[end]
+	[spawn]
+		solidtrash="LuaScripts\WorldObjects\Trash\TankTrash\_PzV-D-trash_hull_scrnR5.txt"
+		exp_SpawnIf="ArgVal(1025)>0.998 && ArgVal(5000)<1.0"
+		Position=-1.796,1.413,1.700
+		SpawnDir=0,1,2
+	[end]
+	[spawn]
+		solidtrash="LuaScripts\WorldObjects\Trash\TankTrash\_PzV-D-trash_hull_scrnR6.txt"
+		exp_SpawnIf="ArgVal(1026)>0.998 && ArgVal(5000)<1.0"
+		Position=-2.726,1.413,1.700
+		SpawnDir=0,1,2
+	[end]
+	[spawn]
+		solidtrash="LuaScripts\WorldObjects\Trash\TankTrash\_PzV-D-trash_hull_track.txt"
+		exp_SpawnIf="ArgVal(1010)>0.998 && ArgVal(5000)<1.0"
+		Position=-1.896,1.984,-1.468
+		Rotation=0,270,30
+		SpawnDir=0,2,-2
+	[end]
+	[spawn]
+		solidtrash="LuaScripts\WorldObjects\Trash\TankTrash\_PzV-D-trash_hull_track.txt"
+		exp_SpawnIf="ArgVal(1010)>0.998 && ArgVal(5000)<1.0"
+		Position=-2.581,1.984,-1.468
+		Rotation=0,270,30
+		SpawnDir=0,2,-2
+	[end]
+	[spawn]
+		solidtrash="LuaScripts\WorldObjects\Trash\TankTrash\_PzV-D-trash_hull_track.txt"
+		exp_SpawnIf="ArgVal(1010)>0.998 && ArgVal(5000)<1.0"
+		Position=-3.255,1.984,-1.468
+		Rotation=0,270,30
+		SpawnDir=0,2,-2
+	[end]
+	[spawn]
+		solidtrash="LuaScripts\WorldObjects\Trash\TankTrash\_PzV-D-trash_hull_track.txt"
+		exp_SpawnIf="ArgVal(1009)>0.998 && ArgVal(5000)<1.0"
+		Position=-1.896,1.984,1.468
+		Rotation=0,90,30
+		SpawnDir=0,2,2
+	[end]
+	[spawn]
+		solidtrash="LuaScripts\WorldObjects\Trash\TankTrash\_PzV-D-trash_hull_track.txt"
+		exp_SpawnIf="ArgVal(1009)>0.998 && ArgVal(5000)<1.0"
+		Position=-2.581,1.984,1.468
+		Rotation=0,90,30
+		SpawnDir=0,2,2
+	[end]
+	[spawn]
+		solidtrash="LuaScripts\WorldObjects\Trash\TankTrash\_PzV-D-trash_hull_track.txt"
+		exp_SpawnIf="ArgVal(1009)>0.998 && ArgVal(5000)<1.0"
+		Position=-3.255,1.984,1.468
+		Rotation=0,90,30
+		SpawnDir=0,2,2
+	[end]
+	[spawn]
+		solidtrash="LuaScripts\WorldObjects\Trash\TankTrash\_PzV-D-trash_hull_track.txt"
+		exp_SpawnIf="ArgVal(1009)>0.998 && ArgVal(5000)<1.0"
+		Position=-3.255,1.984,1.468
+		Rotation=0,90,30
+		SpawnDir=0,2,2
+	[end]
+	[spawn]
+		solidtrash="LuaScripts\WorldObjects\Trash\TankTrash\_PzV-D-trash_box_L.txt"
+		exp_SpawnIf="ArgVal(1029)>0.998 && ArgVal(5000)<1.0"
+		Position=-3.554,1.632,-1.121
+		Rotation=0,0,0
+		SpawnDir=-2,0,-0.5
+	[end]
+	[spawn]
+		solidtrash="LuaScripts\WorldObjects\Trash\TankTrash\_PzV-D-trash_box_R.txt"
+		exp_SpawnIf="ArgVal(1030)>0.998 && ArgVal(5000)<1.0"
+		Position=-3.554,1.632,1.121
+		Rotation=0,0,0
+		SpawnDir=-2,0,0.5
+	[end]
+	[spawn]
+		solidtrash="LuaScripts\WorldObjects\Trash\TankTrash\_PzV-D-trash_fender_FL.txt"
+		exp_SpawnIf="ArgVal(1027)>0.998 && ArgVal(5000)<1.0"
+		Position=2.983,1.327,-1.287
+		Rotation=0,0,0
+		SpawnDir=1,1,-1
+	[end]
+	[spawn]
+		solidtrash="LuaScripts\WorldObjects\Trash\TankTrash\_PzV-D-trash_fender_FR.txt"
+		exp_SpawnIf="ArgVal(1027)>0.998 && ArgVal(5000)<1.0"
+		Position=2.983,1.327,-1.287
+		Rotation=0,0,0
+		SpawnDir=1,1,1
+	[end]
+[end]
+
+//End of Graphicsl Damage Groups
+
+[GUIDGroups]
+	DGroup="Engine"
+	DGroup="Electrics"
+	DGroup="WaterTank"
+	DGroup="OilTank"
+	DGroup="FuelTank"
+	DGroup="TrackL"
+	DGroup="TrackR"
+	DGroup="Gearbox"
+	DGroup="Steering"
+	DGroup="Radio"
+[end]
+
+
+logtreshold=0.0001
+
+[Entrance]
+	EntrancePos= 1.152,1.000,-2.370
+	EntranceRot= 0,315,0
+	JumpDir= 0,0,0
+[end]
+
+///// CPlatformTank properties
+
+LeverArgs=130,140
+GearArg=15
+
+ClosedHatch=false // True - люк будет всегда закрытым
+ClosedWindow=false  // True - форточка будет всегда закрытой
+CanopyOpenByDefault=false
+WindowOpenByDefault=true
+BlockControlsBotOutside="VC_GAS","VC_TURN" // Блокирование управления при вылезшем водителе
+
+OpenCockpitArg=30
+CockpitLightArg=30000,0.25,0.251,0.6
+OpenWindowArg=31
+WindowLightArg=30010,0.45,0.55,0.6
+
+hatchtime=3.75	//Время анинации от Arg=0 до Arg=1.0. Требуемое время анимации от Arg=0.1 до Arg=0.9 определено временем анимации персонажа (3 сек), откуда значение параметра 1.0/0.8*3=3.75.
+windowtime=4.0
+
+TechChatCrewRole=1	//Роль для техночата люков (Driver: 1, Gunner: 3, Commander: 5, Machinegunner: 7, Radioman: 9)
+
+HeadLightArg=60200
+ElectricFloodLightArg=60310
+ElectricPointLightArg=60210
+
+SetCockpitArgs=true	// true - автоматическое выставление значений анимаций в систему сетевых команд с указанным флагом сетевой передачи, false - в самолётах это делается в коде или в случае работы объекта только на приём
+
+//CockpitArg= FetchType, CmdID, SubcmdID, ArgNum, ArgValDefault, SmoothingType, SmoothingPower, NetworkFlag
+//FetchType=-1: аргумент в объекте не забирается для анимирования
+//FetchType=-2: аргумент в объекте забирается для анимирования из самого объекта
+//FetchType=-3: аргумент в объекте забирается для анимирования по сетевым командам parent-объекта
+//FetchType>=0: аргумент в объекте забирается для анимирования по сетевым командам child-объекта с укзанным Attach ID
+//CmdID=[0..999]: ID сетевой команды низкого качества, используемой для передачи значения.
+//CmdID=[1000..1999]: ID сетевой команды среднего качества, используемой для передачи значения.
+//SubcmdID=[0..3]: ID сетевой подкоманды команды низкого качества.
+//SubcmdID=[0..1]: ID сетевой подкоманды команды среднего качества.
+//ArgNum: номер аргумента анимации устанавливаемого в/из команды.
+//ArgValDefault: дефолтное значение аргумента анимации в случае, если команда не приходила.
+//SmoothingType: smooth_clamp - сглаживаение не-круговых анимаций
+//SmoothingType: smooth_wrap - сглаживаение круговых анимаций
+//SmoothingPower: постоянная времени сглаживания
+//NetworkFlag="": отправки команды в сеть нет и нет выставления команды в случае, если SetCockpitArgs=false
+//NetworkFlag="low_freq": отправка в сеть целиком команды, содержащей указанный аргумент в случае его изменения, не чаще низкой частоты
+//NetworkFlag="med_freq": отправка в сеть целиком команды, содержащей указанный аргумент в случае его изменения, не чаще средней частоты
+//NetworkFlag="high_freq": отправка в сеть целиком команды, содержащей указанный аргумент в случае его изменения, не чаще высокой частоты
+//NetworkFlag="granted_single": отправка в сеть целиком команды, содержащей указанный аргумент в случае его изменения, с применением гарантированного пакета состояния
+
+CockpitArg = -2,0000, 0, 60210, 0.0, "smooth_clamp", 0.5, "granted_single"	// Electric point lights
+CockpitArg = -2,0000, 1, 60310, 0.0, "smooth_clamp", 0.5, "granted_single"	// Electric flood light
+CockpitArg = -2,0000, 2,  6126, 0.0, "", 0.0, "granted_single"				// CEI_IGNITION
+CockpitArg = -2,0000, 3,  6080, 0.0, "smooth_clamp", 0.5, "granted_single"	// Power Mass switch animation
+CockpitArg = -2,0001, 0, 61650, 0.0, "smooth_clamp", 0.5, "granted_single"	// CEI_COOLANT_BOIL
+CockpitArg = -2,0001, 1, 61350, 0.0, "smooth_clamp", 0.5, "granted_single"	// Fire extinguisher effect
+
+CockpitArg = -2,0050, 0, 6050, 0.0, "smooth_wrap", 0.5, "med_freq"	// Radio device animation
+
+CockpitArg = -2,0051, 0, 5020, 0.0, "smooth_clamp", 0.5, "med_freq"	// CEI_RPM
+CockpitArg = -2,0051, 1, 13, 0.5, "smooth_clamp", 0.7, "med_freq"	// LeverArgs
+CockpitArg = -2,0051, 2, 14, 0.5, "smooth_clamp", 0.7, "med_freq"	// LeverArgs
+CockpitArg = -2,0051, 3, 15, 0.214, "smooth_clamp", 0.7, "med_freq"	// GearArg
+
+CockpitArg = -2,0052, 0, 22, 0.0, "smooth_clamp", 0.5, "low_freq"	// CEI_RPMPULSE
+CockpitArg = -2,0052, 1, 12, 0.0, "smooth_clamp", 0.9, "low_freq"	// CEI_THROTTLE
+CockpitArg = -2,0052, 2, 6005, 0.0, "smooth_clamp", 0.9, "low_freq"	// CEI_COOLANT_T
+CockpitArg = -2,0052, 3, 25, 0.0, "smooth_clamp", 0.5, "low_freq"	// CEI_OIL_P
+
+CockpitArg = -2,0053, 0, 10, 0.0, "smooth_clamp", 0.9, "low_freq"	// CEI_CLUTCH
+CockpitArg = -2,0053, 1, 11, 0.0, "smooth_clamp", 0.9, "low_freq"	// CEI_BRAKE
+CockpitArg = -2,0053, 2, 21, 0.5, "smooth_clamp", 0.9, "low_freq"	// CEI_SPEED
+CockpitArg = -2,0053, 3, 6055, 0.5, "smooth_wrap", 0.9, "low_freq"	// PPI_COMPASS
+
+CockpitArg = 1, 0100, 0, 9109, 0.0, "smooth_clamp", 0.0, ""		// Снаряды
+CockpitArg = 1, 0100, 1, 9008, 0.0, "smooth_clamp", 0.0, ""		// Магазины спаренного пулемёта
+
+//CPhysIndicators
+//indicator="PPI_SECONDS",6001, 0,60,1,128	//Name,Arg,ScaleMin,ScaleMax [,SmoothK, [ArgFlags]]
+//indicator="PPI_MINUTES",6002, 0,60,1,128	//Name,Arg,ScaleMin,ScaleMax [,SmoothK, [ArgFlags]]
+//indicator="PPI_HOURS",6003, 0,24,1,128	//Name,Arg,ScaleMin,ScaleMax [,SmoothK, [ArgFlags]]
+indicator="PPI_COMPASS",6055, 0,360,1,128	//Name,Arg,ScaleMin,ScaleMax [,SmoothK, [ArgFlags]]
+
+[moveDeviator]
+  HiFreqAmp = 0.2f
+  MaxDeviation = 0.3f
+  Periods = 2.1, 0.4;
+[end]
+accelDirK = 0.3
+accelDirSmooth = 0.05
+accelSideK = 0.3
+accelSideSmooth = 0.05
+
+[moveBotDeviator]
+	HiFreqAmp = 0.2f
+	MaxDeviation = 0.3f
+	Periods = 2.1, 0.4;
+[end]
+accelBotDirK = 0.2
+accelBotDirSmooth = 0.03
+accelBotSideK = 0.2
+accelBotSideSmooth = 0.03
+
+[MovementDamageGroups]	// Порог здоровья элемента, ниже которого танк выйдет из своего звена и остановится, а звено поедет без него
+	MinMovementHealth="Engine",0.5
+	MinMovementHealth="Gearbox",0.5
+	MinMovementHealth="FuelTank",0.5
+	MinMovementHealth="OilTank",0.5
+	MinMovementHealth="WaterTank",0.5
+	MinMovementHealth="TrackL",0.01
+	MinMovementHealth="TrackR",0.01
+[end]
+
+PrioritySpeed = 6.9			// Референсная скорость для алгоритмов движения ИИ (0.9 от скорости движения по полю)
+PrioritySpeedRoad = 15.3	// Референсная скорость для алгоритмов движения ИИ (0.9 от скорости движения по дороге)
+
+SeekMaintenance=true	// Включение поиска объектов для сервиса (починка, заправка и т.д.)
+FieldMaintence=0		// Перечень значений параметра RepairSource, при котором элемент может быть исправлен в полевых условиях без мастерской рядом
+
+// Переменные для техночата люков, створок, лючков ракетницы

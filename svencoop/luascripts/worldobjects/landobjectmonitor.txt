@@ -1,0 +1,5 @@
+Class_name = "CLandObjectMonitor"
+object_name = ""
+
+
+

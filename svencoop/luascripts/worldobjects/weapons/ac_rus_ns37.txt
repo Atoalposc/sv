@@ -1,0 +1,77 @@
+
+Name = "NS-37"
+
+Gage = 37 // [мм]
+
+Mass = 0.001 // [кг]
+MassPosition_inGunAxis = -2.386, 0.0, 0.0 // рассчитанна€ по фото длина пушки составл€ет 3767мм
+MOI_inGunAxis = 0.025, 0.985, 0.995, 0.050, 0.000, 0.000 // [кг*кв.м]
+
+SnappingTime = 0.01
+AutoCockingTime = 0.23
+
+ShotAnimationPeriod = 0.24 // SnappingTime + AutoCockingTime
+
+// паспортна€ скорострельность: RapidityOfFire = 60 / (SnappingTime + AutoCockingTime) = 250 выстрелов в минуту
+
+MainManuallyCockingTime = 2.0
+ReserveManuallyCockingTime = 1.5
+
+ShotRate = 0 // количество выстрелов в одной очереди не ограничено
+
+FireUnLockedSafetyLockPosition = 0.0
+FireLockedSafetyLockPosition = 1.0
+
+FireLockedMaxTriggerPosition = 0.0
+FireTriggerPosition = 0.5
+
+FiringPinPositionKeysDuringMainManuallyCocking = 0.0, 1.0
+FiringPinPositionKeysDuringReserveManuallyCocking = 0.0, 1.0
+FiringPinPositionKeysDuringAutoCocking = 0.0, 1.0
+
+AmmunitionMovingKeysDuringMainManuallyCocking = 0.75, 0.85
+AmmunitionMovingKeysDuringReserveManuallyCocking = 0.75, 0.85
+AmmunitionMovingKeysDuringAutoCocking = 0.0, 1.0
+
+CartridgeCaseReleaseDuringMainManuallyCocking = 0.8
+CartridgeCaseReleaseDuringReserveManuallyCocking = 0.8
+cartridgeCaseReleaseDuringAutoCocking = 0.8
+
+BarrelTemperatureIncreasePerShot = 15.84
+BarrelTemperatureDecreaseCoefficient = 0.045
+
+BulletDispertionAngleData = 0.0, 0.6, 700.0, 3.5 //разброс зафиксированной пушки при 0  нулевой, разброс перегретой 0.6∞
+BulletSpeedReducingData = 0.01, 700.0, 0.25, 0.05, 3.5
+BulletMisfireData= 0.0, 0.02, 700.0, 6.0
+
+CartridgeCasesEjectionPosition = -3.05, -0.115, 0.0
+CartridgeCasesEjectionSpeed = 0.0, -2.0, 0.0
+
+[DrawAnimation=0] // поворот дополнительного рычага ручного взведени€
+
+	[GunMode=MainManuallyCocking]
+		Point = 0.0, 0.0
+		Point = 0.5, 1.0
+		Point = 0.9, 1.0
+		Point = 1.0, 0.0
+	[end]
+[end]
+
+[DrawAnimation=1] // поворот дополнительного рычага ручного взведени€
+
+	[GunMode=ReserveManuallyCocking]
+		Point = 0.0, 0.0
+		Point = 0.5, 1.0
+		Point = 0.9, 1.0
+		Point = 1.0, 0.0
+	[end]   
+[end]
+
+[DrawAnimation=2] // анимаци€ отката ствола
+
+	[GunMode=AutoCocking]
+		Point = 0.0, 0.0
+		Point = 0.2, 1.0
+		Point = 0.3, 1.0
+		Point = 1.0, 0.0
+	[end]

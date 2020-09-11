@@ -1,0 +1,5 @@
+class_name = "CBatchFreeEffect"
+
+VisualImage=0,"graphics\effects\Air\crashWings.mgm",false
+visualradius=0.1
+SoundScript=""

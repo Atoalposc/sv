@@ -1,0 +1,78 @@
+Class_name = "CBatchBallistics"
+object_name = "BULLET_ENG_11x59_AP"
+
+//11мм патрон к пулемету Vickers Balloon Gun
+
+//////	PhysicsBody properties
+VisualImage=0,"graphics/ammo/ammoRmgSmk.mgm",false // TODO
+visualradius=4
+SoundScript=""
+ImageAttr=21	//IA_NOMINPIXELS | IA_NOINTERPOLATION
+
+//CollisionBody="graphics/ammo/ammo.col"
+
+NoDirecion=true
+NoCollision=true
+
+// дальность, скорость на этой дальности (на 0м - указать на 5км/ч меньше расчетной), пары бронЯ-урон за броней. Ѓроню больше, чем в первой паре, не пробьет
+// за базовый взЯт урон на дальности 100м при нулевой броне, на макс. броне урон равне 0.25 от базового, на 0.8 макс. брони урон равен 0.5 от базового
+// урон при нулевой броне уменьшаетсЯ с дальностью по соотношению квадрата скоростей
+// скорости по дальностЯм взЯты из лога утилиты расчета .bin файлов пули (расчет таблиц наведениЯ), на 10км/ч меньше ресчетной
+// т.к. если скорость окажетсЯ больше расчетной на данной дальности, то дамага не будет
+// базовый урон расчитан по соотношению кинетических энергий на дальности 100м между данной пулей и референсной пулей SHELL_GER_20x82_AP (=1000)
+
+Armor=0,610,	10,68,	8,168,	0,270
+Armor=100,524,	8,50,	6,124,	0,200 // опорнаЯ бронепробиваемость пересчитана по формуле де Њарра из референсной бронепробиваемости BULLET_RUS_12-7x108_AP на близкой скорости, убойность повышена принудительно
+Armor=500,311,	4,18,	3,44,	0,70
+Armor=1000,226,	2,10,	1,24,	0,36
+Armor=1500,166,	2,6,	1,12,	0,20
+
+// аэродинамические коэфициенты подобраны исходЯ из совпадениЯ графика скорости по дальности длЯ эталонной пули
+
+Gage=11.43				//калибр
+DefaultStartSpeed=610	//дефолтнаЯ начальнаЯ скорость при стрельбе из простых пушек (наземка)
+MaxDistance=1600		//предельнаЯ дальность, дальше которой объект удалитсЯ
+Mass=0.0175				//масса пули
+Mkr=0.99				//значение числа Њаха, после которого начинаетсЯ повышение Cx до момента M=1, зависит от формы тела но не от размера
+Mmax=2.2				//значение числа Њаха, до которого завершаетсЯ понижение Cx, начавшеесЯ при M=1, зависит от формы тела но не от размера
+Cx_0=0.18				//значение к-та сопротивлениЯ при (M <= Mkr), зависит от формы тела но не от размера
+Cx_max=0.45				//значение к-та сопротивлениЯ при (M = 1), зависит от формы тела но не от размера
+Cx_1=0.38				//значение к-та сопротивлениЯ при (M >= Mmax), зависит от формы тела но не от размера
+R=0.005715				//радиус пули
+LiveTime=7				//времЯ жизни объекта (большее из двух: времЯ полета на MaxDistance или времЯ горениЯ трассера + 3.5с)
+TimeToDestroy=0			//времЯ жизни объекта после попаданиЯ в скрытом состоЯнии, что бы трейл трассера не пропадал пока не расстворитьсЯ
+TracertShowtime = 1.28	//времЯ горениЯ трассера
+MaxRedirections = 2		//максимальное кол-во рикошетов
+DestroyOnExplosion=false	//используется только для бронебойных пуль (default =true) с целью обеспечить применение Hit..Effect вместо Hit.., при сохранении пробоя препятствия на вылет
+							//что в свою очередь требуется для "прицепления" эффектов попадания по движущейся технике, а так же гарантированной передаче попаданий в сетевой игре
+
+debug=false
+
+DefaultBulletSpeed = 610.0
+BulletSpeed = "Vickers Balloon Gun", 610.0
+
+// Попадание без рикошета, CBatchExplosion привяжется к объекту и отправится в сеть с привязкой
+HitMisc="LuaScripts/WorldObjects/Explosions/Effects/hit_ap_12-23mm_wood.txt"
+HitArmor="LuaScripts/WorldObjects/Explosions/Effects/hit_ap_12-23mm_armour.txt"
+HitMetal="LuaScripts/WorldObjects/Explosions/Effects/hit_ap_12-23mm_armour.txt"
+
+// Эффект попадания с рикошетом, только для локальной пули без отправки в сеть (,TRUE - не генерировать если не рикошет)
+HitMiscEffect="LuaScripts/WorldObjects/Explosions/Effects/rebound_ap_7-25mm_wood.txt",TRUE
+HitArmorEffect="LuaScripts/WorldObjects/Explosions/Effects/rebound_ap_7-25mm_armour.txt",TRUE
+HitMetalEffect="LuaScripts/WorldObjects/Explosions/Effects/rebound_ap_7-25mm_armour.txt",TRUE
+
+// Эффект попадания для локальной пули без отправки в сеть
+HitDummyEffect=""
+HitWaterEffect="LuaScripts/WorldObjects/Explosions/Effects/hit_ap_12-23mm_water.txt"
+HitGroundEffect="LuaScripts/WorldObjects/Explosions/Effects/hit_ap_12-23mm_ground.txt"
+HitBuildingEffect="LuaScripts/WorldObjects/Explosions/Effects/hit_ap_12-23mm_building.txt"
+HitForestEffect="LuaScripts/WorldObjects/Explosions/Effects/hit_ap_7mm_wood.txt"
+
+shellType = 2
+//        SHELL_TYPE_CV = 1,// Бронебойный - CV - Armour Piercing with Cavity Bursting Charge
+//        SHELL_TYPE_AP = 2,// Бронебойный сплошной - AP - Armour Piercing Solid
+//        SHELL_TYPE_HV = 3,// Подкалиберный - HV - Armour Piercing Composite Rigid (High Velocity)
+//        SHELL_TYPE_HT = 4,// Кумулятивный - HT - Hight Explosive Anti Tank (HEAT)
+//        SHELL_TYPE_SH = 5,// Шрапнельный - SH - Shrapnel
+//        SHELL_TYPE_HE = 6,// Осколочный - HE - High Explosive and Fragmental
+//        SHELL_TYPE_SpHV = 7,// Подкалиберный катушечный - SpHV - Armour Piercing Spool-Shaped (Spool High Velocity)

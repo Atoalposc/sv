@@ -1,0 +1,61 @@
+Class_name = "CVehicleTurret"
+object_name = "VehicleTurret"
+// ѕулемет браунинг пехотный сдвоенный
+//SoundScript="LuaScripts\Sound\Vehicles\DShK_Double.cfg"
+
+[attach=0]
+	position= 0.0, 0.0, 0
+	object = "LuaScripts/WorldObjects/Bots/BotGunnerMachineGun.txt"
+[end]
+
+PitchPoint = -0.109, 1.426, 0.0
+
+AngleYawMin      = -110.0
+AngleYawMax      = 110.0
+AnglePitchMin    = -20.0
+AnglePitchMax    = 50.0
+AnglePitchDef    = 30.0
+YawArgNum        = 221
+PitchArgNum      = 241
+YawArgMin        = 0.194444
+YawArgMax        = 0.805556
+PitchArgMin      = 0.0
+PitchArgMax      = 1.0
+
+YawAngularSpeed    = 35.0
+PitchAngularSpeed  = 30.0
+
+FireArgumentNum  = 64200
+AttackAnimationArgNum = 61
+NumOfAnimations = 4
+
+FireAnimationTime    = 0.05
+AttackAnimationTime  = 0.05
+
+MuzzleDisplacement = 3.0, 0.043, 0
+
+AttackDistance = 1500.0		//AI max aim distance versus ground point
+AttackDistanceTrgGnd = 700.0		//AI max aim distance versus ground target
+AttackDistanceTrgAir = 1500.0		//AI max aim distance versus air target
+
+[bullet=1]
+	BulletScript    = "LuaScripts/WorldObjects/Ballistics/AmmunitionForNPC/NPC_BULLET_USA_12-7_AP.txt"
+	TargetingScript = "LuaScripts/WorldObjects/Ballistics/AmmunitionForNPC/NPC_BULLET_USA_12-7_AP.bin"
+	ExplosionScript = ""
+	BulletsCount = 4000
+	StartBulletSpeed = 840.0
+	RealPhysicBullet = true
+[end]
+
+VisibleTraceNum = 4
+
+NumBulletsInQueue = 40
+QueueRechargeTime   = 1.0
+BulletRechargeTime  = 0.0472
+FireDispAngle = 0.2 //градусы
+FireDispSpeed = 17.2 // м/с
+
+NeedFuse = false
+
+IsSoundLooped = true
+SoundNumber = 5

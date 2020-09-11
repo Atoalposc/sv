@@ -1,0 +1,9 @@
+Class_name = "CPlaneInputController"
+object_name = "Plane controller"
+
+
+//////	Controller specific
+Artificial=false;
+
+ControlledType="GOT_PLANE";
+

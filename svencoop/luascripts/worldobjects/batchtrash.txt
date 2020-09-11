@@ -1,0 +1,5 @@
+batch_class = "CBatchTrash"
+
+
+VisualImage=0,"graphics\sound.mgm",true
+SoundScript=""

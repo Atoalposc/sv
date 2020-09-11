@@ -1,0 +1,10 @@
+Class_name = "CVehicleInputController"
+object_name = "VehicleInputController0"
+
+//////	Controller specific
+Artificial=false;
+
+ControlledType="GOT_VEHICLE";
+ControlledType="GOT_SHIP";
+ControlledType="GOT_TANK";
+

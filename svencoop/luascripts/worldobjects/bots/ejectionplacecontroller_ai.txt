@@ -1,0 +1,9 @@
+Class_name = "CPlaneAI"
+object_name = "EjectionPlace controller AI"
+
+
+//////	Controller specific
+Artificial=true;
+
+ControlledType="GOT_EJECTION_PLACE";
+

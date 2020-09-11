@@ -1,0 +1,75 @@
+Class_name = "CVehicleTurret"
+object_name = "VehicleTurret"
+// Зенитная пушка Flakvierling 38
+//SoundScript="LuaScripts\Sound\Vehicles\CannonAA_Shot_Small.cfg"
+
+[attach=0]
+	position= 0.0, 0.0, 0
+	object = "LuaScripts/WorldObjects/Bots/BotGunnerMachineGun.txt"
+[end]
+
+PitchPoint = 0.337, 0.537, 0.0
+
+AngleYawMin      = -180.0
+AngleYawMax      = 180.0
+AnglePitchMin    = -10.0
+AnglePitchMax    = 80.0
+AnglePitchDef    = 30
+YawArgNum        = 221
+PitchArgNum      = 241
+YawArgMin        = 0.0
+YawArgMax        = 1.0
+PitchArgMin      = 0.0
+PitchArgMax      = 1.0
+
+YawAngularSpeed    = 18.0
+PitchAngularSpeed  = 18.0
+
+FireArgumentNum  = 64200
+AttackAnimationArgNum = 61
+NumOfAnimations = 4
+
+FireAnimationTime    = 0.13333
+AttackAnimationTime  = 0.13333
+
+MuzzleDisplacement = 2.14, 0.18, 0.233	//‘мещено вперед на 1.0м
+MuzzleDisplacement = 2.149, -0.043, 0.231
+MuzzleDisplacement = 2.148, -0.045, -0.243
+MuzzleDisplacement = 2.138, 0.18, -0.245
+
+AttackDistance   = 2000.0		//AI max aim distance versus ground point
+AttackDistanceTrgGnd = 1000.0		//AI max aim distance versus ground target
+AttackDistanceTrgAir = 2000.0		//AI max aim distance versus air target
+
+[bullet=1]
+	BulletScript    = "LuaScripts/WorldObjects/Ballistics/AmmunitionForNPC/NPC_SHELL_GER_20_HE.txt"
+	TargetingScript = "LuaScripts/WorldObjects/Ballistics/AmmunitionForNPC/NPC_SHELL_GER_20_HE.bin"
+	ExplosionScript = ""
+	BulletsCount = 2000
+	StartBulletSpeed = 900.0
+	RealPhysicBullet = true
+	PriorityArmorMin = 0.0
+	PriorityArmorMax = 5.0
+[end]
+
+[bullet=2]
+	BulletScript    = "LuaScripts/WorldObjects/Ballistics/AmmunitionForNPC/NPC_SHELL_GER_20_AP.txt"
+	TargetingScript = "LuaScripts/WorldObjects/Ballistics/AmmunitionForNPC/NPC_SHELL_GER_20_AP.bin"
+	ExplosionScript = ""
+	BulletsCount = 2000
+	StartBulletSpeed = 900.0
+	RealPhysicBullet = true
+	PriorityArmorMin = 5.0
+	PriorityArmorMax = 1000.0
+[end]
+
+VisibleTraceNum = 5
+
+NumBulletsInQueue = 80
+QueueRechargeTime   = 4.5
+BulletRechargeTime  = 0.0333325
+IsSoundLooped=true
+FireDispAngle = 0.2 //градусы
+FireDispSpeed = 18.0 // м/с
+
+NeedFuse = false

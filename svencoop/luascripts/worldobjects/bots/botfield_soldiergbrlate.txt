@@ -1,0 +1,58 @@
+Class_name = "CBotCharacter"
+
+detail_type = "DET_INFANTRY" //list of types is in \inc\SimulationSystem\DetailTypes.inc
+
+//////	PhysicsBody properties
+VisualImage=0,"graphics/characters/BotSoldiersGBR/SoldierGBR.mgm",true
+CollisionBody="graphics/characters/BotSoldiersGBR/OfficerGBR.col"
+Animator="graphics/characters/Keyframes/BotSoldiers/BotSoldiersOnField.chr","GOT_NONE"
+
+visualradius=2
+
+CameraHidden=true
+
+//////	Bot specific
+Controller="LuaScripts/WorldObjects/Bots/BotFieldController_AI.txt"
+Controller="LuaScripts/WorldObjects/Bots/BotController_NI.txt"
+
+SoundScript="LuaScripts/Sound/Vehicles/BotSound.cfg"
+
+[attach=0]
+	position= 0, 0.72, 0
+	object = "LuaScripts/WorldObjects/Bots/BotHeadGunGer.txt"
+[end]
+
+NeckAngleConstrX=-100,100;
+NeckAngleConstrY=-175.0,175.0;
+NeckAngleConstrZ=-120,120;
+
+NeckSlideConstrX=-0.40,0.40;
+NeckSlideConstrY=-0.45,0.45;
+NeckSlideConstrZ=-0.45,0.45;
+
+energyloss="",true,0.1,10000 // Потеря энергии пули при попадании, true - проверка на входе и выходе в колижн-бокс, первое эквивалентная броня на входе и выходе, второе джоулей на каждый метр пути внутри колижена
+
+// Damage model
+Armor=0 // толщина брони
+LifeRate=500 // Масштаб пулевых и фугасных повреждений
+LifeRateFrag=1500 // Масштаб осколочных повреждений
+HeadConvexPrefix="Head" // Префикс имени конвекса колижена головы
+HeadArmor=0 // толщина брони головы
+HeadLifeRate=200 // Масштаб пулевых и фугасных повреждений головы
+HeadLifeRateFrag=600 // Масштаб осколочных повреждений головы
+Firing=1 // Минимальное значение поджигания у средства поражения для зажигания объекта
+DestroyDelay=15 // задержка на удаление объекта после смерти
+MinEjectAlt=10 // ограничение на минимальную высоту выпрыгивания
+
+FootLength=0.75			//Высота центра модели при ходьбе
+WalkSpeed=1.1,-0.7		//Скорость шагом вперед, назад
+WalkAccel=0.08,0.1		//Ускорение шагом вперед, назад
+RunSpeed=3,-0.7			//Скорость бегом вперед, назад
+RunAccel=0.1,0.1		//Ускорение бегом вперед, назад
+CrawlSpeed=0.5,0.5		//Скорость ползком вперед, назад
+CrawlAccel=0.1,0.1		//Ускорение ползком вперед, назад
+
+ImpulseToDestroy = 500		// Определяет силу удара обеъкта об танк, нужную для его уничтожения. Подвижные объекты на 6 категорий по размерам. Автомобили, малые грузовики, большие грузовики, малые танки, средние танки, большие танки.
+ImpulseMinimumLevel = 100		// Определяет минимальную силу удара об танк, нужную для его повреждения. Для пушек снижено что бы их можно было давить.
+
+NetworkEnabled=false

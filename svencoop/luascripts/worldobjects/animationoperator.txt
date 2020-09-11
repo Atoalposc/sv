@@ -1,0 +1,12 @@
+class_name = "CAnimationOperator"
+object_name = "AnimationOperator"
+
+//////	PhysicsBody properties
+
+//CollisionBody="graphics/Blocks/airfield.col"
+
+//SoundScript="LuaScripts/Fokker_DR1.cfg"
+
+SendRate=5,50	//normal, attached state
+
+CommandMonitor="LuaScripts/WorldObjects/AnimationOperatorMonitor.txt"

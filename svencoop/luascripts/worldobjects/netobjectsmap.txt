@@ -1,0 +1,15 @@
+
+
+numberofEntries=2,
+
+pairs =
+{
+ ["FokkerDr1","NetPlane",1],
+ ["Jasta","NetPlane",2], 
+
+},
+
+
+
+
+

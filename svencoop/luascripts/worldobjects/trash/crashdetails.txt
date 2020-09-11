@@ -1,0 +1,11 @@
+class_name = "CBatchTrashAnimated"
+
+VisualImage=0,"graphics\effects\Air\crashDetails.epl",false
+visualradius=2
+SoundScript=""
+
+Animation=50311
+LiveTime=3.33
+AnimationTime=3.33
+Ranges=1,0.01,0.9,0
+Drag=0.2

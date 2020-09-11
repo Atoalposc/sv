@@ -1,0 +1,8 @@
+class_name = "CAIPoi"
+object_name = "AI Point of Interest"
+
+//////	PhysicsBody properties
+
+SendRate=5,50	//normal, attached state
+
+CommandMonitor="LuaScripts/WorldObjects/AIPoiMonitor.txt"

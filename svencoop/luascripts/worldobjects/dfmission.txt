@@ -1,0 +1,4 @@
+class_name = "CDFMission"
+object_name = "Dogfight Mission"
+
+sound_script = "LuaScripts/Sound/Ambients.cfg"

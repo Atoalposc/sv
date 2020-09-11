@@ -1,0 +1,3 @@
+class_name = "CAeroplaneFragment"
+VisualImage=0,"graphics/planes/MC202s8/MC202s8.mgm",true,true
+CollisionBody="graphics/planes/MC202s8/MC202s8_Phys.col"

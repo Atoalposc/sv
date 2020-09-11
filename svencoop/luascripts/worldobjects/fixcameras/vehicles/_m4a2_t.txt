@@ -1,0 +1,13 @@
+// attach ID shold be in range from 100 to 110
+
+[attach=105] // Turret camera on roof
+	position = -0.297,1.011,-0.349
+	rotation = 0, 0, 0
+	object = "LuaScripts/WorldObjects/GoProCamera90.txt"
+[end]
+
+[attach=106] // Turret camera looking backward on commander
+	position = 1.023,0.914,-0.542
+	rotation = 0, 150, 0
+	object = "LuaScripts/WorldObjects/GoProCamera90.txt"
+[end]

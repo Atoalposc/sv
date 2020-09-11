@@ -1,0 +1,311 @@
+
+//
+// Pe-2 ser.87
+//
+
+[performance]
+    MaxSpeed           = 505.0
+    MaxClimbRate       = 10.5
+    ServiceCeiling     = 8000.0
+    MinStructureHealth = 0.863
+    MinEngineHealth    = 0.6
+    EngineWarming      = true
+    TurnRate           = 310.0, 31.0
+
+    ////// ClimbTime = <float ALTITUDE>, <float TIME> // 4х100 ФАБ, 8 РС, 100% топлива, 1160 мм рт.ст., RPM 2150, радиаторы открыты
+   ClimbTime = 0,0
+    ClimbTime = 1000,96
+    ClimbTime = 2000,198
+    ClimbTime = 3000,314
+    ClimbTime = 4000,441
+    ClimbTime = 5000,612
+
+    ////// MaxAltTAS = <float ALTITUDE>, <float TAS> // 4х100 ФАБ, 8 РС, 100% топлива, 1160 мм рт.ст., RPM 2150, радиаторы открыты
+     MaxAltTAS = 0,446
+    MaxAltTAS = 1000,468
+    MaxAltTAS = 2000,476
+    MaxAltTAS = 3000,486
+    MaxAltTAS = 4000,504
+    MaxAltTAS = 5000,498
+    MaxAltTAS = 6000,485
+    MaxAltTAS = 7000,468
+
+    ////// turn time at altitude (m/s) = <float ALTITUDE>, <float TIME> // без бомб, 50% топлива, 1160 мм рт.ст., RPM 2050
+    TurnTimeAlt = 0,30.0
+    TurnTimeAlt = 1000,31.8
+    TurnTimeAlt = 2000,34.5
+    TurnTimeAlt = 3000,37.7
+    TurnTimeAlt = 4000,42.1
+    TurnTimeAlt = 5000,49.6
+
+    ////// optimal turn CAS at altitude= <float ALTITUDE>, <float CAS> // без бомб, 50% топлива, 1160 мм рт.ст., RPM 2050
+    TurnOptimal_CAS_Alt = 0,310
+    TurnOptimal_CAS_Alt = 1000,310
+    TurnOptimal_CAS_Alt = 2000,300
+    TurnOptimal_CAS_Alt = 3000,290
+    TurnOptimal_CAS_Alt = 4000,280
+    TurnOptimal_CAS_Alt = 5000,270
+
+    MaxClimbCAS = 300
+    MaxClimbRate = 10.5
+    MaxAltitude = 8000.0
+    CruiseFuelRate = 7.32     //[л./мин.] 280 км/ч (MinCruiseCAS); 1000 м; 50% бака, без бомб, стандартная атмосфера
+    PriorityType = 3				//FIGHTER=1,HEAVY_FIGHTER=2,LIGHT_BOMBER=3,BOMBER=4,LIGHT_RECON=5,RECON=6,SHTURMOVIK=7,CARGO=8
+[end]
+
+[cruise]
+    RefAngle               = 90.0
+    RefRoll                = 85.0
+    MaxRoll                = 60.0
+    MaxRollClimb           = 6.0
+    RefRollFactor          = 0.5
+    RefAltError            = 100.0
+    RefClimb               = 10.0
+    RefClimbFactor         = 1.5
+    RefDive                = 20.0
+    RefDiveFactor          = 1.5
+    RefSSA                 = 15.0
+    RefYawRate             = -15.0
+    TurnOffError           = -5
+    TurnOnError            = -2
+    MinRPM                 = 550
+    MinCruiseCAS           = 280.0
+    MinWingmanCAS          = 250.0
+    WingLeaderLagCorrectionK = 1.0		// коэфицент от 0.0 до 1.0(default), уменьшающий степень сброса скорости лидером при ожидании ведомых
+    PursueWingmanDist      = 400.0		// пороговое расстояние до места в формации с которого начинает падать заданное превышение скорости
+    WingLeaderThrottleLowLimit = 0.4	// ограничение минимума газа ведущего в снижении и торможении
+    WingLeaderThrottleUpLimit  = 0.95	// ограничение максимума газа ведущего в наборе высоты и разгоне
+    LandRoundCAS0          = 290		// Скорость на подходе к аэродрому, уходе на 2й круг, ко 2му и 3му разворотам
+    LandRoundCAS1          = 280		// Скорость на подходе к 4му развороту
+    LandRoundCAS2          = 240		// Скорость на подходе к точке входа в глиссаду
+    LandingApproachCAS     = 210.0
+    LandingTouchDownCAS    = 190.0
+    TouchDownDistance      = 200.0	// Расстояние от точки начала выравнивания  до торца ВПП
+    TouchDownPitch         = 10.0    
+    LandingApproachCAS_NoFuel  = 210.0 	//для маленького(выработано топливо) веса
+    LandingTouchDownCAS_NoFuel = 190.0	//для маленького(выработано топливо) веса
+    TouchDownDistance_NoFuel   = 200.0		//для маленького(выработано топливо) веса
+    TouchDownPitch_NoFuel      = 11.0		//для маленького(выработано топливо) веса
+    StartTurnBeforeGlissadeDistance = 650.0	// расстояние от оси ВПП на котором начинается 4-й разворот подбирается т.о. чтобы после завершения 4-го разворота самолёт оказался на оси ВПП
+    TouchDownPitchUpSpeed  = 140.0	// скорость с которой на посадке начинается интенсивное дотягивание ручки на себя для торможения после касания
+    TouchDownAlignHeight   = 100.0	// высота начала выравнивания (по умолчанию - 15.0)
+    SmoothTouchDownHeight  = 3.0	// высота начала "мягкого касания(выдерживания)" по умолчанию - 2.0
+    LandingThrottleLimit   = false
+    BrakePitchMax          = 12.0	// тангаж при котором начинается приотпускание тормозов
+    BrakePitchMin          = 10.0	// тангаж при котором тормоза не зажмутся больше BrakeLimMin
+    BrakeLimMin            = 1.0	// множитель заданного сигнала тормозов при тангаже BrakePitchMin (защита от капотирования)
+    ApproachLowering       = false
+    ApproachIgnition       = false
+    LandingRoundIgnition   = false
+    TouchDownCYRFactor     = 0.0
+    RestrictAttackAngle    = true
+    MinAttackAngle         = 10.0
+    MaxAttackAngle         = 15.0
+    MinNegativeAttackAngle = -8.0
+    MaxNegativeAttackAngle = -12.0
+    MinSlipAngle           = 15.0
+    MaxSlipAngle           = 20.0
+    TaxiD1                 = 2.0
+    TaxiD2                 = 8.0
+    TaxiD3                 = 80.0
+    TaxiD4                 = 300.0
+    TaxiSpeedD1            = 15.0	// заданная скорость руления до дистанции D1, к D2 линейно интерполируется
+    TaxiSpeedD2D3          = 25.0	// заданная скорость руления от дистанции D2 до D3, к D2 линейно интерполируется
+    TaxiSpeedD4            = 60.0	// заданная скорость руления от дистанции D4
+    TaxiMaxAngle           = 90.0	// угол отклонения от заданного направления руления, при котором заданная скорость снизится до TaxiSpeedD1
+    TaxiMaxAside           = 50.0	// боковое отклонение от заданного направления руления, при котором заданная скорость снизится до TaxiSpeedD1
+    TaxiBrakingThrottleUp  = 0.5	// насколько подгазовывать при использовании тормоза для подруливания на скорости менее TaxiSpeedD1
+    TaxiingPitch           = false	// управление фиксатором хвостового колеса по взятию ручки управления на себя, тянет ручку когда до точки руления далеко и на взлете. Если выключено - тянет всегда.
+    TaxiingPIDSpeed        = 40.0	// скорость переключения PID с [pid_taxiing] в [pid_0] при взлёте, при посадке обратное переключение при скорости 0,75*TaxiingPIDSpeed по умолчанию = TakeOffCAS+10
+    Switch_2_TaxiingPIDSpeed = 120.0    // скорость переключения PID с [pid_0] в [pid_taxiing] при посадке. По умолчанию = LandingTouchDownCAS - 20.0
+    TakeOffCAS             = 220.0	//целевая скорость , достигнув которой бот начинает пытаться оторвать самолёт от полосы. 
+    TakeoffElevatorSafe    = true
+    TakeoffSafePitch       = 0.0
+    TakeoffSurfaceSlope    = false
+    TakeoffCriticalSlope   = 0.0
+    CriticalTakeoffRoll    = 10
+    TakeoffYawFactor       = 0
+    TakeOffBrakingMax      = 0.0	// значение торможения при отклонении на взлете по курсу на TakeOffBrakingAngle (до скорости pid_taxiing)
+    TakeOffBrakingAngle    = 10.0	// отклонение по курсу на взлете, при котором осуществляется торможение на TakeOffBrakingMax
+    StallRollRate          = 160.0
+    StallYawRate           = 60.0
+    StructureAlert         = true
+    StructureAlertNy       = 5		// ограничение по пилоту, по самолёту =9
+    StructureAlertTAS      = 730.0
+    AttackIgnitionControl  = false
+    TakeoffRefAngle        = 5.0
+    MaxFlapsCAS            = 5.0
+    MinFlapsCAS            = 10.0
+    TakeOFFFlapsAngle      = 0.4   // 0..1 позиция закрылков при взлёте
+    LandingFlapsAngle      = 0.4   // 0..1 позиция закрылков в посадочной конфигурации
+    FlapsPosQuantity       = 0
+    DifferentialBrakes     = false  // "true", если управление тормозами раздельное(мессер), "false" - общее (ЛаГГ)
+    OpenCocpitWhileTaxi    = true   //  true - рулим на взлёт с открытым фонарём
+    NeedFilter             = true	// нужно ли применять фильтр управления
+    MinStickMoveTime       = 0.1	//минимальное время за которое ручка перебрасывается из крайнего положения в крайнее положение
+    MaxStickMoveTime       = 0.1	// максимальное время за которое ручка перебрасывается из крайнего положения в крайнее положение
+    MinStickMoveCAS        = 300.0	// скорость на которой время переброски m_MinStickMoveTime
+    MaxStickMoveCAS        = 400.0	// скорость на которой время переброски m_MaxStickMoveTime
+    CruiseThrottleLimit    = 1.0	// ограничитель положения РУД-а в крейсерских режимах полёта, 0..1 , по умолчанию - 1
+    taxiWindLimit          = 10.5		// скорость ветра(м/с) выше которой самолёт не может рулить по земле и приземлившись выключается и дестроится на полосе (дефолт - 15.0 м/с)
+[end]
+
+[dogfight]
+    [novice]
+        RefNoseAngle      = 30.0
+        MinCAS1           = 200.0
+        MaxCAS2           = 650.0
+        MaxPitchRate      = 180.0
+        AttackDistance    = 500.0
+        EngageDistance    = 1500.0
+        MinFireDistance   = 50.0
+        MaxFireDistance   = 300.0
+        MinOpenFireAngle  = 14.0
+        MaxOpenFireAngle  = 7.0
+        MinStopFireAngle  = 28.0
+        MaxStopFireAngle  = 14.0
+        CollisionTimeTreshold  = 3.0
+        HBTNegativeRoll        = -60.0
+        HBTPositiveBTRoll      = 60.0
+        InterceptAltitudeAdvance = 0.0
+    [end]
+    [normal]
+        RefNoseAngle      = 30.0
+        MinCAS1           = 200.0
+        MaxCAS2           = 600.0
+        MaxPitchRate      = 180.0
+        AttackDistance    = 800.0
+        EngageDistance    = 2000.0
+        MinFireDistance   = 50.0
+        MaxFireDistance   = 350.0
+        MinOpenFireAngle  = 11.0
+        MaxOpenFireAngle  = 5.0
+        MinStopFireAngle  = 19.2
+        MaxStopFireAngle  = 8.5
+        CollisionTimeTreshold  = 3.0
+        HBTNegativeRoll        = -70.0
+        HBTPositiveBTRoll      = 70.0
+        InterceptAltitudeAdvance = 0.0
+    [end]
+    [high]
+        RefNoseAngle      = 30.0
+        MinCAS1           = 200.0
+        MaxCAS2           = 500.0
+        MaxPitchRate      = 180.0
+        AttackDistance    = 1200.0
+        EngageDistance    = 2500.0
+        MinFireDistance   = 50.0
+        MaxFireDistance   = 400.0
+        MinOpenFireAngle  = 8.5
+        MaxOpenFireAngle  = 3.0
+        MinStopFireAngle  = 12.7
+        MaxStopFireAngle  = 4.5
+        CollisionTimeTreshold  = 3.0
+        HBTNegativeRoll        = -75.0
+        HBTPositiveBTRoll      = 75.0
+        InterceptAltitudeAdvance = 300.0
+    [end]
+    [ace]
+        RefNoseAngle      = 30.0
+        MinCAS1           = 200.0
+        MaxCAS2           = 450.0
+        MaxPitchRate      = 180.0
+        AttackDistance    = 2000.0
+        EngageDistance    = 3000.0
+        MinFireDistance   = 50.0
+        MaxFireDistance   = 500.0
+        MinOpenFireAngle  = 5.5
+        MaxOpenFireAngle  = 1.5
+        MinStopFireAngle  = 6.8
+        MaxStopFireAngle  = 1.8
+        CollisionTimeTreshold  = 3.0
+        HBTNegativeRoll        = -80.0
+        HBTPositiveBTRoll      = 80.0
+        InterceptAltitudeAdvance = 1000.0
+    [end]
+
+    MinSafeAltitude0  = 50.0
+    MaxSafeAltitude0  = 100.0
+    MinSafeAltitude45 = 80.0
+    MaxSafeAltitude45 = 250.0
+    MinSafeAltitudeVP = 600.0
+    MaxSafeAltitudeVP = 1200.0
+
+    CASPitchLimit  = false
+    MinPitchCAS    = 200.0
+    MaxPitchCAS    = 565.0
+    STVOffset      = -1.5 // -5.5
+    YawAimingAngle = 7.0
+
+    DiveCAS   = 700.0
+    CruiseCAS = 400.0
+    ClimbCAS  = 320.0
+
+    RestrictPitchBySSA = true
+    MinPitchSSA = 10.0
+    MaxPitchSSA = 15.0
+
+    GunAirAimSmooth = 0.4    // Сглаживание наведения пушками в воздушном бою (нужно при расколбасе). [0..1], 0 - максимально, 1 - минимально, -1 - выключено
+[end]
+
+[approach]
+    VFAngle              = 0.0
+    ApproachCAS          = 400.0
+    ApproachRadius       = 700.0
+    ApproachDistance     = 2600.0
+    ApproachAltitude     = 600.0
+    GroundAttackExitAltitude = 150.0   // минимальная высота выхода из пикирования при атаке ракетами и пушками (настроить над верхушками деревьев, а потом +40м)
+    GroundAttackDistance = 300.0
+    GroundEngageDistance = 2200.0
+    GroundEngageRocketK  = 1.0			// к-т на который умножается m_GroundEngageDistance при атаке ракетами
+    SpiralAttackApproach = true
+    DiveBombAltitude     = 2500.0		// минимальная высота начала отвесного пикирования, если самолёт ниже и есть команда на атаку - будет набирать эту высоту перед бомбёжкой
+    DiveBombExitAltitude = 750.0		// минимальная высота выхода из отвесного пикирования
+    DeepDiveWeaponSet    = 3,5,6,10	// набор payloads подходящий для бомбёжки отвесным пикированием, -1 не используется, до 15 значений в строке
+    ShallowDiveWeaponSet = -1			// набор payloads подходящий для бомбёжки пологим пикированием, -1 не используется, до 15 значений в строке
+    OwerWingDive         = false		// вход в отвесное пикирование , true - переворотом через крыло, false - отдачей ручки от себя
+    DiveSoftness         = 10.0			// "мягкость" выбирания ручки в пикировании большее значение - медленнее подводится к точке сброса, при этом планее, если число большое - может не успевать на низких высотах
+    PushDiveEntranceDistance = 3000.0	// горизонтальное расстояние(м) до цели с которого начинается ввод в пике "ручкой от себя", подбирать таким образом, чтобы самолёт успевал занять положение для бомбардировки в пике, чем меньше, тем угол пике - выше
+    PushDiveEntranceK    = 0.5			// Коэфф. интенсивности ввода в пике "ручкой от себя",при увеличении - более интенсивный ввод,  грубо, (Гориз.расстояние - PushDiveEntranceDistance)*PushDiveEntranceK = требуемый угол тангажа
+    ShallowDiveAngle     = 20.0			// угол в пологом пикировании
+    ShallowExitAltitude  = 230.0		// минимальная высота выхода из пологого пикирования (настроить над верхушками деревьев, а потом +40м)
+    ShallowDiveEnterKoef = 1.3			// коэффициент на который умножается расчётная дальность начала ввода в пикирование, >1 - самолёт пикировать начинает раньше, < 1 - позже, подбирать под инд. особенности самолёта
+    Salvo2WeaponSet    = -1			// набор payloads, при которых происходит залповый сброс/пуск бомб/ракет по 2 штуки, -1 не используется, до 15 значений в строке
+    Salvo4WeaponSet    = 2,4,7,8,9,10	// набор payloads, при которых происходит залповый сброс/пуск бомб/ракет по 4 штуки, -1 не используется, до 15 значений в строке
+    SalvoAllWeaponSet  = 1			// набор payloads, при которых происходит залповый сброс/пуск бомб/ракет всех сразу, -1 не используется, до 15 значений в строке
+    NearRocketAimError   = 15			//  Допустимая ошибка прицеливания по неподвижной цели на дистанции 300м и менее
+    FarRocketAimError    = 10			//  Допустимая ошибка прицеливания по неподвижной цели на дистанции 600м и менее
+    RocketAimSmooth      = 0.8			//  Резкость наведения ракетами. При <1 плавнее, при >1 резче
+[end]
+
+[adapt_pid_0]
+    CAS     = 200.0
+    Roll    = 20.0,  0.0,  6.0, 0.05
+    Pitch   = 60.0,  0.0, 10.0, 0.02
+    PitchVy = 45.0,  0.0, 40.0, 0.05
+    Yaw     = 35.0,  0.0, 12.0, 0.05
+    Speed   = 20.0, 50.0, 15.0, 0.2
+[end]
+[adapt_pid_1]
+    CAS     = 300.0
+    Roll    = 15.0,  0.0,  3.5, 0.05
+    Pitch   = 40.0,  0.0,  5.0, 0.02
+    PitchVy = 25.0,  0.0, 15.0, 0.05
+    Yaw     = 20.0,  0.0,  9.0, 0.05
+    Speed   = 20.0, 50.0, 15.0, 0.2
+[end]
+[adapt_pid_2]
+    CAS     = 500.0
+    Roll    = 10.0,  0.0,  2.0, 0.05
+    Pitch   = 20.0,  0.0,  2.0, 0.02
+    PitchVy =  6.5,  0.0,  3.0, 0.02
+    Yaw     = 20.0,  0.0,  2.0, 0.05
+    Speed   = 20.0, 50.0, 15.0, 0.2
+[end]
+[pid_taxiing]
+    Roll    = 20.0,  0.0,  0.0, 0.03
+    Pitch   =  4.0,  0.0,  0.0, 0.05
+    Yaw     = 15.0,  0.0,  0.0, 0.05
+    Speed   = 40.0, 30.0,  0.0, 0.2
+    WheelBrakes = 2.0, 0.0, 0.0
+[end]

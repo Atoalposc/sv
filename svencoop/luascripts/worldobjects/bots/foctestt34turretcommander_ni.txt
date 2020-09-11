@@ -1,0 +1,8 @@
+Class_name = "CCommanderInputController"
+object_name = "CCommanderInputController"
+
+//////	Controller specific
+Artificial=false;
+
+ControlledType="GOT_VEHICLE_TURRET";
+

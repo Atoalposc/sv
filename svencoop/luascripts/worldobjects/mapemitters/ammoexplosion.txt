@@ -1,0 +1,14 @@
+Class_name = "CStaticEmitter"
+object_name = "trash"
+
+//////	PhysicsBody properties
+VisualImage=0,"graphics\effects\Surf\AmmoExplosion.epl",false
+visualradius=50
+
+duration=10.33
+range=0,1
+loop=false
+
+
+
+destroy_pause=0.1

@@ -1,0 +1,15 @@
+Class_name = "CBatchTrash"
+
+
+//////	PhysicsBody properties
+VisualImage=0,"graphics\Planes\Trash\trash.mgm",false
+
+VisualRadius=0.5
+
+radius=2
+mass=1
+
+//horiz_friction=0.3
+
+lifetime=5
+

@@ -1,0 +1,19 @@
+VisAnimVal=0.6
+
+LockTime=0.75	//Delay between shoots in seconds
+
+SelfShoot=true
+
+ContentName="advancedHandgun",4
+
+Deviation=0.7
+
+[clip]
+	ReloadDelay=3
+	Capacity=10
+	Ammo=40
+	StartSpeed=425
+	FName="LuaScripts/WorldObjects/Ballistics/BULLET_PISTOL.txt"
+	FireSound=15,16
+	ReloadSound=17
+[end]

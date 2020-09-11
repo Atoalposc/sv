@@ -1,0 +1,11 @@
+Class_name = "CBot"
+object_name = "BotMachinist0"
+
+SoundScript=""
+
+Controller="LuaScripts/WorldObjects/Bots/TrainController_AI.txt"
+Controller="LuaScripts/WorldObjects/Bots/VehicleController_NI.txt"
+
+//логирование повреждений
+logtreshold=0.0001
+Acceleration_safe=5000.0 // макс. импульс перегрузки

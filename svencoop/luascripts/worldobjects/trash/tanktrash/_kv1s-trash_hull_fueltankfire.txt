@@ -1,0 +1,15 @@
+Class_name = "CSolidTrash"
+
+VisualImage=0,"graphics\Vehicles\_kv1s\_kv1s-trash_hull_fueltank.MGM",true
+CollisionBody="graphics\Vehicles\_kv1s\_kv1s-trash_hull_fueltank.col"
+
+Friction=0.8
+Mass=10
+//MaxDeep=0.1
+TLimit=0
+Ik=3.0
+DynamicCOG=true
+
+//Spin=false
+ImageArg=60150
+ImagePhase=1

@@ -1,0 +1,10 @@
+Class_name = "CEjectionPlace"
+object_name = "EjectionPlace"
+
+[attach=0]
+	position= 0,0,0
+[end]
+
+EntrancePos= 0.0, 0.0, 0.0
+EntranceRot= 0,270,0
+EntranceDir=0,0.7,-3.5

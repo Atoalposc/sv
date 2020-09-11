@@ -1,0 +1,11 @@
+Class_name = "CStaticBlock"
+object_name = "CappyChateau"
+
+//////	PhysicsBody properties
+//VisualImage=2,"graphics/models/pilot_b.mgm",true
+
+SoundScript=""
+
+CollisionBody="graphics/buildings/CappyChateau.col"
+
+logtreshold=0.005

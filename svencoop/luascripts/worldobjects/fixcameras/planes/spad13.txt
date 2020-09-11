@@ -1,0 +1,41 @@
+// attach ID shold be in range from 100 to 110
+
+[attach=100] // Gun camera over the cocpit
+	position = -0.227,0.289,0.525
+	rotation = 0, 0, 0
+	object = "LuaScripts/WorldObjects/GoProCamera75.txt"
+[end]
+
+[attach=101] // Forvard camera located on the vertical fin
+	position = -3.820,0.806,0.236
+	rotation = 0, 0, -10
+	convex = "VO"
+	object = "LuaScripts/WorldObjects/GoProCamera90.txt"
+[end]
+
+[attach=102] // Forvard camera located on the horizontal fin
+	position = -3.688,0.471,-1.391
+	rotation = 0, 0, 0
+	convex = "GO_L"
+	object = "LuaScripts/WorldObjects/GoProCamera90.txt"
+[end]
+
+[attach=103] // Backward camera located on the engine cowling
+	position = 1.354,0.586,-0.647
+	rotation = 0, 150, 0
+	object = "LuaScripts/WorldObjects/GoProCamera90.txt"
+[end]
+
+[attach=104] // Side camera located on wing
+	position = 1.025,0.717,-3.860
+	rotation = 0, 100, 0
+	convex = "Krilo_Top_L_3"
+	object = "LuaScripts/WorldObjects/GoProCamera90.txt"
+[end]
+
+[attach=105] // Forward camera located below the plane tail
+	position = -3.768,-0.168,-0.272
+	rotation = 0, 0, 0
+	convex = "Fuse_3"
+	object = "LuaScripts/WorldObjects/GoProCamera90.txt"
+[end]

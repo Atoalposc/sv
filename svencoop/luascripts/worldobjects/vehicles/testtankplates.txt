@@ -1,0 +1,620 @@
+class_name = "CPlatformTank"
+object_name = "TestTankPlates"
+detail_type = "DET_TANK" //list of types is in \inc\SimulationSystem\DetailTypes.inc
+
+[COCKPIT_LIMITS]
+x= -0.1, 0.1
+y= -0.2, 0.05
+z= -0.2, 0.2
+[END]
+
+[OPEN_COCKPIT_LIMITS]
+x= -0.1, 0.1
+y= -0.2, 0.05
+z= -0.2, 0.2
+[END]
+
+DEBUG=false
+
+//////	PhysicsBody properties
+VisualImage=0,"graphics\Vehicles\TestTankPlates\TestTankPlates.mgm",true
+
+//VisualImage=ID,model_or_effect,cast_shadows[,debris_effects]
+//ID:					INT:	0 - visible everywhere, 1 - visible inside, 2 - visible outside
+//model_or_effect:		STRING:	path to model file (mgm) of effect file (epl)
+//cast_shadows: 		BOOL/INT:	cast shadows from object or not (cast_shadows=Attr1+Attr2+...+AttrN)
+//						VIF_CASTSHADOWS=1,
+//						VIF_BLENDMASKLAST=2,
+//						VIF_ALWAYSONTOP=4,
+//						VIF_FLATAMBIENT=8,
+//[,debris_effects]:	BOOL:	optional parameter, show effects on object debris or not
+
+ImageAttr=24	// IA_NOMINPIXELS | IA_NOMINPIXELS
+//	IA_DEFAULT=0,
+//	IA_NOCLIP=1,
+//	IA_NOCLIP_ANIM=2,
+//	IA_NOROTINTERPOLATION=4,
+//	IA_NOMINZ=8,
+//	IA_NOMINPIXELS=16,
+//	IA_NOPOSINTERPOLATION=32,
+//	IA_CLOSEVIEWARG=64,
+//	IA_ALWAYSVISIBLE=128,
+//	IA_SCALEARG=256,
+//	ImageAttr=Attr1+Attr2+...+AttrN
+
+TransparentCockpit=false	// If false - Attached bot will be not rendered if cockpit hatch is closed (default =true)
+
+CollisionBody="graphics\Vehicles\TestTankPlates\TestTankPlates.col"
+
+SoundScript="LuaScripts/Sound/Vehicles/T34_FP.cfg"
+
+ExhaustArg=64000
+DustArg=61000
+
+CollideChildren=true
+
+[attach=0]
+	position= 1.35,20.6,-0.25
+	object = "LuaScripts/WorldObjects/Bots/BotTankT3442_Driver.txt"
+[end]
+
+[attach=2]
+	position= 0.0, 2.0, 0.0
+	object = "LuaScripts/WorldObjects/Spotter.txt"
+[end]
+
+
+TargetHeight = 1.5			// Дельта по высоте к центру модели используемая при прицеливании и оценке видимости
+
+//IK=2
+COG=-0.0f,0.9,0
+//MaxDeep=0.1
+
+SendRate=5,50	//normal, attached state
+SendRateArg=5,10,25,10
+
+CommandMonitor="LuaScripts/WorldObjects/TankPlatformMonitor.txt"
+
+Mass=29000
+
+Rebound=0.0f
+Friction=0.5f
+
+SpringAnim=1.72,-0.05,1.3, 300,0.12	//LocalX,LocalY,LocalZ, SpringAnim arg, TraveRange (meters)
+SpringAnim=0.78,-0.05,1.3, 301,0.12
+SpringAnim=-0.27,-0.05,1.3, 302,0.12
+SpringAnim=-1.13,-0.05,1.3, 303,0.12
+SpringAnim=-2.0,-0.05,1.3, 304,0.12
+
+SpringAnim=1.72,-0.05,-1.3, 200,0.12
+SpringAnim=0.78,-0.05,-1.3, 201,0.12
+SpringAnim=-0.27,-0.05,-1.3, 202,0.12
+SpringAnim=-1.13,-0.05,-1.3, 203,0.12
+SpringAnim=-2.0,-0.05,-1.3, 204,0.12
+
+
+SphereHitProtection=45	//Броневая защита стрелка/водителя от осколков при закрытой кабине
+
+[SphereProtectionBoxOpen]	// Если данный блок есть, то броня пилота от осколков задана по сторонам, если блока нет, то используется общий параметр SphereHitProtection=
+	FovH=60			// Полный угол горизонтального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+	FovV=60			// Полный угол вертикального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+					// Остальные 5 раструбов определяются автоматически по центральной симметрии относительно переднего
+	ArmorFront=0
+	ArmorBack=40
+	ArmorTop=15
+	ArmorBottom=15
+	ArmorRight=40
+	ArmorLeft=40
+[end]
+
+[SphereProtectionBoxClose]	// Если данный блок есть, то броня пилота от осколков задана по сторонам, если блока нет, то используется общий параметр SphereHitProtection=
+	FovH=90			// Полный угол горизонтального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+	FovV=90			// Полный угол вертикального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+					// Остальные 5 раструбов определяются автоматически по центральной симметрии относительно переднего
+	ArmorFront=45
+	ArmorBack=40
+	ArmorTop=15
+	ArmorBottom=15
+	ArmorRight=40
+	ArmorLeft=40
+[end]
+
+[device=CHubAuto]
+	Name="Main_Hub"
+
+	ThrottleMapRow0=1,	1,	1		//Amount of throttle per XY position
+	ThrottleMapRow1=1,	0,	1
+	ThrottleMapRow2=-1,	-1,	-1
+
+//	ParkingGear=2
+	GearShiftDelayUp=2,4		//first - direct UP switch, second - after DOWN switch
+	GearShiftDelayDown=0.1,1	// - direct DOWN switch, b - after UP switch
+
+	ShiftSpinRatio=0.95,0.33	//ShiftUp threshold,ShiftDown threshold
+
+	AutoBalance=false
+	BalanceMapRow0=	0.75,	0,	-0.75		//Amount of balance per XY position
+	BalanceMapRow1=	1,	0,	-1
+	BalanceMapRow2=	0.8,	0,	-0.8
+
+	StallProtectionRPM=450	//Lowest engine RPM to push clutch to prevent stalling
+	ShiftGearRPM=1200
+	GearsSwitchDuration=0.25,0.05	//Seconds. 1st number at 0° ground slope. 2nd number at 20° ground slope.
+	
+	ParkOffThrottle=0.8	//[0..1] Relative RPM to start moving when parking state
+	ParkOffRPM=1700
+
+	ClutchReleaseSpeedK=0.1,0.5	//[0..1] smooth K for clutch releasing (lower => slower). 1st number at 0° ground slope. 2nd number at 20° ground slope.
+[end]
+
+[device=CEngineCommonSystems]	//Engine with differential and brakes output
+	Name="Main"
+
+	MaxTorque=2435		//	Newton/meters
+
+	IdleRPM=500
+	CutoffRPM=200
+//	SpinSmoothK=0.1		//Last chance anti-oscilations for engine revs. Do not use this variable (default =1, tank chassis to engine feedback smoothing)
+
+//	GearsRatio=28.5
+
+	GearsForward=27.11, 12.98, 7.84, 4.15	//Corrected for right speed at 1700 RPM (48.3 km/h).
+
+	GearsRear=29.07
+
+	Frictions_off_on=5.0, 0.1	//Engine internal friction coefficient, running and idle
+
+	GearboxFriction=50				//Newtons per 1 RPM inside gearbox at 1'st gear
+	FrictionAfterGearboxMin=60		//Newtons per 1 RPM after gearbox
+	FrictionAfterGearboxMax=440		//Newtons per 1 RPM after gearbox
+
+	ControlHub="Main_Hub"
+
+	MaxRPM=1900					//RPM max allowed
+	MaxHPRPM=1800				//RPM where engine power (N) is max
+	MaxHP=500
+	CurveDistortion=1.5
+	DGroup="Engine"
+
+//Fuel system parameters
+	FuelTankCapacity=460  //liters
+	FuelTankMaxLeak=1 //lters per second
+	HourFuelReducePerRPM=0.0436  //FuelReducePerRPM in a hour. Calculated for range 300 km at max speed 54 km/h at 1900 rpm. FuelCapacity*Speed/Range/RPM.
+
+//Subsystems setup
+	OperatingOilT=0.0f,80.0f
+	OperatingOilP=2.0f,7.0f
+
+//CPhysIndicators
+	indicator="CEI_RPMPULSE",22, 0,3000	//Name,Arg,ScaleMin,ScaleMax [,SmoothK, [ArgFlags]]
+	indicator="CEI_OIL_T",23, 0,125		//Name,Arg,ScaleMin,ScaleMax [,SmoothK, [ArgFlags]]
+	indicator="CEI_OIL_P",25, 0,16,0.05	//Name,Arg,ScaleMin,ScaleMax [,SmoothK, [ArgFlags]]
+
+	indicator="CEI_CLUTCH",10, 1,0,0.2	//Name,Arg,ScaleMin,ScaleMax [,SmoothK, [ArgFlags]]
+	indicator="CEI_BRAKE",11, 0,1,0.2	//Name,Arg,ScaleMin,ScaleMax [,SmoothK, [ArgFlags]]
+	indicator="CEI_THROTTLE",12, 0,1	//Name,Arg,ScaleMin,ScaleMax [,SmoothK, [ArgFlags]]
+
+	StartingDuration=2
+	StoppingDuration=2
+
+[end]
+
+[device=CWheelTrack]
+	Name="left"
+
+	AttachToConvex=""
+	DGroup="TruckL"
+
+	LocalOrigin=-2.0,-0.05,-1.3f;
+	LocalDir=3.7f,0,0
+	Subdiv=5
+
+	Mass=2000	//5 whells per 100 kg, NOT added to overall mass!
+	InertiaMul=10	//To compensate complex track inertia
+
+//SpringsK=0.0f
+//SpringsD=0.0f
+	SpringsK=70.0f
+	SpringsD=5.0f
+//MaxSpringDeep=0.1
+
+	Friction=0.8	//Friction K with ground
+	FrictionAnisotropyDir=0,0,0.7f
+
+	StatifFrictionMul=2.0	//The less value - more sliding while static friction
+				//The higher value - less computational stable & less sliding
+
+	WheelRad=0.313
+	WheelArg=100
+	WheelRevolutions=4
+	DustArgs=60405,60402
+
+	TrackArg=650
+	TrackTileSize=0.387
+	
+	[device=CEngineCommonAxle]	//Spindle with brakes
+		Name="left"
+		CommonEngine="Main"	//Connection to differential engine
+
+		BrakeFriction=0.2
+
+		StatifFrictionMul=2.0	//The less value - more sliding while static friction
+					//The higher value - less computational stable & less sliding
+
+		ControlHub="Main_Hub"
+	[end]
+
+	FlexTensionArg=290	//Forward/backward chain tension arg
+	FlexTension=100.0f,500.0f	//Min,Max tension of flexpoints in Newtons
+	FlexMateTravelRange=0.0,0.6	//Travel range of SpringAnim args [0..1] inside of FlexPoints args range [0..1]
+	FlexPoint=2.11,0.8,-1.3,	250,0,	0.13	//LocalX,LocalY,LocalZ, FlexPointArg,mate SpringAnim arg, FlexPoint TravelRange (meters)
+	FlexPoint=1.72,0.8,-1.3,	251,200,0.22
+	FlexPoint=1.25,0.8,-1.3,	252,0,	0.22
+	FlexPoint=0.87,0.8,-1.3,	253,201,0.22
+	FlexPoint=0.26,0.8,-1.3,	254,0,	0.22
+	FlexPoint=-0.26,0.8,-1.3,	255,202,0.22
+	FlexPoint=-0.7,0.8,-1.3,	256,0,	0.22
+	FlexPoint=-1.13,0.8,-1.3,	257,203,0.22
+	FlexPoint=-1.58,0.8,-1.3,	258,0,	0.22
+	FlexPoint=-2.00,0.8,-1.3,	259,204,0.22
+	FlexPoint=-2.36,0.8,-1.3,	260,0,	0.13
+	
+	PullGearArg=102,1,6	//Arg, n,m - n/m Gear Track/Teeth ratio
+[end]
+
+[device=CWheelTrack]
+	Name="right"
+
+	AttachToConvex=""
+	DGroup="TruckR"
+
+	LocalOrigin=-2.0,-0.05,1.3f;
+	LocalDir=3.7f,0,0
+	Subdiv=5
+
+	Mass=2000
+	InertiaMul=10
+
+//SpringsK=0.0f
+//SpringsD=0.0f
+	SpringsK=70.0f
+	SpringsD=5.0f
+//MaxSpringDeep=0.1
+
+	Friction=0.7
+	FrictionAnisotropyDir=0,0,0.7f
+
+	StatifFrictionMul=2.0
+
+	WheelRad=0.313
+	WheelArg=101
+	WheelRevolutions=4
+	DustArgs=60406,60404
+	
+	TrackArg=651
+	TrackTileSize=0.387
+
+	[device=CEngineCommonAxle]	//Spindle with brakes
+		Name="right"
+		CommonEngine="Main"	//Connection to differential engine
+
+		BrakeFriction=0.2
+
+		StatifFrictionMul=2.0	//The less value - more sliding while static friction
+					//The higher value - less computational stable & less sliding
+
+		ControlHub="Main_Hub"
+	[end]
+
+	FlexTensionArg=390	//Forward/backward chain tension arg
+	FlexTension=100.0f,500.0f	//Min,Max tension of flexpoints in Newtons
+	FlexMateTravelRange=0.0,0.6	//Travel range of SpringAnim args [0..1] inside of FlexPoints args range [0..1]
+	FlexPoint=2.11,0.8,1.3,		350,0,	0.13	//LocalX,LocalY,LocalZ, FlexPointArg,mate SpringAnim arg, FlexPoint TravelRange (meters)
+	FlexPoint=1.72,0.8,1.3,		351,300,0.22
+	FlexPoint=1.25,0.8,1.3,		352,0,	0.22
+	FlexPoint=0.87,0.8,1.3,		353,301,0.22
+	FlexPoint=0.26,0.8,1.3,		354,0,	0.22
+	FlexPoint=-0.26,0.8,1.3,	355,302,0.22
+	FlexPoint=-0.7,0.8,1.3,		356,0,	0.22
+	FlexPoint=-1.13,0.8,1.3,	357,303,0.22
+	FlexPoint=-1.58,0.8,1.3,	358,0,	0.22
+	FlexPoint=-2.00,0.8,1.3,	359,304,0.22
+	FlexPoint=-2.36,0.8,1.3,	360,0,	0.13
+
+	PullGearArg=103,1,6	//Arg, n,m - n/m Gear track/teeth ratio
+[end]
+
+CameraRestrict=0.3f
+
+
+////	Energy loss for bullet travel through HitBody convices	////
+energyloss="",true,1,200	// Потеря энергии пули при попадании, true - проверка на входе и выходе в колижн-бокс, первое эквивалентная броня на входе и выходе, второе джоулей на каждый метр пути внутри колижена
+energyloss="coll_10001",false,20,1
+energyloss="coll_10002",false,20,1
+energyloss="coll_10003",false,20,1
+energyloss="coll_10004",false,20,1
+energyloss="coll_10005",false,20,1
+energyloss="coll_10006",false,20,1
+energyloss="coll_10007",false,20,1
+energyloss="coll_10008",false,20,1
+energyloss="coll_10009",false,20,1
+energyloss="coll_10010",false,20,1
+
+
+ArmorForAI = 45 // толщина брони используемая для AI вычислений (выбор типа снаряда, определение времени на уничтожение цели). По умолчанию == 0 и если это так,
+	// то AI использует усредненное значение брони по всем группам. Если параметр m_fArmorForAI > 0 , то используется это значение
+
+//Functional Damage Groups
+
+[DGroup=Engine]
+	IsCritical=false	//true - обнуление лайфа модуля обнулит лайф всего объекта
+	LifeK=400			//весовой коэфициент влияния лайфа модуля на лайф всего объекта (все к-ты нормируются автоматически)
+	convex="engine", 20,20000,"MT_ARMOR"	//ConvexName, Armor,LifeRate, SurfaceType
+	SphereHitProtection=45		// защита от осколочно-осколочного воздействия за счет расположения внутри бронекорпуса
+	[SphereHitArmorBox]		// Если данный блок есть, то броня пилота от осколков задана по сторонам, если блока нет, то используется общий параметр SphereHitProtection=
+		FovH=90			// Полный угол горизонтального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+		FovV=90			// Полный угол вертикального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+					// Остальные 5 раструбов определяются автоматически по центральной симметрии относительно переднего
+		ArmorFront=45
+		ArmorBack=40
+		ArmorTop=15
+		ArmorBottom=15
+		ArmorRight=40
+		ArmorLeft=40
+	[end]
+	LifeRateFrag=20000			// LifeRate для расчета осколочного действия
+	Shield=0.0
+//	DamageArg=1000
+//	DamageMaxVal=0.98
+	SmokeArg=60000
+	SmokeDec=0.02
+	MinHealthToSmoke=0.5
+//	GUIGroup=true
+	CollisionLifeRate=27500000		// (x1.25 of TrackL)
+	CollisionMinImpulse=4400000		// (same to CollisionLifeRate TrackL)
+	AlwaysColDamage=true
+[end]
+[DGroup=Body]
+	IsCritical=true	//true - обнуление лайфа модуля обнулит лайф всего объекта
+	LifeK=400			//весовой коэфициент влияния лайфа модуля на лайф всего объекта (все к-ты нормируются автоматически)
+//	convex="ammunitionR", 5,20000,"MT_ARMOR"	//ConvexName, Armor,LifeRate, SurfaceType
+//	convex="ammunitionL", 5,20000,"MT_ARMOR"	//ConvexName, Armor,LifeRate, SurfaceType
+	SphereHitProtection=45		// защита от осколочно-осколочного воздействия за счет расположения внутри бронекорпуса
+	LifeRateFrag=20000			// LifeRate для расчета осколочного действия
+	Shield=0.0		//If >0.0 first decreases Shield, then Health
+	DamageArg=5000		//Indicates current health bar as animation
+//	DamageMaxVal=0.98
+	SmokeArg=60100		//Upon strong Health decrease it will animate smoke on SmokeArg
+	SmokeDec=0.02		//Smoke reduce speed
+	MinHealthToSmoke=0.001
+//	Explosion="LuaScripts\WorldObjects\Explosions\Detonation\FuelTank.txt"
+//	ExplosionAnimation="LuaScripts\WorldObjects\Explosions\Detonation\TankExplosion.txt"
+	Explosion="LuaScripts\WorldObjects\Explosions\Detonation\TankExplosion.txt"				//TODO до разбирательств почему не работает ExplosionAnimation
+//	GUIGroup=true
+	CollisionLifeRate=33000000		// (x1.5 of TrackL)
+	CollisionMinImpulse=4400000		// (same to CollisionLifeRate TrackL)
+	AlwaysColDamage=false
+[end]
+[DGroup=TruckL]
+	IsCritical=false	//true - обнуление лайфа модуля обнулит лайф всего объекта
+	LifeK=200			//весовой коэфициент влияния лайфа модуля на лайф всего объекта (все к-ты нормируются автоматически)
+	convex="truck_L_Front",20,30000,"MT_ARMOR"	//ConvexName, Armor,LifeRate, SurfaceType
+	convex="truck_L_Back",20,30000,"MT_ARMOR"	//ConvexName, Armor,LifeRate, SurfaceType
+	convex="truck_L_Bot",20,30000,"MT_ARMOR"	//ConvexName, Armor,LifeRate, SurfaceType
+	convex="truck_L_Top",20,30000,"MT_ARMOR"	//ConvexName, Armor,LifeRate, SurfaceType
+	SphereHitProtection=20		//  защита от осколочно-осколочного воздействия за счет расположения внутри бронекорпуса
+	[SphereHitArmorBox]		// Если данный блок есть, то броня пилота от осколков задана по сторонам, если блока нет, то используется общий параметр SphereHitProtection=
+		FovH=140			// Полный угол горизонтального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+		FovV=140			// Полный угол вертикального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+							// Остальные 5 раструбов определяются автоматически по центральной симметрии относительно переднего
+		ArmorFront=20
+		ArmorBack=20
+		ArmorTop=60
+		ArmorBottom=20
+		ArmorRight=100
+		ArmorLeft=20
+	[end]
+	LifeRateFrag=45000			// LifeRate для расчета осколочного действия
+	Shield=0.0
+	DamageArg=3000
+//	DamageMaxVal=0.98
+	SmokeArg=0
+	SmokeDec=0.02
+//	GUIGroup=true
+	CollisionLifeRate=22000000		// (x40 of AI analog)
+	CollisionMinImpulse=3500000		// (0.2 of CollisionLifeRate)
+	AlwaysColDamage=false
+[end]
+[DGroup=TruckR]
+	IsCritical=false	//true - обнуление лайфа модуля обнулит лайф всего объекта
+	LifeK=200			//весовой коэфициент влияния лайфа модуля на лайф всего объекта (все к-ты нормируются автоматически)
+	convex="truck_R_Front",20,30000,"MT_ARMOR"	//ConvexName, Armor,LifeRate, SurfaceType
+	convex="truck_R_Back",20,30000,"MT_ARMOR"	//ConvexName, Armor,LifeRate, SurfaceType
+	convex="truck_R_Bot",20,30000,"MT_ARMOR"	//ConvexName, Armor,LifeRate, SurfaceType
+	convex="truck_R_Top",20,30000,"MT_ARMOR"	//ConvexName, Armor,LifeRate, SurfaceType
+	SphereHitProtection=20		//  защита от осколочно-осколочного воздействия за счет расположения внутри бронекорпуса
+	[SphereHitArmorBox]		// Если данный блок есть, то броня пилота от осколков задана по сторонам, если блока нет, то используется общий параметр SphereHitProtection=
+		FovH=140			// Полный угол горизонтального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+		FovV=140			// Полный угол вертикального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+							// Остальные 5 раструбов определяются автоматически по центральной симметрии относительно переднего
+		ArmorFront=20
+		ArmorBack=20
+		ArmorTop=60
+		ArmorBottom=20
+		ArmorRight=20
+		ArmorLeft=100
+	[end]
+	LifeRateFrag=45000			// LifeRate для расчета осколочного действия
+	Shield=0.0
+	DamageArg=4000
+//	DamageMaxVal=0.98
+	SmokeArg=0
+	SmokeDec=0.02
+//	GUIGroup=true
+	CollisionLifeRate=22000000		// (x40 of AI analog)
+	CollisionMinImpulse=3500000		// (0.2 of CollisionLifeRate) downscaled for tuning
+	AlwaysColDamage=false
+[end]
+
+//End of Functional Damage Groups
+//Graphical Damage Groups:
+
+[DGroup=Plate01]
+	IsCritical=false	//true - обнуление лайфа модуля обнулит лайф всего объекта
+	LifeK=50			//весовой коэфициент влияния лайфа модуля на лайф всего объекта (все к-ты нормируются автоматически)
+	convex="coll_10001",20,50000,"MT_ARMOR"	//ConvexName, Armor,LifeRate, SurfaceType
+	SphereHitProtection=20		//  защита от осколочно-осколочного воздействия за счет расположения внутри бронекорпуса
+	LifeRateFrag=20000			// LifeRate для расчета осколочного действия
+	Shield=0.0
+	DamageArg=10001
+	CollisionLifeRate=8200000		// (x0.375 of TrackL)
+	CollisionMinImpulse=1640000		// (0.2 of CollisionLifeRate) downscaled for tuning
+	AlwaysColDamage=false
+[end]
+[DGroup=Plate02]
+	IsCritical=false	//true - обнуление лайфа модуля обнулит лайф всего объекта
+	LifeK=50			//весовой коэфициент влияния лайфа модуля на лайф всего объекта (все к-ты нормируются автоматически)
+	convex="coll_10002",20,50000,"MT_ARMOR"	//ConvexName, Armor,LifeRate, SurfaceType
+	SphereHitProtection=20		//  защита от осколочно-осколочного воздействия за счет расположения внутри бронекорпуса
+	LifeRateFrag=20000			// LifeRate для расчета осколочного действия
+	Shield=0.0
+	DamageArg=10002
+	CollisionLifeRate=8200000		// (x0.375 of TrackL)
+	CollisionMinImpulse=1640000		// (0.2 of CollisionLifeRate) downscaled for tuning
+	AlwaysColDamage=false
+[end]
+[DGroup=Plate03]
+	IsCritical=false	//true - обнуление лайфа модуля обнулит лайф всего объекта
+	LifeK=50			//весовой коэфициент влияния лайфа модуля на лайф всего объекта (все к-ты нормируются автоматически)
+	convex="coll_10003",20,50000,"MT_ARMOR"	//ConvexName, Armor,LifeRate, SurfaceType
+	SphereHitProtection=20		//  защита от осколочно-осколочного воздействия за счет расположения внутри бронекорпуса
+	LifeRateFrag=20000			// LifeRate для расчета осколочного действия
+	Shield=0.0
+	DamageArg=10003
+	CollisionLifeRate=8200000		// (x0.375 of TrackL)
+	CollisionMinImpulse=1640000		// (0.2 of CollisionLifeRate) downscaled for tuning
+	AlwaysColDamage=false
+[end]
+[DGroup=Plate04]
+	IsCritical=false	//true - обнуление лайфа модуля обнулит лайф всего объекта
+	LifeK=50			//весовой коэфициент влияния лайфа модуля на лайф всего объекта (все к-ты нормируются автоматически)
+	convex="coll_10004",20,50000,"MT_ARMOR"	//ConvexName, Armor,LifeRate, SurfaceType
+	SphereHitProtection=20		//  защита от осколочно-осколочного воздействия за счет расположения внутри бронекорпуса
+	LifeRateFrag=20000			// LifeRate для расчета осколочного действия
+	Shield=0.0
+	DamageArg=10004
+	CollisionLifeRate=8200000		// (x0.375 of TrackL)
+	CollisionMinImpulse=1640000		// (0.2 of CollisionLifeRate) downscaled for tuning
+	AlwaysColDamage=false
+[end]
+[DGroup=Plate05]
+	IsCritical=false	//true - обнуление лайфа модуля обнулит лайф всего объекта
+	LifeK=50			//весовой коэфициент влияния лайфа модуля на лайф всего объекта (все к-ты нормируются автоматически)
+	convex="coll_10005",20,50000,"MT_ARMOR"	//ConvexName, Armor,LifeRate, SurfaceType
+	SphereHitProtection=20		//  защита от осколочно-осколочного воздействия за счет расположения внутри бронекорпуса
+	LifeRateFrag=20000			// LifeRate для расчета осколочного действия
+	Shield=0.0
+	DamageArg=10005
+	CollisionLifeRate=8200000		// (x0.375 of TrackL)
+	CollisionMinImpulse=1640000		// (0.2 of CollisionLifeRate) downscaled for tuning
+	AlwaysColDamage=false
+[end]
+[DGroup=Plate06]
+	IsCritical=false	//true - обнуление лайфа модуля обнулит лайф всего объекта
+	LifeK=50			//весовой коэфициент влияния лайфа модуля на лайф всего объекта (все к-ты нормируются автоматически)
+	convex="coll_10006",20,50000,"MT_ARMOR"	//ConvexName, Armor,LifeRate, SurfaceType
+	SphereHitProtection=20		//  защита от осколочно-осколочного воздействия за счет расположения внутри бронекорпуса
+	LifeRateFrag=20000			// LifeRate для расчета осколочного действия
+	Shield=0.0
+	DamageArg=10006
+	CollisionLifeRate=8200000		// (x0.375 of TrackL)
+	CollisionMinImpulse=1640000		// (0.2 of CollisionLifeRate) downscaled for tuning
+	AlwaysColDamage=false
+[end]
+[DGroup=Plate07]
+	IsCritical=false	//true - обнуление лайфа модуля обнулит лайф всего объекта
+	LifeK=50			//весовой коэфициент влияния лайфа модуля на лайф всего объекта (все к-ты нормируются автоматически)
+	convex="coll_10007",20,50000,"MT_ARMOR"	//ConvexName, Armor,LifeRate, SurfaceType
+	SphereHitProtection=20		//  защита от осколочно-осколочного воздействия за счет расположения внутри бронекорпуса
+	LifeRateFrag=20000			// LifeRate для расчета осколочного действия
+	Shield=0.0
+	DamageArg=10007
+	CollisionLifeRate=8200000		// (x0.375 of TrackL)
+	CollisionMinImpulse=1640000		// (0.2 of CollisionLifeRate) downscaled for tuning
+	AlwaysColDamage=false
+[end]
+[DGroup=Plate08]
+	IsCritical=false	//true - обнуление лайфа модуля обнулит лайф всего объекта
+	LifeK=50			//весовой коэфициент влияния лайфа модуля на лайф всего объекта (все к-ты нормируются автоматически)
+	convex="coll_10008",20,50000,"MT_ARMOR"	//ConvexName, Armor,LifeRate, SurfaceType
+	SphereHitProtection=20		//  защита от осколочно-осколочного воздействия за счет расположения внутри бронекорпуса
+	LifeRateFrag=20000			// LifeRate для расчета осколочного действия
+	Shield=0.0
+	DamageArg=10008
+	CollisionLifeRate=8200000		// (x0.375 of TrackL)
+	CollisionMinImpulse=1640000		// (0.2 of CollisionLifeRate) downscaled for tuning
+	AlwaysColDamage=false
+[end]
+[DGroup=Plate09]
+	IsCritical=false	//true - обнуление лайфа модуля обнулит лайф всего объекта
+	LifeK=50			//весовой коэфициент влияния лайфа модуля на лайф всего объекта (все к-ты нормируются автоматически)
+	convex="coll_10009",20,50000,"MT_ARMOR"	//ConvexName, Armor,LifeRate, SurfaceType
+	SphereHitProtection=20		//  защита от осколочно-осколочного воздействия за счет расположения внутри бронекорпуса
+	LifeRateFrag=20000			// LifeRate для расчета осколочного действия
+	Shield=0.0
+	DamageArg=10009
+	CollisionLifeRate=8200000		// (x0.375 of TrackL)
+	CollisionMinImpulse=1640000		// (0.2 of CollisionLifeRate) downscaled for tuning
+	AlwaysColDamage=false
+[end]
+[DGroup=Plate10]
+	IsCritical=false	//true - обнуление лайфа модуля обнулит лайф всего объекта
+	LifeK=50			//весовой коэфициент влияния лайфа модуля на лайф всего объекта (все к-ты нормируются автоматически)
+	convex="coll_10010",20,50000,"MT_ARMOR"	//ConvexName, Armor,LifeRate, SurfaceType
+	SphereHitProtection=20		//  защита от осколочно-осколочного воздействия за счет расположения внутри бронекорпуса
+	LifeRateFrag=20000			// LifeRate для расчета осколочного действия
+	Shield=0.0
+	DamageArg=10010
+	CollisionLifeRate=8200000		// (x0.375 of TrackL)
+	CollisionMinImpulse=1640000		// (0.2 of CollisionLifeRate) downscaled for tuning
+	AlwaysColDamage=false
+[end]
+
+//End of Graphicsl Damage Groups
+
+logtreshold=0.005
+
+
+///// CPlatformTank properties
+LeverArgs=13,14
+GearArg=15
+
+
+
+OpenCockpitArg=30
+
+hatchtime=1
+windowtime=1
+
+HeadLightArg=60200
+
+CockpitLightArg=30000,0.45,0.55,0.6
+
+ClosedHatch=false // True - люк будет всегда закрытым
+ClosedWindow=true  // True - форточка будет всегда закрытой
+CanopyOpenByDefault=false
+WindowOpenByDefault=true
+
+
+//CPhysIndicators
+indicator="PPI_SPEED",21, 0,27.8	//Name,Arg,ScaleMin,ScaleMax [,SmoothK, [ArgFlags]]
+
+[moveDeviator]
+  HiFreqAmp = 0.2f
+  MaxDeviation = 0.3f
+  Periods = 2.1, 0.4;
+[end]
+accelDirK = 0.3
+accelDirSmooth = 0.05
+accelSideK = 0.3
+accelSideSmooth = 0.05

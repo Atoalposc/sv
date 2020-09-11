@@ -1,0 +1,14 @@
+Class_name = "CStaticEmitter"
+object_name = "trash"
+
+//////	PhysicsBody properties
+VisualImage=0,"graphics\effects\air\VillageSmoke.epl",false
+visualradius=500
+
+duration=16.66
+range=0,1
+loop=false
+
+
+
+destroy_pause=0.1

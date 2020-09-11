@@ -1,0 +1,42 @@
+Class_name = "CParatroopersCreator"
+object_name = "ParatroopersCreator_Ju52"
+
+//////	PhysicsBody properties
+VisualImage=0,"graphics/Characters/ParatrooperGER/paratroopers_ju52_%s.mgm",true
+CollisionBody="graphics/Characters/ParatrooperGER/paratroopers_ju52.col"
+
+Paratrooper="LuaScripts/WorldObjects/Bots/BotParatrooperGER.txt"
+
+ParatroopersTotal=12
+ParatrooperMass=100
+minDropSpeed=20
+minDropAltitude=100
+QuantityArg=100
+JumpDelay=2
+
+// Damage model
+LifeRate=3600 // жизненный тонус
+LifeRateFrag=3600 // У бота свой расчет осколочного воздействия
+Firing=1 // Минимальное значение поджигания у средства поражения для зажигания объекта
+Armor=0
+//[ArmorBox]			// Если данный блок есть, то броня задана по сторонам, если блока нет, то используется общий параметр Armor=
+//	FovH=90			// Полный угол горизонтального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+//	FovV=150		// Полный угол вертикального раствора пирамидального раструба углов нормали к колижену, по которому грань колижена определяется, как ArmorFront
+//					// Остальные 5 раструбов определяются автоматически по центральной симметрии относительно переднего
+//	ArmorFront=80
+//	ArmorBack=30
+//	ArmorTop=10
+//	ArmorBottom=30
+//	ArmorRight=30
+//	ArmorLeft=30
+//[end]
+
+debug=false
+
+
+
+[attach=0]
+	position= -3.192, -0.63, -0.8
+	object = "LuaScripts/WorldObjects/Bots/BotEjectionPlace.txt"
+[end]
+

@@ -1,0 +1,3 @@
+Class_name = "CFlareGun"
+
+FlarePath="LuaScripts/WorldObjects/Ballistics/Flare.txt"

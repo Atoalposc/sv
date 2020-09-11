@@ -1,0 +1,31 @@
+Class_name = "CShipAI"
+object_name = "Ship Controller AI"
+
+//////	Controller specific
+Artificial=true;
+
+ControlledType="GOT_SHIP";
+
+IgnoreRoads = true
+
+ForceP	= 0.5
+ForceI	= 4.0
+ForceD	= 1.5
+
+TurnP	= 0.0
+TurnI	= 5.0
+TurnD	= 20.0
+
+SearchDist	= 200
+TargetSpeed	= 1.5
+Coeff		= 2.0
+
+TimeColSearch = 1.0
+
+WaitingDistDense= 90
+WaitingDistSafe = 110
+WaitingDistLoose= 140
+
+ColumnIntervalDense = 60
+ColumnIntervalSafe  = 80
+ColumnIntervalLoose = 110

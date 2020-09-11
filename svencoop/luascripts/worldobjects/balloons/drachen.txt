@@ -1,0 +1,65 @@
+class_name = "CAerostat"
+object_name = "Drachen"
+
+//////	PhysicsBody properties
+VisualImage=0,"graphics/Balloons/Drachen/Drachen.mgm",1
+
+CollisionBody="graphics/Balloons/Drachen/Drachen.col"
+
+CommandMonitor="LuaScripts/WorldObjects/AerostatMonitor.txt"
+
+Explosion="LuaScripts/WorldObjects/Explosions/Detonation/BalloonInAir.txt"
+
+[attach=0]
+	position= -5.884, -5.251, 0.0
+	rotation= 0, 180, 0
+	object = "LuaScripts/WorldObjects/Bots/BotPilotBalloon_GER17.txt"
+[end]
+
+[attach=1]
+	position= -5.244, -5.291, 0.0
+	rotation= 0, 0, 0
+	object = "LuaScripts/WorldObjects/Balloons/Drachen_P2.txt"
+[end]
+
+[attach=2]
+	position= -5.311,-4.436,1.296
+	rotation= 60, 0, 0
+	object = "LuaScripts/WorldObjects/FlareGun.txt"
+[end]
+
+CanopyOpenByDefault=true
+
+// Центр приложения архимедовой силы
+ForceCenter=-5.930,  8.473,  0
+WireCenter= -4.377,  7.000,  0.000
+// Геометрический центр (также туда целится бот)
+GeometryCenter=-6.93,  7.974,  0.000 // Известная координата
+BalloonWidth=8
+BalloonLength=25
+Volume=800
+DecreaseLifeSpeed=0.2
+DeadLife=0.7
+Basket=-5.57,-0.7,0
+AerostatHeight=17 // Для определения времени складывания
+
+CordMinLength=5.0
+CordSpeed=20.0 // скорость сматывания/разматывания тросса 
+
+// Damage model
+Armor=5 // толщина брони
+LifeRate=9000 // жизненный тонус
+EpFg=1000
+LifeRateFrag=5000 // LifeRate для расчета осколочного действия
+Firing=0.005 // Минимальное значение поджигания у средства поражения для зажигания объекта
+
+//логирование повреждений
+logtreshold=0.005 
+
+SendRate=20,50	//normal, attached state
+
+[Entrance]
+	EntrancePos= -5.884, -5.251, 0.0
+	EntranceRot= 0,180,0
+	JumpDir= -4, 1, 0
+[end]

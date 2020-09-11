@@ -1,0 +1,13 @@
+Class_name = "CStaticEmitter"
+object_name = "trash"
+
+//////	PhysicsBody properties
+VisualImage=0,"graphics\effects\surf\signalSmoke.epl",false
+ImageAttr=128
+visualradius=20
+
+duration=15.0
+range=0.33,0.48
+loop=false
+
+destroy_pause=1

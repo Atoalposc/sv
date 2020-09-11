@@ -1,0 +1,39 @@
+Class_name = "CBatchBallistics"
+object_name = "FlareYellow"
+
+//////	PhysicsBody properties
+VisualImage=0,"graphics/effects/arm/alarmRocketY.mgm",0
+visualradius=10
+SoundScript=""
+ImageAttr=5	//IA_NOINTERPOLATION | IA_NOCLIP
+
+//CollisionBody="graphics/ammo/ammo.col"
+
+NoDirecion=true
+NoCollision=true
+CalcWind=true
+
+// Таблица не заполнена
+Armor=1,100,	1,250
+Armor=100,5,	1,100
+
+DefaultStartSpeed=100
+MaxDistance=1000
+Mass=0.050
+MassDegradation=0.3
+MassAnimation=64152
+Mkr=0.73
+Mmax=1.7
+Cx_0=0.4
+Cx_max=0.4
+Cx_1=0.4
+R=0.01
+LiveTime=18
+TimeToDestroy=0
+MaxRedirections = 2		//максимальное кол-во рикошетов
+
+ChDirMinPeriod=0.1
+ChFreq=30
+ChAmplitude=0.1
+
+/////////////

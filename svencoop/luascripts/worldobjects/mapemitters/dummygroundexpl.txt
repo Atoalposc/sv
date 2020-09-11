@@ -1,0 +1,16 @@
+Class_name = "CStaticEmitter"
+object_name = "trash"
+
+//////	PhysicsBody properties
+VisualImage=0,"graphics\effects\Arm\explSurfBomb.epl",false
+visualradius=4
+
+SoundScript="LuaScripts/Sound/explosions/HE/Ground_Med.cfg"
+SoundStrength=1.0
+
+duration=1.0
+range=0,1
+loop=false
+
+SoundTime=8
+destroy_pause=10

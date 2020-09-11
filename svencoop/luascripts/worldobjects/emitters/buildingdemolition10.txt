@@ -1,0 +1,19 @@
+Class_name = "CStaticEmitter"
+
+//////	PhysicsBody properties
+VisualImage=0,"graphics\effects\surf\BuildingDemolition-Small.epl",false
+
+SoundScript="LuaScripts/Sound/explosions/Splash/Fire.cfg"
+SoundStrength=0.2
+SoundTime=2
+
+duration=60
+range=0,0.33
+range=0.34,0.66
+range=0.67,1
+loop=false
+
+destroy_pause=10
+
+
+VisualRadius=1.5

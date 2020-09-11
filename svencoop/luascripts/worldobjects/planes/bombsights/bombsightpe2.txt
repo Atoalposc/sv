@@ -1,0 +1,16 @@
+Class_name = "CBombSiteAim"
+object_name = "Bomb Sight Pe2"
+
+sightType=false // true - vizir, false - bombaim
+
+VisualImage=1,"graphics/planes/He111H6/bombsight.mgm",false
+
+smoothparam = 0.2
+fovsmoothparam = 0.5
+
+maxf = 75.0
+maxb = 15.0
+maxl = 40.0
+maxr = 40.0
+
+rollstabilizationlimit = 0.1
